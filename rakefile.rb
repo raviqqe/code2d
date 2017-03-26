@@ -4,12 +4,10 @@ file index_html => Dir.glob('src/client/**/*.elm') do |t|
   sh "elm-make --yes --warn --output #{t.name} src/client/Main.elm"
 end
 
-task :apply do
-  sh 'terraform apply'
-end
-
-task :plan do
-  sh 'terraform plan'
+%i(apply plan).each do |name|
+  task name do
+    sh "terraform #{name} -var index_html=#{index_html}"
+  end
 end
 
 task :destroy do
