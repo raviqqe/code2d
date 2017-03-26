@@ -16,8 +16,9 @@ resource "aws_s3_bucket" "main" {
 }
 
 resource "aws_s3_bucket_object" "index_html" {
-  bucket = "work2d.raviqqe.com"
+  bucket = "${aws_s3_bucket.main.id}"
   key    = "index.html"
   source = "${var.index_html}"
   acl    = "public-read"
+  content_type = "text/html"
 }

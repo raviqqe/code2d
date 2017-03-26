@@ -5,7 +5,7 @@ file index_html => Dir.glob('src/client/**/*.elm') do |t|
 end
 
 %i(apply plan).each do |name|
-  task name do
+  task name => index_html do
     sh "terraform #{name} -var index_html=#{index_html}"
   end
 end
