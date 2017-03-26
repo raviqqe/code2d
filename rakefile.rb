@@ -1,3 +1,9 @@
+index_html = 'build/client/index.html'
+
+file index_html => Dir.glob('src/client/**/*.elm') do |t|
+  sh "elm-make --yes --warn --output #{t.name} src/client/Main.elm"
+end
+
 task :apply do
   sh 'terraform apply'
 end
