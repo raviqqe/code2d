@@ -1,4 +1,5 @@
 *.backup
+*.tfstate
 build
 elm-package.json
 elm-stuff
