@@ -1,2 +1,7 @@
 # work2d
-work to death
+
+Work to death.
+
+## License
+
+[The Unlicense](https://unlicense.org)
