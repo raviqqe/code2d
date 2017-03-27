@@ -1,19 +1,27 @@
 module Main exposing (..)
 
 import Html exposing (..)
+import Html.Events exposing (onClick)
 import Time exposing (..)
 
 
 -- Model
 
 
+type Page
+    = Menu
+    | Timer
+
+
 type alias Model =
-    { time : Float }
+    { page : Page, time : Int }
 
 
 type Msg
-    = NoOp
-    | Delta Time
+    = Clock Time
+    | Pause
+    | Reset
+    | Resume
 
 
 
@@ -22,7 +30,15 @@ type Msg
 
 view : Model -> Html Msg
 view model =
-    body [] [ p [] [ text "25" ] ]
+    case model.page of
+        Menu ->
+            div []
+                [ button [ onClick Reset ] [ text "reset" ]
+                , button [ onClick Resume ] [ text "resume" ]
+                ]
+
+        Timer ->
+            div [ onClick Pause ] [ text (toString model.time) ]
 
 
 
@@ -31,12 +47,30 @@ view model =
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    model ! []
+    case msg of
+        Clock _ ->
+            { model
+                | time =
+                    if model.page == Menu then
+                        model.time
+                    else
+                        max 0 (model.time - 1)
+            }
+                ! []
+
+        Pause ->
+            { model | page = Menu } ! []
+
+        Reset ->
+            { page = Timer, time = 25 * 60 } ! []
+
+        Resume ->
+            { model | page = Timer } ! []
 
 
 subscribe : Model -> Sub Msg
 subscribe _ =
-    Sub.batch [ every millisecond Delta ]
+    Sub.batch [ every second Clock ]
 
 
 
@@ -46,7 +80,7 @@ subscribe _ =
 main : Program Never Model Msg
 main =
     program
-        { init = { time = 0 } ! []
+        { init = { page = Menu, time = 0 } ! []
         , update = update
         , view = view
         , subscriptions = subscribe
