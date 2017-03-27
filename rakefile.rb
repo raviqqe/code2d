@@ -16,6 +16,7 @@ end
 
 task :format do
   sh 'rubocop -a'
+  sh 'elm-format --yes .' if `which elm-format` != ''
 end
 
 task :clean do
