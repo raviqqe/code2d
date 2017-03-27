@@ -15,6 +15,8 @@ task :destroy do
   sh 'terraform destroy -force'
 end
 
+task update: %i(destroy apply)
+
 task :format do
   sh 'rubocop -a'
   sh 'elm-format --yes .' if `which elm-format` != ''
