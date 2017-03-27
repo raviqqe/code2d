@@ -1,12 +1,13 @@
-index_html = 'build/client/index.html'
+main_js = 'build/client/main.js'
 
-file index_html => Dir.glob('src/client/**/*.elm') do |t|
+file main_js => Dir.glob('src/client/**/*.elm') do |t|
   sh "elm-make --yes --warn --output #{t.name} src/client/Main.elm"
 end
 
 %i(apply plan).each do |name|
-  task name => index_html do
-    sh "terraform #{name} -var index_html=#{index_html}"
+  task name => main_js do |t|
+    sh "terraform #{name} -var index_html=src/client/index.html "\
+       "-var main_js=#{t.source}"
   end
 end
 
