@@ -14,7 +14,9 @@ type Page
 
 
 type alias Model =
-    { page : Page, time : Int }
+    { page : Page
+    , time : Int
+    }
 
 
 type Msg
@@ -30,20 +32,17 @@ type Msg
 
 view : Model -> Html Msg
 view model =
-    div
-        []
+    div []
         (case model.page of
             Menu ->
-                [ div
-                    []
+                [ div []
                     [ button [ onClick Reset ] [ Html.text "reset" ]
                     , button [ onClick Resume ] [ Html.text "resume" ]
                     ]
                 ]
 
             Timer ->
-                [ div
-                    [ onClick Pause ]
+                [ div [ onClick Pause ]
                     [ Html.text (toString model.time) ]
                 ]
         )
@@ -59,10 +58,12 @@ update msg model =
         Clock _ ->
             { model
                 | time =
-                    if model.page == Menu then
-                        model.time
-                    else
-                        max 0 (model.time - 1)
+                    case model.page of
+                        Menu ->
+                            model.time
+
+                        Timer ->
+                            max 0 (model.time - 1)
             }
                 ! []
 
