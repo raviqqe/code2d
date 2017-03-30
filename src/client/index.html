@@ -11,6 +11,12 @@
     <script src="main.js"></script>
     <script>
 var app = Elm.Main.embed(document.getElementById('main'));
+
+app.ports.check.subscribe(function(_) {
+  var sound = new Audio("gong.mp3");
+  sound.play();
+  app.ports.suggestions.send([]);
+});
     </script>
   </body>
 </html>

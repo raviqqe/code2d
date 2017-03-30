@@ -1,9 +1,19 @@
-module Main exposing (..)
+port module Main exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Time exposing (..)
+
+
+-- Javascript itnerop
+
+
+port check : String -> Cmd msg
+
+
+port suggestions : (List String -> msg) -> Sub msg
+
 
 
 -- Model
@@ -73,7 +83,10 @@ update msg model =
                         Timer ->
                             Basics.max 0 (model.time - 1)
             }
-                ! []
+                ! if model.time == 1 then
+                    [ check "Ring!" ]
+                  else
+                    []
 
         Pause ->
             { model | page = Menu } ! []
