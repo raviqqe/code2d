@@ -6,7 +6,9 @@ end
 
 %i(apply plan).each do |name|
   task name => main_js do |t|
-    sh "terraform #{name} -var index_html=src/client/index.html "\
+    sh "terraform #{name} "\
+       '-var index_html=src/client/index.html '\
+       '-var style_css=src/client/style.css '\
        "-var main_js=#{t.source}"
   end
 end

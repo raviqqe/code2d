@@ -2,6 +2,10 @@ variable index_html {
   default = ""
 }
 
+variable style_css {
+  default = ""
+}
+
 variable main_js {
   default = ""
 }
@@ -25,6 +29,14 @@ resource "aws_s3_bucket_object" "index_html" {
   source = "${var.index_html}"
   acl    = "public-read"
   content_type = "text/html"
+}
+
+resource "aws_s3_bucket_object" "style_css" {
+  bucket = "${aws_s3_bucket.main.id}"
+  key    = "style.css"
+  source = "${var.style_css}"
+  acl    = "public-read"
+  content_type = "text/css"
 }
 
 resource "aws_s3_bucket_object" "main_js" {

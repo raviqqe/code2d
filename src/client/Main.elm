@@ -1,6 +1,7 @@
 module Main exposing (..)
 
 import Html exposing (..)
+import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Time exposing (..)
 
@@ -32,18 +33,25 @@ type Msg
 
 view : Model -> Html Msg
 view model =
-    div []
+    div [ class "valign-wrapper light-blue darken-2 full-screen" ]
         (case model.page of
             Menu ->
-                [ div []
-                    [ button [ onClick Reset ] [ Html.text "reset" ]
-                    , button [ onClick Resume ] [ Html.text "resume" ]
+                [ div [ class "horizontal-center" ]
+                    [ button
+                        [ onClick Reset, class "button btn-large" ]
+                        [ Html.text "reset" ]
+                    , button
+                        [ onClick Resume, class "button btn-large" ]
+                        [ Html.text "resume" ]
                     ]
                 ]
 
             Timer ->
-                [ div [ onMouseUp Pause ]
-                    [ Html.text (toString model.time) ]
+                [ div [ onMouseUp Pause, class "link-cursor valign-wrapper full-screen" ]
+                    [ span
+                        [ class "time horizontal-center" ]
+                        [ Html.text (toString model.time) ]
+                    ]
                 ]
         )
 
@@ -63,7 +71,7 @@ update msg model =
                             model.time
 
                         Timer ->
-                            max 0 (model.time - 1)
+                            Basics.max 0 (model.time - 1)
             }
                 ! []
 
