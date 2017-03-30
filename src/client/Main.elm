@@ -1,7 +1,7 @@
 module Main exposing (..)
 
 import Html exposing (..)
-import Html.Events exposing (onClick)
+import Html.Events exposing (..)
 import Time exposing (..)
 
 
@@ -42,7 +42,7 @@ view model =
                 ]
 
             Timer ->
-                [ div [ onClick Pause ]
+                [ div [ onMouseUp Pause ]
                     [ Html.text (toString model.time) ]
                 ]
         )
