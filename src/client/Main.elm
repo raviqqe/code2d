@@ -46,15 +46,17 @@ view model =
     div [ class "valign-wrapper light-blue darken-2 full-screen" ]
         (case model.page of
             Menu ->
-                [ div [ class "horizontal-center" ]
-                    [ button
-                        [ onClick Reset, class "button btn-large" ]
-                        [ Html.text "reset" ]
-                    , button
-                        [ onClick Resume, class "button btn-large" ]
-                        [ Html.text "resume" ]
+                let
+                    timerButton msg text =
+                        button
+                            [ onClick msg, class "button btn-large red" ]
+                            [ Html.text text ]
+                in
+                    [ div [ class "horizontal-center" ]
+                        [ timerButton Reset "reset"
+                        , timerButton Resume "resume"
+                        ]
                     ]
-                ]
 
             Timer ->
                 [ div [ onMouseUp Pause, class "link-cursor valign-wrapper full-screen" ]
