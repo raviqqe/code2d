@@ -7,7 +7,7 @@ html, body, .full-screen, #main {
 
 .time {
   color: white;
-  font-size: 50vh;
+  font-size: 30vw;
 }
 
 .horizontal-center {
@@ -15,10 +15,30 @@ html, body, .full-screen, #main {
   margin-right: auto;
 }
 
-.button {
-  margin: 4em;
+.button-list {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
 }
 
 .link-cursor {
   cursor: pointer;
+}
+
+@media screen and (min-width: 600px) {
+  .button-list {
+    width: 50%;
+    margin: auto;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .button-list {
+    display: block;
+  }
+
+  .btn, .btn-large {
+    display: block;
+    margin: 2em auto;
+  }
 }

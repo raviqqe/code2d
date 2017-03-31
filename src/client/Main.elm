@@ -49,10 +49,10 @@ view model =
                 let
                     timerButton msg color text =
                         button
-                            [ onClick msg, class ("button btn-large " ++ color) ]
+                            [ onClick msg, class ("btn-large " ++ color) ]
                             [ Html.text text ]
                 in
-                    [ div [ class "horizontal-center" ]
+                    [ div [ class "button-list" ]
                         [ timerButton Reset "red" "reset"
                         , timerButton Resume "orange darken-2" "resume"
                         ]
