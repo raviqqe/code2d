@@ -47,14 +47,14 @@ view model =
         (case model.page of
             Menu ->
                 let
-                    timerButton msg text =
+                    timerButton msg color text =
                         button
-                            [ onClick msg, class "button btn-large red" ]
+                            [ onClick msg, class ("button btn-large " ++ color) ]
                             [ Html.text text ]
                 in
                     [ div [ class "horizontal-center" ]
-                        [ timerButton Reset "reset"
-                        , timerButton Resume "resume"
+                        [ timerButton Reset "red" "reset"
+                        , timerButton Resume "orange darken-2" "resume"
                         ]
                     ]
 
