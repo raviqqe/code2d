@@ -46,11 +46,3 @@ resource "aws_s3_bucket_object" "main_js" {
   acl    = "public-read"
   content_type = "application/javascript"
 }
-
-resource "aws_s3_bucket_object" "gong_mp3" {
-  bucket = "${aws_s3_bucket.main.id}"
-  key    = "gong.mp3"
-  source = "audio/gong.mp3"
-  acl    = "public-read"
-  content_type = "audio/mp3"
-}
