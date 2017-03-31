@@ -1,6 +1,6 @@
 # work2d
 
-Work to death.
+Work to d\*\*\*\*.
 
 ## Demo
 
