@@ -45,7 +45,7 @@ type Msg
 
 view : Model -> Html Msg
 view model =
-    div [ class "valign-wrapper light-blue darken-2 full-screen" ]
+    div [ class "valign-wrapper blue full-screen" ]
         (case model.page of
             Menu ->
                 let
@@ -56,8 +56,8 @@ view model =
                 in
                     [ div [ class "button-list" ]
                         [ timerButton StartWork "red" "work"
-                        , timerButton StartBreak "green darken-2" "break"
-                        , timerButton Resume "orange darken-2" "resume"
+                        , timerButton StartBreak "green" "break"
+                        , timerButton Resume "blue-grey" "resume"
                         ]
                     ]
 
