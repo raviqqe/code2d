@@ -18,6 +18,10 @@ AWS.config.credentials = new AWS.CognitoIdentityCredentials({
     IdentityPoolId: 'us-east-1:436d7a57-8280-482a-8d9b-3e61caa7bafc',
 });
 
+AWS.config.credentials.get(function() {
+    client = new AWS.CognitoSyncManager();
+});
+
 var app = Elm.Main.embed(document.getElementById('main'));
 
 app.ports.check.subscribe(function(_) {
