@@ -1,23 +1,22 @@
-main_js = 'build/client/main.js'
+DOCS_DIR = 'docs'.freeze
 
-file main_js => Dir.glob('src/client/**/*.elm') do |t|
-  sh "elm-make --yes --warn --output #{t.name} src/client/Main.elm"
+directory DOCS_DIR
+
+rule '.js' => '.elm' do |t|
+  sh "elm-make --yes --warn --output #{t.name} #{t.source}"
 end
 
+task build: File.join(DOCS_DIR, 'Main.js')
+
 %i(apply plan).each do |name|
-  task name => main_js do |t|
-    sh "terraform #{name} "\
-       '-var index_html=src/client/index.html '\
-       '-var style_css=src/client/style.css '\
-       "-var main_js=#{t.source}"
+  task name => :build do
+    sh "terraform #{name}"
   end
 end
 
 task :destroy do
   sh 'terraform destroy -force'
 end
-
-task update: %i(destroy apply)
 
 task :format do
   sh 'rubocop -a'
