@@ -21,10 +21,10 @@ resources:
       Properties:
         TableName: users
         AttributeDefinitions:
-          - AttributeName: user_id
+          - AttributeName: id
             AttributeType: S
         KeySchema:
-          - AttributeName: user_id
+          - AttributeName: id
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1
