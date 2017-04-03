@@ -13,6 +13,11 @@
     <div id="main"></div>
     <script src="Main.js"></script>
     <script>
+AWS.config.region = 'us-east-1';
+AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+    IdentityPoolId: 'us-east-1:436d7a57-8280-482a-8d9b-3e61caa7bafc',
+});
+
 var app = Elm.Main.embed(document.getElementById('main'));
 
 app.ports.check.subscribe(function(_) {
