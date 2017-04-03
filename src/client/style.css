@@ -27,7 +27,7 @@ html, body, .full-screen, #main {
 
 @media screen and (min-width: 600px) {
   .button-list {
-    width: 50%;
+    width: 60%;
     margin: auto;
   }
 }

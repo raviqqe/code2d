@@ -21,7 +21,8 @@ port suggestions : (List String -> msg) -> Sub msg
 
 type Page
     = Menu
-    | Timer
+    | Work
+    | Break
 
 
 type alias Model =
@@ -33,7 +34,8 @@ type alias Model =
 type Msg
     = Clock Time
     | Pause
-    | Reset
+    | StartWork
+    | StartBreak
     | Resume
 
 
@@ -53,12 +55,13 @@ view model =
                             [ Html.text text ]
                 in
                     [ div [ class "button-list" ]
-                        [ timerButton Reset "red" "reset"
+                        [ timerButton StartWork "red" "work"
+                        , timerButton StartBreak "green darken-2" "break"
                         , timerButton Resume "orange darken-2" "resume"
                         ]
                     ]
 
-            Timer ->
+            _ ->
                 [ div [ onMouseUp Pause, class "link-cursor valign-wrapper full-screen" ]
                     [ span
                         [ class "time horizontal-center" ]
@@ -82,7 +85,7 @@ update msg model =
                         Menu ->
                             model.time
 
-                        Timer ->
+                        _ ->
                             Basics.max 0 (model.time - 1)
             }
                 ! if model.time == 1 then
@@ -93,11 +96,14 @@ update msg model =
         Pause ->
             { model | page = Menu } ! []
 
-        Reset ->
-            { page = Timer, time = 25 * 60 } ! []
+        StartWork ->
+            { page = Work, time = 25 * 60 } ! []
+
+        StartBreak ->
+            { page = Break, time = 5 * 60 } ! []
 
         Resume ->
-            { model | page = Timer } ! []
+            { model | page = Work } ! []
 
 
 subscribe : Model -> Sub Msg
