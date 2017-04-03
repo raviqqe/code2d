@@ -4,7 +4,7 @@ Work to d\*\*\*\*.
 
 ## Demo
 
-[Here](http://s3.amazonaws.com/work2d.raviqqe.com/index.html).
+On [the GitHub pages](https://raviqqe.github.io/work2d).
 
 ## License
 
