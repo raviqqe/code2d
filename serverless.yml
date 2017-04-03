@@ -1,0 +1,31 @@
+service: work2d
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+
+functions:
+  login:
+    handler: handler.login
+    events:
+      - http:
+          path: login
+          method: get
+          cors: true
+
+
+resources:
+  Resources:
+    userTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: users
+        AttributeDefinitions:
+          - AttributeName: user_id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: user_id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1

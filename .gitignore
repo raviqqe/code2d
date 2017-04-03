@@ -4,3 +4,6 @@
 build
 elm-package.json
 elm-stuff
+node_modules
+jspm_packages
+.serverless

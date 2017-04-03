@@ -8,14 +8,12 @@ end
 
 task build: File.join(DOCS_DIR, 'Main.js')
 
-%i(apply plan).each do |name|
-  task name => :build do
-    sh "terraform #{name}"
-  end
+task :deploy do
+  sh 'sls deploy -v'
 end
 
-task :destroy do
-  sh 'terraform destroy -force'
+task :remove do
+  sh 'sls remove -v'
 end
 
 task :format do
