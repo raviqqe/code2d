@@ -4,4 +4,4 @@ Productivity tool for hackers.
 
 ## License
 
-[The Unlicense](https://unlicense.org)
+[MIT](LICENSE)
