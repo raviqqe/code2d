@@ -1,9 +1,9 @@
 {
 	"compilerOptions": {
-		"module": "esnext",
-		"target": "es5",
-		"lib": ["es6", "dom"],
 		"jsx": "react",
-		"rootDir": "src"
+		"lib": ["es6", "dom"],
+		"module": "esnext",
+		"rootDir": "src",
+		"target": "es5"
 	}
 }
