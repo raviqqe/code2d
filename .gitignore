@@ -1,9 +1,1 @@
-*.backup
-*.info
-*.tfstate
-build
-elm-package.json
-elm-stuff
-node_modules
-jspm_packages
-.serverless
+.terraform
