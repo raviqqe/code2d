@@ -1,4 +1,4 @@
-# work2d
+# code2d
 
 Productivity tool for hackers.
 
