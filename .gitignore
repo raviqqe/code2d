@@ -1,5 +1,7 @@
-*.tfstate
 *.backup
+*.info
+*.log
+*.tfstate
 .terraform
 node_modules
 package-lock.json
