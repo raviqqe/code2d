@@ -6,21 +6,9 @@ provider "aws" {
   region = "us-east-1"
 }
 
-resource "aws_s3_bucket" "public" {
-  bucket = "${var.domain}"
-  acl    = "public-read"
-
-  website = {
-    index_document = "index.html"
-  }
-}
-
-resource "aws_s3_bucket_object" "object" {
-  bucket       = "${aws_s3_bucket.public.id}"
-  key          = "index.html"
-  source       = "index.html"
-  content_type = "text/html"
-  acl          = "public-read"
+module "app" {
+  source = "./app"
+  domain = "${var.domain}"
 }
 
 resource "aws_route53_zone" "main" {
@@ -33,8 +21,8 @@ resource "aws_route53_record" "self" {
   type    = "A"
 
   alias {
-    name                   = "${aws_s3_bucket.public.website_domain}"
-    zone_id                = "${aws_s3_bucket.public.hosted_zone_id}"
+    name                   = "${module.app.domain}"
+    zone_id                = "${module.app.zone_id}"
     evaluate_target_health = true
   }
 }
