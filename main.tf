@@ -6,8 +6,9 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "public" {
-  bucket = "${var.domain}"
-  acl    = "public-read"
+  bucket        = "${var.domain}"
+  acl           = "public-read"
+  force_destroy = true
 
   website = {
     index_document = "index.html"
