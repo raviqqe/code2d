@@ -17,3 +17,7 @@ end
 task deploy: :build do
   sh "aws s3 cp --recursive build s3://#{ENV['BUCKET']}"
 end
+
+task :clean do
+  sh 'git clean -dfx'
+end

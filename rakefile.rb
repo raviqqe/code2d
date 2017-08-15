@@ -24,5 +24,7 @@ task :withdraw do
 end
 
 task :clean do
-  sh 'git clean -dfx'
+  cd 'app' do
+    sh 'rake clean'
+  end
 end
