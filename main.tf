@@ -1,14 +1,17 @@
-variable "domain" {
-  default = "code2d.net"
-}
+variable "domain" {}
+variable "region" {}
 
 provider "aws" {
-  region = "us-east-1"
+  region = "${var.region}"
 }
 
-module "app" {
-  source = "./app"
-  domain = "${var.domain}"
+resource "aws_s3_bucket" "public" {
+  bucket = "${var.domain}"
+  acl    = "public-read"
+
+  website = {
+    index_document = "index.html"
+  }
 }
 
 resource "aws_route53_zone" "main" {
@@ -21,8 +24,8 @@ resource "aws_route53_record" "self" {
   type    = "A"
 
   alias {
-    name                   = "${module.app.domain}"
-    zone_id                = "${module.app.zone_id}"
+    name                   = "${aws_s3_bucket.public.website_domain}"
+    zone_id                = "${aws_s3_bucket.public.hosted_zone_id}"
     evaluate_target_health = true
   }
 }

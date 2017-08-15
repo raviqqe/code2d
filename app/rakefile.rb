@@ -13,3 +13,7 @@ end
 task run: :deps do
   sh 'npx react-scripts-ts start'
 end
+
+task deploy: :build do
+  sh "aws s3 cp --recursive build s3://#{ENV['BUCKET']}"
+end
