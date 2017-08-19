@@ -15,7 +15,7 @@ task run: :deps do
 end
 
 task deploy: :build do
-  sh "aws s3 cp --recursive build s3://#{ENV['BUCKET']}"
+  sh "aws s3 cp --acl public-read --recursive build s3://#{ENV['BUCKET']}"
 end
 
 task :clean do
