@@ -51,6 +51,8 @@ resource "aws_cloudfront_distribution" "d" {
     ssl_support_method       = "sni-only"
   }
 
+  price_class = "PriceClass_200"
+
   restrictions {
     geo_restriction {
       restriction_type = "none"
