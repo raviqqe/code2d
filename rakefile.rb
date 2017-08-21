@@ -9,7 +9,7 @@ task :build do
   end
 end
 
-task deploy: :build do
+task :deploy do
   sh 'terraform init'
   sh 'terraform get'
   sh "terraform apply #{TERRAFORM_VARS}"
