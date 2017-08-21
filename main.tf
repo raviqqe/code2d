@@ -60,12 +60,12 @@ resource "aws_cloudfront_distribution" "d" {
   }
 }
 
-resource "aws_route53_zone" "main" {
+resource "aws_route53_zone" "z" {
   name = "${var.domain}"
 }
 
-resource "aws_route53_record" "self" {
-  zone_id = "${aws_route53_zone.main.zone_id}"
+resource "aws_route53_record" "r" {
+  zone_id = "${aws_route53_zone.z.zone_id}"
   name    = "${var.domain}"
   type    = "A"
 
@@ -74,4 +74,8 @@ resource "aws_route53_record" "self" {
     zone_id                = "${aws_cloudfront_distribution.d.hosted_zone_id}"
     evaluate_target_health = true
   }
+}
+
+output "name_servers" {
+  value = "${aws_route53_zone.z.name_servers}"
 }
