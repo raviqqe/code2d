@@ -1,4 +1,4 @@
-# code2d
+# [code2d](http://code2d.net)
 
 Productivity tool for hackers.
 
