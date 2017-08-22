@@ -1,7 +1,9 @@
 import * as React from "react";
 
+import "./Task.css";
+
 export default class extends React.Component {
     public render() {
-        return <div><p>My task</p></div>;
+        return <div className="Task">My task</div>;
     }
 }
