@@ -1,8 +1,11 @@
 import * as React from "react";
+import { DragDropContext } from "react-dnd";
+import TouchBackend from "react-dnd-touch-backend";
 
 import "./App.css";
 import TaskList from "./TaskList";
 
+@DragDropContext(TouchBackend)
 export default class extends React.Component {
     public render() {
         return (
