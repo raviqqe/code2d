@@ -3,3 +3,8 @@
 	padding: 1em;
 	color: white;
 }
+
+.App-task-lists {
+	display: flex;
+	flex-direction: column wrap;
+}
