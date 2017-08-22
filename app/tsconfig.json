@@ -3,6 +3,7 @@
 		"jsx": "react",
 		"lib": ["es6", "dom"],
 		"rootDir": "src",
-		"target": "es5"
+		"target": "es5",
+		"experimentalDecorators": true
 	}
 }
