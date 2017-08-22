@@ -3,6 +3,7 @@ task :deps do
 end
 
 task build: :deps do
+  sh 'npx node-sass-chokidar src -o src'
   sh 'npx react-scripts-ts build'
 end
 
