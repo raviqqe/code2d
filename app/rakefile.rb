@@ -12,6 +12,7 @@ task test: :deps do
 end
 
 task run: :deps do
+  sh 'npx node-sass-chokidar src -o src --watch --recursive &'
   sh 'npx react-scripts-ts start'
 end
 
