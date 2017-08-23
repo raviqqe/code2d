@@ -1,3 +1,8 @@
 .TaskList {
 	width: (100% / 3);
 }
+
+.TaskList-header {
+	display: flex;
+	justify-content: center;
+}

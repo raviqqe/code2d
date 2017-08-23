@@ -1,10 +1,11 @@
 import * as _ from "lodash";
 import * as React from "react";
+import Check = require("react-icons/lib/fa/check");
 
 import Task from "./Task";
 import "./TaskList.css";
 
-export default class extends React.Component {
+export default class extends React.Component<{ icon: any }> {
     public state = {
         tasks: [{ id: "foo" }, { id: "bar" }, { id: "baz" }],
     };
@@ -21,6 +22,9 @@ export default class extends React.Component {
 
         return (
             <div className="TaskList">
+                <div className="TaskList-header">
+                    {this.props.icon}
+                </div>
                 {this.state.tasks.map((task) =>
                     <Task {...task} key={task.id} onDrop={swapTasks} />)}
             </div>
