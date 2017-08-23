@@ -5,7 +5,7 @@ import "./Task.css";
 
 interface IProps {
     id: string;
-    onDrop: (id: string, swappedId: string) => void;
+    onDrop: (task: any, swappedTask: any) => void;
 }
 
 @DragSource("Task", {
