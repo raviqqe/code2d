@@ -6,7 +6,7 @@ import Copy = require("react-icons/lib/fa/copy");
 import Repeat = require("react-icons/lib/fa/repeat");
 
 import "./App.css";
-import TaskList from "./TaskList";
+import TaskLists from "./TaskLists";
 
 @DragDropContext(TouchBackend({ enableMouseEvents: true }))
 export default class extends React.Component {
@@ -16,11 +16,7 @@ export default class extends React.Component {
                 <div className="App-header">
                     <h1>code2d</h1>
                 </div>
-                <div className="App-task-lists">
-                    <TaskList icon={<Copy />} />
-                    <TaskList icon={<Repeat />} />
-                    <TaskList icon={<Check />} />
-                </div>
+                <TaskLists />
             </div>
         );
     }
