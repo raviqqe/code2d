@@ -16,7 +16,10 @@
     "react-icons": "^2.2.5",
     "react-redux": "^5.0.6",
     "react-scripts-ts": "2.6.0",
-    "redux-saga": "^0.15.6"
+    "redux-saga": "^0.15.6",
+    "typescript-fsa": "^2.4.0",
+    "typescript-fsa-reducers": "^0.4.4",
+    "typescript-fsa-redux-saga": "^1.0.2"
   },
   "devDependencies": {
     "node-sass-chokidar": "0.0.3",
