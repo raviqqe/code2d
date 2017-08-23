@@ -6,10 +6,12 @@ import { reducerWithInitialState } from "typescript-fsa-reducers";
 import * as aws from "../lib/aws";
 import { unwrapAction } from "./utils";
 
-export const signIn = actionCreatorFactory().async<
+const signIn = actionCreatorFactory().async<
     { token: string },
     undefined,
     { message: string }>("SIGN_IN");
+
+export default { signIn: signIn.started };
 
 export const initialState = {
     errorMessage: "",
