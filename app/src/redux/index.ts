@@ -1,10 +1,19 @@
-import { combineReducers } from "redux";
+import { applyMiddleware, combineReducers, compose, createStore } from "redux";
+import createSagaMiddleware from "redux-saga";
 import { all } from "redux-saga/effects";
 
 import * as signIn from "./sign-in";
 
-export const reducer = combineReducers({ signIn: signIn.reducer });
+export default function() {
+    const sagaMiddleware = createSagaMiddleware();
 
-export function* saga() {
-    yield all([...signIn.sagas]);
+    sagaMiddleware.run(function* _() {
+        yield all([...signIn.sagas]);
+    });
+
+    return createStore(
+        combineReducers({
+            signIn: signIn.reducer,
+        }),
+        compose(applyMiddleware(sagaMiddleware)));
 }
