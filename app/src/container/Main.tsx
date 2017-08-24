@@ -1,16 +1,16 @@
 import * as React from "react";
 import { DragDropContext } from "react-dnd";
 import TouchBackend from "react-dnd-touch-backend";
+import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import TaskLists from "../component/TaskLists";
-import { isSignedIn } from "../lib/firebase";
 import "./style/Main.css";
 
 @DragDropContext(TouchBackend({ enableMouseEvents: true }))
-export default class extends React.Component {
+class Main extends React.Component<{ signedIn: boolean }> {
     public render() {
-        if (!isSignedIn()) {
+        if (!this.props.signedIn) {
             return <Redirect to="/sign-in" />;
         }
 
@@ -24,3 +24,5 @@ export default class extends React.Component {
         );
     }
 }
+
+export default connect(({ authState }) => authState, {})(Main);

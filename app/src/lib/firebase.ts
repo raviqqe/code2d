@@ -15,7 +15,3 @@ export async function signIn(): Promise<void> {
     await firebase.auth().signInWithRedirect(new firebase.auth.GithubAuthProvider());
     await firebase.auth().getRedirectResult();
 }
-
-export function isSignedIn(): boolean {
-    return firebase.auth().currentUser !== null;
-}

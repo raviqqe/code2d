@@ -2,18 +2,18 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
-import { isSignedIn } from "../lib/firebase";
 import actionCreators from "../redux/sign-in";
 
 interface IProps {
     errorMessage: string;
     halfway: boolean;
+    signedIn: boolean;
     signIn: () => void;
 }
 
 class SignIn extends React.Component<IProps> {
     public render() {
-        if (isSignedIn()) {
+        if (this.props.signedIn) {
             return <Redirect to="/" />;
         }
 
@@ -25,4 +25,7 @@ class SignIn extends React.Component<IProps> {
     }
 }
 
-export default connect(({ signIn }) => signIn, actionCreators)(SignIn);
+export default connect(
+    ({ authState, signIn }) => ({ ...authState, ...signIn }),
+    actionCreators,
+)(SignIn);
