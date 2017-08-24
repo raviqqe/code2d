@@ -7,8 +7,8 @@ import * as aws from "../lib/aws";
 import { unwrapAction } from "./utils";
 
 const signIn = actionCreatorFactory().async<
-    { token: string },
-    undefined,
+    void,
+    void,
     { message: string }>("SIGN_IN");
 
 export default { signIn: signIn.started };
@@ -29,7 +29,7 @@ export const reducer = reducerWithInitialState(initialState)
 export const sagas = [
     takeEvery(signIn.started.type, unwrapAction(
         signIn.started,
-        function* _({ token }): SagaIterator {
-            yield call(aws.signIn, token);
+        function* _(): SagaIterator {
+            yield call(() => undefined);
         })),
 ];
