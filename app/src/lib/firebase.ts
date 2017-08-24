@@ -12,7 +12,8 @@ export function initialize(): void {
 }
 
 export async function signIn(): Promise<void> {
-    await firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider());
+    await firebase.auth().signInWithRedirect(new firebase.auth.GithubAuthProvider());
+    await firebase.auth().getRedirectResult();
 }
 
 export function isSignedIn(): boolean {
