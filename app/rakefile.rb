@@ -11,7 +11,7 @@ task test: :deps do
   sh 'CI=true npx react-scripts-ts test --env=jsdom'
 end
 
-task run: :deps do
+task run: :build do
   sh 'npx node-sass-chokidar src -o src --watch --recursive &'
   sh 'npx react-scripts-ts start'
 end
