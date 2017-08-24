@@ -12,7 +12,9 @@ interface IProps {
 class SignIn extends React.Component<IProps> {
     public render() {
         return (
-            <div onClick={this.props.signIn}>Sign in</div>
+            <div>
+                <button onClick={this.props.signIn}>Sign in</button>
+            </div>
         );
     }
 }

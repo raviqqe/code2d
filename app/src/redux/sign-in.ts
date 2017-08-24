@@ -1,35 +1,37 @@
 import { SagaIterator } from "redux-saga";
-import { call, takeEvery } from "redux-saga/effects";
+import { call, put, takeEvery } from "redux-saga/effects";
 import actionCreatorFactory from "typescript-fsa";
 import { reducerWithInitialState } from "typescript-fsa-reducers";
 
-import * as aws from "../lib/aws";
+import * as firebase from "../lib/firebase";
 import { unwrapAction } from "./utils";
 
 const signIn = actionCreatorFactory().async<
-    void,
-    void,
-    { message: string }>("SIGN_IN");
+    null,
+    null,
+    Error>("SIGN_IN");
 
-export default { signIn: signIn.started };
+export default { signIn: () => signIn.started(null) };
 
-export const initialState = {
-    errorMessage: "",
+export const initialState: { error: Error | null, halfway: boolean } = {
+    error: null,
     halfway: false,
 };
 
 export const reducer = reducerWithInitialState(initialState)
-    .case(signIn.started, () => ({ errorMessage: "", halfway: true }))
-    .case(signIn.done, () => ({ errorMessage: "", halfway: false }))
-    .case(signIn.failed, (_, { error: { message } }) => ({
-        errorMessage: message,
-        halfway: false,
-    }));
+    .case(signIn.started, () => ({ error: null, halfway: true }))
+    .case(signIn.done, () => ({ error: null, halfway: false }))
+    .case(signIn.failed, (_, { error }) => ({ error, halfway: false }));
 
 export const sagas = [
     takeEvery(signIn.started.type, unwrapAction(
         signIn.started,
         function* _(): SagaIterator {
-            yield call(() => undefined);
+            try {
+                yield call(firebase.signIn);
+                yield put(signIn.done({ params: null, result: null }));
+            } catch (error) {
+                yield put(signIn.failed({ params: null, error }));
+            }
         })),
 ];
