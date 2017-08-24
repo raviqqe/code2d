@@ -15,7 +15,7 @@ class SignIn extends React.Component<IProps> {
         return (
             <div>
                 <GoogleLogin
-                    clientId="yourClientID"
+                    clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
                     scope="email"
                     onSuccess={({ getAuthResponse }: GoogleLoginResponse) => {
                         const token = getAuthResponse().id_token;
