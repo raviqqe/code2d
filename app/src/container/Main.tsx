@@ -2,8 +2,8 @@ import * as React from "react";
 import { DragDropContext } from "react-dnd";
 import TouchBackend from "react-dnd-touch-backend";
 
+import TaskLists from "../component/TaskLists";
 import "./Main.css";
-import TaskLists from "./TaskLists";
 
 @DragDropContext(TouchBackend({ enableMouseEvents: true }))
 export default class extends React.Component {

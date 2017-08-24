@@ -2,7 +2,7 @@ import * as React from "react";
 import { GoogleLogin } from "react-google-login-component";
 import { connect } from "react-redux";
 
-import actionCreators from "./redux/sign-in";
+import actionCreators from "../redux/sign-in";
 
 interface IProps {
     errorMessage: string;
