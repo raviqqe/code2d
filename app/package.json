@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "aws-sdk": "^2.102.0",
+    "firebase": "^4.3.0",
     "lodash": "^4.17.4",
     "react": "^15.6.1",
     "react-dnd": "^2.4.0",
