@@ -14,6 +14,8 @@ task :deploy do
   sh 'terraform get'
   sh "terraform apply #{TERRAFORM_VARS}"
 
+  sh 'firebase deploy'
+
   cd 'app' do
     sh "BUCKET=#{DOMAIN} rake deploy"
   end
