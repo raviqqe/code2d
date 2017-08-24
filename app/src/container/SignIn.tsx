@@ -1,5 +1,5 @@
 import * as React from "react";
-import { GoogleLogin } from "react-google-login-component";
+import GoogleLogin, { GoogleLoginResponse } from "react-google-login";
 import { connect } from "react-redux";
 
 import actionCreators from "../redux/sign-in";
@@ -15,15 +15,16 @@ class SignIn extends React.Component<IProps> {
         return (
             <div>
                 <GoogleLogin
-                    socialId="yourClientID"
-                    className="google-login"
+                    clientId="yourClientID"
                     scope="email"
-                    responseHandler={(user) => {
-                        const token: string = user.getAuthResponse().id_token;
-                        console.log({ accessToken: token });
+                    onSuccess={({ getAuthResponse }: GoogleLoginResponse) => {
+                        const token = getAuthResponse().id_token;
+                        console.log({ token });
                         this.props.signIn({ token });
                     }}
-                    buttonText="Sign in"
+                    onFailure={({ details }: { details: string }) => {
+                        console.error(details);
+                    }}
                 />
             </div>
         );
