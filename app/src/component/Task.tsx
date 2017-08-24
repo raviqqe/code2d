@@ -1,7 +1,7 @@
 import * as React from "react";
 import { DragSource, DropTarget } from "react-dnd";
 
-import "./Task.css";
+import "./style/Task.css";
 
 interface IProps {
     id: string;

@@ -1,8 +1,8 @@
 import * as React from "react";
 import Check = require("react-icons/lib/fa/check");
 
+import "./style/TaskList.css";
 import Task from "./Task";
-import "./TaskList.css";
 
 interface IProps {
     icon: any;
