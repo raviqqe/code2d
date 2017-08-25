@@ -1,6 +1,7 @@
 import * as React from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
+import ITask from "../lib/task";
 import "./style/TaskList.css";
 import Task from "./Task";
 
@@ -11,15 +12,15 @@ function reorderTask(tasks, i, j) {
 }
 
 interface IState {
-    tasks: Array<{ id: string, content: string }>;
+    tasks: ITask[];
 }
 
 export default class extends React.Component<{}, IState> {
     public state = {
         tasks: [
-            { id: "foo", content: "Hello, world!" },
-            { id: "bar", content: "Hello, Japan!" },
-            { id: "baz", content: "Hello, me!" },
+            { id: "foo", name: "foo", description: "Hello, world!" },
+            { id: "bar", name: "bar", description: "Hello, Japan!" },
+            { id: "baz", name: "baz", description: "Hello, me!" },
         ],
     };
 
@@ -39,7 +40,7 @@ export default class extends React.Component<{}, IState> {
                                                 style={provided.draggableStyle}
                                                 {...provided.dragHandleProps}
                                             >
-                                                {task.content}
+                                                <Task {...task} />
                                             </div>
                                             {provided.placeholder}
                                         </div>
