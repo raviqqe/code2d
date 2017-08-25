@@ -11,7 +11,6 @@ interface IProps extends ITask {
 export default class extends React.Component<IProps> {
     public render() {
         const { description, id, name, onDelete } = this.props;
-        console.log(onDelete);
 
         return (
             <div className="Task">
