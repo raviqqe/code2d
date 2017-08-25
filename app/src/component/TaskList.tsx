@@ -30,7 +30,7 @@ export default class extends React.Component<{}, IState> {
                 <Droppable droppableId="taskList">
                     {({ innerRef }) => (
                         <div className="TaskList-container" ref={innerRef}>
-                            {this.state.tasks.map((task) => (
+                            {this.state.tasks.map((task, index) => (
                                 <Draggable key={task.id} draggableId={task.id}>
                                     {(provided) => (
                                         <div>
@@ -40,7 +40,16 @@ export default class extends React.Component<{}, IState> {
                                                 style={provided.draggableStyle}
                                                 {...provided.dragHandleProps}
                                             >
-                                                <Task {...task} />
+                                                <Task
+                                                    {...task}
+                                                    onDelete={() => {
+                                                        const tasks = [...this.state.tasks];
+
+                                                        tasks.splice(index, 1);
+
+                                                        this.setState({ tasks });
+                                                    }}
+                                                />
                                             </div>
                                             {provided.placeholder}
                                         </div>
