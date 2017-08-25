@@ -1,6 +1,6 @@
 # [code2d](http://code2d.net)
 
-Productivity tool for hackers.
+Productivity tool for software engineers.
 
 ## License
 
