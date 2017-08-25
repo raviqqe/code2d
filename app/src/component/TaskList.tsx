@@ -2,6 +2,7 @@ import * as React from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
 import ITask from "../lib/task";
+import AddTask from "./AddTask";
 import "./style/TaskList.css";
 import Task from "./Task";
 
@@ -26,40 +27,46 @@ export default class extends React.Component<{}, IState> {
 
     public render() {
         return (
-            <DragDropContext onDragEnd={this.onDragEnd}>
-                <Droppable droppableId="taskList">
-                    {({ innerRef }) => (
-                        <div className="TaskList-container" ref={innerRef}>
-                            {this.state.tasks.map((task, index) => (
-                                <Draggable key={task.id} draggableId={task.id}>
-                                    {(provided) => (
-                                        <div>
-                                            <div
-                                                className="TaskList-task"
-                                                ref={provided.innerRef}
-                                                style={provided.draggableStyle}
-                                                {...provided.dragHandleProps}
-                                            >
-                                                <Task
-                                                    {...task}
-                                                    onDelete={() => {
-                                                        const tasks = [...this.state.tasks];
+            <div>
+                <AddTask
+                    onAddTask={(task: ITask) =>
+                        this.setState({ tasks: [task, ...this.state.tasks] })}
+                />
+                <DragDropContext onDragEnd={this.onDragEnd}>
+                    <Droppable droppableId="taskList">
+                        {({ innerRef }) => (
+                            <div className="TaskList-container" ref={innerRef}>
+                                {this.state.tasks.map((task, index) => (
+                                    <Draggable key={task.id} draggableId={task.id}>
+                                        {(provided) => (
+                                            <div>
+                                                <div
+                                                    className="TaskList-task"
+                                                    ref={provided.innerRef}
+                                                    style={provided.draggableStyle}
+                                                    {...provided.dragHandleProps}
+                                                >
+                                                    <Task
+                                                        {...task}
+                                                        onDelete={() => {
+                                                            const tasks = [...this.state.tasks];
 
-                                                        tasks.splice(index, 1);
+                                                            tasks.splice(index, 1);
 
-                                                        this.setState({ tasks });
-                                                    }}
-                                                />
+                                                            this.setState({ tasks });
+                                                        }}
+                                                    />
+                                                </div>
+                                                {provided.placeholder}
                                             </div>
-                                            {provided.placeholder}
-                                        </div>
-                                    )}
-                                </Draggable>
-                            ))}
-                        </div>
-                    )}
-                </Droppable>
-            </DragDropContext>
+                                        )}
+                                    </Draggable>
+                                ))}
+                            </div>
+                        )}
+                    </Droppable>
+                </DragDropContext>
+            </div>
         );
     }
 
