@@ -1,10 +1,10 @@
 import { SagaIterator } from "redux-saga";
-import { call, put, takeEvery } from "redux-saga/effects";
+import { call, put } from "redux-saga/effects";
 import actionCreatorFactory from "typescript-fsa";
 import { reducerWithInitialState } from "typescript-fsa-reducers";
 
 import * as firebase from "../lib/firebase";
-import { unwrapAction } from "./utils";
+import { takeEvery } from "./utils";
 
 const signIn = actionCreatorFactory().async<
     null,
@@ -24,7 +24,7 @@ export const reducer = reducerWithInitialState(initialState)
     .case(signIn.failed, (_, { error }) => ({ error, halfway: false }));
 
 export const sagas = [
-    takeEvery(signIn.started.type, unwrapAction(
+    takeEvery(
         signIn.started,
         function* _(): SagaIterator {
             try {
@@ -33,5 +33,5 @@ export const sagas = [
             } catch (error) {
                 yield put(signIn.failed({ params: null, error }));
             }
-        })),
+        }),
 ];
