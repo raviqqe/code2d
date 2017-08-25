@@ -5,10 +5,10 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import TaskList from "../component/TaskList";
-import "./style/Main.css";
+import "./style/Home.css";
 
 @DragDropContext(TouchBackend({ enableMouseEvents: true }))
-class Main extends React.Component<{ signedIn: boolean }> {
+class Home extends React.Component<{ signedIn: boolean }> {
     public render() {
         if (!this.props.signedIn) {
             return <Redirect to="/sign-in" />;
@@ -22,4 +22,4 @@ class Main extends React.Component<{ signedIn: boolean }> {
     }
 }
 
-export default connect(({ authState }) => authState, {})(Main);
+export default connect(({ authState }) => authState, {})(Home);

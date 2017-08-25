@@ -1,7 +1,7 @@
 import * as React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 
-import Main from "./Main";
+import Home from "./Home";
 import SignIn from "./SignIn";
 
 export default class extends React.Component {
@@ -9,7 +9,7 @@ export default class extends React.Component {
         return (
             <BrowserRouter>
                 <div>
-                    <Route path="/" component={Main} />
+                    <Route path="/" component={Home} />
                     <Route path="/sign-in" component={SignIn} />
                 </div>
             </BrowserRouter>
