@@ -32,7 +32,17 @@ export default class extends React.Component<{}, IState> {
                     onAddTask={(task: ITask) =>
                         this.setState({ tasks: [task, ...this.state.tasks] })}
                 />
-                <DragDropContext onDragEnd={this.onDragEnd}>
+                <DragDropContext
+                    onDragEnd={({ destination, source }): void => {
+                        if (!destination) {
+                            return;
+                        }
+
+                        this.setState({
+                            tasks: reorderTask(this.state.tasks, source.index, destination.index),
+                        });
+                    }}
+                >
                     <Droppable droppableId="taskList">
                         {({ innerRef }) => (
                             <div className="TaskList-container" ref={innerRef}>
@@ -68,15 +78,5 @@ export default class extends React.Component<{}, IState> {
                 </DragDropContext>
             </div>
         );
-    }
-
-    private onDragEnd = ({ destination, source }): void => {
-        if (!destination) {
-            return;
-        }
-
-        this.setState({
-            tasks: reorderTask(this.state.tasks, source.index, destination.index),
-        });
     }
 }
