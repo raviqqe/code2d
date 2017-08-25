@@ -4,7 +4,7 @@ import TouchBackend from "react-dnd-touch-backend";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
-import TaskLists from "../component/TaskLists";
+import TaskList from "../component/TaskList";
 import "./style/Main.css";
 
 @DragDropContext(TouchBackend({ enableMouseEvents: true }))
@@ -16,10 +16,7 @@ class Main extends React.Component<{ signedIn: boolean }> {
 
         return (
             <div>
-                <div className="Main-header">
-                    <h1>code2d</h1>
-                </div>
-                <TaskLists />
+                <TaskList />
             </div>
         );
     }

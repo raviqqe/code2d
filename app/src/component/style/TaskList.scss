@@ -1,8 +1,11 @@
-.TaskList {
-	width: (100% / 3);
+.TaskList-container {
+	background: black;
+	width: 50%;
 }
 
-.TaskList-header {
-	display: flex;
-	justify-content: center;
+.TaskList-task {
+	background: white;
+	margin-bottom: 8px;
+	padding: 16px;
+	user-select: none;
 }
