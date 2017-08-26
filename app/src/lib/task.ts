@@ -11,16 +11,12 @@ export interface ITask extends INewTask {
 }
 
 export class Tasks {
-    public create(task: INewTask): string {
-        return this.ref.push({ ...task, done: false }).key;
+    public create = (task: INewTask): string => {
+        return this.reference.push({ ...task, done: false }).key;
     }
 
-    public async findAll(): Promise<{ [key: string]: ITask }> {
-        return (await this.ref.once("value")).val();
-    }
-
-    public onUndoneTasksUpdate(callback: (tasks: ITask[]) => void) {
-        this.ref.orderByChild("done").equalTo(false).on("value", (snapshot) => {
+    public onUndoneTasksUpdate = (callback: (tasks: ITask[]) => void) => {
+        this.reference.orderByChild("done").equalTo(false).on("value", (snapshot) => {
             const idToTask = snapshot.val();
 
             if (!idToTask) {
@@ -38,11 +34,7 @@ export class Tasks {
         });
     }
 
-    private get ref(): firebase.database.Reference {
-        return firebase.database().ref(this.path);
-    }
-
-    private get path(): string {
-        return `users/${firebase.auth().currentUser.uid}/tasks`;
+    private get reference(): firebase.database.Reference {
+        return firebase.database().ref(`users/${firebase.auth().currentUser.uid}/tasks`);
     }
 }
