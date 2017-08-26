@@ -1,7 +1,5 @@
 import * as firebase from "firebase";
 
-import ITask from "./task";
-
 const projectId = process.env.REACT_APP_FIREBASE_PROJECT_ID;
 
 export function initialize(): void {
@@ -18,16 +16,6 @@ export async function signIn(): Promise<void> {
     await firebase.auth().getRedirectResult();
 }
 
-export class Tasks {
-    public create(task: ITask): string {
-        return this.ref.push(task).key;
-    }
-
-    public async findAll(): Promise<{ [key: string]: ITask }> {
-        return (await this.ref.once("value")).val();
-    }
-
-    private get ref(): firebase.database.Reference {
-        return firebase.database().ref(`users/${firebase.auth().currentUser.uid}/tasks`);
-    }
+export function onAuthStateChanged(callback: (user: firebase.User) => void) {
+    firebase.auth().onAuthStateChanged(callback);
 }
