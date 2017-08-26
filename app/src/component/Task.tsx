@@ -1,7 +1,7 @@
 import * as React from "react";
 import Close = require("react-icons/lib/fa/close");
 
-import ITask from "../lib/task";
+import { ITask } from "../lib/task";
 import "./style/Task.css";
 
 interface IProps extends ITask {

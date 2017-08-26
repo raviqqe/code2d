@@ -1,7 +1,8 @@
 import * as React from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { connect } from "react-redux";
 
-import ITask from "../lib/task";
+import { ITask } from "../lib/task";
 import AddTask from "./AddTask";
 import "./style/TaskList.css";
 import Task from "./Task";
@@ -12,41 +13,28 @@ function reorderTask(tasks, i, j) {
     return tasks;
 }
 
-interface IState {
-    tasks: ITask[];
-}
-
-export default class extends React.Component<{}, IState> {
-    public state = {
-        tasks: [
-            { id: "foo", name: "foo", description: "Hello, world!" },
-            { id: "bar", name: "bar", description: "Hello, Japan!" },
-            { id: "baz", name: "baz", description: "Hello, me!" },
-        ],
-    };
-
+class TaskList extends React.Component<{ tasks: ITask[] }> {
     public render() {
         return (
             <div>
-                <AddTask
-                    onAddTask={(task: ITask) =>
-                        this.setState({ tasks: [task, ...this.state.tasks] })}
-                />
+                <AddTask />
                 <DragDropContext
                     onDragEnd={({ destination, source }): void => {
-                        if (!destination) {
-                            return;
-                        }
+                        // TODO: Reorder tasks.
 
-                        this.setState({
-                            tasks: reorderTask(this.state.tasks, source.index, destination.index),
-                        });
+                        // if (!destination) {
+                        //     return;
+                        // }
+
+                        // this.setState({
+                        //     tasks: reorderTask(this.props.tasks, source.index, destination.index),
+                        // });
                     }}
                 >
                     <Droppable droppableId="taskList">
                         {({ innerRef }) => (
                             <div className="TaskList-container" ref={innerRef}>
-                                {this.state.tasks.map((task, index) => (
+                                {this.props.tasks.map((task, index) => (
                                     <Draggable key={task.id} draggableId={task.id}>
                                         {(provided) => (
                                             <div>
@@ -59,11 +47,13 @@ export default class extends React.Component<{}, IState> {
                                                     <Task
                                                         {...task}
                                                         onDelete={() => {
-                                                            const tasks = [...this.state.tasks];
+                                                            // TODO: Delete a task.
 
-                                                            tasks.splice(index, 1);
+                                                            // const tasks = [...this.props.tasks];
 
-                                                            this.setState({ tasks });
+                                                            // tasks.splice(index, 1);
+
+                                                            // this.setState({ tasks });
                                                         }}
                                                     />
                                                 </div>
@@ -80,3 +70,5 @@ export default class extends React.Component<{}, IState> {
         );
     }
 }
+
+export default connect(({ tasks }) => tasks)(TaskList);

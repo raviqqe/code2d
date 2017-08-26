@@ -1,10 +1,6 @@
 import * as React from "react";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import uuid = require("uuid/v4");
 
-import ITask from "../lib/task";
-import "./style/TaskList.css";
-import Task from "./Task";
+import { INewTask } from "../lib/task";
 
 function reorderTask(tasks, i, j) {
     tasks = [...tasks];
@@ -12,30 +8,21 @@ function reorderTask(tasks, i, j) {
     return tasks;
 }
 
-interface IProps {
-    onAddTask: (task: ITask) => void;
-}
-
 interface IState {
     addingTask: boolean;
-    task: ITask;
+    task: INewTask;
 }
 
-export default class extends React.Component<IProps, IState> {
-    public state = {
+export default class extends React.Component<{}, IState> {
+    public state: IState = {
         addingTask: false,
-        task: { id: "", name: "", description: "" },
+        task: { name: "", description: "" },
     };
 
     public render() {
         if (!this.state.addingTask) {
             return (
-                <div
-                    onClick={() => this.setState({
-                        addingTask: true,
-                        task: { id: uuid(), name: "", description: "" },
-                    })}
-                >
+                <div onClick={() => this.setState({ addingTask: true })}>
                     Add a task
                 </div>
             );
@@ -44,10 +31,10 @@ export default class extends React.Component<IProps, IState> {
         return (
             <form
                 onSubmit={() => {
-                    this.props.onAddTask(this.state.task);
+                    // TODO: this.props.addTask(this.state.task);
                     this.setState({
                         addingTask: false,
-                        task: { id: "", name: "", description: "" },
+                        task: { name: "", description: "" },
                     });
                 }}
             >
