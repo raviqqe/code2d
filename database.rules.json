@@ -2,9 +2,31 @@
 	"rules": {
 		"users": {
 			"$uid": {
-				".read": "$uid === auth.uid",
-				".write": "$uid === auth.uid"
+				".read": "$uid == auth.uid",
+				".write": "$uid == auth.uid",
+				"tasks": {
+					"$task": {
+						"name": {
+							".validate": "newData.val().length <= 150"
+						},
+						"description": {
+							".validate": "newData.val().length <= 1000"
+						},
+						"done": {
+							".validate": "newData.isBoolean()"
+						},
+						"$other": {
+							".validate": false
+						}
+					}
+				},
+				"$other": {
+					".validate": false
+				}
 			}
+		},
+		"$other": {
+			".validate": false
 		}
 	}
 }
