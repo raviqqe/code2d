@@ -22,6 +22,12 @@ export class Tasks {
     public onUndoneTasksUpdate(callback: (tasks: ITask[]) => void) {
         this.ref.orderByChild("done").equalTo(false).on("value", (snapshot) => {
             const idToTask = snapshot.val();
+
+            if (!idToTask) {
+                callback([]);
+                return;
+            }
+
             const tasks: ITask[] = [];
 
             for (const id of Object.keys(idToTask)) {

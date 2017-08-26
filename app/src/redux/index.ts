@@ -24,14 +24,15 @@ export default function() {
         yield all([...signIn.sagas]);
     });
 
-    firebase.onAuthStateChanged(
-        (user) => store.dispatch(
-            user === null ?
-                authStateActionCreators.signOut() :
-                authStateActionCreators.signIn()));
-
-    (new Tasks()).onUndoneTasksUpdate((tasks: ITask[]) =>
-        store.dispatch(tasksActionCreators.updateTasks(tasks)));
+    firebase.onAuthStateChanged((user) => {
+        if (user === null) {
+            store.dispatch(authStateActionCreators.signOut());
+        } else {
+            store.dispatch(authStateActionCreators.signIn());
+            (new Tasks()).onUndoneTasksUpdate((tasks: ITask[]) =>
+                store.dispatch(tasksActionCreators.updateTasks(tasks)));
+        }
+    });
 
     return store;
 }
