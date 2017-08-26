@@ -17,7 +17,7 @@ export default class extends React.Component<IProps> {
                 <div>{"ID:" + id}</div>
                 <div>{"Name:" + name}</div>
                 <div>{"Description:" + description}</div>
-                <button onClick={onDelete}><Close /></button>
+                <div onClick={onDelete}><Close /></div>
             </div>
         );
     }

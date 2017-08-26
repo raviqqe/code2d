@@ -17,15 +17,10 @@ class SignIn extends React.Component<IProps> {
             return <Redirect to="/" />;
         }
 
-        return (
-            <div>
-                <button onClick={this.props.signIn}>Sign in</button>
-            </div>
-        );
+        return <div onClick={this.props.signIn}>Sign in</div>;
     }
 }
 
-export default connect(
-    ({ authState, signIn }) => ({ ...authState, ...signIn }),
-    actionCreators,
-)(SignIn);
+const mapStateToProps = ({ authState, signIn }) => ({ ...authState, ...signIn });
+
+export default connect(mapStateToProps, actionCreators)(SignIn);
