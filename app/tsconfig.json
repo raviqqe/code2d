@@ -4,6 +4,7 @@
 		"lib": ["es5", "es6", "dom"],
 		"rootDir": "src",
 		"target": "es5",
+		"downlevelIteration": true,
 		"experimentalDecorators": true
 	}
 }

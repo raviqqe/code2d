@@ -1,11 +1,11 @@
 import * as React from "react";
+import { connect } from "react-redux";
 
 import { INewTask } from "../lib/task";
+import { actionCreators } from "../redux/add-task";
 
-function reorderTask(tasks, i, j) {
-    tasks = [...tasks];
-    tasks.splice(j, 0, tasks.splice(i, 1)[0]);
-    return tasks;
+interface IProps {
+    addTask: (task: INewTask) => void;
 }
 
 interface IState {
@@ -13,7 +13,7 @@ interface IState {
     task: INewTask;
 }
 
-export default class extends React.Component<{}, IState> {
+class AddTask extends React.Component<IProps, IState> {
     public state: IState = {
         addingTask: false,
         task: { name: "", description: "" },
@@ -31,7 +31,7 @@ export default class extends React.Component<{}, IState> {
         return (
             <form
                 onSubmit={() => {
-                    // TODO: this.props.addTask(this.state.task);
+                    this.props.addTask(this.state.task);
                     this.setState({
                         addingTask: false,
                         task: { name: "", description: "" },
@@ -56,8 +56,10 @@ export default class extends React.Component<{}, IState> {
                             this.setState({ task: { ...this.state.task, description: value } })}
                     />
                 </label>
-                <input type="submit" value="Submit" />
+                <input type="submit" value="Add task" />
             </form>
         );
     }
 }
+
+export default connect(({ addTask }) => addTask, { addTask: actionCreators.addTask })(AddTask);

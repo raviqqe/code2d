@@ -11,8 +11,8 @@ export interface ITask extends INewTask {
 }
 
 export class Tasks {
-    public create(task: ITask): string {
-        return this.ref.push(task).key;
+    public create(task: INewTask): string {
+        return this.ref.push({ ...task, done: false }).key;
     }
 
     public async findAll(): Promise<{ [key: string]: ITask }> {

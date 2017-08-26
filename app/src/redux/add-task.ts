@@ -8,7 +8,7 @@ import { takeEvery } from "./utils";
 
 const addTask = actionCreatorFactory().async<INewTask, null, Error>("ADD_TASK");
 
-export default { addTask: addTask.started };
+export const actionCreators = { addTask: addTask.started };
 
 export const initialState: { error: Error | null, halfway: boolean } = {
     error: null,
