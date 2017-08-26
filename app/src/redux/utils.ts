@@ -10,6 +10,6 @@ function unwrapAction<P>(
     };
 }
 
-export function* takeEvery<P>(actionCreator: ActionCreator<P>, saga: (payload: P) => SagaIterator): SagaIterator {
+export function takeEvery<P>(actionCreator: ActionCreator<P>, saga: (payload: P) => SagaIterator): effects.ForkEffect {
     return effects.takeEvery(actionCreator.type, unwrapAction(actionCreator, saga));
 }
