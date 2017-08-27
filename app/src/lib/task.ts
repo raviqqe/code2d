@@ -7,55 +7,45 @@ export interface INewTask {
 }
 
 export interface ITask extends INewTask {
-    id: string;
     createdAt: number;
     updatedAt: number;
 }
 
 export class Tasks {
     public create = async (task: INewTask): Promise<void> => {
-        const ids = (await this.taskList.once("value")).val();
+        const tasks = (await this.undoneTasks.once("value")).val();
 
-        this.taskList.set([
-            this.tasks.push({ createdAt: Date.now(), updatedAt: Date.now(), ...task }).key,
-            ...(ids ? ids : []),
+        this.setUndoneTasks([
+            { createdAt: Date.now(), updatedAt: Date.now(), ...task },
+            ...(tasks ? tasks : []),
         ]);
     }
 
-    public remove = async (removedId: string): Promise<void> => {
-        const ids = (await this.taskList.once("value")).val();
+    public markDone = async (task: ITask): Promise<void> => {
+        const tasks = (await this.undoneTasks.once("value")).val();
 
-        _.remove(ids, (id) => id === removedId);
+        _.remove(tasks, task);
 
-        await this.setTaskList(ids);
-        await this.tasks.child(removedId).remove();
+        await this.setUndoneTasks(tasks);
+        await this.doneTasks.push(task);
     }
 
-    public setTaskList = async (taskIds: string[]): Promise<void> => {
-        await this.taskList.set(taskIds);
+    public setUndoneTasks = async (tasks: ITask[]): Promise<void> => {
+        await this.undoneTasks.set(tasks);
     }
 
-    public onTaskListUpdate = (callback: (tasks: ITask[]) => void): void => {
-        this.taskList.on("value", async (snapshot): Promise<void> => {
-            const ids: string[] = snapshot.val();
-
-            if (!ids) {
-                callback([]);
-                return;
-            }
-
-            callback(await Promise.all(ids.map(async (id: string) => ({
-                id,
-                ...(await this.tasks.orderByKey().equalTo(id).once("value")).val()[id],
-            }))));
+    public onUndoneTasksUpdate = (callback: (tasks: ITask[]) => void): void => {
+        this.undoneTasks.on("value", async (snapshot): Promise<void> => {
+            const tasks = snapshot.val();
+            callback(tasks ? tasks : []);
         });
     }
 
-    private get tasks(): firebase.database.Reference {
-        return firebase.database().ref(`users/${firebase.auth().currentUser.uid}/tasks`);
+    private get undoneTasks(): firebase.database.Reference {
+        return firebase.database().ref(`users/${firebase.auth().currentUser.uid}/tasks/undone`);
     }
 
-    private get taskList(): firebase.database.Reference {
-        return firebase.database().ref(`users/${firebase.auth().currentUser.uid}/taskList`);
+    private get doneTasks(): firebase.database.Reference {
+        return firebase.database().ref(`users/${firebase.auth().currentUser.uid}/tasks/done`);
     }
 }

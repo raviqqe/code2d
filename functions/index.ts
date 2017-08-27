@@ -2,7 +2,7 @@ import * as functions from "firebase-functions";
 
 const maxTasks = 64;
 
-export const limitTasks = functions.database.ref("users/{userId}/tasks/{taskId}").onCreate(
+export const limitTasks = functions.database.ref("users/{userId}/tasks/{state}/{taskId}").onCreate(
     async ({ data: { ref: { parent } } }) => {
         const snapshot = await parent.once("value");
 

@@ -4,24 +4,47 @@
 			"$uid": {
 				".read": "$uid == auth.uid",
 				".write": "$uid == auth.uid",
-				"taskList": {},
 				"tasks": {
-					"$task": {
-						"name": {
-							".validate": "newData.val().length <= 150"
-						},
-						"description": {
-							".validate": "newData.val().length <= 1000"
-						},
-						"createdAt": {
-							".validate": "newData.isNumber()"
-						},
-						"updatedAt": {
-							".validate": "newData.isNumber()"
-						},
-						"$other": {
-							".validate": false
+					"done": {
+						"$task": {
+							"name": {
+								".validate": "newData.val().length <= 150"
+							},
+							"description": {
+								".validate": "newData.val().length <= 1000"
+							},
+							"createdAt": {
+								".validate": "newData.isNumber()"
+							},
+							"updatedAt": {
+								".validate": "newData.isNumber()"
+							},
+							"$other": {
+								".validate": false
+							}
 						}
+					},
+					"undone": {
+						"$task": {
+							"name": {
+								".validate": "newData.val().length <= 150"
+							},
+							"description": {
+								".validate": "newData.val().length <= 1000"
+							},
+							"createdAt": {
+								".validate": "newData.isNumber()"
+							},
+							"updatedAt": {
+								".validate": "newData.isNumber()"
+							},
+							"$other": {
+								".validate": false
+							}
+						}
+					},
+					"$other": {
+						".validate": false
 					}
 				},
 				"$other": {

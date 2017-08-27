@@ -10,7 +10,7 @@ import "./style/TaskList.css";
 
 interface IProps {
     tasks: ITask[];
-    setTaskList: (taskIds: string[]) => void;
+    setUndoneTasks: (tasks: ITask[]) => void;
 }
 
 class TaskList extends React.Component<IProps> {
@@ -19,10 +19,8 @@ class TaskList extends React.Component<IProps> {
             <div className="TaskList-container">
                 <AddTask />
                 <SortableTasks
-                    onSortEnd={({ newIndex, oldIndex }) => this.props.setTaskList(arrayMove(
-                        this.props.tasks.map(({ id }) => id),
-                        oldIndex,
-                        newIndex))}
+                    onSortEnd={({ newIndex, oldIndex }) =>
+                        this.props.setUndoneTasks(arrayMove(this.props.tasks, oldIndex, newIndex))}
                     distance={5}
                     tasks={this.props.tasks}
                 />

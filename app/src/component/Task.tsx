@@ -7,19 +7,27 @@ import { actionCreators } from "../redux/tasks";
 import "./style/Task.css";
 
 interface IProps extends ITask {
-    removeTask: (taskId: string) => void;
+    markDoneTask: (task: ITask) => void;
 }
 
 class Task extends React.Component<IProps> {
     public render() {
-        const { description, id, name } = this.props;
+        const { name, description, createdAt, updatedAt } = this.props;
 
         return (
             <div className="Task">
-                <div>{"ID:" + id}</div>
                 <div>{"Name:" + name}</div>
                 <div>{"Description:" + description}</div>
-                <div onClick={() => this.props.removeTask(id)}><Close /></div>
+                <div
+                    onClick={() => this.props.markDoneTask({
+                        createdAt,
+                        description,
+                        name,
+                        updatedAt,
+                    })}
+                >
+                    <Close />
+                </div>
             </div>
         );
     }
