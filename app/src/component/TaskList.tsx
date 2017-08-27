@@ -23,7 +23,7 @@ class TaskList extends React.Component<IProps> {
                         this.props.tasks.map(({ id }) => id),
                         oldIndex,
                         newIndex))}
-                    pressDelay={200}
+                    distance={5}
                     tasks={this.props.tasks}
                 />
             </div>
