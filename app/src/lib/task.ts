@@ -7,34 +7,39 @@ export interface INewTask {
 
 export interface ITask extends INewTask {
     id: string;
-    done: boolean;
 }
 
 export class Tasks {
-    public create = (task: INewTask): string => {
-        return this.reference.push({ ...task, done: false }).key;
+    public create = async (task: INewTask): Promise<void> => {
+        const ids = (await this.taskList.once("value")).val();
+
+        this.taskList.set([
+            this.tasks.push(task).key,
+            ...(ids ? ids : []),
+        ]);
     }
 
-    public onUndoneTasksUpdate = (callback: (tasks: ITask[]) => void) => {
-        this.reference.orderByChild("done").equalTo(false).on("value", (snapshot) => {
-            const idToTask = snapshot.val();
+    public onUndoneTasksUpdate = (callback: (tasks: ITask[]) => void): void => {
+        this.taskList.on("value", async (snapshot): Promise<void> => {
+            const ids: string[] = snapshot.val();
 
-            if (!idToTask) {
+            if (!ids) {
                 callback([]);
                 return;
             }
 
-            const tasks: ITask[] = [];
-
-            for (const id of Object.keys(idToTask)) {
-                tasks.push({ id, ...idToTask[id] });
-            }
-
-            callback(tasks);
+            callback(await Promise.all(ids.map(async (id: string) => ({
+                id,
+                ...(await this.tasks.orderByKey().equalTo(id).once("value")).val()[id],
+            }))));
         });
     }
 
-    private get reference(): firebase.database.Reference {
+    private get tasks(): firebase.database.Reference {
         return firebase.database().ref(`users/${firebase.auth().currentUser.uid}/tasks`);
+    }
+
+    private get taskList(): firebase.database.Reference {
+        return firebase.database().ref(`users/${firebase.auth().currentUser.uid}/taskList`);
     }
 }
