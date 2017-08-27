@@ -13,8 +13,11 @@
 						"description": {
 							".validate": "newData.val().length <= 1000"
 						},
-						"done": {
-							".validate": "newData.isBoolean()"
+						"createdAt": {
+							".validate": "newData.isNumber()"
+						},
+						"updatedAt": {
+							".validate": "newData.isNumber()"
 						},
 						"$other": {
 							".validate": false

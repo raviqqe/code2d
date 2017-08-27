@@ -8,6 +8,8 @@ export interface INewTask {
 
 export interface ITask extends INewTask {
     id: string;
+    createdAt: number;
+    updatedAt: number;
 }
 
 export class Tasks {
@@ -15,7 +17,7 @@ export class Tasks {
         const ids = (await this.taskList.once("value")).val();
 
         this.taskList.set([
-            this.tasks.push(task).key,
+            this.tasks.push({ createdAt: Date.now(), updatedAt: Date.now(), ...task }).key,
             ...(ids ? ids : []),
         ]);
     }
