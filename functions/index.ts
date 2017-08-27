@@ -1,8 +1,17 @@
 import * as functions from "firebase-functions";
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
+const maxTasks = 64;
+
+export const limitTasks = functions.database.ref("users/{userId}/tasks/{taskId}").onCreate(
+    async ({ data: { ref: { parent } } }) => {
+        const snapshot = await parent.once("value");
+
+        if (snapshot.numChildren() >= maxTasks) {
+            const idToTask = snapshot.val();
+
+            await parent.update(Object.keys(idToTask)
+                .map((id: string) => idToTask[id])
+                .sort((x, y) => x.updatedAt - y.updatedAt)
+                .slice(0, maxTasks));
+        }
+    });
