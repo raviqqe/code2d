@@ -19,6 +19,10 @@ export class Tasks {
         ]);
     }
 
+    public async setTaskList(taskIds: string[]): Promise<void> {
+        await this.taskList.set(taskIds);
+    }
+
     public onUndoneTasksUpdate = (callback: (tasks: ITask[]) => void): void => {
         this.taskList.on("value", async (snapshot): Promise<void> => {
             const ids: string[] = snapshot.val();

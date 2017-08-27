@@ -23,7 +23,7 @@ export default function() {
         compose(applyMiddleware(sagaMiddleware)));
 
     sagaMiddleware.run(function* _() {
-        yield all([...addTask.sagas, ...signIn.sagas]);
+        yield all([...addTask.sagas, ...signIn.sagas, ...tasks.sagas]);
     });
 
     firebase.onAuthStateChanged((user) => {
