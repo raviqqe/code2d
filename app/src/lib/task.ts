@@ -1,4 +1,5 @@
 import * as firebase from "firebase";
+import * as _ from "lodash";
 
 export interface INewTask {
     name: string;
@@ -17,6 +18,13 @@ export class Tasks {
             this.tasks.push(task).key,
             ...(ids ? ids : []),
         ]);
+    }
+
+    public removeTask = async (removedId: string): Promise<void> => {
+        await this.setTaskList(_.remove(
+            (await this.taskList.once("value")).val(),
+            (id) => id === removedId));
+        await this.tasks.child(removedId).remove();
     }
 
     public setTaskList = async (taskIds: string[]): Promise<void> => {
