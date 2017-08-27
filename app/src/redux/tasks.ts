@@ -23,7 +23,7 @@ export const sagas = [
     takeEvery(
         removeTask,
         function* _(taskId: string): SagaIterator {
-            yield call((new Tasks()).removeTask, taskId);
+            yield call((new Tasks()).remove, taskId);
         }),
     takeEvery(
         setTaskList,

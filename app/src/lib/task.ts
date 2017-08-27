@@ -22,7 +22,7 @@ export class Tasks {
         ]);
     }
 
-    public removeTask = async (removedId: string): Promise<void> => {
+    public remove = async (removedId: string): Promise<void> => {
         const ids = (await this.taskList.once("value")).val();
 
         _.remove(ids, (id) => id === removedId);
