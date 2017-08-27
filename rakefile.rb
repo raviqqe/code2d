@@ -7,6 +7,10 @@ task :build do
   cd 'app' do
     sh 'rake build'
   end
+
+  cd 'functions' do
+    sh 'rake build'
+  end
 end
 
 task :deploy do
