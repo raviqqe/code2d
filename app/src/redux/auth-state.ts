@@ -6,7 +6,7 @@ const actionCreator = actionCreatorFactory("AUTH_STATE");
 const signIn = actionCreator<null>("SIGN_IN");
 const signOut = actionCreator<null>("SIGN_OUT");
 
-export default {
+export const actionCreators = {
     signIn: () => signIn(null),
     signOut: () => signOut(null),
 };

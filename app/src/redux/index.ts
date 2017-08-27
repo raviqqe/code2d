@@ -5,7 +5,6 @@ import { all } from "redux-saga/effects";
 import * as firebase from "../lib/firebase";
 import { ITask, Tasks } from "../lib/task";
 import * as addTask from "./add-task";
-import authStateActionCreators from "./auth-state";
 import * as authState from "./auth-state";
 import * as signIn from "./sign-in";
 import * as tasks from "./tasks";
@@ -27,9 +26,9 @@ export default function() {
 
     firebase.onAuthStateChanged((user) => {
         if (user === null) {
-            store.dispatch(authStateActionCreators.signOut());
+            store.dispatch(authState.actionCreators.signOut());
         } else {
-            store.dispatch(authStateActionCreators.signIn());
+            store.dispatch(authState.actionCreators.signIn());
             (new Tasks()).onUndoneTasksUpdate((ts: ITask[]) =>
                 store.dispatch(tasks.actionCreators.updateTasks(ts)));
         }
