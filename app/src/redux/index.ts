@@ -8,7 +8,6 @@ import * as addTask from "./add-task";
 import authStateActionCreators from "./auth-state";
 import * as authState from "./auth-state";
 import * as signIn from "./sign-in";
-import tasksActionCreators from "./tasks";
 import * as tasks from "./tasks";
 
 export default function() {
@@ -31,8 +30,8 @@ export default function() {
             store.dispatch(authStateActionCreators.signOut());
         } else {
             store.dispatch(authStateActionCreators.signIn());
-            (new Tasks()).onUndoneTasksUpdate((tasks: ITask[]) =>
-                store.dispatch(tasksActionCreators.updateTasks(tasks)));
+            (new Tasks()).onUndoneTasksUpdate((ts: ITask[]) =>
+                store.dispatch(tasks.actionCreators.updateTasks(ts)));
         }
     });
 

@@ -11,7 +11,7 @@ const factory = actionCreatorFactory();
 const setTaskList = factory<string[]>("SET_TASK_LIST");
 const updateTasks = factory<ITask[]>("UPDATE_TASKS");
 
-export default { setTaskList, updateTasks };
+export const actionCreators = { setTaskList, updateTasks };
 
 export const initialState: { tasks: ITask[] } = { tasks: [] };
 

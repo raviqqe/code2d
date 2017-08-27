@@ -19,7 +19,7 @@ export class Tasks {
         ]);
     }
 
-    public async setTaskList(taskIds: string[]): Promise<void> {
+    public setTaskList = async (taskIds: string[]): Promise<void> => {
         await this.taskList.set(taskIds);
     }
 
