@@ -39,7 +39,7 @@ class AddTask extends React.Component<IProps, IState> {
                 }}
             >
                 <label>
-                    Name:
+                    Name
                     <input
                         type="text"
                         value={this.state.task.name}
@@ -48,7 +48,7 @@ class AddTask extends React.Component<IProps, IState> {
                     />
                 </label>
                 <label>
-                    Description:
+                    Description
                     <input
                         type="text"
                         value={this.state.task.description}
