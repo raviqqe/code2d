@@ -8,12 +8,6 @@ import AddTask from "./AddTask";
 import SortableTasks from "./SortableTasks";
 import "./style/TaskList.css";
 
-function reorderTask(tasks, i, j) {
-    tasks = [...tasks];
-    tasks.splice(j, 0, tasks.splice(i, 1)[0]);
-    return tasks;
-}
-
 interface IProps {
     tasks: ITask[];
     setTaskList: (taskIds: string[]) => void;
