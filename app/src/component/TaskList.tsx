@@ -1,11 +1,10 @@
 import * as React from "react";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { connect } from "react-redux";
 
 import { ITask } from "../lib/task";
 import AddTask from "./AddTask";
+import SortableTasks from "./SortableTasks";
 import "./style/TaskList.css";
-import Task from "./Task";
 
 function reorderTask(tasks, i, j) {
     tasks = [...tasks];
@@ -16,56 +15,14 @@ function reorderTask(tasks, i, j) {
 class TaskList extends React.Component<{ tasks: ITask[] }> {
     public render() {
         return (
-            <div>
+            <div className="TaskList-container">
                 <AddTask />
-                <DragDropContext
-                    onDragEnd={({ destination, source }): void => {
-                        // TODO: Reorder tasks.
-
-                        // if (!destination) {
-                        //     return;
-                        // }
-
-                        // this.setState({
-                        //     tasks: reorderTask(this.props.tasks, source.index, destination.index),
-                        // });
+                <SortableTasks
+                    onSortEnd={() => {
+                        // TODO: Sort tasks.
                     }}
-                >
-                    <Droppable droppableId="taskList">
-                        {({ innerRef }) => (
-                            <div className="TaskList-container" ref={innerRef}>
-                                {this.props.tasks.map((task, index) => (
-                                    <Draggable key={task.id} draggableId={task.id}>
-                                        {(provided) => (
-                                            <div>
-                                                <div
-                                                    className="TaskList-task"
-                                                    ref={provided.innerRef}
-                                                    style={provided.draggableStyle}
-                                                    {...provided.dragHandleProps}
-                                                >
-                                                    <Task
-                                                        {...task}
-                                                        onDelete={() => {
-                                                            // TODO: Delete a task.
-
-                                                            // const tasks = [...this.props.tasks];
-
-                                                            // tasks.splice(index, 1);
-
-                                                            // this.setState({ tasks });
-                                                        }}
-                                                    />
-                                                </div>
-                                                {provided.placeholder}
-                                            </div>
-                                        )}
-                                    </Draggable>
-                                ))}
-                            </div>
-                        )}
-                    </Droppable>
-                </DragDropContext>
+                    tasks={this.props.tasks}
+                />
             </div>
         );
     }
