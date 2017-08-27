@@ -29,7 +29,7 @@ export default function() {
             store.dispatch(authState.actionCreators.signOut());
         } else {
             store.dispatch(authState.actionCreators.signIn());
-            (new Tasks()).onUndoneTasksUpdate((ts: ITask[]) =>
+            (new Tasks()).onTaskListUpdate((ts: ITask[]) =>
                 store.dispatch(tasks.actionCreators.updateTasks(ts)));
         }
     });
