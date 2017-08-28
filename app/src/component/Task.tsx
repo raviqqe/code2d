@@ -16,8 +16,8 @@ class Task extends React.Component<IProps> {
 
         return (
             <div className="Task">
-                <div>{"Name:" + name}</div>
-                <div>{"Description:" + description}</div>
+                <div>{name}</div>
+                <div>{description}</div>
                 <div
                     onClick={() => this.props.markDoneTask({
                         createdAt,
