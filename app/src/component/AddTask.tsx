@@ -38,24 +38,20 @@ class AddTask extends React.Component<IProps, IState> {
                     });
                 }}
             >
-                <label>
-                    Name
-                    <input
-                        type="text"
-                        value={this.state.task.name}
-                        onChange={({ target: { value } }) =>
-                            this.setState({ task: { ...this.state.task, name: value } })}
-                    />
-                </label>
-                <label>
-                    Description
-                    <input
-                        type="text"
-                        value={this.state.task.description}
-                        onChange={({ target: { value } }) =>
-                            this.setState({ task: { ...this.state.task, description: value } })}
-                    />
-                </label>
+                <input
+                    placeholder="Name"
+                    type="text"
+                    value={this.state.task.name}
+                    onChange={({ target: { value } }) =>
+                        this.setState({ task: { ...this.state.task, name: value } })}
+                />
+                <input
+                    placeholder="Description"
+                    type="text"
+                    value={this.state.task.description}
+                    onChange={({ target: { value } }) =>
+                        this.setState({ task: { ...this.state.task, description: value } })}
+                />
                 <input type="submit" value="Add task" />
             </form>
         );
