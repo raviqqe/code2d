@@ -1,6 +1,7 @@
 import * as React from "react";
 
 interface IProps {
+    editable?: boolean;
     onEdit: (text: string) => void;
     text: string;
 }
@@ -18,8 +19,10 @@ export default class extends React.Component<IProps, IState> {
 
     private input: { focus: () => void, value: string };
 
-    public edit() {
-        this.setState({ editing: true });
+    public edit = (): void => {
+        if (this.props.editable || this.props.editable === undefined) {
+            this.setState({ editing: true });
+        }
     }
 
     public componentDidUpdate(_, { editing }: IState) {
@@ -49,7 +52,7 @@ export default class extends React.Component<IProps, IState> {
                 }}
             />
         ) : (
-                <div onClick={() => this.setState({ editing: true })}>
+                <div onClick={this.edit}>
                     {this.props.text}
                 </div>
             );
