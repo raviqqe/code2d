@@ -11,13 +11,53 @@ interface IProps extends ITask {
 }
 
 class Task extends React.Component<IProps> {
+    public state = {
+        description: "",
+        editingDescription: false,
+        editingName: false,
+        name: "",
+    };
+
     public render() {
         const { name, description, createdAt, updatedAt } = this.props;
+        const { editingName, editingDescription } = this.state;
 
         return (
             <div className="Task">
-                <div>{name}</div>
-                <div>{description}</div>
+                {editingName ? (
+                    <input
+                        type="text"
+                        value={this.state.name}
+                        onChange={({ target: { value } }) =>
+                            this.setState({ name: value })}
+                        onKeyPress={({ charCode }) => {
+                            if (charCode === 13) {
+                                this.setState({ editingName: false });
+                            }
+                        }}
+                    />
+                ) : (
+                        <div onClick={() => this.setState({ editingName: true, name })}>
+                            {name}
+                        </div>
+                    )}
+                {editingDescription ? (
+                    <input
+                        type="text"
+                        value={this.state.description}
+                        onChange={({ target: { value } }) =>
+                            this.setState({ description: value })}
+                        onKeyPress={({ charCode }) => {
+                            if (charCode === 13) {
+                                this.setState({ editingDescription: false });
+                            }
+                        }}
+                    />
+                ) : (
+                        <div onClick={() => this.setState({ editingDescription: true, description })}>
+                            {description}
+                        </div>
+                    )}
                 <div
                     onClick={() => this.props.markDoneTask({
                         createdAt,
