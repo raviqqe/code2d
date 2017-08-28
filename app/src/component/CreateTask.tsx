@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Plus } from "react-feather";
 import { connect } from "react-redux";
 
 import { INewTask } from "../lib/task";
@@ -31,7 +32,7 @@ class CreateTask extends React.Component<IProps, IState> {
         if (!this.state.creatingTask) {
             return (
                 <div onClick={() => this.setState({ creatingTask: true })}>
-                    Create
+                    <Plus />
                 </div>
             );
         }
