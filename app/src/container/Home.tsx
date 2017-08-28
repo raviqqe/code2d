@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import DoneTasks from "../component/DoneTasks";
-import UndoneTasks from "../component/UndoneTasks";
+import TodoTasks from "../component/TodoTasks";
 import "./style/Home.css";
 
 class Home extends React.Component<{ signedIn: boolean }> {
@@ -21,7 +21,7 @@ class Home extends React.Component<{ signedIn: boolean }> {
                 <div onClick={() => this.setState({ showDoneTasks: !showDoneTasks })}>
                     {showDoneTasks ? "Done" : "To-do"} tasks
                 </div>
-                {showDoneTasks ? <DoneTasks /> : <UndoneTasks />}
+                {showDoneTasks ? <DoneTasks /> : <TodoTasks />}
             </div>
         );
     }

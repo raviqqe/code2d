@@ -11,21 +11,21 @@ const factory = actionCreatorFactory();
 const createTask = factory<INewTask>("CREATE_TASK");
 const editTask = factory<{ newTask: ITask, oldTask: ITask }>("EDIT_TASK");
 const markTaskDone = factory<ITask>("MARK_TASK_DONE");
-const markTaskUndone = factory<ITask>("MARK_TASK_UNDONE");
+const markTaskTodo = factory<ITask>("MARK_TASK_TODO");
 const removeTask = factory<ITask>("REMOVE_TASK");
-const setUndoneTasks = factory<ITask[]>("SET_UNDONE_TASKS");
-const updateUndoneTasks = factory<ITask[]>("UPDATE_UNDONE_TASKS");
+const setTodoTasks = factory<ITask[]>("SET_TODO_TASKS");
+const updateTodoTasks = factory<ITask[]>("UPDATE_TODO_TASKS");
 const updateDoneTasks = factory<ITask[]>("UPDATE_DONE_TASKS");
 
 export const actionCreators = {
     createTask,
     editTask: (oldTask: ITask, newTask: ITask) => editTask({ newTask, oldTask }),
     markTaskDone,
-    markTaskUndone,
+    markTaskTodo,
     removeTask,
-    setUndoneTasks,
+    setTodoTasks,
     updateDoneTasks,
-    updateUndoneTasks,
+    updateTodoTasks,
 };
 
 export const initialState: { doneTasks: ITask[], undoneTasks: ITask[] } = {
@@ -35,7 +35,7 @@ export const initialState: { doneTasks: ITask[], undoneTasks: ITask[] } = {
 
 export const reducer = reducerWithInitialState(initialState)
     .case(updateDoneTasks, ({ undoneTasks }, tasks) => ({ doneTasks: tasks, undoneTasks }))
-    .case(updateUndoneTasks, ({ doneTasks }, tasks) => ({ doneTasks, undoneTasks: tasks }));
+    .case(updateTodoTasks, ({ doneTasks }, tasks) => ({ doneTasks, undoneTasks: tasks }));
 
 export const sagas = [
     takeEvery(
@@ -54,9 +54,9 @@ export const sagas = [
             yield call((new Tasks()).markDone, task);
         }),
     takeEvery(
-        markTaskUndone,
+        markTaskTodo,
         function* _(task: ITask): SagaIterator {
-            yield call((new Tasks()).markUndone, task);
+            yield call((new Tasks()).markTodo, task);
         }),
     takeEvery(
         removeTask,
@@ -64,8 +64,8 @@ export const sagas = [
             yield call((new Tasks()).remove, task);
         }),
     takeEvery(
-        setUndoneTasks,
+        setTodoTasks,
         function* _(tasks: ITask[]): SagaIterator {
-            yield call((new Tasks()).setUndoneTasks, tasks);
+            yield call((new Tasks()).setTodoTasks, tasks);
         }),
 ];

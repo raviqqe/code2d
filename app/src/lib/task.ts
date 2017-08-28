@@ -13,25 +13,25 @@ export interface ITask extends INewTask {
 
 export class Tasks {
     public create = async (task: INewTask): Promise<void> => {
-        const tasks = await this.getUndoneTasks();
+        const tasks = await this.getTodoTasks();
 
-        this.setUndoneTasks([
+        this.setTodoTasks([
             { createdAt: Date.now(), updatedAt: Date.now(), ...task },
             ...(tasks ? tasks : []),
         ]);
     }
 
     public markDone = async (task: ITask): Promise<void> => {
-        const tasks = await this.getUndoneTasks();
+        const tasks = await this.getTodoTasks();
 
         _.remove(tasks, task);
 
-        await this.setUndoneTasks(tasks);
+        await this.setTodoTasks(tasks);
         await this.doneTasks.push(task);
     }
 
-    public markUndone = async (task: ITask): Promise<void> => {
-        await this.setUndoneTasks([task, ...(await this.getUndoneTasks())]);
+    public markTodo = async (task: ITask): Promise<void> => {
+        await this.setTodoTasks([task, ...(await this.getTodoTasks())]);
         await this.remove(task);
     }
 
@@ -40,15 +40,15 @@ export class Tasks {
     }
 
     public edit = async (oldTask: ITask, newTask: ITask): Promise<void> => {
-        this.undoneTasks.child(_.findIndex(await this.getUndoneTasks(), oldTask)).set(newTask);
+        this.todoTasks.child(_.findIndex(await this.getTodoTasks(), oldTask)).set(newTask);
     }
 
-    public setUndoneTasks = async (tasks: ITask[]): Promise<void> => {
-        await this.undoneTasks.set(tasks);
+    public setTodoTasks = async (tasks: ITask[]): Promise<void> => {
+        await this.todoTasks.set(tasks);
     }
 
-    public onUndoneTasksUpdate = (callback: (tasks: ITask[]) => void): void => {
-        this.undoneTasks.on("value", async (snapshot): Promise<void> => {
+    public onTodoTasksUpdate = (callback: (tasks: ITask[]) => void): void => {
+        this.todoTasks.on("value", async (snapshot): Promise<void> => {
             const tasks = snapshot.val();
             callback(tasks ? tasks : []);
         });
@@ -66,8 +66,8 @@ export class Tasks {
         });
     }
 
-    private getUndoneTasks = async (): Promise<ITask[]> => {
-        const tasks = (await this.undoneTasks.once("value")).val();
+    private getTodoTasks = async (): Promise<ITask[]> => {
+        const tasks = (await this.todoTasks.once("value")).val();
         return tasks ? tasks : [];
     }
 
@@ -76,8 +76,8 @@ export class Tasks {
         return tasks ? tasks : {};
     }
 
-    private get undoneTasks(): firebase.database.Reference {
-        return firebase.database().ref(`users/${firebase.auth().currentUser.uid}/tasks/undone`);
+    private get todoTasks(): firebase.database.Reference {
+        return firebase.database().ref(`users/${firebase.auth().currentUser.uid}/tasks/todo`);
     }
 
     private get doneTasks(): firebase.database.Reference {

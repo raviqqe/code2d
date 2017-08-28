@@ -31,8 +31,8 @@ export default function() {
             (new Tasks()).onDoneTasksUpdate((ts: ITask[]) =>
                 store.dispatch(tasks.actionCreators.updateDoneTasks(ts)));
 
-            (new Tasks()).onUndoneTasksUpdate((ts: ITask[]) =>
-                store.dispatch(tasks.actionCreators.updateUndoneTasks(ts)));
+            (new Tasks()).onTodoTasksUpdate((ts: ITask[]) =>
+                store.dispatch(tasks.actionCreators.updateTodoTasks(ts)));
         }
     });
 

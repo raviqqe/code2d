@@ -8,8 +8,8 @@ interface ITask {
     updatedAt: number;
 }
 
-export const truncateUndoneTasks = createTruncateTasksFunction(
-    "undone",
+export const truncateTodoTasks = createTruncateTasksFunction(
+    "todo",
     (tasks: ITask[]) => {
         for (const task of extractOldTasks(tasks)) {
             _.remove(tasks, task);
@@ -30,7 +30,7 @@ export const truncateDoneTasks = createTruncateTasksFunction(
     });
 
 function createTruncateTasksFunction<T>(
-    state: "done" | "undone",
+    state: "done" | "todo",
     callback: (tasks: T) => T) {
     return functions.database.ref(`users/{userId}/tasks/${state}/{taskId}`).onCreate(
         async ({ data: { ref: { parent } } }) => {

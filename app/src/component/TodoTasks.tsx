@@ -6,21 +6,21 @@ import { ITask } from "../lib/task";
 import { actionCreators } from "../redux/tasks";
 import CreateTask from "./CreateTask";
 import SortableTasks from "./SortableTasks";
-import "./style/UndoneTasks.css";
+import "./style/TodoTasks.css";
 
 interface IProps {
     tasks: ITask[];
-    setUndoneTasks: (tasks: ITask[]) => void;
+    setTodoTasks: (tasks: ITask[]) => void;
 }
 
-class UndoneTasks extends React.Component<IProps> {
+class TodoTasks extends React.Component<IProps> {
     public render() {
         return (
-            <div className="UndoneTasks-container">
+            <div className="TodoTasks-container">
                 <CreateTask />
                 <SortableTasks
                     onSortEnd={({ newIndex, oldIndex }) =>
-                        this.props.setUndoneTasks(arrayMove(this.props.tasks, oldIndex, newIndex))}
+                        this.props.setTodoTasks(arrayMove(this.props.tasks, oldIndex, newIndex))}
                     distance={5}
                     tasks={this.props.tasks}
                 />
@@ -32,4 +32,4 @@ class UndoneTasks extends React.Component<IProps> {
 export default connect(
     ({ tasks: { undoneTasks } }) => ({ tasks: undoneTasks } as any), // TODO: Remove `as any`.
     actionCreators,
-)(UndoneTasks);
+)(TodoTasks);

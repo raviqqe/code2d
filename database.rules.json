@@ -24,7 +24,7 @@
 							}
 						}
 					},
-					"undone": {
+					"todo": {
 						"$task": {
 							"name": {
 								".validate": "newData.val().length <= 150 && newData.val().length > 0"

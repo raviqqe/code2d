@@ -11,7 +11,7 @@ interface IProps extends ITask {
     done?: boolean;
     editTask: (oldTask: ITask, newTask: ITask) => void;
     markTaskDone: (task: ITask) => void;
-    markTaskUndone: (task: ITask) => void;
+    markTaskTodo: (task: ITask) => void;
     removeTask: (task: ITask) => void;
 }
 
@@ -37,7 +37,7 @@ class Task extends React.Component<IProps> {
                 />
                 {done ? (
                     <div>
-                        <div onClick={() => this.props.markTaskUndone(task)}><RotateCcw /></div>
+                        <div onClick={() => this.props.markTaskTodo(task)}><RotateCcw /></div>
                         <div onClick={() => this.props.removeTask(task)}><Trash2 /></div>
                     </div >
                 ) : (
