@@ -19,6 +19,14 @@ class AddTask extends React.Component<IProps, IState> {
         task: { name: "", description: "" },
     };
 
+    private name: { focus: () => void };
+
+    public componentDidUpdate(_, { addingTask }: IState) {
+        if (!addingTask && this.state.addingTask) {
+            this.name.focus(); // Do this after rendering.
+        }
+    }
+
     public render() {
         if (!this.state.addingTask) {
             return (
@@ -39,6 +47,7 @@ class AddTask extends React.Component<IProps, IState> {
                 }}
             >
                 <input
+                    ref={(name) => { this.name = name; }}
                     placeholder="Name"
                     type="text"
                     value={this.state.task.name}
