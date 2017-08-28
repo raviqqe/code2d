@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as ReactDOM from "react-dom";
+import { render } from "react-dom";
 import { Provider } from "react-redux";
 
 import App from "./container/App";
@@ -12,7 +12,5 @@ firebase.initialize();
 
 const store = createStore();
 
-ReactDOM.render(
-    <Provider store={store}><App /></Provider>,
-    document.getElementById("root") as HTMLElement);
+render(<Provider store={store}><App /></Provider>, document.getElementById("root"));
 registerServiceWorker();
