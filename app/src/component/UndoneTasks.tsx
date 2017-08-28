@@ -6,17 +6,17 @@ import { ITask } from "../lib/task";
 import { actionCreators } from "../redux/tasks";
 import CreateTask from "./CreateTask";
 import SortableTasks from "./SortableTasks";
-import "./style/TaskList.css";
+import "./style/UndoneTasks.css";
 
 interface IProps {
     tasks: ITask[];
     setUndoneTasks: (tasks: ITask[]) => void;
 }
 
-class TaskList extends React.Component<IProps> {
+class UndoneTasks extends React.Component<IProps> {
     public render() {
         return (
-            <div className="TaskList-container">
+            <div className="UndoneTasks-container">
                 <CreateTask />
                 <SortableTasks
                     onSortEnd={({ newIndex, oldIndex }) =>
@@ -29,4 +29,4 @@ class TaskList extends React.Component<IProps> {
     }
 }
 
-export default connect(({ tasks }) => tasks, actionCreators)(TaskList);
+export default connect(({ tasks }) => tasks, actionCreators)(UndoneTasks);
