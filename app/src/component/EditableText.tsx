@@ -18,6 +18,10 @@ export default class extends React.Component<IProps, IState> {
 
     private input: { focus: () => void, value: string };
 
+    public edit() {
+        this.setState({ editing: true });
+    }
+
     public componentDidUpdate(_, { editing }: IState) {
         if (!editing && this.state.editing) {
             this.input.focus(); // Do this after rendering.
