@@ -67,11 +67,13 @@ export class Tasks {
     }
 
     private getUndoneTasks = async (): Promise<ITask[]> => {
-        return (await this.undoneTasks.once("value")).val();
+        const tasks = (await this.undoneTasks.once("value")).val();
+        return tasks ? tasks : [];
     }
 
-    private getDoneTasks = async (): Promise<ITask[]> => {
-        return (await this.doneTasks.once("value")).val();
+    private getDoneTasks = async (): Promise<{ [key: string]: ITask }> => {
+        const tasks = (await this.doneTasks.once("value")).val();
+        return tasks ? tasks : {};
     }
 
     private get undoneTasks(): firebase.database.Reference {
