@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import { INewTask } from "../lib/task";
-import { actionCreators } from "../redux/create-task";
+import { actionCreators } from "../redux/tasks";
 
 interface IProps {
     createTask: (task: INewTask) => void;
@@ -68,4 +68,4 @@ class CreateTask extends React.Component<IProps, IState> {
     }
 }
 
-export default connect(({ createTask }) => createTask, { createTask: actionCreators.createTask })(CreateTask);
+export default connect(({ tasks }) => tasks, actionCreators)(CreateTask);
