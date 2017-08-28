@@ -30,6 +30,11 @@ export class Tasks {
         await this.doneTasks.push(task);
     }
 
+    public markUndone = async (task: ITask): Promise<void> => {
+        await this.setUndoneTasks([task, ...(await this.getUndoneTasks())]);
+        await this.remove(task);
+    }
+
     public remove = async (task: ITask): Promise<void> => {
         await this.doneTasks.child(_.findKey(await this.getDoneTasks(), task)).remove();
     }

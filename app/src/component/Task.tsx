@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Edit2, X } from "react-feather";
+import { Check, Edit2, RotateCcw, X } from "react-feather";
 import { connect } from "react-redux";
 
 import { ITask } from "../lib/task";
@@ -11,6 +11,7 @@ interface IProps extends ITask {
     done?: boolean;
     editTask: (oldTask: ITask, newTask: ITask) => void;
     markTaskDone: (task: ITask) => void;
+    markTaskUndone: (task: ITask) => void;
     removeTask: (task: ITask) => void;
 }
 
@@ -34,22 +35,17 @@ class Task extends React.Component<IProps> {
                     text={description}
                     onEdit={(description) => this.props.editTask(task, { ...task, description })}
                 />
-                <div
-                    onClick={() => {
-                        if (done) {
-                            this.props.removeTask(task);
-                        } else {
-                            this.props.markTaskDone(task);
-                        }
-                    }}
-                >
-                    <X />
-                </div>
-                {!done && (
-                    <div onClick={() => this.description.edit()}>
-                        <Edit2 />
-                    </div>
-                )}
+                {done ? (
+                    <div>
+                        <div onClick={() => this.props.removeTask(task)}><X /></div>
+                        <div onClick={() => this.props.markTaskUndone(task)}><RotateCcw /></div>
+                    </div >
+                ) : (
+                        <div>
+                            <div onClick={() => this.props.markTaskDone(task)}><Check /></div>
+                            <div onClick={() => this.description.edit()}><Edit2 /></div>
+                        </div>
+                    )}
             </div>
         );
     }
