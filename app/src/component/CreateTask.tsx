@@ -31,7 +31,7 @@ class CreateTask extends React.Component<IProps, IState> {
         if (!this.state.creatingTask) {
             return (
                 <div onClick={() => this.setState({ creatingTask: true })}>
-                    Create a task
+                    Create
                 </div>
             );
         }
@@ -61,7 +61,7 @@ class CreateTask extends React.Component<IProps, IState> {
                     onChange={({ target: { value } }) =>
                         this.setState({ task: { ...this.state.task, description: value } })}
                 />
-                <input type="submit" value="Create task" />
+                <input type="submit" value="Create" />
                 <button onClick={() => this.setState({ creatingTask: false })}>Cancel</button>
             </form>
         );
