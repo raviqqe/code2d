@@ -1,6 +1,5 @@
 import * as React from "react";
-import Close = require("react-icons/lib/fa/close");
-import Edit = require("react-icons/lib/md/edit");
+import { Edit2, X } from "react-feather";
 import { connect } from "react-redux";
 
 import { ITask } from "../lib/task";
@@ -32,10 +31,10 @@ class Task extends React.Component<IProps> {
                     onEdit={(description) => this.props.editTask(task, { ...task, description })}
                 />
                 <div onClick={() => this.props.markDoneTask(task)}>
-                    <Close />
+                    <X />
                 </div>
                 <div onClick={() => this.description.edit()}>
-                    <Edit />
+                    <Edit2 />
                 </div>
             </div>
         );
