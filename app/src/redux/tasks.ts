@@ -11,7 +11,7 @@ const factory = actionCreatorFactory();
 const createTask = factory<INewTask>("CREATE_TASK");
 const editTask = factory<{ newTask: ITask, oldTask: ITask }>("EDIT_TASK");
 const markDoneTask = factory<ITask>("MARK_DONE_TASK");
-const setUndoneTasks = factory<ITask[]>("SET_TASK_LIST");
+const setUndoneTasks = factory<ITask[]>("SET_UNDONE_TASKS");
 const updateUndoneTasks = factory<ITask[]>("UPDATE_TASKS");
 
 export const actionCreators = {
