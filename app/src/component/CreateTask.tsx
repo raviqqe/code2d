@@ -2,36 +2,36 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import { INewTask } from "../lib/task";
-import { actionCreators } from "../redux/add-task";
+import { actionCreators } from "../redux/create-task";
 
 interface IProps {
-    addTask: (task: INewTask) => void;
+    createTask: (task: INewTask) => void;
 }
 
 interface IState {
-    addingTask: boolean;
+    creatingTask: boolean;
     task: INewTask;
 }
 
-class AddTask extends React.Component<IProps, IState> {
+class CreateTask extends React.Component<IProps, IState> {
     public state: IState = {
-        addingTask: false,
+        creatingTask: false,
         task: { name: "", description: "" },
     };
 
     private name: { focus: () => void };
 
-    public componentDidUpdate(_, { addingTask }: IState) {
-        if (!addingTask && this.state.addingTask) {
+    public componentDidUpdate(_, { creatingTask }: IState) {
+        if (!creatingTask && this.state.creatingTask) {
             this.name.focus(); // Do this after rendering.
         }
     }
 
     public render() {
-        if (!this.state.addingTask) {
+        if (!this.state.creatingTask) {
             return (
-                <div onClick={() => this.setState({ addingTask: true })}>
-                    Add a task
+                <div onClick={() => this.setState({ creatingTask: true })}>
+                    Create a task
                 </div>
             );
         }
@@ -39,9 +39,9 @@ class AddTask extends React.Component<IProps, IState> {
         return (
             <form
                 onSubmit={() => {
-                    this.props.addTask(this.state.task);
+                    this.props.createTask(this.state.task);
                     this.setState({
-                        addingTask: false,
+                        creatingTask: false,
                         task: { name: "", description: "" },
                     });
                 }}
@@ -61,11 +61,11 @@ class AddTask extends React.Component<IProps, IState> {
                     onChange={({ target: { value } }) =>
                         this.setState({ task: { ...this.state.task, description: value } })}
                 />
-                <input type="submit" value="Add task" />
-                <button onClick={() => this.setState({ addingTask: false })}>Cancel</button>
+                <input type="submit" value="Create task" />
+                <button onClick={() => this.setState({ creatingTask: false })}>Cancel</button>
             </form>
         );
     }
 }
 
-export default connect(({ addTask }) => addTask, { addTask: actionCreators.addTask })(AddTask);
+export default connect(({ createTask }) => createTask, { createTask: actionCreators.createTask })(CreateTask);

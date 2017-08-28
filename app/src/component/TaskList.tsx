@@ -4,7 +4,7 @@ import { arrayMove } from "react-sortable-hoc";
 
 import { ITask } from "../lib/task";
 import { actionCreators } from "../redux/tasks";
-import AddTask from "./AddTask";
+import CreateTask from "./CreateTask";
 import SortableTasks from "./SortableTasks";
 import "./style/TaskList.css";
 
@@ -17,7 +17,7 @@ class TaskList extends React.Component<IProps> {
     public render() {
         return (
             <div className="TaskList-container">
-                <AddTask />
+                <CreateTask />
                 <SortableTasks
                     onSortEnd={({ newIndex, oldIndex }) =>
                         this.props.setUndoneTasks(arrayMove(this.props.tasks, oldIndex, newIndex))}
