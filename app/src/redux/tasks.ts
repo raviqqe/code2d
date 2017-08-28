@@ -11,6 +11,7 @@ const factory = actionCreatorFactory();
 const createTask = factory<INewTask>("CREATE_TASK");
 const editTask = factory<{ newTask: ITask, oldTask: ITask }>("EDIT_TASK");
 const markDoneTask = factory<ITask>("MARK_DONE_TASK");
+const removeTask = factory<ITask>("REMOVE_TASK");
 const setUndoneTasks = factory<ITask[]>("SET_UNDONE_TASKS");
 const updateUndoneTasks = factory<ITask[]>("UPDATE_UNDONE_TASKS");
 const updateDoneTasks = factory<ITask[]>("UPDATE_DONE_TASKS");
@@ -19,6 +20,7 @@ export const actionCreators = {
     createTask,
     editTask: (oldTask: ITask, newTask: ITask) => editTask({ newTask, oldTask }),
     markDoneTask,
+    removeTask,
     setUndoneTasks,
     updateDoneTasks,
     updateUndoneTasks,
@@ -48,6 +50,11 @@ export const sagas = [
         markDoneTask,
         function* _(task: ITask): SagaIterator {
             yield call((new Tasks()).markDone, task);
+        }),
+    takeEvery(
+        removeTask,
+        function* _(task: ITask): SagaIterator {
+            yield call((new Tasks()).remove, task);
         }),
     takeEvery(
         setUndoneTasks,

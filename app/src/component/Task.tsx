@@ -11,6 +11,7 @@ interface IProps extends ITask {
     editable?: boolean;
     editTask: (oldTask: ITask, newTask: ITask) => void;
     markDoneTask: (task: ITask) => void;
+    removeTask: (task: ITask) => void;
 }
 
 class Task extends React.Component<IProps> {
@@ -35,7 +36,15 @@ class Task extends React.Component<IProps> {
                     text={description}
                     onEdit={(description) => this.props.editTask(task, { ...task, description })}
                 />
-                <div onClick={() => this.props.markDoneTask(task)}>
+                <div
+                    onClick={() => {
+                        if (editable) {
+                            this.props.markDoneTask(task);
+                        } else {
+                            this.props.removeTask(task);
+                        }
+                    }}
+                >
                     <X />
                 </div>
                 {editable && (

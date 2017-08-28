@@ -30,6 +30,10 @@ export class Tasks {
         await this.doneTasks.push(task);
     }
 
+    public remove = async (task: ITask): Promise<void> => {
+        await this.doneTasks.child(_.findKey(await this.getDoneTasks(), task)).remove();
+    }
+
     public edit = async (oldTask: ITask, newTask: ITask): Promise<void> => {
         this.undoneTasks.child(_.findIndex(await this.getUndoneTasks(), oldTask)).set(newTask);
     }
@@ -59,6 +63,10 @@ export class Tasks {
 
     private getUndoneTasks = async (): Promise<ITask[]> => {
         return (await this.undoneTasks.once("value")).val();
+    }
+
+    private getDoneTasks = async (): Promise<ITask[]> => {
+        return (await this.doneTasks.once("value")).val();
     }
 
     private get undoneTasks(): firebase.database.Reference {
