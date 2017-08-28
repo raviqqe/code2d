@@ -62,6 +62,7 @@ class AddTask extends React.Component<IProps, IState> {
                         this.setState({ task: { ...this.state.task, description: value } })}
                 />
                 <input type="submit" value="Add task" />
+                <button onClick={() => this.setState({ addingTask: false })}>Cancel</button>
             </form>
         );
     }
