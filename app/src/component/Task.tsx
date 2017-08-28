@@ -17,8 +17,10 @@ class Task extends React.Component<IProps> {
     private description: { edit: () => void; };
 
     public render() {
-        const { createdAt, description, editable, name, updatedAt } = this.props;
+        const { createdAt, description, name, updatedAt } = this.props;
         const task: ITask = { createdAt, description, name, updatedAt };
+
+        const editable = this.props.editable || this.props.editable === undefined;
 
         return (
             <div className="Task">
@@ -36,9 +38,11 @@ class Task extends React.Component<IProps> {
                 <div onClick={() => this.props.markDoneTask(task)}>
                     <X />
                 </div>
-                <div onClick={() => this.description.edit()}>
-                    <Edit2 />
-                </div>
+                {editable && (
+                    <div onClick={() => this.description.edit()}>
+                        <Edit2 />
+                    </div>
+                )}
             </div>
         );
     }

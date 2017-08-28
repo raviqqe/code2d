@@ -2,18 +2,26 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
+import DoneTasks from "../component/DoneTasks";
 import UndoneTasks from "../component/UndoneTasks";
 import "./style/Home.css";
 
 class Home extends React.Component<{ signedIn: boolean }> {
+    public state = { showDoneTasks: false };
+
     public render() {
         if (!this.props.signedIn) {
             return <Redirect to="/sign-in" />;
         }
 
+        const { showDoneTasks } = this.state;
+
         return (
             <div>
-                <UndoneTasks />
+                <div onClick={() => this.setState({ showDoneTasks: !showDoneTasks })}>
+                    {showDoneTasks ? "Done" : "To-do"} tasks
+                </div>
+                {showDoneTasks ? <DoneTasks /> : <UndoneTasks />}
             </div>
         );
     }
