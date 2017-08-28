@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Check, Edit2, RotateCcw, X } from "react-feather";
+import { Check, Edit2, RotateCcw, Trash2 } from "react-feather";
 import { connect } from "react-redux";
 
 import { ITask } from "../lib/task";
@@ -37,8 +37,8 @@ class Task extends React.Component<IProps> {
                 />
                 {done ? (
                     <div>
-                        <div onClick={() => this.props.removeTask(task)}><X /></div>
                         <div onClick={() => this.props.markTaskUndone(task)}><RotateCcw /></div>
+                        <div onClick={() => this.props.removeTask(task)}><Trash2 /></div>
                     </div >
                 ) : (
                         <div>
