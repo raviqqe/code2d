@@ -45,6 +45,18 @@ export class Tasks {
         });
     }
 
+    public onDoneTasksUpdate = (callback: (tasks: ITask[]) => void): void => {
+        this.doneTasks.on("value", async (snapshot): Promise<void> => {
+            const tasks: { [key: string]: ITask } = snapshot.val();
+
+            if (!tasks) {
+                callback([]);
+            }
+
+            callback(_.values(tasks).sort((x, y) => y.updatedAt - x.updatedAt));
+        });
+    }
+
     private getUndoneTasks = async (): Promise<ITask[]> => {
         return (await this.undoneTasks.once("value")).val();
     }

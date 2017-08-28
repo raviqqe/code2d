@@ -24,4 +24,7 @@ class DoneTasks extends React.Component<IProps> {
     }
 }
 
-export default connect(({ tasks }) => tasks, actionCreators)(DoneTasks);
+export default connect(
+    ({ tasks: { doneTasks } }) => ({ tasks: doneTasks } as any),
+    actionCreators,
+)(DoneTasks);

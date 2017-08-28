@@ -27,6 +27,10 @@ export default function() {
             store.dispatch(authState.actionCreators.signOut());
         } else {
             store.dispatch(authState.actionCreators.signIn());
+
+            (new Tasks()).onDoneTasksUpdate((ts: ITask[]) =>
+                store.dispatch(tasks.actionCreators.updateDoneTasks(ts)));
+
             (new Tasks()).onUndoneTasksUpdate((ts: ITask[]) =>
                 store.dispatch(tasks.actionCreators.updateUndoneTasks(ts)));
         }

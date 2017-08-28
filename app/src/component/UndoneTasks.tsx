@@ -29,4 +29,7 @@ class UndoneTasks extends React.Component<IProps> {
     }
 }
 
-export default connect(({ tasks }) => tasks, actionCreators)(UndoneTasks);
+export default connect(
+    ({ tasks: { undoneTasks } }) => ({ tasks: undoneTasks } as any), // TODO: Remove `as any`.
+    actionCreators,
+)(UndoneTasks);

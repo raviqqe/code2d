@@ -12,20 +12,26 @@ const createTask = factory<INewTask>("CREATE_TASK");
 const editTask = factory<{ newTask: ITask, oldTask: ITask }>("EDIT_TASK");
 const markDoneTask = factory<ITask>("MARK_DONE_TASK");
 const setUndoneTasks = factory<ITask[]>("SET_UNDONE_TASKS");
-const updateUndoneTasks = factory<ITask[]>("UPDATE_TASKS");
+const updateUndoneTasks = factory<ITask[]>("UPDATE_UNDONE_TASKS");
+const updateDoneTasks = factory<ITask[]>("UPDATE_DONE_TASKS");
 
 export const actionCreators = {
     createTask,
     editTask: (oldTask: ITask, newTask: ITask) => editTask({ newTask, oldTask }),
     markDoneTask,
     setUndoneTasks,
+    updateDoneTasks,
     updateUndoneTasks,
 };
 
-export const initialState: { tasks: ITask[] } = { tasks: [] };
+export const initialState: { doneTasks: ITask[], undoneTasks: ITask[] } = {
+    doneTasks: [],
+    undoneTasks: [],
+};
 
 export const reducer = reducerWithInitialState(initialState)
-    .case(updateUndoneTasks, (_, tasks) => ({ tasks }));
+    .case(updateDoneTasks, ({ undoneTasks }, tasks) => ({ doneTasks: tasks, undoneTasks }))
+    .case(updateUndoneTasks, ({ doneTasks }, tasks) => ({ doneTasks, undoneTasks: tasks }));
 
 export const sagas = [
     takeEvery(
