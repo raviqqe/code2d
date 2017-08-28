@@ -8,7 +8,7 @@
 					"done": {
 						"$task": {
 							"name": {
-								".validate": "newData.val().length <= 150"
+								".validate": "newData.val().length <= 150 && newData.val().length > 0"
 							},
 							"description": {
 								".validate": "newData.val().length <= 1000"
@@ -27,7 +27,7 @@
 					"undone": {
 						"$task": {
 							"name": {
-								".validate": "newData.val().length <= 150"
+								".validate": "newData.val().length <= 150 && newData.val().length > 0"
 							},
 							"description": {
 								".validate": "newData.val().length <= 1000"
