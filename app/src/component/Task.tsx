@@ -10,7 +10,7 @@ import "./style/Task.css";
 interface IProps extends ITask {
     editable?: boolean;
     editTask: (oldTask: ITask, newTask: ITask) => void;
-    markDoneTask: (task: ITask) => void;
+    markTaskDone: (task: ITask) => void;
     removeTask: (task: ITask) => void;
 }
 
@@ -39,7 +39,7 @@ class Task extends React.Component<IProps> {
                 <div
                     onClick={() => {
                         if (editable) {
-                            this.props.markDoneTask(task);
+                            this.props.markTaskDone(task);
                         } else {
                             this.props.removeTask(task);
                         }
