@@ -13,7 +13,7 @@ export interface ITask extends INewTask {
 
 export class Tasks {
     public create = async (task: INewTask): Promise<void> => {
-        const tasks = (await this.undoneTasks.once("value")).val();
+        const tasks = await this.getUndoneTasks();
 
         this.setUndoneTasks([
             { createdAt: Date.now(), updatedAt: Date.now(), ...task },
@@ -22,12 +22,16 @@ export class Tasks {
     }
 
     public markDone = async (task: ITask): Promise<void> => {
-        const tasks = (await this.undoneTasks.once("value")).val();
+        const tasks = await this.getUndoneTasks();
 
         _.remove(tasks, task);
 
         await this.setUndoneTasks(tasks);
         await this.doneTasks.push(task);
+    }
+
+    public edit = async (oldTask: ITask, newTask: ITask): Promise<void> => {
+        this.undoneTasks.child(_.findIndex(await this.getUndoneTasks(), oldTask)).set(newTask);
     }
 
     public setUndoneTasks = async (tasks: ITask[]): Promise<void> => {
@@ -39,6 +43,10 @@ export class Tasks {
             const tasks = snapshot.val();
             callback(tasks ? tasks : []);
         });
+    }
+
+    private getUndoneTasks = async (): Promise<ITask[]> => {
+        return (await this.undoneTasks.once("value")).val();
     }
 
     private get undoneTasks(): firebase.database.Reference {
