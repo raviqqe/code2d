@@ -13,12 +13,12 @@ interface IProps {
 
 class DoneTasks extends React.Component<IProps> {
     public render() {
-        // TODO: Fix editable prop hack.
+        // TODO: Fix done prop hack.
 
         return (
             <ul className="DoneTasks-container">
                 {this.props.tasks.map((task: ITask, index) =>
-                    <li key={index}><Task {...{ editable: false, ...task }} /></li>)}
+                    <li key={index}><Task {...{ done: true, ...task }} /></li>)}
             </ul>
         );
     }
