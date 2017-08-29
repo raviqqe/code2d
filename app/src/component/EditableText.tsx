@@ -1,4 +1,7 @@
 import * as React from "react";
+import Markdown = require("react-markdown");
+
+import "./style/EditableText.css";
 
 interface IProps {
     className?: string;
@@ -53,7 +56,9 @@ export default class extends React.Component<IProps, IState> {
                     className={this.props.className}
                     onClick={this.props.textArea ? undefined : this.startEditing}
                 >
-                    {this.props.text}
+                    {this.props.textArea
+                        ? <Markdown className="EditableText-markdown" source={this.props.text} />
+                        : this.props.text}
                 </div>
             );
         }
