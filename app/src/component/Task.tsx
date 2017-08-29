@@ -50,7 +50,6 @@ class Task extends React.Component<IProps, IState> {
                     editable={editable}
                     text={task.description}
                     textArea={true}
-                    onCancelEditing={() => this.setState({ editingDescription: false })}
                     onEdit={(description) => this.props.editTask(task, { ...task, description })}
                 />
             </div>
