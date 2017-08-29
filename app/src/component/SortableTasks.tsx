@@ -7,10 +7,10 @@ import SortableTask from "./SortableTask";
 class SortableTasks extends React.Component<{ tasks: ITask[] }> {
     public render() {
         return (
-            <ul>
+            <div>
                 {this.props.tasks.map((task, index) =>
                     <SortableTask key={`task-${index}`} index={index} {...task} />)}
-            </ul>
+            </div>
         );
     }
 }

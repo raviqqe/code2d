@@ -16,10 +16,10 @@ class DoneTasks extends React.Component<IProps> {
         // TODO: Fix done prop hack.
 
         return (
-            <ul className="DoneTasks-container">
+            <div className="DoneTasks-container">
                 {this.props.tasks.map((task: ITask, index) =>
                     <li key={index}><Task {...{ done: true, ...task }} /></li>)}
-            </ul>
+            </div>
         );
     }
 }

@@ -6,7 +6,7 @@ import Task from "./Task";
 
 class SortableTask extends React.Component<ITask> {
     public render() {
-        return <li><Task {...this.props} /></li>;
+        return <Task {...this.props} />;
     }
 }
 
