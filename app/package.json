@@ -25,6 +25,7 @@
     "@types/react-redux": "^5.0.5",
     "@types/react-sortable-hoc": "^0.6.0",
     "node-sass-chokidar": "0.0.3",
-    "stylelint-config-standard": "^17.0.0"
+    "stylelint": "^8.0.0",
+    "stylelint-config-recommended-scss": "^2.0.0"
   }
 }
