@@ -15,9 +15,11 @@ class SignIn extends React.Component<IProps> {
     public render() {
         if (this.props.signedIn) {
             return <Redirect to="/" />;
+        } else if (this.props.halfway) {
+            return <div>Signing in...</div>;
         }
 
-        return <div onClick={this.props.signIn}>Sign in</div>;
+        return <button onClick={this.props.signIn}>Sign in</button>;
     }
 }
 
