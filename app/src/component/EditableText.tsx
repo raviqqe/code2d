@@ -50,7 +50,7 @@ export default class extends React.Component<IProps, IState> {
     }
 
     public render() {
-        if (!this.state.editing && this.props.text) {
+        if (!this.state.editing && this.props.text.trim()) {
             return (
                 <div
                     className={this.props.className}
