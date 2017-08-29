@@ -48,6 +48,7 @@ class CreateTask extends React.Component<IProps, IState> {
                 }}
             >
                 <input
+                    className="Task-name-input"
                     ref={(name) => { this.name = name; }}
                     placeholder="Name"
                     type="text"

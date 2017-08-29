@@ -26,7 +26,7 @@ class Task extends React.Component<IProps> {
             <div className="Task-container">
                 <div className="Task-header">
                     <EditableText
-                        className="Task-name-normal"
+                        className="Task-name"
                         inputClassName="Task-name-input"
                         editable={editable}
                         text={task.name}
@@ -35,6 +35,8 @@ class Task extends React.Component<IProps> {
                     {this.buttons}
                 </div>
                 <EditableText
+                    className="Task-description"
+                    inputClassName="Task-description-input"
                     ref={(description) => { this.description = description; }}
                     editable={editable}
                     text={task.description}
@@ -50,19 +52,19 @@ class Task extends React.Component<IProps> {
         return this.props.done ? (
             <div className="Task-buttons-container">
                 <div className="Task-button" onClick={() => this.props.markTaskTodo(task)}>
-                    <RotateCcw />
+                    <RotateCcw size={20} />
                 </div>
                 <div className="Task-button" onClick={() => this.props.removeTask(task)}>
-                    <Trash2 />
+                    <Trash2 size={22} />
                 </div>
             </div>
         ) : (
                 <div className="Task-buttons-container">
                     <div className="Task-button" onClick={() => this.props.markTaskDone(task)}>
-                        <Check />
+                        <Check size={22} />
                     </div>
                     <div className="Task-button" onClick={() => this.description.edit()}>
-                        <Edit2 />
+                        <Edit2 size={20} />
                     </div>
                 </div>
             );

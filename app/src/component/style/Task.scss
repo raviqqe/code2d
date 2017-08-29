@@ -2,7 +2,7 @@
 	width: 100%;
 	background: #888;
 	color: #fff;
-	padding: 0.8em;
+	padding: 0.5em;
 	margin-bottom: 0.5em;
 	border-radius: 0.4em;
 }
@@ -17,26 +17,41 @@
 	justify-content: space-between;
 }
 
-@mixin Task-name {
-	font-size: 1.3em;
-	width: calc(100% - 80px);
-}
-
-.Task-name-normal {
-	@include Task-name;
-}
-
-.Task-name-input {
-	@include Task-name;
-
+@mixin Task-input {
 	padding: 0.3em;
 	border-width: 0;
 	border-radius: 0.3em;
 	outline: none;
 }
 
+.Task-name {
+	font-size: 1.1em;
+	width: 100%;
+	margin-right: 0.5em;
+	box-sizing: border-box;
+}
+
+.Task-name-input {
+	@extend .Task-name;
+
+	@include Task-input;
+}
+
+.Task-description {
+	margin-top: 0.4em;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.Task-description-input {
+	@extend .Task-description;
+
+	@include Task-input;
+}
+
 .Task-buttons-container {
 	display: flex;
+	align-items: center;
 }
 
 .Task-button {
