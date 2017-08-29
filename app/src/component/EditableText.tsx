@@ -1,6 +1,8 @@
 import * as React from "react";
 
 interface IProps {
+    className?: string;
+    inputClassName?: string;
     editable?: boolean;
     onEdit: (text: string) => void;
     text: string;
@@ -39,6 +41,7 @@ export default class extends React.Component<IProps, IState> {
     public render() {
         return this.state.editing ? (
             <input
+                className={this.props.inputClassName}
                 ref={(input) => { this.input = input; }}
                 type="text"
                 value={this.state.text}
@@ -52,7 +55,7 @@ export default class extends React.Component<IProps, IState> {
                 }}
             />
         ) : (
-                <div onClick={this.edit}>
+                <div className={this.props.className} onClick={this.edit}>
                     {this.props.text}
                 </div>
             );

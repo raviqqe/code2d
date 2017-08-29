@@ -19,35 +19,58 @@ class Task extends React.Component<IProps> {
     private description: { edit: () => void; };
 
     public render() {
-        const { createdAt, description, done, name, updatedAt } = this.props;
-        const task: ITask = { createdAt, description, name, updatedAt };
+        const editable = !this.props.done;
+        const task = this.task;
 
         return (
-            <div className="Task">
-                <EditableText
-                    editable={!done}
-                    text={name}
-                    onEdit={(name) => this.props.editTask(task, { ...task, name })}
-                />
+            <div className="Task-container">
+                <div className="Task-header">
+                    <EditableText
+                        className="Task-name-normal"
+                        inputClassName="Task-name-input"
+                        editable={editable}
+                        text={task.name}
+                        onEdit={(name) => this.props.editTask(task, { ...task, name })}
+                    />
+                    {this.buttons}
+                </div>
                 <EditableText
                     ref={(description) => { this.description = description; }}
-                    editable={!done}
-                    text={description}
+                    editable={editable}
+                    text={task.description}
                     onEdit={(description) => this.props.editTask(task, { ...task, description })}
                 />
-                {done ? (
-                    <div>
-                        <div onClick={() => this.props.markTaskTodo(task)}><RotateCcw /></div>
-                        <div onClick={() => this.props.removeTask(task)}><Trash2 /></div>
-                    </div >
-                ) : (
-                        <div>
-                            <div onClick={() => this.props.markTaskDone(task)}><Check /></div>
-                            <div onClick={() => this.description.edit()}><Edit2 /></div>
-                        </div>
-                    )}
             </div>
         );
+    }
+
+    private get buttons() {
+        const task = this.task;
+
+        return this.props.done ? (
+            <div className="Task-buttons-container">
+                <div className="Task-button" onClick={() => this.props.markTaskTodo(task)}>
+                    <RotateCcw />
+                </div>
+                <div className="Task-button" onClick={() => this.props.removeTask(task)}>
+                    <Trash2 />
+                </div>
+            </div>
+        ) : (
+                <div className="Task-buttons-container">
+                    <div className="Task-button" onClick={() => this.props.markTaskDone(task)}>
+                        <Check />
+                    </div>
+                    <div className="Task-button" onClick={() => this.description.edit()}>
+                        <Edit2 />
+                    </div>
+                </div>
+            );
+    }
+
+    private get task(): ITask {
+        const { createdAt, description, name, updatedAt } = this.props;
+        return { createdAt, description, name, updatedAt };
     }
 }
 
