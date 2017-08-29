@@ -54,7 +54,7 @@ export default class extends React.Component<IProps, IState> {
     }
 
     public render() {
-        if (!this.state.editing) {
+        if (!this.state.editing && this.props.text) {
             return (
                 <div
                     className={this.props.className}
@@ -65,6 +65,8 @@ export default class extends React.Component<IProps, IState> {
                         : this.props.text}
                 </div>
             );
+        } else if (!this.state.editing) {
+            return false;
         }
 
         const commonProps = {
