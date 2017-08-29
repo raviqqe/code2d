@@ -6,8 +6,12 @@ import DoneTasks from "../component/DoneTasks";
 import TodoTasks from "../component/TodoTasks";
 import "./style/Home.css";
 
-class Home extends React.Component<{ signedIn: boolean }> {
-    public state = { showDoneTasks: false };
+interface IState {
+    showDoneTasks: boolean;
+}
+
+class Home extends React.Component<{ signedIn: boolean }, IState> {
+    public state: IState = { showDoneTasks: false };
 
     public render() {
         if (!this.props.signedIn) {
@@ -19,7 +23,7 @@ class Home extends React.Component<{ signedIn: boolean }> {
         return (
             <div>
                 <div onClick={() => this.setState({ showDoneTasks: !showDoneTasks })}>
-                    {showDoneTasks ? "Done" : "To-do"} tasks
+                    {showDoneTasks ? "done" : "todo"}
                 </div>
                 {showDoneTasks ? <DoneTasks /> : <TodoTasks />}
             </div>
