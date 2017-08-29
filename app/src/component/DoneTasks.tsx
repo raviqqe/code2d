@@ -18,7 +18,7 @@ class DoneTasks extends React.Component<IProps> {
         return (
             <div className="DoneTasks-container">
                 {this.props.tasks.map((task: ITask, index) =>
-                    <li key={index}><Task {...{ done: true, ...task }} /></li>)}
+                    <Task key={index} {...{ done: true, ...task }} />)}
             </div>
         );
     }
