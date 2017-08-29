@@ -26,6 +26,7 @@
     "@types/react-sortable-hoc": "^0.6.0",
     "node-sass-chokidar": "0.0.3",
     "stylelint": "^8.0.0",
-    "stylelint-config-recommended-scss": "^2.0.0"
+    "stylelint-config-recommended-scss": "^2.0.0",
+    "stylelint-scss": "^2.1.0"
   }
 }
