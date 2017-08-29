@@ -17,10 +17,11 @@ interface IProps extends ITask {
 
 interface IState {
     editingDescription: boolean;
+    showAll: boolean;
 }
 
 class Task extends React.Component<IProps, IState> {
-    public state: IState = { editingDescription: false };
+    public state: IState = { editingDescription: false, showAll: false };
 
     private description: {
         startEditing: () => void;
@@ -32,7 +33,11 @@ class Task extends React.Component<IProps, IState> {
         const task = this.task;
 
         return (
-            <div className="Task-container">
+            <div
+                className="Task-container"
+                onMouseOver={() => this.setState({ showAll: true })}
+                onMouseOut={() => this.setState({ showAll: false })}
+            >
                 <div className="Task-header">
                     <EditableText
                         className="Task-name"
@@ -44,7 +49,7 @@ class Task extends React.Component<IProps, IState> {
                     {this.buttons}
                 </div>
                 <EditableText
-                    className="Task-description"
+                    className={this.state.showAll ? "Task-description" : "invisible"}
                     inputClassName="Task-description-input"
                     ref={(description) => { this.description = description; }}
                     editable={editable}
@@ -58,9 +63,10 @@ class Task extends React.Component<IProps, IState> {
 
     private get buttons() {
         const task = this.task;
+        const containerClassName = this.state.showAll ? "Task-buttons-container" : "invisible";
 
         return this.props.done ? (
-            <div className="Task-buttons-container">
+            <div className={containerClassName}>
                 <div className="Task-button" onClick={() => this.props.markTaskTodo(task)}>
                     <RotateCcw size={20} />
                 </div>
@@ -69,7 +75,7 @@ class Task extends React.Component<IProps, IState> {
                 </div>
             </div>
         ) : (
-                <div className="Task-buttons-container">
+                <div className={containerClassName}>
                     <div className="Task-button" onClick={() => this.props.markTaskDone(task)}>
                         <Check size={22} />
                     </div>
