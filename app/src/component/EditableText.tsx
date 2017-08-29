@@ -7,6 +7,7 @@ interface IProps {
     className?: string;
     inputClassName?: string;
     editable?: boolean;
+    onCancelEditing?: () => void;
     onEdit: (text: string) => void;
     text: string;
     textArea?: boolean;
@@ -36,7 +37,10 @@ export default class extends React.Component<IProps, IState> {
         this.props.onEdit(this.state.text);
     }
 
-    public cancelEditing = (): void => this.setState({ editing: false });
+    public cancelEditing = (): void => {
+        this.setState({ editing: false });
+        this.props.onCancelEditing();
+    }
 
     public componentDidUpdate(_, { editing }: IState) {
         if (!editing && this.state.editing) {
@@ -65,6 +69,7 @@ export default class extends React.Component<IProps, IState> {
 
         const commonProps = {
             className: this.props.inputClassName,
+            onBlur: this.cancelEditing,
             onChange: ({ target: { value } }) => this.setState({ text: value }),
             ref: (input) => { this.input = input; },
             value: this.state.text,
