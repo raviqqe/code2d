@@ -22,11 +22,18 @@ export default class extends React.Component<IProps, IState> {
 
     private input: { focus: () => void, value: string };
 
-    public edit = (): void => {
+    public startEditing = (): void => {
         if (this.props.editable || this.props.editable === undefined) {
             this.setState({ editing: true });
         }
     }
+
+    public stopEditing = (): void => {
+        this.setState({ editing: false });
+        this.props.onEdit(this.state.text);
+    }
+
+    public cancelEditing = (): void => this.setState({ editing: false });
 
     public componentDidUpdate(_, { editing }: IState) {
         if (!editing && this.state.editing) {
@@ -42,26 +49,35 @@ export default class extends React.Component<IProps, IState> {
     public render() {
         if (!this.state.editing) {
             return (
-                <div className={this.props.className} onClick={this.edit}>
+                <div
+                    className={this.props.className}
+                    onClick={this.props.textArea ? undefined : this.startEditing}
+                >
                     {this.props.text}
                 </div>
             );
         }
 
-        const inputProps = {
+        const commonProps = {
             className: this.props.inputClassName,
-            onBlur: () => this.setState({ editing: false }),
             onChange: ({ target: { value } }) => this.setState({ text: value }),
-            onKeyPress: ({ charCode }) => {
-                if (charCode === 13) {
-                    this.setState({ editing: false });
-                    this.props.onEdit(this.state.text);
-                }
-            },
             ref: (input) => { this.input = input; },
             value: this.state.text,
         };
 
-        return this.props.textArea ? <textarea {...inputProps} /> : <input {...inputProps} />;
+        return this.props.textArea
+            ? <textarea {...commonProps} />
+            : (
+                <input
+                    {...commonProps}
+                    onBlur={this.cancelEditing}
+                    onKeyPress={({ charCode }) => {
+                        if (charCode === 13) {
+                            this.stopEditing();
+                            this.props.onEdit(this.state.text);
+                        }
+                    }}
+                />
+            );
     }
 }

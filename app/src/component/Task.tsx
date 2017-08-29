@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Check, Edit2, RotateCcw, Trash2 } from "react-feather";
+import { Check, Edit2, RotateCcw, Save, Trash2 } from "react-feather";
 import { connect } from "react-redux";
 
 import { ITask } from "../lib/task";
@@ -15,8 +15,17 @@ interface IProps extends ITask {
     removeTask: (task: ITask) => void;
 }
 
-class Task extends React.Component<IProps> {
-    private description: { edit: () => void; };
+interface IState {
+    editingDescription: boolean;
+}
+
+class Task extends React.Component<IProps, IState> {
+    public state: IState = { editingDescription: false };
+
+    private description: {
+        startEditing: () => void;
+        stopEditing: () => void;
+    };
 
     public render() {
         const editable = !this.props.done;
@@ -64,9 +73,27 @@ class Task extends React.Component<IProps> {
                     <div className="Task-button" onClick={() => this.props.markTaskDone(task)}>
                         <Check size={22} />
                     </div>
-                    <div className="Task-button" onClick={() => this.description.edit()}>
-                        <Edit2 size={20} />
-                    </div>
+                    {this.state.editingDescription ? (
+                        <div
+                            className="Task-button"
+                            onClick={() => {
+                                this.description.stopEditing();
+                                this.setState({ editingDescription: false });
+                            }}
+                        >
+                            <Save size={20} />
+                        </div>
+                    ) : (
+                            <div
+                                className="Task-button"
+                                onClick={() => {
+                                    this.description.startEditing();
+                                    this.setState({ editingDescription: true });
+                                }}
+                            >
+                                <Edit2 size={20} />
+                            </div>
+                        )}
                 </div>
             );
     }
