@@ -15,6 +15,7 @@
 	display: flex;
 	flex-direction: horizontal;
 	justify-content: space-between;
+	align-items: center;
 }
 
 @mixin Task-input {
@@ -55,7 +56,8 @@
 }
 
 .Task-button {
-	margin-right: 0.3em;
+	font-size: 0;
+	margin-right: 4px;
 }
 
 .Task-button:last-child {
