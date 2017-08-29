@@ -6,6 +6,7 @@ interface IProps {
     editable?: boolean;
     onEdit: (text: string) => void;
     text: string;
+    textArea?: boolean;
 }
 
 interface IState {
@@ -39,25 +40,28 @@ export default class extends React.Component<IProps, IState> {
     }
 
     public render() {
-        return this.state.editing ? (
-            <input
-                className={this.props.inputClassName}
-                ref={(input) => { this.input = input; }}
-                type="text"
-                value={this.state.text}
-                onBlur={() => this.setState({ editing: false })}
-                onChange={({ target: { value } }) => this.setState({ text: value })}
-                onKeyPress={({ charCode }) => {
-                    if (charCode === 13) {
-                        this.setState({ editing: false });
-                        this.props.onEdit(this.state.text);
-                    }
-                }}
-            />
-        ) : (
+        if (!this.state.editing) {
+            return (
                 <div className={this.props.className} onClick={this.edit}>
                     {this.props.text}
                 </div>
             );
+        }
+
+        const inputProps = {
+            className: this.props.inputClassName,
+            onBlur: () => this.setState({ editing: false }),
+            onChange: ({ target: { value } }) => this.setState({ text: value }),
+            onKeyPress: ({ charCode }) => {
+                if (charCode === 13) {
+                    this.setState({ editing: false });
+                    this.props.onEdit(this.state.text);
+                }
+            },
+            ref: (input) => { this.input = input; },
+            value: this.state.text,
+        };
+
+        return this.props.textArea ? <textarea {...inputProps} /> : <input {...inputProps} />;
     }
 }

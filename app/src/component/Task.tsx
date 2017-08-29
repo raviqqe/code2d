@@ -40,6 +40,7 @@ class Task extends React.Component<IProps> {
                     ref={(description) => { this.description = description; }}
                     editable={editable}
                     text={task.description}
+                    textArea={true}
                     onEdit={(description) => this.props.editTask(task, { ...task, description })}
                 />
             </div>
