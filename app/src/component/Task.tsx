@@ -15,6 +15,7 @@ interface IProps extends ITask {
     markTaskDone: (task: ITask) => void;
     markTaskTodo: (task: ITask) => void;
     removeTask: (task: ITask) => void;
+    setCurrentTask: (task: ITask | null) => void;
 }
 
 interface IState {
@@ -29,7 +30,10 @@ class Task extends React.Component<IProps, IState> {
         const task = this.task;
 
         return (
-            <div className="Task-container">
+            <div
+                className="Task-container"
+                onClick={() => this.props.setCurrentTask(task)}
+            >
                 <div className="Task-header">
                     <TaskName
                         editable={editable}

@@ -1,3 +1,4 @@
+import * as _ from "lodash";
 import * as React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
@@ -9,6 +10,7 @@ import { ITask } from "../lib/task";
 import "./style/Home.css";
 
 interface IProps {
+    currentTask: ITask | null;
     signedIn: boolean;
     doneTasks: ITask[];
     todoTasks: ITask[];
@@ -28,7 +30,6 @@ class Home extends React.Component<IProps, IState> {
 
         const { showDoneTasks } = this.state;
         const Tasks = showDoneTasks ? DoneTasks : TodoTasks;
-        const task = showDoneTasks ? this.props.doneTasks[0] : this.props.todoTasks[0];
 
         return (
             <div className="Home-container">
@@ -53,11 +54,20 @@ class Home extends React.Component<IProps, IState> {
                         <Tasks />
                     </div>
                     <div className="Home-sidebar">
-                        {task && <Task {...{ detailed: true, ...task }} />}
+                        {this.currentTask &&
+                            <Task {...{ detailed: true, ...this.currentTask }} />}
                     </div>
                 </div>
             </div>
         );
+    }
+
+    private get currentTask(): ITask | null {
+        const tasks = this.state.showDoneTasks ? this.props.doneTasks : this.props.todoTasks;
+
+        return this.props.currentTask && _.findIndex(tasks, this.props.currentTask) >= 0
+            ? this.props.currentTask
+            : tasks[0];
     }
 }
 
