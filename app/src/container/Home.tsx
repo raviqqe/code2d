@@ -40,7 +40,7 @@ class Home extends React.Component<IProps, IState> {
                         <Tasks />
                     </div>
                     <div className="Home-sidebar">
-                        {task && <Task {...task} />}
+                        {task && <Task {...{ detailed: true, ...task }} />}
                     </div>
                 </div>
             </div>

@@ -9,36 +9,27 @@ import TaskDescription from "./TaskDescription";
 import TaskName from "./TaskName";
 
 interface IProps extends ITask {
+    detailed: boolean;
     done?: boolean;
     editTask: (oldTask: ITask, newTask: ITask) => void;
     markTaskDone: (task: ITask) => void;
     markTaskTodo: (task: ITask) => void;
     removeTask: (task: ITask) => void;
-    sorting: boolean;
 }
 
 interface IState {
     editingDescription: boolean;
-    showAll: boolean;
 }
 
 class Task extends React.Component<IProps, IState> {
-    public state: IState = { editingDescription: false, showAll: false };
+    public state: IState = { editingDescription: false };
 
     public render() {
         const editable = !this.props.done;
         const task = this.task;
 
         return (
-            <div
-                className="Task-container"
-                onMouseDown={() => {
-                    // Rerender a dragged task Before sorting.
-                    this.setState({ showAll: false });
-                }}
-                onMouseOver={() => this.setState({ showAll: true })}
-                onMouseOut={() => this.setState({ showAll: false })}
-            >
+            <div className="Task-container">
                 <div className="Task-header">
                     <TaskName
                         className="Task-name"
@@ -49,13 +40,16 @@ class Task extends React.Component<IProps, IState> {
                     />
                     {this.buttons}
                 </div>
-                <TaskDescription
-                    className={this.showAll ? "Task-description" : "invisible"}
-                    inputClassName="Task-description-input"
-                    editing={editable && this.state.editingDescription}
-                    text={task.description}
-                    onEdit={(description) => this.props.editTask(task, { ...task, description })}
-                />
+                {this.props.detailed && (
+                    <TaskDescription
+                        className="Task-description"
+                        inputClassName="Task-description-input"
+                        editing={editable && this.state.editingDescription}
+                        text={task.description}
+                        onEdit={(description) =>
+                            this.props.editTask(task, { ...task, description })}
+                    />
+                )}
             </div>
         );
     }
@@ -63,45 +57,45 @@ class Task extends React.Component<IProps, IState> {
     private get buttons() {
         const task = this.task;
         const containerProps = {
-            className: this.showAll ? "Task-buttons-container" : "invisible",
+            className: "Task-buttons-container",
             onMouseDown: (event) => event.stopPropagation(),
         };
 
-        return this.props.done ? (
-            <div {...containerProps}>
-                <div className="Task-button" onClick={() => this.props.markTaskTodo(task)}>
-                    <RotateCcw size={20} />
-                </div>
-                <div className="Task-button" onClick={() => this.props.removeTask(task)}>
-                    <Trash2 size={22} />
-                </div>
-            </div>
-        ) : (
+        if (this.props.done) {
+            return (
                 <div {...containerProps}>
-                    <div className="Task-button" onClick={() => this.props.markTaskDone(task)}>
-                        <Check size={22} />
+                    <div className="Task-button" onClick={() => this.props.markTaskTodo(task)}>
+                        <RotateCcw size={20} />
                     </div>
-                    {this.state.editingDescription ? (
-                        <div
-                            className="Task-button"
-                            onClick={() => this.setState({ editingDescription: false })}
-                        >
-                            <Save size={20} />
-                        </div>
-                    ) : (
-                            <div
-                                className="Task-button"
-                                onClick={() => this.setState({ editingDescription: true })}
-                            >
-                                <Edit2 size={20} />
-                            </div>
-                        )}
+                    <div className="Task-button" onClick={() => this.props.removeTask(task)}>
+                        <Trash2 size={22} />
+                    </div>
                 </div>
             );
-    }
+        }
 
-    private get showAll(): boolean {
-        return this.state.showAll && !this.props.sorting;
+        return (
+            <div {...containerProps}>
+                <div className="Task-button" onClick={() => this.props.markTaskDone(task)}>
+                    <Check size={22} />
+                </div>
+                {this.props.detailed && (this.state.editingDescription ? (
+                    <div
+                        className="Task-button"
+                        onClick={() => this.setState({ editingDescription: false })}
+                    >
+                        <Save size={20} />
+                    </div>
+                ) : (
+                        <div
+                            className="Task-button"
+                            onClick={() => this.setState({ editingDescription: true })}
+                        >
+                            <Edit2 size={20} />
+                        </div>
+                    ))}
+            </div>
+        );
     }
 
     private get task(): ITask {
