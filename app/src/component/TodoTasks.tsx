@@ -30,7 +30,7 @@ class TodoTasks extends React.Component<IProps> {
                     tasks={this.props.tasks}
                     pressDelay={isTouchDevice()
                         ? 200
-                        : /* Wait rerendering of a dragged task */ 50}
+                        : /* Wait rerendering of a dragged task */ 80}
                 />
             </div>
         );

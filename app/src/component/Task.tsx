@@ -68,10 +68,13 @@ class Task extends React.Component<IProps, IState> {
 
     private get buttons() {
         const task = this.task;
-        const containerClassName = this.showAll ? "Task-buttons-container" : "invisible";
+        const containerProps = {
+            className: this.showAll ? "Task-buttons-container" : "invisible",
+            onMouseDown: (event) => event.stopPropagation(),
+        };
 
         return this.props.done ? (
-            <div className={containerClassName}>
+            <div {...containerProps}>
                 <div className="Task-button" onClick={() => this.props.markTaskTodo(task)}>
                     <RotateCcw size={20} />
                 </div>
@@ -80,7 +83,7 @@ class Task extends React.Component<IProps, IState> {
                 </div>
             </div>
         ) : (
-                <div className={containerClassName}>
+                <div {...containerProps}>
                     <div className="Task-button" onClick={() => this.props.markTaskDone(task)}>
                         <Check size={22} />
                     </div>
