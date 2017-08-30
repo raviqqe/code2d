@@ -32,17 +32,17 @@ export const actionCreators = {
     updateTodoTasks,
 };
 
-export const initialState: { doneTasks: ITask[], sorting: boolean, undoneTasks: ITask[] } = {
+export const initialState: { doneTasks: ITask[], sorting: boolean, todoTasks: ITask[] } = {
     doneTasks: [],
     sorting: false,
-    undoneTasks: [],
+    todoTasks: [],
 };
 
 export const reducer = reducerWithInitialState(initialState)
     .case(startSortingTasks, (state) => ({ ...state, sorting: true }))
     .case(stopSortingTasks, (state) => ({ ...state, sorting: false }))
     .case(updateDoneTasks, (state, tasks) => ({ ...state, doneTasks: tasks }))
-    .case(updateTodoTasks, (state, tasks) => ({ ...state, undoneTasks: tasks }));
+    .case(updateTodoTasks, (state, tasks) => ({ ...state, todoTasks: tasks }));
 
 export const sagas = [
     takeEvery(

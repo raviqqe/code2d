@@ -38,6 +38,6 @@ class TodoTasks extends React.Component<IProps> {
 }
 
 export default connect(
-    ({ tasks: { undoneTasks } }) => ({ tasks: undoneTasks } as any), // TODO: Remove `as any`.
+    ({ tasks: { todoTasks } }) => ({ tasks: todoTasks } as any), // TODO: Remove `as any`.
     actionCreators,
 )(TodoTasks);
