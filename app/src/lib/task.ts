@@ -48,14 +48,14 @@ export class Tasks {
     }
 
     public onTodoTasksUpdate = (callback: (tasks: ITask[]) => void): void => {
-        this.todoTasks.on("value", async (snapshot): Promise<void> => {
+        this.todoTasks.on("value", (snapshot): void => {
             const tasks = snapshot.val();
             callback(tasks ? tasks : []);
         });
     }
 
     public onDoneTasksUpdate = (callback: (tasks: ITask[]) => void): void => {
-        this.doneTasks.on("value", async (snapshot): Promise<void> => {
+        this.doneTasks.on("value", (snapshot): void => {
             const tasks: { [key: string]: ITask } = snapshot.val();
 
             if (!tasks) {
