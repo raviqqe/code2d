@@ -1,0 +1,18 @@
+@import "./tasks-container.scss";
+
+.TodoTasks-container {
+	height: 100%;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+}
+
+.TodoTasks-create-task {
+	padding-right: $tasks-container-padding-right;
+}
+
+.TodoTasks-tasks-container {
+	@include tasks-container;
+
+	flex: 1;
+}
