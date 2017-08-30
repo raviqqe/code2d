@@ -8,6 +8,12 @@
 	border-radius: 0.4em;
 }
 
+.Task-container-highlighted {
+	@extend .Task-container;
+
+	box-shadow: 0 0 0.2em 0.15em #7f969c;
+}
+
 .Task-container:last-child {
 	margin-bottom: 0;
 }

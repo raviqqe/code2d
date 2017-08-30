@@ -1,8 +1,8 @@
-$tasks-container-padding-right: 0.5em;
+$tasks-container-padding: 0.5em;
 
 @mixin tasks-container {
 	height: 100%;
 	box-sizing: border-box;
 	overflow: scroll;
-	padding-right: $tasks-container-padding-right;
+	padding: $tasks-container-padding;
 }

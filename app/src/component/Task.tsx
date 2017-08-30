@@ -1,3 +1,4 @@
+import * as _ from "lodash";
 import * as React from "react";
 import { Check, Edit2, RotateCcw, Save, Trash2 } from "react-feather";
 import { connect } from "react-redux";
@@ -9,6 +10,7 @@ import TaskDescription from "./TaskDescription";
 import TaskName from "./TaskName";
 
 interface IProps extends ITask {
+    currentTask: ITask | null;
     detailed: boolean;
     done?: boolean;
     editTask: (oldTask: ITask, newTask: ITask) => void;
@@ -31,7 +33,9 @@ class Task extends React.Component<IProps, IState> {
 
         return (
             <div
-                className="Task-container"
+                className={!this.props.detailed && this.isCurrentTask
+                    ? "Task-container-highlighted"
+                    : "Task-container"}
                 onClick={() => this.props.setCurrentTask(task)}
             >
                 <div className="Task-header">
@@ -95,6 +99,10 @@ class Task extends React.Component<IProps, IState> {
                     ))}
             </div>
         );
+    }
+
+    private get isCurrentTask(): boolean {
+        return _.isEqual(this.task, this.props.currentTask);
     }
 
     private get task(): ITask {
