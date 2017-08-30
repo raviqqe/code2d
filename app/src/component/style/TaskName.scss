@@ -8,7 +8,7 @@
 }
 
 .TaskName-input {
-	@extend .TaskName;
+	@extend .TaskName-normal;
 
 	@include task-input;
 }

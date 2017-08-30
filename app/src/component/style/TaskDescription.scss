@@ -7,7 +7,7 @@
 }
 
 .TaskDescription-input {
-	@extend .TaskDescription;
+	@extend .TaskDescription-normal;
 
 	@include task-input;
 }
