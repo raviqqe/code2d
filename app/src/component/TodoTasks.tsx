@@ -12,12 +12,12 @@ import "./style/TodoTasks.css";
 interface IProps {
     tasks: ITask[];
     setTodoTasks: (tasks: ITask[]) => void;
-    startSortingTasks: () => void;
-    stopSortingTasks: () => void;
 }
 
 class TodoTasks extends React.Component<IProps> {
     public render() {
+        const sortableProps = isTouchDevice() ? { pressDelay: 200 } : { distance: 5 };
+
         return (
             <div className="TodoTasks-container">
                 <div className="TodoTasks-create-task">
@@ -25,12 +25,9 @@ class TodoTasks extends React.Component<IProps> {
                 </div>
                 <div className="TodoTasks-tasks-container">
                     <SortableTasks
-                        onSortStart={this.props.startSortingTasks}
-                        onSortEnd={({ newIndex, oldIndex }) => {
+                        onSortEnd={({ newIndex, oldIndex }) =>
                             this.props.setTodoTasks(
-                                arrayMove(this.props.tasks, oldIndex, newIndex));
-                            this.props.stopSortingTasks();
-                        }}
+                                arrayMove(this.props.tasks, oldIndex, newIndex))}
                         tasks={this.props.tasks}
                         pressDelay={isTouchDevice()
                             ? 200

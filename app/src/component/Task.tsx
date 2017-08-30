@@ -58,7 +58,6 @@ class Task extends React.Component<IProps, IState> {
         const task = this.task;
         const containerProps = {
             className: "Task-buttons-container",
-            onMouseDown: (event) => event.stopPropagation(),
         };
 
         if (this.props.done) {
