@@ -1,8 +1,6 @@
 import * as React from "react";
 import Markdown = require("react-markdown");
 
-import "./style/EditableText.css";
-
 interface IProps {
     className?: string;
     inputClassName?: string;

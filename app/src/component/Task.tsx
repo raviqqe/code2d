@@ -4,8 +4,9 @@ import { connect } from "react-redux";
 
 import { ITask } from "../lib/task";
 import { actionCreators } from "../redux/tasks";
-import EditableText from "./EditableText";
 import "./style/Task.css";
+import TaskDescription from "./TaskDescription";
+import TaskName from "./TaskName";
 
 interface IProps extends ITask {
     done?: boolean;
@@ -44,7 +45,7 @@ class Task extends React.Component<IProps, IState> {
                 onMouseOut={() => this.setState({ showAll: false })}
             >
                 <div className="Task-header">
-                    <EditableText
+                    <TaskName
                         className="Task-name"
                         inputClassName="Task-name-input"
                         editable={editable}
@@ -53,7 +54,7 @@ class Task extends React.Component<IProps, IState> {
                     />
                     {this.buttons}
                 </div>
-                <EditableText
+                <TaskDescription
                     className={this.showAll ? "Task-description" : "invisible"}
                     inputClassName="Task-description-input"
                     ref={(description) => { this.description = description; }}
