@@ -4,6 +4,15 @@
 	height: 100vh;
 }
 
+.Home-buttons {
+	display: flex;
+	flex-direction: row;
+}
+
+.Home-button {
+	flex: 1;
+}
+
 .Home-main {
 	background-color: #7d432f;
 	padding: 1em;

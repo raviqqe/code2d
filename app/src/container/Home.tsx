@@ -32,9 +32,22 @@ class Home extends React.Component<IProps, IState> {
 
         return (
             <div className="Home-container">
-                <button onClick={() => this.setState({ showDoneTasks: !showDoneTasks })}>
-                    {showDoneTasks ? "done" : "todo"}
-                </button>
+                <div className="Home-buttons">
+                    <button
+                        className="Home-button"
+                        onClick={() => this.setState({ showDoneTasks: false })}
+                        disabled={!showDoneTasks}
+                    >
+                        todo
+                    </button>
+                    <button
+                        className="Home-button"
+                        onClick={() => this.setState({ showDoneTasks: true })}
+                        disabled={showDoneTasks}
+                    >
+                        done
+                    </button>
+                </div>
                 <div className="Home-main">
                     <div className="Home-tasks">
                         <Tasks />
