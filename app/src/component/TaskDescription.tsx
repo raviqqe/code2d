@@ -40,7 +40,7 @@ export default class extends InputComponent<IProps, IState> {
         if (this.props.text.trim()) {
             return (
                 <div className={this.props.className}>
-                    <Markdown className="EditableText-markdown" source={this.props.text} />
+                    <Markdown className="TaskDescription-markdown" source={this.props.text} />
                 </div>
             );
         }
