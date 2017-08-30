@@ -1,5 +1,7 @@
-.Home-header {
-	background-color: #222;
+.Home-container {
+	background-color: #7d432f;
 	padding: 1em;
-	color: white;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
