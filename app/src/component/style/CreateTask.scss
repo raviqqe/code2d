@@ -1,0 +1,28 @@
+@mixin CreateTask-container {
+	background: #888;
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 0.5em;
+	padding: 0.5em;
+}
+
+.CreateTask-button-container {
+	@include CreateTask-container;
+
+	color: white;
+	align-items: center;
+}
+
+.CreateTask-form-container {
+	@include CreateTask-container;
+}
+
+.CreateTask-buttons {
+	display: flex;
+	flex-direction: row;
+}
+
+.CreateTask-button {
+	flex: 1;
+}

@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 import { INewTask } from "../lib/task";
 import { actionCreators } from "../redux/tasks";
+import "./style/CreateTask.css";
 
 interface IProps {
     createTask: (task: INewTask) => void;
@@ -31,7 +32,10 @@ class CreateTask extends React.Component<IProps, IState> {
     public render() {
         if (!this.state.creatingTask) {
             return (
-                <div onClick={() => this.setState({ creatingTask: true })}>
+                <div
+                    className="CreateTask-button-container"
+                    onClick={() => this.setState({ creatingTask: true })}
+                >
                     <Plus />
                 </div>
             );
@@ -39,6 +43,7 @@ class CreateTask extends React.Component<IProps, IState> {
 
         return (
             <form
+                className="CreateTask-form-container"
                 onSubmit={() => {
                     this.props.createTask(this.state.task);
                     this.setState({
@@ -63,8 +68,15 @@ class CreateTask extends React.Component<IProps, IState> {
                     onChange={({ target: { value } }) =>
                         this.setState({ task: { ...this.state.task, description: value } })}
                 />
-                <input type="submit" value="Create" />
-                <button onClick={() => this.setState({ creatingTask: false })}>Cancel</button>
+                <div className="CreateTask-buttons">
+                    <input className="CreateTask-button" type="submit" value="Create" />
+                    <button
+                        className="CreateTask-button"
+                        onClick={() => this.setState({ creatingTask: false })}
+                    >
+                        Cancel
+                    </button>
+                </div>
             </form>
         );
     }
