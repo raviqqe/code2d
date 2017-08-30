@@ -25,11 +25,6 @@ interface IState {
 class Task extends React.Component<IProps, IState> {
     public state: IState = { editingDescription: false, showAll: false };
 
-    private description: {
-        startEditing: () => void;
-        stopEditing: () => void;
-    };
-
     public render() {
         const editable = !this.props.done;
         const task = this.task;
@@ -57,10 +52,8 @@ class Task extends React.Component<IProps, IState> {
                 <TaskDescription
                     className={this.showAll ? "Task-description" : "invisible"}
                     inputClassName="Task-description-input"
-                    ref={(description) => { this.description = description; }}
-                    editable={editable}
+                    editing={editable && this.state.editingDescription}
                     text={task.description}
-                    textArea={true}
                     onEdit={(description) => this.props.editTask(task, { ...task, description })}
                 />
             </div>
@@ -91,20 +84,14 @@ class Task extends React.Component<IProps, IState> {
                     {this.state.editingDescription ? (
                         <div
                             className="Task-button"
-                            onClick={() => {
-                                this.description.stopEditing();
-                                this.setState({ editingDescription: false });
-                            }}
+                            onClick={() => this.setState({ editingDescription: false })}
                         >
                             <Save size={20} />
                         </div>
                     ) : (
                             <div
                                 className="Task-button"
-                                onClick={() => {
-                                    this.description.startEditing();
-                                    this.setState({ editingDescription: true });
-                                }}
+                                onClick={() => this.setState({ editingDescription: true })}
                             >
                                 <Edit2 size={20} />
                             </div>

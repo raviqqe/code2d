@@ -5,26 +5,16 @@ export interface IProps {
 }
 
 export interface IState {
-    editing: boolean;
     text: string;
 }
 
-export default abstract class InputComponent<P extends IProps> extends React.Component<P, IState> {
-    public state: IState = {
-        editing: false,
-        text: "",
-    };
+export default abstract class InputComponent<P extends IProps, S extends IState> extends React.Component<P, S> {
+    protected startEditing(ref: { focus: () => void, value: string }) {
+        ref.focus(); // Do this after rendering.
 
-    protected input: { focus: () => void, value: string };
-
-    public componentDidUpdate(_, { editing }: IState) {
-        if (!editing && this.state.editing) {
-            this.input.focus(); // Do this after rendering.
-
-            // Set an initial value and move a cursor to end.
-            this.input.value = "";
-            this.input.value = this.props.text;
-            this.setState({ text: this.props.text });
-        }
+        // Set an initial value and move a cursor to end.
+        ref.value = "";
+        ref.value = this.props.text;
+        this.setState({ text: this.props.text });
     }
 }

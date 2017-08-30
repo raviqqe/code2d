@@ -1,7 +1,7 @@
 import * as React from "react";
 import Markdown = require("react-markdown");
 
-import InputComponent, { IState } from "./InputComponent";
+import InputComponent, { IState as IInputComponentState } from "./InputComponent";
 
 interface IProps {
     className?: string;
@@ -11,7 +11,21 @@ interface IProps {
     text: string;
 }
 
-export default class extends InputComponent<IProps> {
+interface IState extends IInputComponentState {
+    editing: boolean;
+}
+
+export default class extends InputComponent<IProps, IState> {
+    public state: IState = { editing: false, text: "" };
+
+    private input: { focus: () => void, value: string };
+
+    public componentDidUpdate(_, { editing }: IState) {
+        if (!editing && this.state.editing) {
+            this.startEditing(this.input);
+        }
+    }
+
     public render() {
         if (this.props.editable && this.state.editing) {
             return (
