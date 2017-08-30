@@ -1,5 +1,4 @@
 @mixin CreateTask-container {
-	background: #888;
 	border-radius: 5px;
 	display: flex;
 	flex-direction: column;
@@ -10,12 +9,15 @@
 .CreateTask-button-container {
 	@include CreateTask-container;
 
+	background: #b56a55;
 	color: white;
 	align-items: center;
 }
 
 .CreateTask-form-container {
 	@include CreateTask-container;
+
+	background: white;
 }
 
 .CreateTask-buttons {
