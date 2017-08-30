@@ -2,10 +2,9 @@ import * as React from "react";
 import Markdown = require("react-markdown");
 
 import InputComponent, { IState as IInputComponentState } from "./InputComponent";
+import "./style/TaskName.css";
 
 interface IProps {
-    className?: string;
-    inputClassName?: string;
     editable?: boolean;
     onEdit: (text: string) => void;
     text: string;
@@ -30,7 +29,7 @@ export default class extends InputComponent<IProps, IState> {
         if (this.props.editable && this.state.editing) {
             return (
                 <input
-                    className={this.props.inputClassName}
+                    className="TaskName-input"
                     onBlur={() => this.setState({ editing: false })}
                     onChange={({ target: { value } }) => this.setState({ text: value })}
                     onKeyPress={({ charCode }) => {
@@ -47,7 +46,7 @@ export default class extends InputComponent<IProps, IState> {
 
         return (
             <div
-                className={this.props.className}
+                className="TaskName-normal"
                 onClick={() => this.setState({ editing: this.props.editable })}
             >
                 {this.props.text}

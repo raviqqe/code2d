@@ -32,8 +32,6 @@ class Task extends React.Component<IProps, IState> {
             <div className="Task-container">
                 <div className="Task-header">
                     <TaskName
-                        className="Task-name"
-                        inputClassName="Task-name-input"
                         editable={editable}
                         text={task.name}
                         onEdit={(name) => this.props.editTask(task, { ...task, name })}
@@ -42,8 +40,6 @@ class Task extends React.Component<IProps, IState> {
                 </div>
                 {this.props.detailed && (
                     <TaskDescription
-                        className="Task-description"
-                        inputClassName="Task-description-input"
                         editing={editable && this.state.editingDescription}
                         text={task.description}
                         onEdit={(description) =>

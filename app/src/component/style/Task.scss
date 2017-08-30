@@ -19,38 +19,6 @@
 	align-items: center;
 }
 
-@mixin Task-input {
-	padding: 0.3em;
-	border-width: 0;
-	border-radius: 5px;
-	outline: none;
-}
-
-.Task-name {
-	font-size: 1.1em;
-	width: 100%;
-	margin-right: 0.5em;
-	box-sizing: border-box;
-}
-
-.Task-name-input {
-	@extend .Task-name;
-
-	@include Task-input;
-}
-
-.Task-description {
-	margin-top: 0.4em;
-	width: 100%;
-	box-sizing: border-box;
-}
-
-.Task-description-input {
-	@extend .Task-description;
-
-	@include Task-input;
-}
-
 .Task-buttons-container {
 	display: flex;
 	align-items: center;

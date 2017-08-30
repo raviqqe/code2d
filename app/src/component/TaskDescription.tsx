@@ -5,8 +5,6 @@ import InputComponent, { IState } from "./InputComponent";
 import "./style/TaskDescription.css";
 
 interface IProps {
-    className?: string;
-    inputClassName?: string;
     editing?: boolean;
     onEdit: (text: string) => void;
     text: string;
@@ -29,7 +27,7 @@ export default class extends InputComponent<IProps, IState> {
         if (this.props.editing) {
             return (
                 <textarea
-                    className={this.props.inputClassName}
+                    className="TaskDescription-input"
                     onChange={({ target: { value } }) => this.setState({ text: value })}
                     ref={(textarea) => { this.textarea = textarea; }}
                     value={this.state.text}
@@ -39,7 +37,7 @@ export default class extends InputComponent<IProps, IState> {
 
         if (this.props.text.trim()) {
             return (
-                <div className={this.props.className}>
+                <div className="TaskDescription-normal">
                     <Markdown className="TaskDescription-markdown" source={this.props.text} />
                 </div>
             );
