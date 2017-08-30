@@ -31,12 +31,14 @@ class Home extends React.Component<IProps, IState> {
         const task = showDoneTasks ? this.props.doneTasks[0] : this.props.todoTasks[0];
 
         return (
-            <div>
+            <div className="Home-container">
                 <button onClick={() => this.setState({ showDoneTasks: !showDoneTasks })}>
                     {showDoneTasks ? "done" : "todo"}
                 </button>
-                <div className="Home-container">
-                    <Tasks />
+                <div className="Home-main">
+                    <div className="Home-tasks">
+                        <Tasks />
+                    </div>
                     <div className="Home-sidebar">
                         {task && <Task {...task} />}
                     </div>

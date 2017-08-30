@@ -1,7 +1,23 @@
 .Home-container {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+}
+
+.Home-main {
 	background-color: #7d432f;
 	padding: 1em;
+	flex: 1;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+}
+
+.Home-tasks {
+	flex: 1;
+	margin-right: 0.8em;
+}
+
+.Home-sidebar {
+	width: 40%;
 }
