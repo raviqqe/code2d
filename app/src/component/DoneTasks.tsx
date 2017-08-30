@@ -4,7 +4,6 @@ import { arrayMove } from "react-sortable-hoc";
 
 import { ITask } from "../lib/task";
 import { actionCreators } from "../redux/tasks";
-import "./style/DoneTasks.css";
 import Task from "./Task";
 
 interface IProps {
@@ -16,7 +15,7 @@ class DoneTasks extends React.Component<IProps> {
         // TODO: Fix done prop hack.
 
         return (
-            <div className="DoneTasks-container">
+            <div>
                 {this.props.tasks.map((task: ITask, index) =>
                     <Task key={index} {...{ done: true, ...task }} />)}
             </div>

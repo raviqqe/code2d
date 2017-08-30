@@ -7,7 +7,6 @@ import { ITask } from "../lib/task";
 import { actionCreators } from "../redux/tasks";
 import CreateTask from "./CreateTask";
 import SortableTasks from "./SortableTasks";
-import "./style/TodoTasks.css";
 
 interface IProps {
     tasks: ITask[];
@@ -19,7 +18,7 @@ interface IProps {
 class TodoTasks extends React.Component<IProps> {
     public render() {
         return (
-            <div className="TodoTasks-container">
+            <div>
                 <CreateTask />
                 <SortableTasks
                     onSortStart={this.props.startSortingTasks}
