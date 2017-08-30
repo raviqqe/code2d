@@ -12,20 +12,25 @@ import "./style/TodoTasks.css";
 interface IProps {
     tasks: ITask[];
     setTodoTasks: (tasks: ITask[]) => void;
+    startSortingTasks: () => void;
+    stopSortingTasks: () => void;
 }
 
 class TodoTasks extends React.Component<IProps> {
     public render() {
-        const sortableProps = isTouchDevice() ? { pressDelay: 200 } : { distance: 5 };
-
         return (
             <div className="TodoTasks-container">
                 <CreateTask />
                 <SortableTasks
-                    onSortEnd={({ newIndex, oldIndex }) =>
-                        this.props.setTodoTasks(arrayMove(this.props.tasks, oldIndex, newIndex))}
+                    onSortStart={this.props.startSortingTasks}
+                    onSortEnd={({ newIndex, oldIndex }) => {
+                        this.props.setTodoTasks(arrayMove(this.props.tasks, oldIndex, newIndex));
+                        this.props.stopSortingTasks();
+                    }}
                     tasks={this.props.tasks}
-                    {...sortableProps}
+                    pressDelay={isTouchDevice()
+                        ? 200
+                        : /* Wait rerendering of a dragged task */ 50}
                 />
             </div>
         );

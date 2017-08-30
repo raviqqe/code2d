@@ -14,6 +14,8 @@ const markTaskDone = factory<ITask>("MARK_TASK_DONE");
 const markTaskTodo = factory<ITask>("MARK_TASK_TODO");
 const removeTask = factory<ITask>("REMOVE_TASK");
 const setTodoTasks = factory<ITask[]>("SET_TODO_TASKS");
+const startSortingTasks = factory("START_SORTING_TASKS");
+const stopSortingTasks = factory("STOP_SORTING_TASKS");
 const updateTodoTasks = factory<ITask[]>("UPDATE_TODO_TASKS");
 const updateDoneTasks = factory<ITask[]>("UPDATE_DONE_TASKS");
 
@@ -24,18 +26,23 @@ export const actionCreators = {
     markTaskTodo,
     removeTask,
     setTodoTasks,
+    startSortingTasks,
+    stopSortingTasks,
     updateDoneTasks,
     updateTodoTasks,
 };
 
-export const initialState: { doneTasks: ITask[], undoneTasks: ITask[] } = {
+export const initialState: { doneTasks: ITask[], sorting: boolean, undoneTasks: ITask[] } = {
     doneTasks: [],
+    sorting: false,
     undoneTasks: [],
 };
 
 export const reducer = reducerWithInitialState(initialState)
-    .case(updateDoneTasks, ({ undoneTasks }, tasks) => ({ doneTasks: tasks, undoneTasks }))
-    .case(updateTodoTasks, ({ doneTasks }, tasks) => ({ doneTasks, undoneTasks: tasks }));
+    .case(startSortingTasks, (state) => ({ ...state, sorting: true }))
+    .case(stopSortingTasks, (state) => ({ ...state, sorting: false }))
+    .case(updateDoneTasks, (state, tasks) => ({ ...state, doneTasks: tasks }))
+    .case(updateTodoTasks, (state, tasks) => ({ ...state, undoneTasks: tasks }));
 
 export const sagas = [
     takeEvery(

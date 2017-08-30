@@ -13,6 +13,7 @@ interface IProps extends ITask {
     markTaskDone: (task: ITask) => void;
     markTaskTodo: (task: ITask) => void;
     removeTask: (task: ITask) => void;
+    sorting: boolean;
 }
 
 interface IState {
@@ -35,6 +36,10 @@ class Task extends React.Component<IProps, IState> {
         return (
             <div
                 className="Task-container"
+                onMouseDown={() => {
+                    // Rerender a dragged task Before sorting.
+                    this.setState({ showAll: false });
+                }}
                 onMouseOver={() => this.setState({ showAll: true })}
                 onMouseOut={() => this.setState({ showAll: false })}
             >
@@ -49,7 +54,7 @@ class Task extends React.Component<IProps, IState> {
                     {this.buttons}
                 </div>
                 <EditableText
-                    className={this.state.showAll ? "Task-description" : "invisible"}
+                    className={this.showAll ? "Task-description" : "invisible"}
                     inputClassName="Task-description-input"
                     ref={(description) => { this.description = description; }}
                     editable={editable}
@@ -63,7 +68,7 @@ class Task extends React.Component<IProps, IState> {
 
     private get buttons() {
         const task = this.task;
-        const containerClassName = this.state.showAll ? "Task-buttons-container" : "invisible";
+        const containerClassName = this.showAll ? "Task-buttons-container" : "invisible";
 
         return this.props.done ? (
             <div className={containerClassName}>
@@ -102,6 +107,10 @@ class Task extends React.Component<IProps, IState> {
                         )}
                 </div>
             );
+    }
+
+    private get showAll(): boolean {
+        return this.state.showAll && !this.props.sorting;
     }
 
     private get task(): ITask {
