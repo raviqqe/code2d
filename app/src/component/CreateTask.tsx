@@ -53,17 +53,16 @@ class CreateTask extends React.Component<IProps, IState> {
                 }}
             >
                 <input
-                    className="Task-name-input"
+                    className="TaskName-input"
                     ref={(name) => { this.name = name; }}
                     placeholder="Name"
-                    type="text"
                     value={this.state.task.name}
                     onChange={({ target: { value } }) =>
                         this.setState({ task: { ...this.state.task, name: value } })}
                 />
-                <input
+                <textarea
+                    className="TaskDescription-input"
                     placeholder="Description"
-                    type="text"
                     value={this.state.task.description}
                     onChange={({ target: { value } }) =>
                         this.setState({ task: { ...this.state.task, description: value } })}

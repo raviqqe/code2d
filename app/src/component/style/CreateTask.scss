@@ -1,3 +1,5 @@
+$red: #b56a55;
+
 @mixin CreateTask-container {
 	border-radius: 5px;
 	display: flex;
@@ -8,7 +10,7 @@
 .CreateTask-button-container {
 	@include CreateTask-container;
 
-	background: #b56a55;
+	background: $red;
 	color: white;
 	align-items: center;
 }
@@ -25,5 +27,18 @@
 }
 
 .CreateTask-button {
+	background: $red;
+	border: {
+		width: 0;
+		radius: 3px;
+	};
+	color: white;
 	flex: 1;
+	padding: 0.4em;
+	margin-top: 0.7em;
+	margin-right: 0.5em;
+}
+
+.CreateTask-button:last-child {
+	margin-right: 0;
 }
