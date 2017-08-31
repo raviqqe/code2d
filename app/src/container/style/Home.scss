@@ -13,7 +13,6 @@
 
 .Home-buttons {
 	display: flex;
-	flex-direction: row;
 }
 
 .Home-button {
@@ -24,8 +23,6 @@
 	background: $light-blue;
 	flex: 1;
 	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
 }
 
 .Home-tasks {
