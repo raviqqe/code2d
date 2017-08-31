@@ -3,6 +3,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
+import CreateTask from "../component/CreateTask";
 import DoneTasks from "../component/DoneTasks";
 import Task from "../component/Task";
 import TodoTasks from "../component/TodoTasks";
@@ -65,6 +66,7 @@ class Home extends React.Component<IProps, IState> {
                                         ...this.props.currentTask,
                                     }}
                                 />}
+                            {!this.state.showDoneTasks && <CreateTask />}
                         </div>
                     </div>
                 </div>

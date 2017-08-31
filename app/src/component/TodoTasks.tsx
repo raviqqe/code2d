@@ -20,20 +20,15 @@ class TodoTasks extends React.Component<IProps> {
 
         return (
             <div className="TodoTasks-container">
-                <div className="TodoTasks-create-task">
-                    <CreateTask />
-                </div>
-                <div className="TodoTasks-tasks-container">
-                    <SortableTasks
-                        onSortEnd={({ newIndex, oldIndex }) =>
-                            this.props.setTodoTasks(
-                                arrayMove(this.props.tasks, oldIndex, newIndex))}
-                        tasks={this.props.tasks}
-                        pressDelay={isTouchDevice()
-                            ? 200
-                            : /* Wait rerendering of a dragged task */ 80}
-                    />
-                </div>
+                <SortableTasks
+                    onSortEnd={({ newIndex, oldIndex }) =>
+                        this.props.setTodoTasks(
+                            arrayMove(this.props.tasks, oldIndex, newIndex))}
+                    tasks={this.props.tasks}
+                    pressDelay={isTouchDevice()
+                        ? 200
+                        : /* Wait rerendering of a dragged task */ 80}
+                />
             </div>
         );
     }

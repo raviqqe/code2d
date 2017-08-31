@@ -1,19 +1,5 @@
-@import "../style/sub-container.scss";
 @import "./tasks-container.scss";
 
 .TodoTasks-container {
-	height: 100%;
-	box-sizing: border-box;
-	display: flex;
-	flex-direction: column;
-}
-
-.TodoTasks-create-task {
-	@include sub-container;
-}
-
-.TodoTasks-tasks-container {
 	@include tasks-container;
-
-	flex: 1;
 }
