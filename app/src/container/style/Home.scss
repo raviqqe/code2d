@@ -1,5 +1,9 @@
 @import "../../component/style/sub-container.scss";
 
+@mixin Home-sub-container {
+	margin: 1em;
+}
+
 .Home-container {
 	display: flex;
 	flex-direction: column;
@@ -17,7 +21,6 @@
 
 .Home-main {
 	background: #adc9b2;
-	padding: 1em;
 	flex: 1;
 	display: flex;
 	flex-direction: row;
@@ -25,6 +28,8 @@
 }
 
 .Home-tasks {
+	@include Home-sub-container;
+
 	flex: 1;
 	margin-right: 0.5em;
 }
@@ -35,4 +40,7 @@
 
 .Home-current-task {
 	@include sub-container;
+	@include Home-sub-container;
+
+	margin-left: 0;
 }
