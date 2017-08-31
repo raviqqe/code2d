@@ -7,7 +7,8 @@
 
 .Home-container {
 	display: flex;
-	flex-direction: column;
+	justify-content: center;
+	width: 100vw;
 	height: 100vh;
 }
 
@@ -15,12 +16,9 @@
 	display: flex;
 }
 
-.Home-button {
-	flex: 1;
-}
-
 .Home-main {
-	flex: 1;
+	width: 150vh;
+	max-width: 100%;
 	display: flex;
 }
 
@@ -32,7 +30,7 @@
 }
 
 .Home-sidebar {
-	width: 40%;
+	width: 50%;
 }
 
 .Home-current-task {
