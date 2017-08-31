@@ -14,8 +14,7 @@ interface IProps extends ITask {
     detailed: boolean;
     done?: boolean;
     editTask: (oldTask: ITask, newTask: ITask) => void;
-    markTaskDone: (task: ITask) => void;
-    markTaskTodo: (task: ITask) => void;
+    switchTaskState: (task: ITask) => void;
     removeTask: (task: ITask) => void;
     setCurrentTask: (task: ITask | null) => void;
 }
@@ -69,7 +68,7 @@ class Task extends React.Component<IProps, IState> {
         if (this.props.done) {
             return (
                 <div {...containerProps}>
-                    <div className="Task-button" onClick={() => this.props.markTaskTodo(task)}>
+                    <div className="Task-button" onClick={() => this.props.switchTaskState(task)}>
                         <RotateCcw size={20} />
                     </div>
                     <div className="Task-button" onClick={() => this.props.removeTask(task)}>
@@ -81,7 +80,7 @@ class Task extends React.Component<IProps, IState> {
 
         return (
             <div {...containerProps}>
-                <div className="Task-button" onClick={() => this.props.markTaskDone(task)}>
+                <div className="Task-button" onClick={() => this.props.switchTaskState(task)}>
                     <Check size={22} />
                 </div>
                 {this.props.detailed && (this.state.editingDescription ? (

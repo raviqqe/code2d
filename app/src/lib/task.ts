@@ -21,18 +21,20 @@ export class Tasks {
         return task;
     }
 
-    public markDone = async (task: ITask): Promise<void> => {
+    public switchState = async (task: ITask): Promise<void> => {
         const tasks = await this.getTodoTasks();
 
-        _.remove(tasks, task);
+        if (_.findIndex(tasks, task) >= 0) {
+            const tasks = await this.getTodoTasks();
 
-        await this.setTodoTasks(tasks);
-        await this.doneTasks.push(task);
-    }
+            _.remove(tasks, task);
 
-    public markTodo = async (task: ITask): Promise<void> => {
-        await this.setTodoTasks([task, ...(await this.getTodoTasks())]);
-        await this.remove(task);
+            await this.setTodoTasks(tasks);
+            await this.doneTasks.push(task);
+        } else {
+            await this.setTodoTasks([task, ...(await this.getTodoTasks())]);
+            await this.remove(task);
+        }
     }
 
     public remove = async (task: ITask): Promise<void> => {
