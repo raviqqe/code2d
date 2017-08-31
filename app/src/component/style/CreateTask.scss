@@ -1,3 +1,6 @@
+@import "./TaskDescription.scss";
+@import "./TaskName.scss";
+
 $red: #b56a55;
 
 @mixin CreateTask-container {
@@ -19,6 +22,14 @@ $red: #b56a55;
 	@include CreateTask-container;
 
 	background: white;
+}
+
+.CreateTask-name {
+	@extend .TaskName-input;
+}
+
+.CreateTask-description {
+	@extend .TaskDescription-input;
 }
 
 .CreateTask-buttons {

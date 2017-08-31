@@ -53,7 +53,7 @@ class CreateTask extends React.Component<IProps, IState> {
                 }}
             >
                 <input
-                    className="TaskName-input"
+                    className="CreateTask-name"
                     ref={(name) => { this.name = name; }}
                     placeholder="Name"
                     value={this.state.task.name}
@@ -61,7 +61,7 @@ class CreateTask extends React.Component<IProps, IState> {
                         this.setState({ task: { ...this.state.task, name: value } })}
                 />
                 <textarea
-                    className="TaskDescription-input"
+                    className="CreateTask-description"
                     placeholder="Description"
                     value={this.state.task.description}
                     onChange={({ target: { value } }) =>
