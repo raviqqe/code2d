@@ -6,6 +6,7 @@ import "./style/TaskDescription.css";
 
 interface IProps {
     editing?: boolean;
+    onBlur: () => void;
     onClick: () => void;
     onEdit: (text: string) => void;
     text: string;
@@ -29,6 +30,7 @@ export default class extends InputComponent<IProps, IState> {
             return (
                 <textarea
                     className="TaskDescription-input"
+                    onBlur={this.props.onBlur}
                     onChange={({ target: { value } }) => this.setState({ text: value })}
                     ref={(textarea) => { this.textarea = textarea; }}
                     value={this.state.text}

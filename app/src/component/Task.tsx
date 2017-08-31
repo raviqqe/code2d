@@ -50,6 +50,7 @@ class Task extends React.Component<IProps, IState> {
                     <TaskDescription
                         editing={editable && this.state.editingDescription}
                         text={task.description}
+                        onBlur={() => this.setState({ editingDescription: false })}
                         onClick={() => this.setState({ editingDescription: true })}
                         onEdit={(description) =>
                             this.props.editTask(task, { ...task, description })}
