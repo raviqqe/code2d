@@ -6,6 +6,7 @@ import "./style/TaskDescription.css";
 
 interface IProps {
     editing?: boolean;
+    onClick: () => void;
     onEdit: (text: string) => void;
     text: string;
 }
@@ -37,7 +38,7 @@ export default class extends InputComponent<IProps, IState> {
 
         if (this.props.text.trim()) {
             return (
-                <div className="TaskDescription-normal">
+                <div className="TaskDescription-normal" onClick={this.props.onClick}>
                     <Markdown className="TaskDescription-markdown" source={this.props.text} />
                 </div>
             );

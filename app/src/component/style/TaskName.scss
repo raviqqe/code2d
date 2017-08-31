@@ -1,5 +1,3 @@
-@import "./task-input.scss";
-
 .TaskName-normal {
 	font-size: 1.1em;
 	margin-right: 0.5em;
@@ -8,7 +6,9 @@
 .TaskName-input {
 	@extend .TaskName-normal;
 
-	@include task-input;
-
+	border-width: 0;
+	outline: none;
+	text-decoration: underline;
+	text-decoration-color: #6d9211;
 	flex: 1;
 }
