@@ -1,5 +1,5 @@
 import { SagaIterator } from "redux-saga";
-import { call } from "redux-saga/effects";
+import { call, put } from "redux-saga/effects";
 import actionCreatorFactory from "typescript-fsa";
 import { reducerWithInitialState } from "typescript-fsa-reducers";
 
@@ -57,6 +57,7 @@ export const sagas = [
         editTask,
         function* _({ newTask, oldTask }): SagaIterator {
             yield call((new Tasks()).edit, oldTask, newTask);
+            yield put(setCurrentTask(newTask));
         }),
     takeEvery(
         markTaskDone,
