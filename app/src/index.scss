@@ -1,3 +1,5 @@
+@import "./style/colors.scss";
+
 .invisible {
 	display: none;
 }
@@ -7,4 +9,13 @@ body {
 	padding: 0;
 	font-family: sans-serif;
 	font-size: 16px;
+	color: $black;
+}
+
+input, textarea {
+	color: $black;
+
+	&:focus {
+		color: $black;
+	}
 }
