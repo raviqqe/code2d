@@ -70,7 +70,7 @@ class CreateTask extends React.Component<IProps, IState> {
                 <div className="CreateTask-buttons">
                     <button className="CreateTask-button" type="submit">Create</button>
                     <button
-                        className="CreateTask-button"
+                        className="CreateTask-cancel-button"
                         onClick={() => this.setState({ creatingTask: false })}
                     >
                         Cancel

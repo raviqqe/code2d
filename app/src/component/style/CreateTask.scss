@@ -38,8 +38,14 @@
 	flex: 1;
 	margin-top: 0.5em;
 	margin-right: 0.5em;
+
+	&:last-child {
+		margin-right: 0;
+	}
 }
 
-.CreateTask-button:last-child {
-	margin-right: 0;
+.CreateTask-cancel-button {
+	@extend .CreateTask-button;
+
+	background: $grey;
 }
