@@ -36,7 +36,7 @@ class CreateTask extends React.Component<IProps, IState> {
                     className="CreateTask-button-container"
                     onClick={() => this.setState({ creatingTask: true })}
                 >
-                    <Plus />
+                    <div className="CreateTask-icon"><Plus /></div>
                 </button>
             );
         }

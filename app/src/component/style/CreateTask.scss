@@ -7,6 +7,10 @@
 	width: 100%;
 }
 
+.CreateTask-icon {
+	font-size: 0;
+}
+
 .CreateTask-form-container {
 	@include Task-container;
 
