@@ -58,7 +58,13 @@ class Home extends React.Component<IProps, IState> {
                     <div className="Home-sidebar">
                         <div className="Home-current-task">
                             {this.props.currentTask &&
-                                <Task {...{ detailed: true, ...this.props.currentTask }} />}
+                                <Task
+                                    {...{
+                                        detailed: true,
+                                        done: this.state.showDoneTasks,
+                                        ...this.props.currentTask,
+                                    }}
+                                />}
                         </div>
                     </div>
                 </div>
