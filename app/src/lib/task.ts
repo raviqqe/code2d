@@ -12,13 +12,13 @@ export interface ITask extends INewTask {
 }
 
 export class Tasks {
-    public create = async (task: INewTask): Promise<void> => {
+    public create = async (newTask: INewTask): Promise<ITask> => {
         const tasks = await this.getTodoTasks();
+        const task: ITask = { createdAt: Date.now(), updatedAt: Date.now(), ...newTask };
 
-        this.setTodoTasks([
-            { createdAt: Date.now(), updatedAt: Date.now(), ...task },
-            ...(tasks ? tasks : []),
-        ]);
+        await this.setTodoTasks([task, ...(tasks ? tasks : [])]);
+
+        return task;
     }
 
     public markDone = async (task: ITask): Promise<void> => {

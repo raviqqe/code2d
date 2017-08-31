@@ -50,8 +50,9 @@ export const reducer = reducerWithInitialState(initialState)
 export const sagas = [
     takeEvery(
         createTask,
-        function* _(task: INewTask): SagaIterator {
-            yield call((new Tasks()).create, task);
+        function* _(newTask: INewTask): SagaIterator {
+            const task = yield call((new Tasks()).create, newTask);
+            yield put(setCurrentTask(task));
         }),
     takeEvery(
         editTask,
