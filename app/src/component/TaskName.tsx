@@ -29,7 +29,7 @@ export default class extends InputComponent<IProps, IState> {
         if (this.props.editable && this.state.editing) {
             return (
                 <input
-                    className="TaskName-input"
+                    className="TaskName-container"
                     onBlur={() => this.setState({ editing: false })}
                     onChange={({ target: { value } }) => this.setState({ text: value })}
                     onKeyPress={({ charCode }) => {
@@ -46,7 +46,7 @@ export default class extends InputComponent<IProps, IState> {
 
         return (
             <div
-                className="TaskName-normal"
+                className="TaskName-container"
                 onClick={() => this.setState({ editing: this.props.editable })}
             >
                 {this.props.text}

@@ -1,17 +1,8 @@
 @import "../../style/colors.scss";
 
-.TaskName-normal {
-	font-size: 1.1em;
+$TaskName-font-size: 1.1em;
+
+.TaskName-container {
+	font-size: $TaskName-font-size;
 	margin-right: 0.5em;
-}
-
-.TaskName-input {
-	@extend .TaskName-normal;
-
-	border-width: 0;
-	outline: none;
-	text-decoration: underline;
-	text-decoration-color: $grey;
-	width: 100%;
-	box-sizing: border-box;
 }

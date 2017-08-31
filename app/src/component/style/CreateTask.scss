@@ -1,4 +1,5 @@
 @import "../../style/colors.scss";
+@import "../../index.scss";
 @import "./TaskDescription.scss";
 @import "./TaskName.scss";
 
@@ -23,24 +24,24 @@
 	background: white;
 }
 
-.CreateTask-name {
-	@extend .TaskName-input;
-
-	text-decoration: none;
+@mixin CreateTask-input {
+	border-width: 0;
 
 	&:focus {
-		@extend .TaskName-input;
+		border-width: $input-border-width;
 	}
+}
+
+.CreateTask-name {
+	@include CreateTask-input;
+
+	font-size: $TaskName-font-size;
 }
 
 .CreateTask-description {
 	@extend .TaskDescription-input;
 
-	border-width: 0;
-
-	&:focus {
-		@extend .TaskDescription-input;
-	}
+	@include CreateTask-input;
 }
 
 .CreateTask-buttons {

@@ -1,16 +1,11 @@
 .TaskDescription-normal {
 	margin-top: 0.4em;
-	width: 100%;
-	box-sizing: border-box;
 }
 
 .TaskDescription-input {
 	@extend .TaskDescription-normal;
 
 	height: 20vh;
-	border-width: 1px;
-	border-radius: 3px;
-	outline: none;
 	resize: vertical;
 }
 
