@@ -1,6 +1,6 @@
 @mixin task-input {
-	padding: 0.3em;
 	border-width: 0;
-	border-radius: 3px;
 	outline: none;
+	text-decoration: underline;
+	text-decoration-color: #6d9211;
 }
