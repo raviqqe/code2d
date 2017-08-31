@@ -1,7 +1,6 @@
+@import "../../style/colors.scss";
 @import "./TaskDescription.scss";
 @import "./TaskName.scss";
-
-$red: #b56a55;
 
 @mixin CreateTask-container {
 	border-radius: 5px;
@@ -13,7 +12,7 @@ $red: #b56a55;
 .CreateTask-button-container {
 	@include CreateTask-container;
 
-	background: $red;
+	background: $light-red;
 	color: white;
 	align-items: center;
 }
@@ -38,7 +37,7 @@ $red: #b56a55;
 }
 
 .CreateTask-button {
-	background: $red;
+	background: $light-red;
 	border: {
 		width: 0;
 		radius: 3px;

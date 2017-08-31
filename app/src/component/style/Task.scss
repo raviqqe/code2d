@@ -1,8 +1,10 @@
+@import "../../style/colors.scss";
+
 .Task-container {
 	width: 100%;
 	box-sizing: border-box;
 	background: white;
-	color: #414f4f;
+	color: $black;
 	padding: 0.5em;
 	margin-bottom: 0.5em;
 	border-radius: 0.4em;
@@ -11,7 +13,7 @@
 .Task-container-highlighted {
 	@extend .Task-container;
 
-	box-shadow: 0 0 0.2em 0.15em #7f969c;
+	box-shadow: 0 0 0.2em 0.15em $grey;
 }
 
 .Task-container:last-child {

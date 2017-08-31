@@ -1,4 +1,5 @@
 @import "../../component/style/sub-container.scss";
+@import "../../style/colors.scss";
 
 @mixin Home-sub-container {
 	margin: 1em;
@@ -20,7 +21,7 @@
 }
 
 .Home-main {
-	background: #adc9b2;
+	background: $light-blue;
 	flex: 1;
 	display: flex;
 	flex-direction: row;
