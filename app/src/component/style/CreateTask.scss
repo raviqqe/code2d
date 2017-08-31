@@ -18,10 +18,6 @@
 	flex-direction: column;
 }
 
-.CreateTask-name {
-	font-size: $TaskName-font-size;
-}
-
 .CreateTask-description {
 	@extend .TaskDescription-input;
 }
