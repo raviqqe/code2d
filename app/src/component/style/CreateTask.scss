@@ -1,24 +1,16 @@
 @import "../../style/colors.scss";
+@import "./Task.scss";
 @import "./TaskDescription.scss";
 @import "./TaskName.scss";
 
-@mixin CreateTask-container {
-	display: flex;
-	padding: 0.5em;
-}
-
 .CreateTask-button-container {
-	@include CreateTask-container;
-
-	justify-content: center;
 	width: 100%;
 }
 
 .CreateTask-form-container {
-	@include CreateTask-container;
+	@include Task-container;
 
-	background: white;
-	border-radius: 5px;
+	display: flex;
 	flex-direction: column;
 }
 
