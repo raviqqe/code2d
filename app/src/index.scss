@@ -18,6 +18,7 @@
 body {
 	@include font;
 
+	background: $light-blue;
 	margin: 0;
 	padding: 0;
 }
@@ -30,7 +31,12 @@ button {
 	};
 	color: white;
 	font-size: 1em;
-	padding: 0.4em;
+	padding: {
+		top: 0.4em;
+		bottom: 0.4em;
+		left: 1em;
+		right: 1em;
+	};
 }
 
 input, textarea {

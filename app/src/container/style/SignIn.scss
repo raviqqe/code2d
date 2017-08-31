@@ -1,0 +1,42 @@
+.SignIn-container {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.SignIn-main-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.SignIn-title {
+	font: {
+		size: 4em;
+		weight: bold;
+	};
+}
+
+.SignIn-description {
+	font-size: 1.2em;
+	margin-top: 0.8em;
+}
+
+.SignIn-button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: {
+		top: 1em;
+		bottom: 1em;
+		left: 2em;
+		right: 2em;
+	};
+}
+
+.SignIn-icon {
+	font-size: 0;
+	margin-right: 10px;
+}

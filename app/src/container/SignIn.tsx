@@ -1,8 +1,10 @@
 import * as React from "react";
+import { Github } from "react-feather";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import actionCreators from "../redux/sign-in";
+import "./style/SignIn.css";
 
 interface IProps {
     errorMessage: string;
@@ -19,7 +21,20 @@ class SignIn extends React.Component<IProps> {
             return <div>Signing in...</div>;
         }
 
-        return <button onClick={this.props.signIn}>Sign in</button>;
+        return (
+            <div className="SignIn-container">
+                <div className="SignIn-main-container">
+                    <div className="SignIn-title">code2d</div>
+                    <div className="SignIn-description">
+                        Productivity tools for software engineers.
+                    </div>
+                </div>
+                <button className="SignIn-button" onClick={this.props.signIn}>
+                    <div className="SignIn-icon"><Github /></div>
+                    Sign in with GitHub
+                </button>
+            </div>
+        );
     }
 }
 
