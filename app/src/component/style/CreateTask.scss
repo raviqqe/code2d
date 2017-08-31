@@ -25,10 +25,22 @@
 
 .CreateTask-name {
 	@extend .TaskName-input;
+
+	text-decoration: none;
+
+	&:focus {
+		@extend .TaskName-input;
+	}
 }
 
 .CreateTask-description {
 	@extend .TaskDescription-input;
+
+	border-width: 0;
+
+	&:focus {
+		@extend .TaskDescription-input;
+	}
 }
 
 .CreateTask-buttons {
