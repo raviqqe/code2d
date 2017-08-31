@@ -1,64 +1,42 @@
 @import "../../style/colors.scss";
-@import "../../index.scss";
 @import "./TaskDescription.scss";
 @import "./TaskName.scss";
 
 @mixin CreateTask-container {
-	border-radius: 5px;
 	display: flex;
-	flex-direction: column;
 	padding: 0.5em;
 }
 
 .CreateTask-button-container {
 	@include CreateTask-container;
 
-	background: $light-red;
-	color: white;
-	align-items: center;
+	justify-content: center;
+	width: 100%;
 }
 
 .CreateTask-form-container {
 	@include CreateTask-container;
 
 	background: white;
-}
-
-@mixin CreateTask-input {
-	border-width: 0;
-
-	&:focus {
-		border-width: $input-border-width;
-	}
+	border-radius: 5px;
+	flex-direction: column;
 }
 
 .CreateTask-name {
-	@include CreateTask-input;
-
 	font-size: $TaskName-font-size;
 }
 
 .CreateTask-description {
 	@extend .TaskDescription-input;
-
-	@include CreateTask-input;
 }
 
 .CreateTask-buttons {
 	display: flex;
-	flex-direction: row;
 }
 
 .CreateTask-button {
-	background: $light-red;
-	border: {
-		width: 0;
-		radius: 3px;
-	};
-	color: white;
 	flex: 1;
-	padding: 0.4em;
-	margin-top: 0.7em;
+	margin-top: 0.5em;
 	margin-right: 0.5em;
 }
 

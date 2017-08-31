@@ -32,12 +32,12 @@ class CreateTask extends React.Component<IProps, IState> {
     public render() {
         if (!this.state.creatingTask) {
             return (
-                <div
+                <button
                     className="CreateTask-button-container"
                     onClick={() => this.setState({ creatingTask: true })}
                 >
                     <Plus />
-                </div>
+                </button>
             );
         }
 
@@ -68,7 +68,7 @@ class CreateTask extends React.Component<IProps, IState> {
                         this.setState({ task: { ...this.state.task, description: value } })}
                 />
                 <div className="CreateTask-buttons">
-                    <input className="CreateTask-button" type="submit" value="Create" />
+                    <button className="CreateTask-button" type="submit">Create</button>
                     <button
                         className="CreateTask-button"
                         onClick={() => this.setState({ creatingTask: false })}

@@ -1,7 +1,5 @@
 @import "./style/colors.scss";
 
-$input-border-width: 1px;
-
 @mixin font-without-size {
 	color: $black;
 	font-family: sans-serif;
@@ -13,11 +11,26 @@ $input-border-width: 1px;
 	font-size: 16px;
 }
 
+* {
+	box-sizing: border-box;
+}
+
 body {
 	@include font;
 
 	margin: 0;
 	padding: 0;
+}
+
+button {
+	background: $light-red;
+	border: {
+		width: 0;
+		radius: 0.5em;
+	};
+	color: white;
+	font-size: 1em;
+	padding: 0.4em;
 }
 
 input, textarea {
@@ -26,10 +39,10 @@ input, textarea {
 	border: {
 		color: $grey;
 		radius: 3px;
-		width: $input-border-width;
+		width: 1px;
 	};
-	box-sizing: border-box;
 	outline: none;
+	padding: 0.2em;
 	width: 100%;
 
 	&:focus {
