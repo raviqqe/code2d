@@ -1,3 +1,4 @@
+@import "../style/sub-container.scss";
 @import "./tasks-container.scss";
 
 .TodoTasks-container {
@@ -8,8 +9,7 @@
 }
 
 .TodoTasks-create-task {
-	padding-left: $tasks-container-padding;
-	padding-right: $tasks-container-padding;
+	@include sub-container;
 }
 
 .TodoTasks-tasks-container {

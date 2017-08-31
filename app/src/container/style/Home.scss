@@ -1,3 +1,5 @@
+@import "../../component/style/sub-container.scss";
+
 .Home-container {
 	display: flex;
 	flex-direction: column;
@@ -29,4 +31,8 @@
 
 .Home-sidebar {
 	width: 40%;
+}
+
+.Home-current-task {
+	@include sub-container;
 }

@@ -1,0 +1,5 @@
+$sub-container-padding: 0.5em;
+
+@mixin sub-container {
+	padding: $sub-container-padding;
+}
