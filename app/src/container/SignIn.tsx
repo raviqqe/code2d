@@ -18,7 +18,7 @@ class SignIn extends React.Component<IProps> {
         if (this.props.signedIn) {
             return <Redirect to="/tasks" />;
         } else if (this.props.halfway) {
-            return <div>Signing in...</div>;
+            return <div className="SignIn-container">Signing in...</div>;
         }
 
         return (
