@@ -20,7 +20,7 @@
 .Task-container-highlighted {
 	@extend .Task-container;
 
-	box-shadow: 0 0 0.2em 0.15em $grey;
+	box-shadow: 0 0 0.2em 0.15em $light-red;
 }
 
 .Task-header {
