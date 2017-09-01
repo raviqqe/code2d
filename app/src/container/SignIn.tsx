@@ -7,7 +7,7 @@ import actionCreators from "../redux/sign-in";
 import "./style/SignIn.css";
 
 interface IProps {
-    errorMessage: string;
+    error: Error;
     halfway: boolean;
     signedIn: boolean;
     signIn: () => void;
