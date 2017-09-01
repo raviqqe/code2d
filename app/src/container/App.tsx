@@ -10,7 +10,9 @@ export default class extends React.Component {
             <BrowserRouter>
                 <div>
                     <Route path="/" render={() => <Redirect to="/tasks" />} />
-                    <Route path="/tasks" component={Tasks} />
+                    <Route path="/tasks" render={() => <Redirect to="/tasks/todo" />} />
+                    <Route path="/tasks/todo" render={() => <Tasks />} />
+                    <Route path="/tasks/done" render={() => <Tasks {...{ done: true }} />} />
                     <Route path="/sign-in" component={SignIn} />
                 </div>
             </BrowserRouter>

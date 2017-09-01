@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 
 import CreateTask from "../component/CreateTask";
 import DoneTasks from "../component/DoneTasks";
+import Menu from "../component/Menu";
 import Task from "../component/Task";
 import TodoTasks from "../component/TodoTasks";
 import { ITask } from "../lib/task";
@@ -15,56 +16,37 @@ interface IProps {
     currentTask: ITask | null;
     setCurrentTask: (task: ITask | null) => void;
     signedIn: boolean;
-    doneTasks: ITask[];
-    todoTasks: ITask[];
+    tasks: ITask[];
+    done: boolean;
 }
 
-interface IState {
-    showDoneTasks: boolean;
-}
-
-class Tasks extends React.Component<IProps, IState> {
-    public state: IState = { showDoneTasks: false };
-
+class Tasks extends React.Component<IProps> {
     public render() {
         if (!this.props.signedIn) {
             return <Redirect to="/sign-in" />;
         }
 
-        const { showDoneTasks } = this.state;
-        const Tasks = showDoneTasks ? DoneTasks : TodoTasks;
+        const { currentTask, done } = this.props;
+        const Tasks = done ? DoneTasks : TodoTasks;
 
         return (
             <div className="Tasks-container">
-                <div className="Tasks-buttons">
-                    <button
-                        onClick={() => this.setState({ showDoneTasks: false })}
-                        disabled={!showDoneTasks}
-                    >
-                        todo
-                    </button>
-                    <button
-                        onClick={() => this.setState({ showDoneTasks: true })}
-                        disabled={showDoneTasks}
-                    >
-                        done
-                    </button>
-                </div>
+                <Menu />
                 <div className="Tasks-main">
                     <div className="Tasks-tasks">
                         <Tasks />
                     </div>
                     <div className="Tasks-sidebar">
                         <div className="Tasks-current-task">
-                            {this.props.currentTask &&
+                            {currentTask &&
                                 <Task
                                     {...{
                                         detailed: true,
-                                        done: this.state.showDoneTasks,
-                                        ...this.props.currentTask,
+                                        done,
+                                        ...currentTask,
                                     }}
                                 />}
-                            {!this.state.showDoneTasks && <CreateTask />}
+                            {!done && <CreateTask />}
                         </div>
                     </div>
                 </div>
@@ -72,16 +54,24 @@ class Tasks extends React.Component<IProps, IState> {
         );
     }
 
-    public componentDidUpdate() {
-        const tasks = this.state.showDoneTasks ? this.props.doneTasks : this.props.todoTasks;
+    public componentDidMount() {
+        this.componentDidUpdate();
+    }
 
-        if (!this.props.currentTask || _.findIndex(tasks, this.props.currentTask) < 0) {
+    public componentDidUpdate() {
+        const { currentTask, tasks } = this.props;
+
+        if (!currentTask || _.findIndex(tasks, currentTask) < 0) {
             this.props.setCurrentTask(tasks[0] || null);
         }
     }
 }
 
 export default connect(
-    ({ authState, tasks }) => ({ ...authState, ...tasks }),
+    ({ authState, tasks: { currentTask, doneTasks, todoTasks } }, { done }) => ({
+        ...authState,
+        currentTask,
+        tasks: done ? doneTasks : todoTasks,
+    }),
     actionCreators,
 )(Tasks);
