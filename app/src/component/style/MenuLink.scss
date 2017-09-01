@@ -1,0 +1,30 @@
+@import "../../style/colors.scss";
+
+.MenuLink-container {
+	width: 100%;
+	text-align: center;
+
+	&:hover {
+		background: $light-grey;
+	}
+
+	& > a {
+		display: block;
+		color: $black;
+		padding: {
+			top: 0.5em;
+			bottom: 0.5em;
+			left: 1em;
+			right: 1em;
+		};
+		text-decoration: none;
+	}
+}
+
+.MenuLink-container-highlighted {
+	@extend .MenuLink-container;
+
+	& > a {
+		color: $light-red;
+	}
+}
