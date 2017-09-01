@@ -20,7 +20,7 @@ class TaskList extends React.Component<IProps> {
         const { done, tasks, setTasks } = this.props;
 
         if (tasks.length === 0) {
-            return <div>There is no todo task.</div>;
+            return <div>There is no task.</div>;
         }
 
         const sortableProps = isTouchDevice() ? { pressDelay: 200 } : { distance: 5 };
