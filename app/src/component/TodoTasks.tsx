@@ -5,7 +5,6 @@ import { arrayMove } from "react-sortable-hoc";
 import { isTouchDevice } from "../lib/device";
 import { ITask } from "../lib/task";
 import { actionCreators } from "../redux/tasks";
-import CreateTask from "./CreateTask";
 import SortableTasks from "./SortableTasks";
 import "./style/TodoTasks.css";
 
