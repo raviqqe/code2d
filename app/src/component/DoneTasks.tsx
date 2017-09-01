@@ -13,7 +13,9 @@ interface IProps {
 
 class DoneTasks extends React.Component<IProps> {
     public render() {
-        // TODO: Fix done prop hack.
+        if (this.props.tasks.length === 0) {
+            return <div>There is no done task.</div>;
+        }
 
         return (
             <div className="DoneTasks-tasks-container">

@@ -16,6 +16,10 @@ interface IProps {
 
 class TodoTasks extends React.Component<IProps> {
     public render() {
+        if (this.props.tasks.length === 0) {
+            return <div>There is no todo task.</div>;
+        }
+
         const sortableProps = isTouchDevice() ? { pressDelay: 200 } : { distance: 5 };
 
         return (
