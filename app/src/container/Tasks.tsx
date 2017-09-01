@@ -13,6 +13,7 @@ import { actionCreators } from "../redux/tasks";
 import "./style/Tasks.css";
 
 interface IProps {
+    creatingTask: boolean;
     currentTask: ITask | null;
     setCurrentTask: (task: ITask | null) => void;
     signedIn: boolean;
@@ -26,7 +27,7 @@ class Tasks extends React.Component<IProps> {
             return <Redirect to="/sign-in" />;
         }
 
-        const { currentTask, done } = this.props;
+        const { creatingTask, currentTask, done } = this.props;
         const Tasks = done ? DoneTasks : TodoTasks;
 
         return (
@@ -40,7 +41,7 @@ class Tasks extends React.Component<IProps> {
                         <Tasks />
                     </div>
                     <div className="Tasks-sidebar">
-                        {currentTask &&
+                        {!creatingTask && currentTask &&
                             <Task
                                 {...{
                                     detailed: true,
@@ -70,8 +71,9 @@ class Tasks extends React.Component<IProps> {
 }
 
 export default connect(
-    ({ authState, tasks: { currentTask, doneTasks, todoTasks } }, { done }) => ({
+    ({ authState, tasks: { creatingTask, currentTask, doneTasks, todoTasks } }, { done }) => ({
         ...authState,
+        creatingTask,
         currentTask,
         tasks: done ? doneTasks : todoTasks,
     }),
