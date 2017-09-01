@@ -4,10 +4,9 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import CreateTask from "../component/CreateTask";
-import DoneTasks from "../component/DoneTasks";
 import Menu from "../component/Menu";
 import Task from "../component/Task";
-import TodoTasks from "../component/TodoTasks";
+import TaskList from "../component/TaskList";
 import { ITask } from "../lib/tasks";
 import { actionCreators } from "../redux/tasks";
 import "./style/Tasks.css";
@@ -28,7 +27,6 @@ class Tasks extends React.Component<IProps> {
         }
 
         const { creatingTask, currentTask, done } = this.props;
-        const Tasks = done ? DoneTasks : TodoTasks;
 
         return (
             <div className="Tasks-container">
@@ -38,7 +36,7 @@ class Tasks extends React.Component<IProps> {
                 </div>
                 <div className="Tasks-main">
                     <div className="Tasks-tasks">
-                        <Tasks />
+                        <TaskList {...{ done }} />
                     </div>
                     <div className="Tasks-sidebar">
                         {!creatingTask && currentTask &&
