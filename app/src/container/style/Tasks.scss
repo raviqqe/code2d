@@ -38,7 +38,7 @@
 	@include Tasks-sub-container;
 
 	flex: 1;
-	margin-right: 0.5em;
+	margin-right: 0;
 }
 
 .Tasks-sidebar {
@@ -49,4 +49,5 @@
 	flex-direction: column;
 	justify-content: space-between;
 	width: 50%;
+	margin-left: 0;
 }
