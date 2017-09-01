@@ -29,9 +29,7 @@ class TodoTasks extends React.Component<IProps> {
                         this.props.setTodoTasks(
                             arrayMove(this.props.tasks, oldIndex, newIndex))}
                     tasks={this.props.tasks}
-                    pressDelay={isTouchDevice()
-                        ? 200
-                        : /* Wait rerendering of a dragged task */ 80}
+                    {...sortableProps}
                 />
             </div>
         );
