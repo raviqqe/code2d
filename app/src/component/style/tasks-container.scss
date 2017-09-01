@@ -1,8 +1,0 @@
-@import "./sub-container.scss";
-
-@mixin tasks-container {
-	@include sub-container;
-
-	height: 100%;
-	overflow: scroll;
-}

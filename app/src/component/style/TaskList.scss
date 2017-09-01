@@ -1,5 +1,8 @@
-@import "./tasks-container.scss";
+@import "./sub-container.scss";
 
 .TaskList-container {
-	@include tasks-container;
+	@include sub-container;
+
+	height: 100%;
+	overflow: scroll;
 }
