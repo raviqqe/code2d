@@ -13,7 +13,7 @@ export interface ITask extends INewTask {
 
 export class Tasks {
     public create = async (newTask: INewTask): Promise<ITask> => {
-        const tasks = await this.getTodoTasks();
+        const tasks = await getTodoTasks();
         const task: ITask = { createdAt: Date.now(), updatedAt: Date.now(), ...newTask };
 
         await this.setTodoTasks([task, ...(tasks ? tasks : [])]);
@@ -22,42 +22,42 @@ export class Tasks {
     }
 
     public switchState = async (task: ITask): Promise<void> => {
-        const tasks = await this.getTodoTasks();
+        const tasks = await getTodoTasks();
 
         if (_.findIndex(tasks, task) >= 0) {
-            const tasks = await this.getTodoTasks();
+            const tasks = await getTodoTasks();
 
             _.remove(tasks, task);
 
             await this.setTodoTasks(tasks);
-            await this.doneTasks.push(task);
+            await doneTasksReference().push(task);
         } else {
-            await this.setTodoTasks([task, ...(await this.getTodoTasks())]);
+            await this.setTodoTasks([task, ...(await getTodoTasks())]);
             await this.remove(task);
         }
     }
 
     public remove = async (task: ITask): Promise<void> => {
-        await this.doneTasks.child(_.findKey(await this.getDoneTasks(), task)).remove();
+        await doneTasksReference().child(_.findKey(await getDoneTasks(), task)).remove();
     }
 
     public edit = async (oldTask: ITask, newTask: ITask): Promise<void> => {
-        this.todoTasks.child(_.findIndex(await this.getTodoTasks(), oldTask)).set(newTask);
+        todoTasksReference().child(_.findIndex(await getTodoTasks(), oldTask)).set(newTask);
     }
 
     public setTodoTasks = async (tasks: ITask[]): Promise<void> => {
-        await this.todoTasks.set(tasks);
+        await todoTasksReference().set(tasks);
     }
 
     public onTodoTasksUpdate = (callback: (tasks: ITask[]) => void): void => {
-        this.todoTasks.on("value", (snapshot): void => {
+        todoTasksReference().on("value", (snapshot): void => {
             const tasks = snapshot.val();
             callback(tasks ? tasks : []);
         });
     }
 
     public onDoneTasksUpdate = (callback: (tasks: ITask[]) => void): void => {
-        this.doneTasks.on("value", (snapshot): void => {
+        doneTasksReference().on("value", (snapshot): void => {
             const tasks: { [key: string]: ITask } = snapshot.val();
 
             if (!tasks) {
@@ -67,22 +67,26 @@ export class Tasks {
             callback(_.values(tasks).sort((x, y) => y.updatedAt - x.updatedAt));
         });
     }
+}
 
-    private getTodoTasks = async (): Promise<ITask[]> => {
-        const tasks = (await this.todoTasks.once("value")).val();
-        return tasks ? tasks : [];
-    }
+function path(done: boolean): string {
+    return `users/${firebase.auth().currentUser.uid}/tasks/${done ? "done" : "todo"}`;
+}
 
-    private getDoneTasks = async (): Promise<{ [key: string]: ITask }> => {
-        const tasks = (await this.doneTasks.once("value")).val();
-        return tasks ? tasks : {};
-    }
+function todoTasksReference(): firebase.database.Reference {
+    return firebase.database().ref(path(false));
+}
 
-    private get todoTasks(): firebase.database.Reference {
-        return firebase.database().ref(`users/${firebase.auth().currentUser.uid}/tasks/todo`);
-    }
+function doneTasksReference(): firebase.database.Reference {
+    return firebase.database().ref(path(true));
+}
 
-    private get doneTasks(): firebase.database.Reference {
-        return firebase.database().ref(`users/${firebase.auth().currentUser.uid}/tasks/done`);
-    }
+async function getTodoTasks(): Promise<ITask[]> {
+    const tasks = (await todoTasksReference().once("value")).val();
+    return tasks ? tasks : [];
+}
+
+async function getDoneTasks(): Promise<{ [key: string]: ITask }> {
+    const tasks = (await doneTasksReference().once("value")).val();
+    return tasks ? tasks : {};
 }
