@@ -7,13 +7,25 @@
 
 .Tasks-container {
 	display: flex;
-	justify-content: center;
 	width: 100vw;
 	height: 100vh;
 }
 
-.Tasks-buttons {
-	display: flex;
+.Tasks-blank {
+	flex: 1;
+}
+
+.Tasks-menu-blank {
+	@extend .Tasks-blank;
+
+	background: white;
+	height: 100%;
+}
+
+.Tasks-menu {
+	background: white;
+	box-shadow: 2px 0 2px rgba(0, 0, 0, 0.1);
+	height: 100%;
 }
 
 .Tasks-main {

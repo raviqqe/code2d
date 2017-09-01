@@ -31,7 +31,10 @@ class Tasks extends React.Component<IProps> {
 
         return (
             <div className="Tasks-container">
-                <Menu />
+                <div className="Tasks-menu-blank" />
+                <div className="Tasks-menu">
+                    <Menu />
+                </div>
                 <div className="Tasks-main">
                     <div className="Tasks-tasks">
                         <Tasks />
@@ -50,6 +53,7 @@ class Tasks extends React.Component<IProps> {
                         </div>
                     </div>
                 </div>
+                <div className="Tasks-blank" />
             </div>
         );
     }
