@@ -27,7 +27,7 @@ class Task extends React.Component<IProps, IState> {
     public state: IState = { editingDescription: false };
 
     public render() {
-        const editable = !this.props.done;
+        const editable = this.props.detailed;
         const task = this.task;
 
         return (
