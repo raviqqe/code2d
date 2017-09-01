@@ -8,34 +8,29 @@ import "./style/CreateTask.css";
 
 interface IProps {
     createTask: (task: INewTask) => void;
-}
-
-interface IState {
     creatingTask: boolean;
-    task: INewTask;
+    newTask: INewTask;
+    setNewTask: (task: INewTask) => void;
+    startCreatingTask: () => void;
+    stopCreatingTask: () => void;
 }
 
-class CreateTask extends React.Component<IProps, IState> {
-    public state: IState = {
-        creatingTask: false,
-        task: { name: "", description: "" },
-    };
-
+class CreateTask extends React.Component<IProps> {
     private name: { focus: () => void };
 
-    public componentDidUpdate(_, { creatingTask }: IState) {
-        if (!creatingTask && this.state.creatingTask) {
+    public componentDidUpdate({ creatingTask }) {
+        if (!creatingTask && this.props.creatingTask) {
             this.name.focus(); // Do this after rendering.
         }
     }
 
     public render() {
-        if (!this.state.creatingTask) {
+        if (!this.props.creatingTask) {
             return (
                 <div className="CreateTask-plus-button-container">
                     <button
                         className="CreateTask-plus-button"
-                        onClick={() => this.setState({ creatingTask: true })}
+                        onClick={this.props.startCreatingTask}
                     >
                         <div className="CreateTask-icon"><Plus /></div>
                     </button>
@@ -43,36 +38,32 @@ class CreateTask extends React.Component<IProps, IState> {
             );
         }
 
+        const { newTask, setNewTask } = this.props;
+
         return (
             <form
                 className="CreateTask-form-container"
-                onSubmit={() => {
-                    this.props.createTask(this.state.task);
-                    this.setState({
-                        creatingTask: false,
-                        task: { name: "", description: "" },
-                    });
-                }}
+                onSubmit={() => this.props.createTask(newTask)}
             >
                 <input
                     ref={(name) => { this.name = name; }}
                     placeholder="Name"
-                    value={this.state.task.name}
+                    value={newTask.name}
                     onChange={({ target: { value } }) =>
-                        this.setState({ task: { ...this.state.task, name: value } })}
+                        setNewTask({ ...newTask, name: value })}
                 />
                 <textarea
                     className="CreateTask-description"
                     placeholder="Description"
-                    value={this.state.task.description}
+                    value={newTask.description}
                     onChange={({ target: { value } }) =>
-                        this.setState({ task: { ...this.state.task, description: value } })}
+                        setNewTask({ ...newTask, description: value })}
                 />
                 <div className="CreateTask-buttons">
                     <button className="CreateTask-button" type="submit">Create</button>
                     <button
                         className="CreateTask-cancel-button"
-                        onClick={() => this.setState({ creatingTask: false })}
+                        onClick={this.props.stopCreatingTask}
                     >
                         Cancel
                     </button>
