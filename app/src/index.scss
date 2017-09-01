@@ -43,6 +43,7 @@ input, textarea {
 	@include font;
 
 	border: {
+		style: solid;
 		color: $grey;
 		radius: 3px;
 		width: 1px;
