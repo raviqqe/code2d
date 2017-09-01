@@ -40,17 +40,15 @@ class Tasks extends React.Component<IProps> {
                         <Tasks />
                     </div>
                     <div className="Tasks-sidebar">
-                        <div className="Tasks-current-task">
-                            {currentTask &&
-                                <Task
-                                    {...{
-                                        detailed: true,
-                                        done,
-                                        ...currentTask,
-                                    }}
-                                />}
-                            {!done && <CreateTask />}
-                        </div>
+                        {currentTask &&
+                            <Task
+                                {...{
+                                    detailed: true,
+                                    done,
+                                    ...currentTask,
+                                }}
+                            />}
+                        {!done && <CreateTask />}
                     </div>
                 </div>
                 <div className="Tasks-blank" />

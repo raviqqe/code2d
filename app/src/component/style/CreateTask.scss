@@ -3,8 +3,19 @@
 @import "./TaskDescription.scss";
 @import "./TaskName.scss";
 
-.CreateTask-button-container {
+.CreateTask-plus-button-container {
 	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.CreateTask-plus-button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 3em;
+	height: 3em;
+	border-radius: 3em;
 }
 
 .CreateTask-icon {
@@ -14,12 +25,15 @@
 .CreateTask-form-container {
 	@include Task-container;
 
+	flex: 1;
 	display: flex;
 	flex-direction: column;
 }
 
 .CreateTask-description {
 	@extend .TaskDescription-input;
+
+	flex: 1;
 }
 
 .CreateTask-buttons {

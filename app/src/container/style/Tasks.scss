@@ -42,12 +42,11 @@
 }
 
 .Tasks-sidebar {
-	width: 50%;
-}
-
-.Tasks-current-task {
 	@include sub-container;
 	@include Tasks-sub-container;
 
-	margin-left: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 50%;
 }
