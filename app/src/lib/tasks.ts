@@ -15,76 +15,68 @@ function path(done: boolean): string {
     return `users/${firebase.auth().currentUser.uid}/tasks/${done ? "done" : "todo"}`;
 }
 
-function todoTasksReference(): firebase.database.Reference {
-    return firebase.database().ref(path(false));
+function tasksReference(done: boolean): firebase.database.Reference {
+    return firebase.database().ref(path(done));
 }
 
-function doneTasksReference(): firebase.database.Reference {
-    return firebase.database().ref(path(true));
-}
-
-async function getTodoTasks(): Promise<ITask[]> {
-    const tasks = (await todoTasksReference().once("value")).val();
+async function getTasks(done: boolean): Promise<ITask[]> {
+    const tasks = (await tasksReference(done).once("value")).val();
     return tasks ? tasks : [];
 }
 
-async function getDoneTasks(): Promise<{ [key: string]: ITask }> {
-    const tasks = (await doneTasksReference().once("value")).val();
-    return tasks ? tasks : {};
-}
-
 export async function createTask(newTask: INewTask): Promise<ITask> {
-    const tasks = await getTodoTasks();
     const task: ITask = { createdAt: Date.now(), updatedAt: Date.now(), ...newTask };
 
-    await setTodoTasks([task, ...(tasks ? tasks : [])]);
+    await setTodoTasks([task, ...(await getTasks(false))]);
 
     return task;
 }
 
 export async function switchTaskState(task: ITask): Promise<void> {
-    const tasks = await getTodoTasks();
+    const tasks = await getTasks(false);
 
     if (_.findIndex(tasks, task) >= 0) {
-        const tasks = await getTodoTasks();
-
         _.remove(tasks, task);
 
         await setTodoTasks(tasks);
-        await doneTasksReference().push(task);
+        await setDoneTasks([task, ...(await getTasks(true))]);
     } else {
-        await setTodoTasks([task, ...(await getTodoTasks())]);
         await removeTask(task);
+        await setTodoTasks([task, ...(await getTasks(false))]);
     }
 }
 
 export async function removeTask(task: ITask): Promise<void> {
-    await doneTasksReference().child(_.findKey(await getDoneTasks(), task)).remove();
+    await tasksReference(true).child(_.findKey(await getTasks(true), task)).remove();
 }
 
 export async function editTask(oldTask: ITask, newTask: ITask): Promise<void> {
-    await todoTasksReference().child(_.findIndex(await getTodoTasks(), oldTask)).set(newTask);
+    await tasksReference(false).child(_.findIndex(await getTasks(false), oldTask)).set(newTask);
+}
+
+async function setTasks(done: boolean, tasks: ITask[]): Promise<void> {
+    await tasksReference(done).set(tasks);
 }
 
 export async function setTodoTasks(tasks: ITask[]): Promise<void> {
-    await todoTasksReference().set(tasks);
+    await setTasks(false, tasks);
 }
 
-export function onTodoTasksUpdate(callback: (tasks: ITask[]) => void): void {
-    todoTasksReference().on("value", (snapshot): void => {
+export async function setDoneTasks(tasks: ITask[]): Promise<void> {
+    await setTasks(true, tasks);
+}
+
+function onTasksUpdate(done: boolean, callback: (tasks: ITask[]) => void): void {
+    tasksReference(done).on("value", (snapshot): void => {
         const tasks = snapshot.val();
         callback(tasks ? tasks : []);
     });
 }
 
+export function onTodoTasksUpdate(callback: (tasks: ITask[]) => void): void {
+    onTasksUpdate(false, callback);
+}
+
 export function onDoneTasksUpdate(callback: (tasks: ITask[]) => void): void {
-    doneTasksReference().on("value", (snapshot): void => {
-        const tasks: { [key: string]: ITask } = snapshot.val();
-
-        if (!tasks) {
-            callback([]);
-        }
-
-        callback(_.values(tasks).sort((x, y) => y.updatedAt - x.updatedAt));
-    });
+    onTasksUpdate(true, callback);
 }
