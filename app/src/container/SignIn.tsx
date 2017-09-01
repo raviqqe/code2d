@@ -38,6 +38,7 @@ class SignIn extends React.Component<IProps> {
     }
 }
 
-const mapStateToProps = ({ authState, signIn }) => ({ ...authState, ...signIn });
-
-export default connect(mapStateToProps, actionCreators)(SignIn);
+export default connect(
+    ({ authState, signIn }) => ({ ...authState, ...signIn }),
+    actionCreators,
+)(SignIn);
