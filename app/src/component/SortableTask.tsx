@@ -1,7 +1,7 @@
 import * as React from "react";
 import { SortableElement } from "react-sortable-hoc";
 
-import { ITask } from "../lib/task";
+import { ITask } from "../lib/tasks";
 import Task from "./Task";
 
 class SortableTask extends React.Component<ITask> {

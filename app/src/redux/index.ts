@@ -3,8 +3,8 @@ import createSagaMiddleware from "redux-saga";
 import { all } from "redux-saga/effects";
 
 import * as firebase from "../lib/firebase";
-import * as taskDatabase from "../lib/task";
-import { ITask } from "../lib/task";
+import * as tasksDatabase from "../lib/tasks";
+import { ITask } from "../lib/tasks";
 import * as authState from "./auth-state";
 import * as signIn from "./sign-in";
 import * as tasks from "./tasks";
@@ -29,10 +29,10 @@ export default function() {
         } else {
             store.dispatch(authState.actionCreators.signIn());
 
-            taskDatabase.onDoneTasksUpdate((ts: ITask[]) =>
+            tasksDatabase.onDoneTasksUpdate((ts: ITask[]) =>
                 store.dispatch(tasks.actionCreators.updateDoneTasks(ts)));
 
-            taskDatabase.onTodoTasksUpdate((ts: ITask[]) =>
+            tasksDatabase.onTodoTasksUpdate((ts: ITask[]) =>
                 store.dispatch(tasks.actionCreators.updateTodoTasks(ts)));
         }
     });

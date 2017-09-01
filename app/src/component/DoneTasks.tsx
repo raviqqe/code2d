@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { arrayMove } from "react-sortable-hoc";
 
-import { ITask } from "../lib/task";
+import { ITask } from "../lib/tasks";
 import { actionCreators } from "../redux/tasks";
 import "./style/DoneTasks.css";
 import Task from "./Task";

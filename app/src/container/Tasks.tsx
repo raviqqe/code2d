@@ -8,7 +8,7 @@ import DoneTasks from "../component/DoneTasks";
 import Menu from "../component/Menu";
 import Task from "../component/Task";
 import TodoTasks from "../component/TodoTasks";
-import { ITask } from "../lib/task";
+import { ITask } from "../lib/tasks";
 import { actionCreators } from "../redux/tasks";
 import "./style/Tasks.css";
 

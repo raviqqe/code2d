@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { arrayMove } from "react-sortable-hoc";
 
 import { isTouchDevice } from "../lib/device";
-import { ITask } from "../lib/task";
+import { ITask } from "../lib/tasks";
 import { actionCreators } from "../redux/tasks";
 import SortableTasks from "./SortableTasks";
 import "./style/TodoTasks.css";

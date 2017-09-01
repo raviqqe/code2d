@@ -2,7 +2,7 @@ import * as React from "react";
 import { Plus } from "react-feather";
 import { connect } from "react-redux";
 
-import { INewTask } from "../lib/task";
+import { INewTask } from "../lib/tasks";
 import { actionCreators } from "../redux/tasks";
 import "./style/CreateTask.css";
 

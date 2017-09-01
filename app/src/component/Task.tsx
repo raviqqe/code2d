@@ -3,7 +3,7 @@ import * as React from "react";
 import { Check, Edit2, RotateCcw, Save, Trash2 } from "react-feather";
 import { connect } from "react-redux";
 
-import { ITask } from "../lib/task";
+import { ITask } from "../lib/tasks";
 import { actionCreators } from "../redux/tasks";
 import "./style/Task.css";
 import TaskDescription from "./TaskDescription";
