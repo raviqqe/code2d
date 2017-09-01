@@ -17,7 +17,7 @@ interface IProps {
 
 class TaskList extends React.Component<IProps> {
     public render() {
-        const { tasks, setTasks } = this.props;
+        const { done, tasks, setTasks } = this.props;
 
         if (tasks.length === 0) {
             return <div>There is no todo task.</div>;
@@ -28,6 +28,7 @@ class TaskList extends React.Component<IProps> {
         return (
             <div className="TaskList-container">
                 <SortableTasks
+                    done={done}
                     onSortEnd={({ newIndex, oldIndex }) =>
                         setTasks(arrayMove(tasks, oldIndex, newIndex))}
                     tasks={tasks}

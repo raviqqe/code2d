@@ -4,7 +4,11 @@ import { SortableElement } from "react-sortable-hoc";
 import { ITask } from "../lib/tasks";
 import Task from "./Task";
 
-class SortableTask extends React.Component<ITask> {
+interface IProps extends ITask {
+    done: boolean;
+}
+
+class SortableTask extends React.Component<IProps> {
     public render() {
         return <Task {...this.props} />;
     }

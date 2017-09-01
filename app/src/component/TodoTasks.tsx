@@ -24,6 +24,7 @@ class TodoTasks extends React.Component<IProps> {
         return (
             <div className="TodoTasks-container">
                 <SortableTasks
+                    done={false}
                     onSortEnd={({ newIndex, oldIndex }) =>
                         this.props.setTodoTasks(
                             arrayMove(this.props.tasks, oldIndex, newIndex))}
