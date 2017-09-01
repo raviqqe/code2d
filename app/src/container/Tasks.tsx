@@ -9,7 +9,7 @@ import Task from "../component/Task";
 import TodoTasks from "../component/TodoTasks";
 import { ITask } from "../lib/task";
 import { actionCreators } from "../redux/tasks";
-import "./style/Home.css";
+import "./style/Tasks.css";
 
 interface IProps {
     currentTask: ITask | null;
@@ -23,7 +23,7 @@ interface IState {
     showDoneTasks: boolean;
 }
 
-class Home extends React.Component<IProps, IState> {
+class Tasks extends React.Component<IProps, IState> {
     public state: IState = { showDoneTasks: false };
 
     public render() {
@@ -35,8 +35,8 @@ class Home extends React.Component<IProps, IState> {
         const Tasks = showDoneTasks ? DoneTasks : TodoTasks;
 
         return (
-            <div className="Home-container">
-                <div className="Home-buttons">
+            <div className="Tasks-container">
+                <div className="Tasks-buttons">
                     <button
                         onClick={() => this.setState({ showDoneTasks: false })}
                         disabled={!showDoneTasks}
@@ -50,12 +50,12 @@ class Home extends React.Component<IProps, IState> {
                         done
                     </button>
                 </div>
-                <div className="Home-main">
-                    <div className="Home-tasks">
+                <div className="Tasks-main">
+                    <div className="Tasks-tasks">
                         <Tasks />
                     </div>
-                    <div className="Home-sidebar">
-                        <div className="Home-current-task">
+                    <div className="Tasks-sidebar">
+                        <div className="Tasks-current-task">
                             {this.props.currentTask &&
                                 <Task
                                     {...{
@@ -84,4 +84,4 @@ class Home extends React.Component<IProps, IState> {
 export default connect(
     ({ authState, tasks }) => ({ ...authState, ...tasks }),
     actionCreators,
-)(Home);
+)(Tasks);

@@ -1,41 +1,41 @@
 @import "../../component/style/sub-container.scss";
 @import "../../style/colors.scss";
 
-@mixin Home-sub-container {
+@mixin Tasks-sub-container {
 	margin: 1em;
 }
 
-.Home-container {
+.Tasks-container {
 	display: flex;
 	justify-content: center;
 	width: 100vw;
 	height: 100vh;
 }
 
-.Home-buttons {
+.Tasks-buttons {
 	display: flex;
 }
 
-.Home-main {
+.Tasks-main {
 	width: 150vh;
 	max-width: 100%;
 	display: flex;
 }
 
-.Home-tasks {
-	@include Home-sub-container;
+.Tasks-tasks {
+	@include Tasks-sub-container;
 
 	flex: 1;
 	margin-right: 0.5em;
 }
 
-.Home-sidebar {
+.Tasks-sidebar {
 	width: 50%;
 }
 
-.Home-current-task {
+.Tasks-current-task {
 	@include sub-container;
-	@include Home-sub-container;
+	@include Tasks-sub-container;
 
 	margin-left: 0;
 }
