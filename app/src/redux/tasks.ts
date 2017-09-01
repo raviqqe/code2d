@@ -14,18 +14,20 @@ const editTask = factory<{ newTask: ITask, oldTask: ITask }>("EDIT_TASK");
 const removeTask = factory<ITask>("REMOVE_TASK");
 const setCurrentTask = factory<ITask | null>("SET_CURRENT_TASK");
 const setNewTask = factory<INewTask>("SET_NEW_TASK");
+const setDoneTasks = factory<ITask[]>("SET_DONE_TASKS");
 const setTodoTasks = factory<ITask[]>("SET_TODO_TASKS");
 const startCreatingTask = factory("START_CREATING_TASK");
 const stopCreatingTask = factory("STOP_CREATING_TASK");
 const switchTaskState = factory<ITask>("SWITCH_TASK_STATE");
-const updateTodoTasks = factory<ITask[]>("UPDATE_TODO_TASKS");
 const updateDoneTasks = factory<ITask[]>("UPDATE_DONE_TASKS");
+const updateTodoTasks = factory<ITask[]>("UPDATE_TODO_TASKS");
 
 export const actionCreators = {
     createTask,
     editTask: (oldTask: ITask, newTask: ITask) => editTask({ newTask, oldTask }),
     removeTask,
     setCurrentTask,
+    setDoneTasks,
     setNewTask,
     setTodoTasks,
     startCreatingTask,
@@ -88,5 +90,10 @@ export const sagas = [
         setTodoTasks,
         function* _(tasks: ITask[]): SagaIterator {
             yield call(tasksDatabase.setTodoTasks, tasks);
+        }),
+    takeEvery(
+        setDoneTasks,
+        function* _(tasks: ITask[]): SagaIterator {
+            yield call(tasksDatabase.setDoneTasks, tasks);
         }),
 ];

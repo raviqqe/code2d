@@ -1,0 +1,5 @@
+@import "./tasks-container.scss";
+
+.TaskList-container {
+	@include tasks-container;
+}
