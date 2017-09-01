@@ -26,12 +26,12 @@
 .Task-header {
 	display: flex;
 	justify-content: space-between;
-	align-items: top;
+	align-items: flex-start;
 }
 
 .Task-buttons-container {
 	display: flex;
-	align-items: top;
+	align-items: flex-start;
 }
 
 .Task-button {
