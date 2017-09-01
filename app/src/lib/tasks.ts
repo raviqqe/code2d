@@ -33,21 +33,29 @@ export async function createTask(newTask: INewTask): Promise<ITask> {
 }
 
 export async function switchTaskState(task: ITask): Promise<void> {
-    const tasks = await getTasks(false);
-
-    if (_.findIndex(tasks, task) >= 0) {
-        _.remove(tasks, task);
-
-        await setTodoTasks(tasks);
+    if (_.findIndex(await getTasks(false), task) >= 0) {
+        await removeTodoTask(task);
         await setDoneTasks([task, ...(await getTasks(true))]);
     } else {
-        await removeTask(task);
+        await removeDoneTask(task);
         await setTodoTasks([task, ...(await getTasks(false))]);
     }
 }
 
-export async function removeTask(task: ITask): Promise<void> {
-    await tasksReference(true).child(_.findKey(await getTasks(true), task)).remove();
+async function removeTask(done: boolean, task: ITask): Promise<void> {
+    const tasks = await getTasks(done);
+
+    _.remove(tasks, task);
+
+    await setTasks(done, tasks);
+}
+
+export async function removeTodoTask(task: ITask): Promise<void> {
+    await removeTask(false, task);
+}
+
+export async function removeDoneTask(task: ITask): Promise<void> {
+    await removeTask(true, task);
 }
 
 export async function editTask(oldTask: ITask, newTask: ITask): Promise<void> {

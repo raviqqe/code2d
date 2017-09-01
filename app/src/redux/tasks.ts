@@ -84,7 +84,7 @@ export const sagas = [
     takeEvery(
         removeTask,
         function* _(task: ITask): SagaIterator {
-            yield call(tasksDatabase.removeTask, task);
+            yield call(tasksDatabase.removeDoneTask, task);
         }),
     takeEvery(
         setTodoTasks,
