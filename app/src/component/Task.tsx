@@ -13,7 +13,7 @@ interface IProps extends ITask {
     currentTask: ITask | null;
     detailed: boolean;
     done?: boolean;
-    editTask: (oldTask: ITask, newTask: ITask) => void;
+    setTodoTask: (oldTask: ITask, newTask: ITask) => void;
     switchTaskState: (task: ITask) => void;
     removeTask: (task: ITask) => void;
     setCurrentTask: (task: ITask | null) => void;
@@ -41,7 +41,7 @@ class Task extends React.Component<IProps, IState> {
                     <TaskName
                         editable={editable}
                         text={task.name}
-                        onEdit={(name) => this.props.editTask(task, { ...task, name })}
+                        onEdit={(name) => this.props.setTodoTask(task, { ...task, name })}
                     />
                     {this.buttons}
                 </div>
@@ -58,7 +58,7 @@ class Task extends React.Component<IProps, IState> {
                             }
                         }}
                         onEdit={(description) =>
-                            this.props.editTask(task, { ...task, description })}
+                            this.props.setTodoTask(task, { ...task, description })}
                     />
                 )}
             </div>

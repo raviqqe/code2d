@@ -10,7 +10,7 @@ import { takeEvery } from "./utils";
 const factory = actionCreatorFactory();
 
 const createTask = factory<INewTask>("CREATE_TASK");
-const editTask = factory<{ newTask: ITask, oldTask: ITask }>("EDIT_TASK");
+const setTodoTask = factory<{ newTask: ITask, oldTask: ITask }>("SET_TODO_TASK");
 const removeTask = factory<ITask>("REMOVE_TASK");
 const setCurrentTask = factory<ITask | null>("SET_CURRENT_TASK");
 const setNewTask = factory<INewTask>("SET_NEW_TASK");
@@ -24,11 +24,11 @@ const updateTodoTasks = factory<ITask[]>("UPDATE_TODO_TASKS");
 
 export const actionCreators = {
     createTask,
-    editTask: (oldTask: ITask, newTask: ITask) => editTask({ newTask, oldTask }),
     removeTask,
     setCurrentTask,
     setDoneTasks,
     setNewTask,
+    setTodoTask: (oldTask: ITask, newTask: ITask) => setTodoTask({ newTask, oldTask }),
     setTodoTasks,
     startCreatingTask,
     stopCreatingTask,
@@ -71,7 +71,7 @@ export const sagas = [
             yield put(setCurrentTask(task));
         }),
     takeEvery(
-        editTask,
+        setTodoTask,
         function* _({ newTask, oldTask }): SagaIterator {
             yield call(todoTasks.set, oldTask, newTask);
             yield put(setCurrentTask(newTask));
