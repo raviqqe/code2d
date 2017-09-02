@@ -1,3 +1,5 @@
+@import "../../style/colors.scss";
+
 .TaskDescription-normal {
 	margin-top: 0.4em;
 }
@@ -22,4 +24,8 @@
 		padding-bottom: 0;
 		margin-bottom: 0;
 	}
+}
+
+.TaskDescription-message {
+	color: $grey;
 }

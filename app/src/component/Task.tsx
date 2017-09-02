@@ -1,6 +1,6 @@
 import * as _ from "lodash";
 import * as React from "react";
-import { Check, Edit2, RotateCcw, Save, Trash2 } from "react-feather";
+import { Check, RotateCcw, Trash2 } from "react-feather";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -20,13 +20,7 @@ interface IProps extends ITask {
     setCurrentTask: (task: ITask | null) => void;
 }
 
-interface IState {
-    editingDescription: boolean;
-}
-
-class Task extends React.Component<IProps, IState> {
-    public state: IState = { editingDescription: false };
-
+class Task extends React.Component<IProps> {
     public render() {
         const { createdAt, detailed, setCurrentTask, setTask, updatedAt } = this.props;
         const editable = detailed;
@@ -50,16 +44,8 @@ class Task extends React.Component<IProps, IState> {
                 {detailed && [
                     <TaskDescription
                         key="description"
-                        editing={editable && this.state.editingDescription}
+                        editable={editable}
                         text={task.description}
-                        onBlur={() => this.setState({ editingDescription: false })}
-                        onClick={() => this.setState({ editingDescription: true })}
-                        onKeyDown={({ keyCode, shiftKey }) => {
-                            if (keyCode === 13 && shiftKey) {
-                                this.setState({ editingDescription: false });
-                                event.preventDefault();
-                            }
-                        }}
                         onEdit={(description) => setTask(task, { ...task, description })}
                     />,
                     this.renderDate("Created at", createdAt),
@@ -88,26 +74,6 @@ class Task extends React.Component<IProps, IState> {
         }
 
         if (this.props.detailed) {
-            if (this.state.editingDescription) {
-                buttons.push(
-                    <div
-                        className="Task-button"
-                        onClick={() => this.setState({ editingDescription: false })}
-                    >
-                        <Save size={20} />
-                    </div>,
-                );
-            } else {
-                buttons.push(
-                    <div
-                        className="Task-button"
-                        onClick={() => this.setState({ editingDescription: true })}
-                    >
-                        <Edit2 size={20} />
-                    </div>,
-                );
-            }
-
             buttons.push(
                 <div className="Task-button" onClick={() => this.props.removeTask(task)}>
                     <Trash2 size={22} />
