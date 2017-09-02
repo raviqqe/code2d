@@ -2,6 +2,7 @@ import * as _ from "lodash";
 import * as React from "react";
 import { Check, Edit2, RotateCcw, Save, Trash2 } from "react-feather";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 import { ITask } from "../lib/tasks";
 import { actionCreators } from "../redux/tasks";
@@ -13,7 +14,7 @@ interface IProps extends ITask {
     currentTask: ITask | null;
     detailed: boolean;
     done?: boolean;
-    setTodoTask: (oldTask: ITask, newTask: ITask) => void;
+    setTask: (oldTask: ITask, newTask: ITask) => void;
     switchTaskState: (task: ITask) => void;
     removeTask: (task: ITask) => void;
     setCurrentTask: (task: ITask | null) => void;
@@ -41,7 +42,7 @@ class Task extends React.Component<IProps, IState> {
                     <TaskName
                         editable={editable}
                         text={task.name}
-                        onEdit={(name) => this.props.setTodoTask(task, { ...task, name })}
+                        onEdit={(name) => this.props.setTask(task, { ...task, name })}
                     />
                     {this.buttons}
                 </div>
@@ -58,7 +59,7 @@ class Task extends React.Component<IProps, IState> {
                             }
                         }}
                         onEdit={(description) =>
-                            this.props.setTodoTask(task, { ...task, description })}
+                            this.props.setTask(task, { ...task, description })}
                     />
                 )}
             </div>
@@ -118,4 +119,17 @@ class Task extends React.Component<IProps, IState> {
     }
 }
 
-export default connect(({ tasks }) => tasks, actionCreators)(Task);
+export default connect(
+    ({ tasks }) => tasks,
+    (dispatch, { done }) => {
+        const { removeTask, setCurrentTask, setDoneTask, setTodoTask, switchTaskState }
+            = bindActionCreators(actionCreators, dispatch);
+
+        return {
+            removeTask,
+            setCurrentTask,
+            setTask: done ? setDoneTask : setTodoTask,
+            switchTaskState,
+        };
+    },
+)(Task);
