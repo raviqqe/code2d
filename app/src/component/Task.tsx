@@ -28,25 +28,26 @@ class Task extends React.Component<IProps, IState> {
     public state: IState = { editingDescription: false };
 
     public render() {
-        const editable = this.props.detailed;
+        const { detailed, setCurrentTask, setTask } = this.props;
+        const editable = detailed;
         const task = this.task;
 
         return (
             <div
-                className={!this.props.detailed && this.isCurrentTask
+                className={!detailed && this.isCurrentTask
                     ? "Task-container-highlighted"
                     : "Task-container"}
-                onClick={() => this.props.setCurrentTask(task)}
+                onClick={() => setCurrentTask(task)}
             >
                 <div className="Task-header">
                     <TaskName
                         editable={editable}
                         text={task.name}
-                        onEdit={(name) => this.props.setTask(task, { ...task, name })}
+                        onEdit={(name) => setTask(task, { ...task, name })}
                     />
                     {this.buttons}
                 </div>
-                {this.props.detailed && (
+                {detailed && (
                     <TaskDescription
                         editing={editable && this.state.editingDescription}
                         text={task.description}
@@ -58,8 +59,7 @@ class Task extends React.Component<IProps, IState> {
                                 event.preventDefault();
                             }
                         }}
-                        onEdit={(description) =>
-                            this.props.setTask(task, { ...task, description })}
+                        onEdit={(description) => setTask(task, { ...task, description })}
                     />
                 )}
             </div>
