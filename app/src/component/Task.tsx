@@ -78,9 +78,11 @@ class Task extends React.Component<IProps, IState> {
                     <div className="Task-button" onClick={() => this.props.switchTaskState(task)}>
                         <RotateCcw size={20} />
                     </div>
-                    <div className="Task-button" onClick={() => this.props.removeTask(task)}>
-                        <Trash2 size={22} />
-                    </div>
+                    {this.props.detailed && (
+                        <div className="Task-button" onClick={() => this.props.removeTask(task)}>
+                            <Trash2 size={22} />
+                        </div>
+                    )}
                 </div>
             );
         }
@@ -105,6 +107,11 @@ class Task extends React.Component<IProps, IState> {
                             <Edit2 size={20} />
                         </div>
                     ))}
+                {this.props.detailed && (
+                    <div className="Task-button" onClick={() => this.props.removeTask(task)}>
+                        <Trash2 size={22} />
+                    </div>
+                )}
             </div>
         );
     }
@@ -122,11 +129,15 @@ class Task extends React.Component<IProps, IState> {
 export default connect(
     ({ tasks }) => tasks,
     (dispatch, { done }) => {
-        const { removeTask, setCurrentTask, setDoneTask, setTodoTask, switchTaskState }
-            = bindActionCreators(actionCreators, dispatch);
+        const {
+            removeDoneTask, removeTodoTask,
+            setCurrentTask,
+            setDoneTask, setTodoTask,
+            switchTaskState,
+        } = bindActionCreators(actionCreators, dispatch);
 
         return {
-            removeTask,
+            removeTask: done ? removeDoneTask : removeTodoTask,
             setCurrentTask,
             setTask: done ? setDoneTask : setTodoTask,
             switchTaskState,
