@@ -68,51 +68,52 @@ class Task extends React.Component<IProps, IState> {
 
     private get buttons() {
         const task = this.task;
-        const containerProps = {
-            className: "Task-buttons-container",
-        };
+        const buttons = [];
 
         if (this.props.done) {
-            return (
-                <div {...containerProps}>
-                    <div className="Task-button" onClick={() => this.props.switchTaskState(task)}>
-                        <RotateCcw size={20} />
-                    </div>
-                    {this.props.detailed && (
-                        <div className="Task-button" onClick={() => this.props.removeTask(task)}>
-                            <Trash2 size={22} />
-                        </div>
-                    )}
-                </div>
+            buttons.push(
+                <div className="Task-button" onClick={() => this.props.switchTaskState(task)}>
+                    <RotateCcw size={20} />
+                </div>,
+            );
+        } else {
+            buttons.push(
+                <div className="Task-button" onClick={() => this.props.switchTaskState(task)}>
+                    <Check size={22} />
+                </div>,
             );
         }
 
-        return (
-            <div {...containerProps}>
-                <div className="Task-button" onClick={() => this.props.switchTaskState(task)}>
-                    <Check size={22} />
-                </div>
-                {this.props.detailed && (this.state.editingDescription ? (
+        if (this.props.detailed) {
+            if (this.state.editingDescription) {
+                buttons.push(
                     <div
                         className="Task-button"
                         onClick={() => this.setState({ editingDescription: false })}
                     >
                         <Save size={20} />
-                    </div>
-                ) : (
-                        <div
-                            className="Task-button"
-                            onClick={() => this.setState({ editingDescription: true })}
-                        >
-                            <Edit2 size={20} />
-                        </div>
-                    ))}
-                {this.props.detailed && (
-                    <div className="Task-button" onClick={() => this.props.removeTask(task)}>
-                        <Trash2 size={22} />
-                    </div>
-                )}
-            </div>
+                    </div>,
+                );
+            } else {
+                buttons.push(
+                    <div
+                        className="Task-button"
+                        onClick={() => this.setState({ editingDescription: true })}
+                    >
+                        <Edit2 size={20} />
+                    </div>,
+                );
+            }
+
+            buttons.push(
+                <div className="Task-button" onClick={() => this.props.removeTask(task)}>
+                    <Trash2 size={22} />
+                </div>,
+            );
+        }
+
+        return (
+            <div className="Task-buttons-container">{buttons}</div>
         );
     }
 
