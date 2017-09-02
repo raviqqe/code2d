@@ -28,7 +28,7 @@ class Task extends React.Component<IProps, IState> {
     public state: IState = { editingDescription: false };
 
     public render() {
-        const { detailed, setCurrentTask, setTask } = this.props;
+        const { createdAt, detailed, setCurrentTask, setTask, updatedAt } = this.props;
         const editable = detailed;
         const task = this.task;
 
@@ -47,8 +47,9 @@ class Task extends React.Component<IProps, IState> {
                     />
                     {this.buttons}
                 </div>
-                {detailed && (
+                {detailed && [
                     <TaskDescription
+                        key="description"
                         editing={editable && this.state.editingDescription}
                         text={task.description}
                         onBlur={() => this.setState({ editingDescription: false })}
@@ -60,8 +61,10 @@ class Task extends React.Component<IProps, IState> {
                             }
                         }}
                         onEdit={(description) => setTask(task, { ...task, description })}
-                    />
-                )}
+                    />,
+                    this.renderDate("Created at", createdAt),
+                    this.renderDate("Updated at", updatedAt),
+                ]}
             </div>
         );
     }
@@ -124,6 +127,14 @@ class Task extends React.Component<IProps, IState> {
     private get task(): ITask {
         const { createdAt, description, name, updatedAt } = this.props;
         return { createdAt, description, name, updatedAt };
+    }
+
+    private renderDate = (label: string, timestamp: number) => {
+        return (
+            <div key={label} className="Task-date">
+                {label}: {(new Date(timestamp).toLocaleDateString())}
+            </div>
+        );
     }
 }
 
