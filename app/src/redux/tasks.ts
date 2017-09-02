@@ -10,11 +10,12 @@ import { takeEvery } from "./utils";
 const factory = actionCreatorFactory();
 
 const createTask = factory<INewTask>("CREATE_TASK");
-const setTodoTask = factory<{ newTask: ITask, oldTask: ITask }>("SET_TODO_TASK");
 const removeTask = factory<ITask>("REMOVE_TASK");
 const setCurrentTask = factory<ITask | null>("SET_CURRENT_TASK");
 const setNewTask = factory<INewTask>("SET_NEW_TASK");
+const setDoneTask = factory<{ newTask: ITask, oldTask: ITask }>("SET_DONE_TASK");
 const setDoneTasks = factory<ITask[]>("SET_DONE_TASKS");
+const setTodoTask = factory<{ newTask: ITask, oldTask: ITask }>("SET_TODO_TASK");
 const setTodoTasks = factory<ITask[]>("SET_TODO_TASKS");
 const startCreatingTask = factory("START_CREATING_TASK");
 const stopCreatingTask = factory("STOP_CREATING_TASK");
@@ -26,6 +27,7 @@ export const actionCreators = {
     createTask,
     removeTask,
     setCurrentTask,
+    setDoneTask: (oldTask: ITask, newTask: ITask) => setDoneTask({ newTask, oldTask }),
     setDoneTasks,
     setNewTask,
     setTodoTask: (oldTask: ITask, newTask: ITask) => setTodoTask({ newTask, oldTask }),
@@ -71,12 +73,6 @@ export const sagas = [
             yield put(setCurrentTask(task));
         }),
     takeEvery(
-        setTodoTask,
-        function* _({ newTask, oldTask }): SagaIterator {
-            yield call(todoTasks.set, oldTask, newTask);
-            yield put(setCurrentTask(newTask));
-        }),
-    takeEvery(
         switchTaskState,
         function* _(task: ITask): SagaIterator {
             yield call(tasks.switchTaskState, task);
@@ -87,13 +83,25 @@ export const sagas = [
             yield call(doneTasks.remove, task);
         }),
     takeEvery(
-        setTodoTasks,
-        function* _(tasks: ITask[]): SagaIterator {
-            yield call(todoTasks.setAll, tasks);
+        setDoneTask,
+        function* _({ newTask, oldTask }): SagaIterator {
+            yield call(doneTasks.set, oldTask, newTask);
+            yield put(setCurrentTask(newTask));
         }),
     takeEvery(
         setDoneTasks,
         function* _(tasks: ITask[]): SagaIterator {
             yield call(doneTasks.setAll, tasks);
+        }),
+    takeEvery(
+        setTodoTask,
+        function* _({ newTask, oldTask }): SagaIterator {
+            yield call(todoTasks.set, oldTask, newTask);
+            yield put(setCurrentTask(newTask));
+        }),
+    takeEvery(
+        setTodoTasks,
+        function* _(tasks: ITask[]): SagaIterator {
+            yield call(todoTasks.setAll, tasks);
         }),
 ];
