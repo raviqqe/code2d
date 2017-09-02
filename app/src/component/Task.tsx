@@ -51,6 +51,12 @@ class Task extends React.Component<IProps, IState> {
                         text={task.description}
                         onBlur={() => this.setState({ editingDescription: false })}
                         onClick={() => this.setState({ editingDescription: true })}
+                        onKeyDown={({ keyCode, shiftKey }) => {
+                            if (keyCode === 13 && shiftKey) {
+                                this.setState({ editingDescription: false });
+                                event.preventDefault();
+                            }
+                        }}
                         onEdit={(description) =>
                             this.props.editTask(task, { ...task, description })}
                     />

@@ -8,6 +8,7 @@ interface IProps {
     editing?: boolean;
     onBlur: () => void;
     onClick: () => void;
+    onKeyDown: (event: React.KeyboardEvent<{}>) => void;
     onEdit: (text: string) => void;
     text: string;
 }
@@ -32,6 +33,7 @@ export default class extends InputComponent<IProps, IState> {
                     className="TaskDescription-input"
                     onBlur={this.props.onBlur}
                     onChange={({ target: { value } }) => this.setState({ text: value })}
+                    onKeyDown={this.props.onKeyDown}
                     ref={(textarea) => { this.textarea = textarea; }}
                     value={this.state.text}
                 />
