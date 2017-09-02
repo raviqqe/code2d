@@ -16,8 +16,9 @@ export default class extends InputComponent<IProps> {
             return (
                 <textarea
                     className="TaskDescription-input"
-                    onKeyDown={({ keyCode, shiftKey }) => {
-                        if (keyCode === 13 && shiftKey) {
+                    onKeyDown={(event: React.KeyboardEvent<{}>) => {
+                        if (event.keyCode === 83 && event.ctrlKey ||
+                            event.keyCode === 13 && event.shiftKey) {
                             this.setState({ editing: false });
                             this.props.onEdit(this.state.text);
                             event.preventDefault();

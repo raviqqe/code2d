@@ -16,10 +16,11 @@ export default class extends InputComponent<IProps> {
             return (
                 <input
                     className="TaskName-container"
-                    onKeyPress={({ keyCode }) => {
-                        if (keyCode === 13) {
+                    onKeyDown={(event: React.KeyboardEvent<{}>) => {
+                        if (event.keyCode === 13) {
                             this.setState({ editing: false });
                             this.props.onEdit(this.state.text);
+                            event.preventDefault();
                         }
                     }}
                     value={this.state.text}
