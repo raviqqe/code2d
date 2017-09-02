@@ -1,8 +1,10 @@
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans");
+
 @import "./style/colors.scss";
 
 @mixin font-without-size {
 	color: $black;
-	font-family: sans-serif;
+	font-family: "Noto Sans", sans-serif;
 }
 
 @mixin font {
