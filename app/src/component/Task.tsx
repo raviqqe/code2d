@@ -61,13 +61,21 @@ class Task extends React.Component<IProps> {
 
         if (this.props.done) {
             buttons.push(
-                <div className="Task-button" onClick={() => this.props.switchTaskState(task)}>
+                <div
+                    key="markTodo"
+                    className="Task-button"
+                    onClick={() => this.props.switchTaskState(task)}
+                >
                     <RotateCcw size={20} />
                 </div>,
             );
         } else {
             buttons.push(
-                <div className="Task-button" onClick={() => this.props.switchTaskState(task)}>
+                <div
+                    key="markDone"
+                    className="Task-button"
+                    onClick={() => this.props.switchTaskState(task)}
+                >
                     <Check size={22} />
                 </div>,
             );
@@ -75,15 +83,17 @@ class Task extends React.Component<IProps> {
 
         if (this.props.detailed) {
             buttons.push(
-                <div className="Task-button" onClick={() => this.props.removeTask(task)}>
+                <div
+                    key="trash"
+                    className="Task-button"
+                    onClick={() => this.props.removeTask(task)}
+                >
                     <Trash2 size={22} />
                 </div>,
             );
         }
 
-        return (
-            <div className="Task-buttons-container">{buttons}</div>
-        );
+        return <div className="Task-buttons-container">{buttons}</div>;
     }
 
     private get isCurrentTask(): boolean {
