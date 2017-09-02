@@ -3,8 +3,8 @@ import { call, put } from "redux-saga/effects";
 import actionCreatorFactory from "typescript-fsa";
 import { reducerWithInitialState } from "typescript-fsa-reducers";
 
-import * as tasksDatabase from "../lib/tasks";
-import { INewTask, ITask } from "../lib/tasks";
+import * as tasks from "../lib/tasks";
+import { doneTasks, INewTask, ITask, todoTasks } from "../lib/tasks";
 import { takeEvery } from "./utils";
 
 const factory = actionCreatorFactory();
@@ -67,33 +67,33 @@ export const sagas = [
     takeEvery(
         createTask,
         function* _(newTask: INewTask): SagaIterator {
-            const task = yield call(tasksDatabase.createTask, newTask);
+            const task = yield call(todoTasks.create, newTask);
             yield put(setCurrentTask(task));
         }),
     takeEvery(
         editTask,
         function* _({ newTask, oldTask }): SagaIterator {
-            yield call(tasksDatabase.editTask, oldTask, newTask);
+            yield call(todoTasks.set, oldTask, newTask);
             yield put(setCurrentTask(newTask));
         }),
     takeEvery(
         switchTaskState,
         function* _(task: ITask): SagaIterator {
-            yield call(tasksDatabase.switchTaskState, task);
+            yield call(tasks.switchTaskState, task);
         }),
     takeEvery(
         removeTask,
         function* _(task: ITask): SagaIterator {
-            yield call(tasksDatabase.removeDoneTask, task);
+            yield call(doneTasks.remove, task);
         }),
     takeEvery(
         setTodoTasks,
         function* _(tasks: ITask[]): SagaIterator {
-            yield call(tasksDatabase.setTodoTasks, tasks);
+            yield call(todoTasks.setAll, tasks);
         }),
     takeEvery(
         setDoneTasks,
         function* _(tasks: ITask[]): SagaIterator {
-            yield call(tasksDatabase.setDoneTasks, tasks);
+            yield call(doneTasks.setAll, tasks);
         }),
 ];
