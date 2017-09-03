@@ -1,11 +1,12 @@
 import * as _ from "lodash";
 import * as React from "react";
-import { Check, RotateCcw, Trash2 } from "react-feather";
+import { Check, Clock, RotateCcw, Trash2 } from "react-feather";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import { ITask } from "../lib/tasks";
-import { actionCreators } from "../redux/tasks";
+import { actionCreators as tasksActionCreators } from "../redux/tasks";
+import { actionCreators as timerActionCreators } from "../redux/timer";
 import "./style/Task.css";
 import TaskDescription from "./TaskDescription";
 import TaskName from "./TaskName";
@@ -18,6 +19,7 @@ interface IProps extends ITask {
     switchTaskState: (task: ITask) => void;
     removeTask: (task: ITask) => void;
     setCurrentTask: (task: ITask | null) => void;
+    toggleTimer: () => void;
 }
 
 interface IState {
@@ -86,7 +88,15 @@ class Task extends React.Component<IProps, IState> {
                 >
                     <Check size={22} />
                 </div>,
-            );
+                (
+                    <div
+                        key="turnOnTimer"
+                        className="Task-button"
+                        onClick={this.props.toggleTimer}
+                    >
+                        <Clock size={22} />
+                    </div>
+                ));
         }
 
         if (this.props.detailed) {
@@ -141,16 +151,14 @@ export default connect(
     (dispatch, { done }) => {
         const {
             removeDoneTask, removeTodoTask,
-            setCurrentTask,
             setDoneTask, setTodoTask,
-            switchTaskState,
-        } = bindActionCreators(actionCreators, dispatch);
+            ...rest,
+        } = bindActionCreators({ ...tasksActionCreators, ...timerActionCreators }, dispatch);
 
         return {
             removeTask: done ? removeDoneTask : removeTodoTask,
-            setCurrentTask,
             setTask: done ? setDoneTask : setTodoTask,
-            switchTaskState,
+            ...rest,
         };
     },
 )(Task);

@@ -10,6 +10,7 @@ import TaskList from "../component/TaskList";
 import { ITask } from "../lib/tasks";
 import { actionCreators } from "../redux/tasks";
 import "./style/Tasks.css";
+import Timer from "./Timer";
 
 interface IProps {
     creatingTask: boolean;
@@ -18,12 +19,15 @@ interface IProps {
     signedIn: boolean;
     tasks: ITask[];
     done: boolean;
+    timerOn: boolean;
 }
 
 class Tasks extends React.Component<IProps> {
     public render() {
         if (!this.props.signedIn) {
             return <Redirect to="/sign-in" />;
+        } else if (this.props.timerOn) {
+            return <Timer />;
         }
 
         const { creatingTask, currentTask, done } = this.props;
@@ -69,11 +73,12 @@ class Tasks extends React.Component<IProps> {
 }
 
 export default connect(
-    ({ authState, tasks: { creatingTask, currentTask, doneTasks, todoTasks } }, { done }) => ({
+    ({ authState, tasks: { creatingTask, currentTask, doneTasks, todoTasks }, timer }, { done }) => ({
         ...authState,
         creatingTask,
         currentTask,
         tasks: done ? doneTasks : todoTasks,
+        timerOn: timer.on,
     }),
     actionCreators,
 )(Tasks);
