@@ -7,6 +7,7 @@ import { doneTasks, ITask, todoTasks } from "../lib/tasks";
 import * as authState from "./auth-state";
 import * as signIn from "./sign-in";
 import * as tasks from "./tasks";
+import * as timer from "./timer";
 
 export default function() {
     const sagaMiddleware = createSagaMiddleware();
@@ -15,6 +16,7 @@ export default function() {
             authState: authState.reducer,
             signIn: signIn.reducer,
             tasks: tasks.reducer,
+            timer: timer.reducer,
         }),
         compose(applyMiddleware(sagaMiddleware)));
 

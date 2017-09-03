@@ -1,10 +1,12 @@
 import * as React from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
+import { actionCreators } from "../redux/timer";
 import "./style/Timer.css";
 
 interface IProps {
-    on: boolean;
+    toggleTimer: () => void;
 }
 
 interface IState {
@@ -12,8 +14,8 @@ interface IState {
     seconds: number;
 }
 
-export default class extends React.Component<IProps, IState> {
-    public state: IState = { paused: false, seconds: 0 };
+class Timer extends React.Component<IProps, IState> {
+    public state: IState = { paused: false, seconds: 25 * 60 };
 
     private timer;
 
@@ -31,23 +33,21 @@ export default class extends React.Component<IProps, IState> {
         window.clearInterval(this.timer);
     }
 
-    public componentDidUpdate({ on }: IProps) {
-        if (!on && this.props.on) {
-            this.setState({ paused: false, seconds: 25 * 60 });
-        }
-    }
-
     public render() {
-        const { paused } = this.state;
+        const { paused, seconds } = this.state;
 
         return (
             <div className="Timer-container">
-                {Math.floor(this.state.seconds / 60)} {this.state.seconds % 60}
+                {Math.floor(seconds / 60)} {seconds % 60}
                 <button onClick={() => this.setState({ paused: !paused })}>
                     {paused ? "restart" : "pause"}
                 </button>
-                <Link to="/tasks/todo">cancel</Link>
+                <div onClick={this.props.toggleTimer}>
+                    <Link to="/tasks/todo">cancel</Link>
+                </div>
             </div>
         );
     }
 }
+
+export default connect(({ timer }) => timer, actionCreators)(Timer);
