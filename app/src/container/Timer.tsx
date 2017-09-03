@@ -21,10 +21,6 @@ class Timer extends React.Component<{ toggleTimer: () => void }, IState> {
             1000);
     }
 
-    public componentWillUnmount() {
-        window.clearInterval(this.timer);
-    }
-
     public render() {
         const { seconds } = this.state;
 
