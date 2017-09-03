@@ -4,15 +4,25 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { playHorn } from "../lib/audio";
-import { actionCreators } from "../redux/timer";
+import { ITask } from "../lib/tasks";
+import { actionCreators as tasksActionCreators } from "../redux/tasks";
+import { actionCreators as timerActionCreators } from "../redux/timer";
 import "./style/Timer.css";
+
+const initialSeconds = 25 * 60;
+
+interface IProps {
+    currentTask: ITask;
+    setTodoTask: (oldTask: ITask, newTask: ITask) => void;
+    toggleTimer: () => void;
+}
 
 interface IState {
     seconds: number;
 }
 
-class Timer extends React.Component<{ toggleTimer: () => void }, IState> {
-    public state: IState = { seconds: 25 * 60 };
+class Timer extends React.Component<IProps, IState> {
+    public state: IState = { seconds: initialSeconds };
 
     private timer;
 
@@ -41,12 +51,28 @@ class Timer extends React.Component<{ toggleTimer: () => void }, IState> {
                         {numeral(seconds % 60).format("00")}
                     </div>
                 </div>
-                <button className="Timer-button" onClick={this.props.toggleTimer}>
-                    <Link to="/tasks/todo">cancel</Link>
+                <button
+                    className="Timer-button"
+                    onClick={() => {
+                        this.saveSpentTime();
+                        this.props.toggleTimer();
+                    }}
+                >
+                    <Link to="/tasks/todo">stop</Link>
                 </button>
             </div>
         );
     }
+
+    private saveSpentTime = () => {
+        const { currentTask, setTodoTask } = this.props;
+        const spentSeconds = currentTask.spentSeconds + (initialSeconds - this.state.seconds);
+
+        setTodoTask(currentTask, { ...currentTask, spentSeconds });
+    }
 }
 
-export default connect(({ timer }) => timer, actionCreators)(Timer);
+export default connect(
+    ({ tasks, timer }) => ({ ...tasks, ...timer }),
+    { ...tasksActionCreators, ...timerActionCreators },
+)(Timer);

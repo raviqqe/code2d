@@ -97,7 +97,10 @@ class Task extends React.Component<IProps, IState> {
                     <div
                         key="turnOnTimer"
                         className="Task-button"
-                        onClick={this.props.toggleTimer}
+                        onClick={() => {
+                            this.props.setCurrentTask(task);
+                            this.props.toggleTimer();
+                        }}
                     >
                         <Clock size={22} />
                     </div>
