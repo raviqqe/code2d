@@ -20,7 +20,13 @@ interface IProps extends ITask {
     setCurrentTask: (task: ITask | null) => void;
 }
 
-class Task extends React.Component<IProps> {
+interface IState {
+    showButtons: boolean;
+}
+
+class Task extends React.Component<IProps, IState> {
+    public state: IState = { showButtons: false };
+
     public render() {
         const { createdAt, detailed, setCurrentTask, setTask, updatedAt } = this.props;
         const editable = detailed;
@@ -32,6 +38,8 @@ class Task extends React.Component<IProps> {
                     ? "Task-container-highlighted"
                     : "Task-container"}
                 onClick={() => setCurrentTask(task)}
+                onMouseOver={() => this.setState({ showButtons: true })}
+                onMouseOut={() => this.setState({ showButtons: false })}
             >
                 <div className="Task-header">
                     <TaskName
@@ -93,7 +101,21 @@ class Task extends React.Component<IProps> {
             );
         }
 
-        return <div className="Task-buttons-container">{buttons}</div>;
+        return (
+            <div className="Task-buttons-container" style={this.buttonsStyle}>
+                {buttons}
+            </div>
+        );
+    }
+
+    private get buttonsStyle() {
+        if (this.state.showButtons) {
+            return {};
+        } else if (this.props.detailed) {
+            return { display: "none" };
+        }
+
+        return { visibility: "hidden" };
     }
 
     private get isCurrentTask(): boolean {
