@@ -146,9 +146,14 @@ class Task extends React.Component<IProps, IState> {
     }
 
     private renderSpentSeconds = () => {
+        const minutes: number = this.props.spentSeconds / 60;
+        const time: string = minutes < 60
+            ? `${numeral(minutes).format("0")} mins`
+            : `${numeral(minutes / 60).format("0[.]0")} hours`;
+
         return (
             <div key="spentTime" className="Task-spent-time">
-                Spent for: {numeral(this.props.spentSeconds / 3600).format("0[.]0")} hours
+                Spent for: {time}
             </div>
         );
     }
