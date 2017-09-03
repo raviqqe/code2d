@@ -32,6 +32,10 @@ class Timer extends React.Component<IProps, IState> {
             1000);
     }
 
+    public componentWillUnmount() {
+        window.clearInterval(this.timer);
+    }
+
     public componentDidUpdate(_, { seconds }: IState) {
         if (seconds !== 0 && this.state.seconds === 0) {
             playHorn();
