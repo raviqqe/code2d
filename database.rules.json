@@ -19,6 +19,9 @@
 							"updatedAt": {
 								".validate": "newData.isNumber()"
 							},
+							"spentSeconds": {
+								".validate": "newData.isNumber()"
+							},
 							"$other": {
 								".validate": false
 							}
@@ -36,6 +39,9 @@
 								".validate": "newData.isNumber()"
 							},
 							"updatedAt": {
+								".validate": "newData.isNumber()"
+							},
+							"spentSeconds": {
 								".validate": "newData.isNumber()"
 							},
 							"$other": {
