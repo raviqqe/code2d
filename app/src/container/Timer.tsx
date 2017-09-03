@@ -3,6 +3,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
+import { playHorn } from "../lib/audio";
 import { actionCreators } from "../redux/timer";
 import "./style/Timer.css";
 
@@ -19,6 +20,12 @@ class Timer extends React.Component<{ toggleTimer: () => void }, IState> {
         this.timer = window.setInterval(
             () => this.setState({ seconds: Math.max(this.state.seconds - 1, 0) }),
             1000);
+    }
+
+    public componentDidUpdate(_, { seconds }: IState) {
+        if (seconds !== 0 && this.state.seconds === 0) {
+            playHorn();
+        }
     }
 
     public render() {
