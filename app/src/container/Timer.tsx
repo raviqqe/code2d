@@ -1,3 +1,4 @@
+import numeral = require("numeral");
 import * as React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -38,13 +39,20 @@ class Timer extends React.Component<IProps, IState> {
 
         return (
             <div className="Timer-container">
-                {Math.floor(seconds / 60)} {seconds % 60}
+                <div className="Timer-time">
+                    <div className="Timer-minutes">
+                        {Math.floor(seconds / 60)}
+                    </div>
+                    <div className="Timer-seconds">
+                        {numeral(seconds % 60).format("00")}
+                    </div>
+                </div>
                 <button onClick={() => this.setState({ paused: !paused })}>
                     {paused ? "restart" : "pause"}
                 </button>
-                <div onClick={this.props.toggleTimer}>
+                <button className="Timer-button" onClick={this.props.toggleTimer}>
                     <Link to="/tasks/todo">cancel</Link>
-                </div>
+                </button>
             </div>
         );
     }
