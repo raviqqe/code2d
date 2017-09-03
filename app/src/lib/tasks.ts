@@ -8,6 +8,7 @@ export interface INewTask {
 
 export interface ITask extends INewTask {
     createdAt: number;
+    spentSeconds: number;
     updatedAt: number;
 }
 
@@ -21,6 +22,7 @@ class Tasks {
     public create = async (newTask: ITask | INewTask): Promise<ITask> => {
         const task: ITask = {
             createdAt: Date.now(),
+            spentSeconds: 0,
             ...newTask,
             updatedAt: Date.now(),
         };

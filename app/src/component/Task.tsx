@@ -1,4 +1,5 @@
 import * as _ from "lodash";
+import numeral = require("numeral");
 import * as React from "react";
 import { Check, Clock, RotateCcw, Trash2 } from "react-feather";
 import { connect } from "react-redux";
@@ -30,7 +31,10 @@ class Task extends React.Component<IProps, IState> {
     public state: IState = { showButtons: false };
 
     public render() {
-        const { createdAt, detailed, setCurrentTask, setTask, updatedAt } = this.props;
+        const {
+            createdAt, detailed, setCurrentTask, setTask, spentSeconds, updatedAt,
+        } = this.props;
+
         const editable = detailed;
         const task = this.task;
 
@@ -58,6 +62,7 @@ class Task extends React.Component<IProps, IState> {
                         text={task.description}
                         onEdit={(description) => setTask(task, { ...task, description })}
                     />,
+                    this.renderSpentSeconds(),
                     this.renderDate("Created at", createdAt),
                     this.renderDate("Updated at", updatedAt),
                 ]}
@@ -133,8 +138,16 @@ class Task extends React.Component<IProps, IState> {
     }
 
     private get task(): ITask {
-        const { createdAt, description, name, updatedAt } = this.props;
-        return { createdAt, description, name, updatedAt };
+        const { createdAt, description, name, spentSeconds, updatedAt } = this.props;
+        return { createdAt, description, name, spentSeconds, updatedAt };
+    }
+
+    private renderSpentSeconds = () => {
+        return (
+            <div key="spentTime" className="Task-spent-time">
+                Spent for: {numeral(this.props.spentSeconds / 3600).format("0[.]0")} hours
+            </div>
+        );
     }
 
     private renderDate = (label: string, timestamp: number) => {
