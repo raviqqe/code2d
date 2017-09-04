@@ -1,3 +1,4 @@
+import Immutable = require("seamless-immutable");
 import actionCreatorFactory from "typescript-fsa";
 import { reducerWithInitialState } from "typescript-fsa-reducers";
 
@@ -11,8 +12,8 @@ export const actionCreators = {
     signOut: () => signOut(null),
 };
 
-export const initialState = { signedIn: false };
+export const initialState = Immutable({ signedIn: false });
 
 export const reducer = reducerWithInitialState(initialState)
-    .case(signIn, () => ({ signedIn: true }))
-    .case(signOut, () => ({ signedIn: false }));
+    .case(signIn, (state) => state.merge({ signedIn: true }))
+    .case(signOut, (state) => state.merge({ signedIn: false }));

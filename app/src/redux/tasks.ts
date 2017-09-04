@@ -1,6 +1,8 @@
 import { findIndex, remove } from "lodash";
 import { SagaIterator } from "redux-saga";
 import { call, put, select } from "redux-saga/effects";
+import { ImmutableObject } from "seamless-immutable";
+import Immutable = require("seamless-immutable");
 import actionCreatorFactory from "typescript-fsa";
 import { reducerWithInitialState } from "typescript-fsa-reducers";
 
@@ -51,25 +53,25 @@ export interface IState {
     todoTasks: ITask[];
 }
 
-export const initialState: IState = {
+export const initialState: ImmutableObject<IState> = Immutable({
     creatingTask: false,
     currentTask: null,
     doneTasks: [],
     newTask: { name: "", description: "" },
     todoTasks: [],
-};
+});
 
 export const reducer = reducerWithInitialState(initialState)
-    .case(createTask, (state) => ({ ...state, creatingTask: false }))
-    .case(resetNewTask, (state) => ({ ...state, newTask: { name: "", description: "" } }))
-    .case(getDoneTasks.done, (state, { result }) => ({ ...state, doneTasks: result }))
-    .case(getTodoTasks.done, (state, { result }) => ({ ...state, todoTasks: result }))
-    .case(setCurrentTask, (state, currentTask) => ({ ...state, currentTask }))
-    .case(setNewTask, (state, newTask) => ({ ...state, newTask }))
-    .case(setDoneTasks, (state, doneTasks) => ({ ...state, doneTasks }))
-    .case(setTodoTasks, (state, todoTasks) => ({ ...state, todoTasks }))
-    .case(startCreatingTask, (state) => ({ ...state, creatingTask: true }))
-    .case(stopCreatingTask, (state) => ({ ...state, creatingTask: false }));
+    .case(createTask, (state) => state.merge({ creatingTask: false }))
+    .case(resetNewTask, (state) => state.merge({ newTask: { name: "", description: "" } }))
+    .case(getDoneTasks.done, (state, { result }) => state.merge({ doneTasks: result }))
+    .case(getTodoTasks.done, (state, { result }) => state.merge({ todoTasks: result }))
+    .case(setCurrentTask, (state, currentTask) => state.merge({ currentTask }))
+    .case(setNewTask, (state, newTask) => state.merge({ newTask }))
+    .case(setDoneTasks, (state, doneTasks) => state.merge({ doneTasks }))
+    .case(setTodoTasks, (state, todoTasks) => state.merge({ todoTasks }))
+    .case(startCreatingTask, (state) => state.merge({ creatingTask: true }))
+    .case(stopCreatingTask, (state) => state.merge({ creatingTask: false }));
 
 export const sagas = [
     takeEvery(
@@ -131,7 +133,7 @@ export const sagas = [
     takeEvery(
         setDoneTask,
         function* _({ newTask, oldTask }): SagaIterator {
-            const tasks: ITask[] = yield select(({ tasks: { doneTasks } }) => doneTasks);
+            const tasks: ITask[] = [...(yield select(({ tasks: { doneTasks } }) => doneTasks))];
             tasks[findIndex(tasks, oldTask)] = newTask;
             yield put(setDoneTasks(tasks));
             yield put(setCurrentTask(newTask));
@@ -144,7 +146,7 @@ export const sagas = [
     takeEvery(
         setTodoTask,
         function* _({ newTask, oldTask }): SagaIterator {
-            const tasks: ITask[] = yield select(({ tasks: { todoTasks } }) => todoTasks);
+            const tasks: ITask[] = [...(yield select(({ tasks: { todoTasks } }) => todoTasks))];
             tasks[findIndex(tasks, oldTask)] = newTask;
             yield put(setTodoTasks(tasks));
             yield put(setCurrentTask(newTask));

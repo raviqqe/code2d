@@ -1,5 +1,7 @@
 import { SagaIterator } from "redux-saga";
 import { call, put } from "redux-saga/effects";
+import { ImmutableObject } from "seamless-immutable";
+import Immutable = require("seamless-immutable");
 import actionCreatorFactory from "typescript-fsa";
 import { reducerWithInitialState } from "typescript-fsa-reducers";
 
@@ -13,15 +15,20 @@ const signIn = actionCreatorFactory().async<
 
 export default { signIn: () => signIn.started(null) };
 
-export const initialState: { error: Error | null, halfway: boolean } = {
+export interface IState {
+    error: Error | null;
+    halfway: boolean;
+}
+
+export const initialState: ImmutableObject<IState> = Immutable({
     error: null,
     halfway: false,
-};
+});
 
 export const reducer = reducerWithInitialState(initialState)
-    .case(signIn.started, () => ({ error: null, halfway: true }))
-    .case(signIn.done, () => ({ error: null, halfway: false }))
-    .case(signIn.failed, (_, { error }) => ({ error, halfway: false }));
+    .case(signIn.started, (state) => state.merge({ error: null, halfway: true }))
+    .case(signIn.done, (state) => state.merge({ error: null, halfway: false }))
+    .case(signIn.failed, (state, { error }) => state.merge({ error, halfway: false }));
 
 export const sagas = [
     takeEvery(
