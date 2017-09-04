@@ -19,42 +19,17 @@ class Tasks {
         this.done = done;
     }
 
-    public create = async (newTask: ITask | INewTask): Promise<ITask> => {
-        const task: ITask = {
-            createdAt: Date.now(),
-            spentSeconds: 0,
-            ...newTask,
-            updatedAt: Date.now(),
-        };
-
-        await this.setAll([task, ...(await this.getAll())]);
-
-        return task;
-    }
-
-    public remove = async (task: ITask): Promise<void> => {
-        const tasks = await this.getAll();
-
-        _.remove(tasks, task);
-
-        await this.setAll(tasks);
-    }
-
-    public set = async (oldTask: ITask, newTask: ITask): Promise<void> => {
-        await this.reference.child(_.findIndex(await this.getAll(), oldTask)).set(newTask);
-    }
-
-    public getAll = async (): Promise<ITask[]> => {
+    public get = async (): Promise<ITask[]> => {
         const tasks = (await this.reference.once("value")).val();
         return tasks ? tasks : [];
     }
 
-    public setAll = async (tasks: ITask[]): Promise<void> => {
+    public set = async (tasks: ITask[]): Promise<void> => {
         await this.reference.set(tasks);
     }
 
     public include = async (task: ITask): Promise<boolean> => {
-        return _.findIndex(await this.getAll(), task) >= 0;
+        return _.findIndex(await this.get(), task) >= 0;
     }
 
     private get reference(): firebase.database.Reference {
@@ -68,13 +43,3 @@ class Tasks {
 
 export const todoTasks = new Tasks(false);
 export const doneTasks = new Tasks(true);
-
-export async function switchTaskState(task: ITask): Promise<void> {
-    if (await todoTasks.include(task)) {
-        await todoTasks.remove(task);
-        await doneTasks.create(task);
-    } else {
-        await doneTasks.remove(task);
-        await todoTasks.create(task);
-    }
-}
