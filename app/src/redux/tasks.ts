@@ -1,5 +1,6 @@
+import { findIndex, remove } from "lodash";
 import { SagaIterator } from "redux-saga";
-import { call, put } from "redux-saga/effects";
+import { call, put, select } from "redux-saga/effects";
 import actionCreatorFactory from "typescript-fsa";
 import { reducerWithInitialState } from "typescript-fsa-reducers";
 
@@ -9,11 +10,12 @@ import { takeEvery } from "./utils";
 
 const factory = actionCreatorFactory();
 
-const createTask = factory<INewTask>("CREATE_TASK");
+const createTask = factory("CREATE_TASK");
 const getDoneTasks = factory.async<void, ITask[]>("GET_DONE_TASKS");
 const getTodoTasks = factory.async<void, ITask[]>("GET_TODO_TASKS");
 const removeDoneTask = factory<ITask>("REMOVE_DONE_TASK");
 const removeTodoTask = factory<ITask>("REMOVE_TODO_TASK");
+const resetNewTask = factory("RESET_NEW_TASK");
 const setCurrentTask = factory<ITask | null>("SET_CURRENT_TASK");
 const setNewTask = factory<INewTask>("SET_NEW_TASK");
 const setDoneTask = factory<{ newTask: ITask, oldTask: ITask }>("SET_DONE_TASK");
@@ -41,7 +43,7 @@ export const actionCreators = {
     switchTaskState,
 };
 
-export interface IInitialState {
+export interface IState {
     creatingTask: boolean;
     currentTask: ITask | null;
     doneTasks: ITask[];
@@ -49,7 +51,7 @@ export interface IInitialState {
     todoTasks: ITask[];
 }
 
-export const initialState: IInitialState = {
+export const initialState: IState = {
     creatingTask: false,
     currentTask: null,
     doneTasks: [],
@@ -58,69 +60,98 @@ export const initialState: IInitialState = {
 };
 
 export const reducer = reducerWithInitialState(initialState)
-    .case(createTask, (state) =>
-        ({ ...state, creatingTask: false, newTask: { name: "", description: "" } }))
+    .case(createTask, (state) => ({ ...state, creatingTask: false }))
+    .case(resetNewTask, (state) => ({ ...state, newTask: { name: "", description: "" } }))
     .case(getDoneTasks.done, (state, { result }) => ({ ...state, doneTasks: result }))
     .case(getTodoTasks.done, (state, { result }) => ({ ...state, todoTasks: result }))
     .case(setCurrentTask, (state, currentTask) => ({ ...state, currentTask }))
     .case(setNewTask, (state, newTask) => ({ ...state, newTask }))
+    .case(setDoneTasks, (state, doneTasks) => ({ ...state, doneTasks }))
+    .case(setTodoTasks, (state, todoTasks) => ({ ...state, todoTasks }))
     .case(startCreatingTask, (state) => ({ ...state, creatingTask: true }))
     .case(stopCreatingTask, (state) => ({ ...state, creatingTask: false }));
 
 export const sagas = [
     takeEvery(
         createTask,
-        function* _(newTask: INewTask): SagaIterator {
-            const task = yield call(todoTasks.create, newTask);
+        function* _(): SagaIterator {
+            const { newTask, todoTasks }: IState = yield select(({ tasks }) => tasks);
+            const task: ITask = {
+                ...newTask,
+                createdAt: Date.now(),
+                spentSeconds: 0,
+                updatedAt: Date.now(),
+            };
+
+            yield put(setTodoTasks([task, ...todoTasks]));
             yield put(setCurrentTask(task));
+            yield put(resetNewTask());
         }),
     takeEvery(
         getDoneTasks.started,
         function* _(): SagaIterator {
-            const tasks: ITask[] = yield call(doneTasks.getAll);
-            yield put(getDoneTasks.done({ params: null, result: tasks }));
+            yield put(getDoneTasks.done({ params: null, result: yield call(doneTasks.get) }));
         }),
     takeEvery(
         getTodoTasks.started,
         function* _(): SagaIterator {
-            const tasks: ITask[] = yield call(todoTasks.getAll);
-            yield put(getTodoTasks.done({ params: null, result: tasks }));
+            yield put(getTodoTasks.done({ params: null, result: yield call(todoTasks.get) }));
         }),
     takeEvery(
         switchTaskState,
         function* _(task: ITask): SagaIterator {
-            yield call(tasks.switchTaskState, task);
+            const { doneTasks, todoTasks }: IState = yield select(({ tasks }) => tasks);
+
+            if (findIndex(todoTasks, task) >= 0) {
+                yield put(removeTodoTask(task));
+                yield put(setDoneTasks([task, ...doneTasks]));
+            } else {
+                yield put(removeDoneTask(task));
+                yield put(setTodoTasks([task, ...todoTasks]));
+            }
         }),
     takeEvery(
         removeDoneTask,
         function* _(task: ITask): SagaIterator {
-            yield call(doneTasks.remove, task);
+            const tasks: ITask[] = [...(yield select(({ tasks: { doneTasks } }) => doneTasks))];
+
+            remove(tasks, task);
+
+            yield put(setDoneTasks(tasks));
         }),
     takeEvery(
         removeTodoTask,
         function* _(task: ITask): SagaIterator {
-            yield call(todoTasks.remove, task);
+            const tasks: ITask[] = [...(yield select(({ tasks: { todoTasks } }) => todoTasks))];
+
+            remove(tasks, task);
+
+            yield put(setTodoTasks(tasks));
         }),
     takeEvery(
         setDoneTask,
         function* _({ newTask, oldTask }): SagaIterator {
-            yield call(doneTasks.set, oldTask, newTask);
+            const tasks: ITask[] = yield select(({ tasks: { doneTasks } }) => doneTasks);
+            tasks[findIndex(tasks, oldTask)] = newTask;
+            yield put(setDoneTasks(tasks));
             yield put(setCurrentTask(newTask));
         }),
     takeEvery(
         setDoneTasks,
         function* _(tasks: ITask[]): SagaIterator {
-            yield call(doneTasks.setAll, tasks);
+            yield call(doneTasks.set, tasks);
         }),
     takeEvery(
         setTodoTask,
         function* _({ newTask, oldTask }): SagaIterator {
-            yield call(todoTasks.set, oldTask, newTask);
+            const tasks: ITask[] = yield select(({ tasks: { todoTasks } }) => todoTasks);
+            tasks[findIndex(tasks, oldTask)] = newTask;
+            yield put(setTodoTasks(tasks));
             yield put(setCurrentTask(newTask));
         }),
     takeEvery(
         setTodoTasks,
         function* _(tasks: ITask[]): SagaIterator {
-            yield call(todoTasks.setAll, tasks);
+            yield call(todoTasks.set, tasks);
         }),
 ];

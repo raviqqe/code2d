@@ -7,7 +7,7 @@ import { actionCreators } from "../redux/tasks";
 import "./style/CreateTask.css";
 
 interface IProps {
-    createTask: (task: INewTask) => void;
+    createTask: () => void;
     creatingTask: boolean;
     newTask: INewTask;
     setNewTask: (task: INewTask) => void;
@@ -43,7 +43,7 @@ class CreateTask extends React.Component<IProps> {
         return (
             <form
                 className="CreateTask-form-container"
-                onSubmit={() => this.props.createTask(newTask)}
+                onSubmit={() => this.props.createTask()}
             >
                 <input
                     ref={(name) => { this.name = name; }}
