@@ -8,40 +8,21 @@ interface ITask {
     updatedAt: number;
 }
 
-export const truncateTodoTasks = createTruncateTasksFunction(
-    "todo",
-    (tasks: ITask[]) => {
-        for (const task of extractOldTasks(tasks)) {
-            _.remove(tasks, task);
-        }
+export const truncateTasks = functions.database.ref("users/{userId}/tasks/{state}/{taskId}").onCreate(
+    async ({ data: { ref: { parent } } }) => {
+        const snapshot = await parent.once("value");
 
-        return tasks;
-    });
+        if (snapshot.numChildren() >= maxTasks) {
+            const tasks = snapshot.val();
 
-export const truncateDoneTasks = createTruncateTasksFunction(
-    "done",
-    (keyToTask: { [key: string]: ITask }) => {
-        for (const { key } of extractOldTasks(
-            Object.keys(keyToTask).map((key) => ({ key, ...keyToTask[key] })))) {
-            delete keyToTask[key];
-        }
-
-        return keyToTask;
-    });
-
-function createTruncateTasksFunction<T>(
-    state: "done" | "todo",
-    callback: (tasks: T) => T) {
-    return functions.database.ref(`users/{userId}/tasks/${state}/{taskId}`).onCreate(
-        async ({ data: { ref: { parent } } }) => {
-            const snapshot = await parent.once("value");
-
-            if (snapshot.numChildren() >= maxTasks) {
-                await parent.set(callback(snapshot.val()));
+            for (const task of extractOldTasks(tasks)) {
+                _.remove(tasks, task);
             }
-        });
-}
+
+            await parent.set(tasks);
+        }
+    });
 
 function extractOldTasks(tasks: ITask[]): ITask[] {
-    return [...tasks].sort((x, y) => y.updatedAt - x.updatedAt).slice(maxTasks);
+    return _.sortBy(tasks, ({ updatedAt }) => -updatedAt).slice(maxTasks);
 }
