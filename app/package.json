@@ -16,6 +16,7 @@
     "react-scripts-ts": "2.6.0",
     "react-sortable-hoc": "^0.6.7",
     "redux-saga": "^0.15.6",
+    "seamless-immutable": "^7.1.2",
     "typescript-fsa": "^2.4.0",
     "typescript-fsa-reducers": "^0.4.4",
     "typescript-fsa-redux-saga": "^1.0.2"
@@ -27,6 +28,8 @@
     "@types/react-dom": "^15.5.4",
     "@types/react-redux": "^5.0.6",
     "@types/react-sortable-hoc": "^0.6.0",
+    "@types/seamless-immutable": "^7.1.1",
+    "jest": "^20.0.4",
     "node-sass-chokidar": "0.0.3",
     "stylelint": "^8.0.0",
     "stylelint-config-recommended-scss": "^2.0.0",
