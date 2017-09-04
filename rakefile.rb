@@ -3,6 +3,12 @@ REGION = 'us-east-1'.freeze
 
 TERRAFORM_VARS = "-var domain=#{DOMAIN} -var region=#{REGION}".freeze
 
+task :test do
+  cd 'functions' do
+    sh 'rake test'
+  end
+end
+
 task :build do
   cd 'app' do
     sh 'rake build'
