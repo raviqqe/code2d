@@ -57,13 +57,6 @@ class Tasks {
         return _.findIndex(await this.getAll(), task) >= 0;
     }
 
-    public onUpdate = (callback: (tasks: ITask[]) => void): void => {
-        this.reference.on("value", (snapshot): void => {
-            const tasks = snapshot.val();
-            callback(tasks ? tasks : []);
-        });
-    }
-
     private get reference(): firebase.database.Reference {
         return firebase.database().ref(this.path);
     }

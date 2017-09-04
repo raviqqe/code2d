@@ -10,6 +10,8 @@ import { takeEvery } from "./utils";
 const factory = actionCreatorFactory();
 
 const createTask = factory<INewTask>("CREATE_TASK");
+const getDoneTasks = factory.async<void, ITask[]>("GET_DONE_TASKS");
+const getTodoTasks = factory.async<void, ITask[]>("GET_TODO_TASKS");
 const removeDoneTask = factory<ITask>("REMOVE_DONE_TASK");
 const removeTodoTask = factory<ITask>("REMOVE_TODO_TASK");
 const setCurrentTask = factory<ITask | null>("SET_CURRENT_TASK");
@@ -21,11 +23,11 @@ const setTodoTasks = factory<ITask[]>("SET_TODO_TASKS");
 const startCreatingTask = factory("START_CREATING_TASK");
 const stopCreatingTask = factory("STOP_CREATING_TASK");
 const switchTaskState = factory<ITask>("SWITCH_TASK_STATE");
-const updateDoneTasks = factory<ITask[]>("UPDATE_DONE_TASKS");
-const updateTodoTasks = factory<ITask[]>("UPDATE_TODO_TASKS");
 
 export const actionCreators = {
     createTask,
+    getDoneTasks: () => getDoneTasks.started(null),
+    getTodoTasks: () => getTodoTasks.started(null),
     removeDoneTask,
     removeTodoTask,
     setCurrentTask,
@@ -37,8 +39,6 @@ export const actionCreators = {
     startCreatingTask,
     stopCreatingTask,
     switchTaskState,
-    updateDoneTasks,
-    updateTodoTasks,
 };
 
 export interface IInitialState {
@@ -60,12 +60,12 @@ export const initialState: IInitialState = {
 export const reducer = reducerWithInitialState(initialState)
     .case(createTask, (state) =>
         ({ ...state, creatingTask: false, newTask: { name: "", description: "" } }))
+    .case(getDoneTasks.done, (state, { result }) => ({ ...state, doneTasks: result }))
+    .case(getTodoTasks.done, (state, { result }) => ({ ...state, todoTasks: result }))
     .case(setCurrentTask, (state, currentTask) => ({ ...state, currentTask }))
     .case(setNewTask, (state, newTask) => ({ ...state, newTask }))
     .case(startCreatingTask, (state) => ({ ...state, creatingTask: true }))
-    .case(stopCreatingTask, (state) => ({ ...state, creatingTask: false }))
-    .case(updateDoneTasks, (state, tasks) => ({ ...state, doneTasks: tasks }))
-    .case(updateTodoTasks, (state, tasks) => ({ ...state, todoTasks: tasks }));
+    .case(stopCreatingTask, (state) => ({ ...state, creatingTask: false }));
 
 export const sagas = [
     takeEvery(
@@ -73,6 +73,18 @@ export const sagas = [
         function* _(newTask: INewTask): SagaIterator {
             const task = yield call(todoTasks.create, newTask);
             yield put(setCurrentTask(task));
+        }),
+    takeEvery(
+        getDoneTasks.started,
+        function* _(): SagaIterator {
+            const tasks: ITask[] = yield call(doneTasks.getAll);
+            yield put(getDoneTasks.done({ params: null, result: tasks }));
+        }),
+    takeEvery(
+        getTodoTasks.started,
+        function* _(): SagaIterator {
+            const tasks: ITask[] = yield call(todoTasks.getAll);
+            yield put(getTodoTasks.done({ params: null, result: tasks }));
         }),
     takeEvery(
         switchTaskState,
