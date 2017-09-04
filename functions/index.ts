@@ -12,7 +12,7 @@ export const truncateTasks = functions.database.ref("users/{userId}/tasks/{state
     async ({ data: { ref: { parent } } }) => {
         const snapshot = await parent.once("value");
 
-        if (snapshot.numChildren() >= maxTasks) {
+        if (snapshot.numChildren() > maxTasks) {
             const tasks = snapshot.val();
 
             for (const task of extractOldTasks(tasks)) {
