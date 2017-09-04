@@ -22,6 +22,6 @@ export const truncateTasks = functions.database.ref("users/{userId}/tasks/{state
         }
     });
 
-function extractOldTasks(tasks: ITask[]): ITask[] {
-    return _.sortBy(tasks, ({ updatedAt }) => -updatedAt).slice(maxTasks);
+export function extractOldTasks(tasks: ITask[], localMaxTasks = maxTasks): ITask[] {
+    return _.sortBy(tasks, ({ updatedAt }) => -updatedAt).slice(localMaxTasks);
 }

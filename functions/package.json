@@ -6,5 +6,9 @@
     "firebase-functions": "^0.5.7",
     "lodash": "^4.17.4"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "@types/jest": "^20.0.8",
+    "jest": "^20.0.4"
+  }
 }
