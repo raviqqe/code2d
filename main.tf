@@ -75,13 +75,9 @@ resource "aws_route53_record" "txt" {
 resource "aws_route53_record" "r" {
   zone_id = "${aws_route53_zone.z.zone_id}"
   name    = "${var.domain}"
+  ttl     = 5
   type    = "A"
-
-  alias {
-    name                   = "${aws_cloudfront_distribution.d.domain_name}"
-    zone_id                = "${aws_cloudfront_distribution.d.hosted_zone_id}"
-    evaluate_target_health = true
-  }
+  records = ["151.101.1.195", "151.101.65.195"]
 }
 
 output "name_servers" {
