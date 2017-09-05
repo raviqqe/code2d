@@ -43,7 +43,10 @@ class CreateTask extends React.Component<IProps> {
         return (
             <form
                 className="CreateTask-form-container"
-                onSubmit={() => this.props.createTask()}
+                onSubmit={(event) => {
+                    this.props.createTask();
+                    event.preventDefault();
+                }}
             >
                 <input
                     ref={(name) => { this.name = name; }}
