@@ -1,0 +1,5 @@
+[{
+	"origin": ["http://localhost:3000", "https://code2d.net"],
+	"method": ["GET", "POST"],
+	"maxAgeSeconds": 3600
+}]

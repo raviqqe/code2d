@@ -1,3 +1,4 @@
+PROJECT_ID = 'work2d-162714'.freeze
 DOMAIN = 'code2d.net'.freeze
 REGION = 'us-east-1'.freeze
 
@@ -25,6 +26,7 @@ task deploy: :build do
   sh "terraform apply #{TERRAFORM_VARS}"
 
   sh 'firebase deploy'
+  sh `gsutil cors set storage_cors.json gs://#{PROJECT_ID}.appspot.com`
 
   cd 'app' do
     sh "BUCKET=#{DOMAIN} rake deploy"
