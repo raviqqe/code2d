@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.16.2",
     "firebase": "^4.3.0",
     "lodash": "^4.17.4",
     "numeral": "^2.0.6",

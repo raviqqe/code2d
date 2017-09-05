@@ -1,3 +1,4 @@
+import axios from "axios";
 import * as firebase from "firebase";
 import * as _ from "lodash";
 
@@ -20,20 +21,24 @@ class Tasks {
     }
 
     public get = async (): Promise<ITask[]> => {
-        const tasks = (await this.reference.once("value")).val();
-        return tasks ? tasks : [];
+        try {
+            return (await axios.get(await this.reference.getDownloadURL())).data;
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
     }
 
     public set = async (tasks: ITask[]): Promise<void> => {
-        await this.reference.set(tasks);
+        await this.reference.putString(JSON.stringify(tasks));
     }
 
     public include = async (task: ITask): Promise<boolean> => {
         return _.findIndex(await this.get(), task) >= 0;
     }
 
-    private get reference(): firebase.database.Reference {
-        return firebase.database().ref(this.path);
+    private get reference(): firebase.storage.Reference {
+        return firebase.storage().ref(this.path);
     }
 
     private get path(): string {
