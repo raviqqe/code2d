@@ -1,0 +1,10 @@
+service firebase.storage {
+  match /users/{userId}/tasks {
+    match /todo {
+      allow read, write: if request.auth.uid == userId && request.resource.size < 256 * 1024;
+    }
+    match /done {
+      allow read, write: if request.auth.uid == userId && request.resource.size < 256 * 1024;
+    }
+  }
+}
