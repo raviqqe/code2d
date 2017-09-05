@@ -30,7 +30,7 @@ class TaskList extends React.Component<IProps> {
                 <SortableTasks
                     done={done}
                     onSortEnd={({ newIndex, oldIndex }) =>
-                        setTasks(arrayMove(tasks, oldIndex, newIndex))}
+                        setTasks(arrayMove([...tasks], oldIndex, newIndex))}
                     tasks={tasks}
                     {...sortableProps}
                 />
