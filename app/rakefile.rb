@@ -16,10 +16,6 @@ task run: :build do
   sh 'npx react-scripts-ts start'
 end
 
-task :deploy do
-  sh "aws s3 cp --acl public-read --recursive build s3://#{ENV['BUCKET']}"
-end
-
 task :clean do
   sh 'git clean -dfx'
 end

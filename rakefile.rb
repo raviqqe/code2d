@@ -28,10 +28,6 @@ task deploy: :build do
   sh 'firebase deploy'
   sh "gsutil cors set storage_cors.json gs://#{PROJECT_ID}.appspot.com"
 
-  cd 'app' do
-    sh "BUCKET=#{DOMAIN} rake deploy"
-  end
-
   name_servers = `terraform output name_servers`
                  .split(/[,\s]+/)
                  .map { |s| 'Name=' + s }
