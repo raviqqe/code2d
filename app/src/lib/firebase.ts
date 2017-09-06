@@ -16,6 +16,6 @@ export async function signIn(): Promise<void> {
     await firebase.auth().getRedirectResult();
 }
 
-export function onAuthStateChanged(callback: (user: firebase.User) => void) {
+export function onAuthStateChanged(callback: (user: firebase.User) => void): void {
     firebase.auth().onAuthStateChanged(callback);
 }
