@@ -1,14 +1,15 @@
 import * as React from "react";
+import { connect } from "react-redux";
 import { BrowserRouter, Redirect, Route } from "react-router-dom";
 
 import SignIn from "./SignIn";
 import Tasks from "./Tasks";
 
-export default class extends React.Component {
+class App extends React.Component<{ initialized: boolean }> {
     public render() {
         return (
             <BrowserRouter>
-                <div>
+                <div style={this.props.initialized ? {} : { display: "none" }}>
                     <Route exact={true} path="/" render={() => <Redirect to="/tasks" />} />
                     <Route exact={true} path="/tasks" render={() => <Redirect to="/tasks/todo" />} />
                     <Route exact={true} path="/tasks/todo" render={() => <Tasks />} />
@@ -19,3 +20,5 @@ export default class extends React.Component {
         );
     }
 }
+
+export default connect(({ authState }) => authState)(App);
