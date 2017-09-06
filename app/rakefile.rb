@@ -8,7 +8,7 @@ task build: :deps do
 end
 
 task test: :deps do
-  sh 'CI=true npx react-scripts-ts test --env=jsdom'
+  sh 'CI=true npx react-scripts-ts test --coverage --env=jsdom'
 end
 
 task run: :build do
