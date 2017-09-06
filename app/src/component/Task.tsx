@@ -16,7 +16,7 @@ interface IProps extends ITask {
     currentTask: ITask | null;
     detailed: boolean;
     done?: boolean;
-    setTask: (oldTask: ITask, newTask: ITask) => void;
+    updateCurrentTask: (task: ITask) => void;
     switchTaskState: (task: ITask) => void;
     removeTask: (task: ITask) => void;
     setCurrentTask: (task: ITask | null) => void;
@@ -32,7 +32,7 @@ class Task extends React.Component<IProps, IState> {
 
     public render() {
         const {
-            createdAt, detailed, setCurrentTask, setTask, spentSeconds, updatedAt,
+            createdAt, detailed, setCurrentTask, spentSeconds, updatedAt, updateCurrentTask,
         } = this.props;
 
         const editable = detailed;
@@ -51,7 +51,7 @@ class Task extends React.Component<IProps, IState> {
                     <TaskName
                         editable={editable}
                         text={task.name}
-                        onEdit={(name) => setTask(task, { ...task, name })}
+                        onEdit={(name) => updateCurrentTask({ ...task, name })}
                     />
                     {this.buttons}
                 </div>
@@ -60,7 +60,7 @@ class Task extends React.Component<IProps, IState> {
                         key="description"
                         editable={editable}
                         text={task.description}
-                        onEdit={(description) => setTask(task, { ...task, description })}
+                        onEdit={(description) => updateCurrentTask({ ...task, description })}
                     />,
                     this.renderSpentSeconds(),
                     this.renderDate("Created at", createdAt),
@@ -169,17 +169,5 @@ class Task extends React.Component<IProps, IState> {
 
 export default connect(
     ({ tasks }) => tasks,
-    (dispatch, { done }) => {
-        const {
-            removeDoneTask, removeTodoTask,
-            setDoneTask, setTodoTask,
-            ...rest,
-        } = bindActionCreators({ ...tasksActionCreators, ...timerActionCreators }, dispatch);
-
-        return {
-            removeTask: done ? removeDoneTask : removeTodoTask,
-            setTask: done ? setDoneTask : setTodoTask,
-            ...rest,
-        };
-    },
+    { ...tasksActionCreators, ...timerActionCreators },
 )(Task);

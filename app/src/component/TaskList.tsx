@@ -43,7 +43,7 @@ export default connect(
     ({ tasks: { todoTasks, doneTasks } }, { done }) =>
         ({ tasks: done ? doneTasks : todoTasks } as any), // TODO: Remove `as any`.
     (dispatch, { done }) => {
-        const { setDoneTasks, setTodoTasks } = bindActionCreators(actionCreators, dispatch);
-        return { setTasks: done ? setDoneTasks : setTodoTasks };
+        const { setTasks } = bindActionCreators(actionCreators, dispatch);
+        return { setTasks: (tasks: ITask[]) => setTasks(done, tasks) };
     },
 )(TaskList);
