@@ -37,52 +37,33 @@ it("creates a new task", async () => {
     check(false, "", "");
 });
 
-it("Remove todo task", async () => {
-    expect.assertions(4);
+for (const done of [false, true]) {
+    const todo = done ? "done" : "todo";
+    const Todo = todo[0].toUpperCase() + todo.slice(1);
 
-    const store = createStore();
+    it(`Remove a ${todo} task`, async () => {
+        expect.assertions(4);
 
-    expect(getState(store).todoTasks.length).toBe(0);
+        const store = createStore();
 
-    store.dispatch(actionCreators.getTodoTasks());
-    await sleep(100);
+        const tasksState = () => getState(store)[todo + "Tasks"];
+        const getTasksAction = actionCreators[`get${Todo}Tasks`]();
 
-    const tasks = getState(store).todoTasks;
+        expect(tasksState().length).toBe(0);
 
-    expect(tasks.length).toBe(1);
+        store.dispatch(getTasksAction);
+        await sleep(100);
 
-    store.dispatch(actionCreators.removeTodoTask(tasks[0]));
-    await sleep(100);
+        expect(tasksState().length).toBe(1);
 
-    expect(getState(store).todoTasks.length).toBe(0);
+        store.dispatch(actionCreators[`remove${Todo}Task`](tasksState()[0]));
+        await sleep(100);
 
-    store.dispatch(actionCreators.getTodoTasks());
-    await sleep(100);
+        expect(tasksState().length).toBe(0);
 
-    expect(getState(store).todoTasks.length).toBe(0);
-});
+        store.dispatch(getTasksAction);
+        await sleep(100);
 
-it("Remove done task", async () => {
-    expect.assertions(4);
-
-    const store = createStore();
-
-    expect(getState(store).doneTasks.length).toBe(0);
-
-    store.dispatch(actionCreators.getDoneTasks());
-    await sleep(100);
-
-    const tasks = getState(store).doneTasks;
-
-    expect(tasks.length).toBe(1);
-
-    store.dispatch(actionCreators.removeDoneTask(tasks[0]));
-    await sleep(100);
-
-    expect(getState(store).doneTasks.length).toBe(0);
-
-    store.dispatch(actionCreators.getDoneTasks());
-    await sleep(100);
-
-    expect(getState(store).doneTasks.length).toBe(0);
-});
+        expect(tasksState().length).toBe(0);
+    });
+}
