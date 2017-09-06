@@ -13,7 +13,13 @@ export interface ITask extends INewTask {
 }
 
 class Tasks {
-    private tasks: ITask[] = [];
+    private tasks: ITask[] = [{
+        createdAt: 42,
+        description: "testDescription",
+        name: "testName",
+        spentSeconds: 42,
+        updatedAt: 42,
+    }];
 
     public get = async (): Promise<ITask[]> => {
         return this.tasks;
