@@ -5,14 +5,10 @@ import { reducerWithInitialState } from "typescript-fsa-reducers";
 const actionCreator = actionCreatorFactory("AUTH_STATE");
 
 const initialize = actionCreator("INITIALIZE");
-const signIn = actionCreator<null>("SIGN_IN");
-const signOut = actionCreator<null>("SIGN_OUT");
+const signIn = actionCreator("SIGN_IN");
+const signOut = actionCreator("SIGN_OUT");
 
-export const actionCreators = {
-    initialize,
-    signIn: () => signIn(null),
-    signOut: () => signOut(null),
-};
+export const actionCreators = { initialize, signIn, signOut };
 
 export const initialState = Immutable({ initialized: false, signedIn: false });
 
