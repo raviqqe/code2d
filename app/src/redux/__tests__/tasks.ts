@@ -5,6 +5,8 @@ import { actionCreators, initialState, IState, reducer } from "../tasks";
 jest.mock("../../lib/tasks");
 
 it("creates a new task", async () => {
+    expect.assertions(3 * 3);
+
     const store = createStore();
 
     const check = (creatingTask: boolean, name: string, description: string) => {

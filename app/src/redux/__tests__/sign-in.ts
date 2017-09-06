@@ -8,6 +8,8 @@ it("tries to sign in", () => {
 });
 
 it("tries to sign in", async () => {
+    expect.assertions(2);
+
     for (const mock of [{ signIn: () => undefined }, { signIn: () => { throw new Error(); } }]) {
         jest.doMock("../../lib/firebase", () => mock);
 
