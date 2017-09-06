@@ -37,8 +37,8 @@ it("creates a new task", async () => {
     check(false, "", "");
 });
 
-it("get todo tasks", async () => {
-    expect.assertions(2);
+it("Remove todo task", async () => {
+    expect.assertions(4);
 
     const store = createStore();
 
@@ -47,11 +47,23 @@ it("get todo tasks", async () => {
     store.dispatch(actionCreators.getTodoTasks());
     await sleep(100);
 
-    expect(getState(store).todoTasks.length).toBe(1);
+    const tasks = getState(store).todoTasks;
+
+    expect(tasks.length).toBe(1);
+
+    store.dispatch(actionCreators.removeTodoTask(tasks[0]));
+    await sleep(100);
+
+    expect(getState(store).todoTasks.length).toBe(0);
+
+    store.dispatch(actionCreators.getTodoTasks());
+    await sleep(100);
+
+    expect(getState(store).todoTasks.length).toBe(0);
 });
 
-it("get done tasks", async () => {
-    expect.assertions(2);
+it("Remove done task", async () => {
+    expect.assertions(4);
 
     const store = createStore();
 
@@ -60,5 +72,17 @@ it("get done tasks", async () => {
     store.dispatch(actionCreators.getDoneTasks());
     await sleep(100);
 
-    expect(getState(store).doneTasks.length).toBe(1);
+    const tasks = getState(store).doneTasks;
+
+    expect(tasks.length).toBe(1);
+
+    store.dispatch(actionCreators.removeDoneTask(tasks[0]));
+    await sleep(100);
+
+    expect(getState(store).doneTasks.length).toBe(0);
+
+    store.dispatch(actionCreators.getDoneTasks());
+    await sleep(100);
+
+    expect(getState(store).doneTasks.length).toBe(0);
 });
