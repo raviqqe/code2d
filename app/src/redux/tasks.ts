@@ -6,40 +6,36 @@ import Immutable = require("seamless-immutable");
 import actionCreatorFactory from "typescript-fsa";
 import { reducerWithInitialState } from "typescript-fsa-reducers";
 
-import * as tasks from "../lib/tasks";
-import { doneTasks, INewTask, ITask, todoTasks } from "../lib/tasks";
+import * as lib from "../lib/tasks";
+import { INewTask, ITask } from "../lib/tasks";
 import { takeEvery } from "./utils";
 
 const factory = actionCreatorFactory();
 
 const createTask = factory("CREATE_TASK");
-const getDoneTasks = factory.async<void, ITask[]>("GET_DONE_TASKS");
-const getTodoTasks = factory.async<void, ITask[]>("GET_TODO_TASKS");
-const removeDoneTask = factory<ITask>("REMOVE_DONE_TASK");
-const removeTodoTask = factory<ITask>("REMOVE_TODO_TASK");
+const getTasks = factory.async<boolean, ITask[]>("GET_TASKS");
+const removeTask = factory<{ done: boolean, task: ITask }>("REMOVE_TASK");
 const resetNewTask = factory("RESET_NEW_TASK");
 const setCurrentTask = factory<ITask | null>("SET_CURRENT_TASK");
 const setNewTask = factory<INewTask>("SET_NEW_TASK");
-const setDoneTask = factory<{ newTask: ITask, oldTask: ITask }>("SET_DONE_TASK");
-const setDoneTasks = factory<ITask[]>("SET_DONE_TASKS");
-const setTodoTask = factory<{ newTask: ITask, oldTask: ITask }>("SET_TODO_TASK");
-const setTodoTasks = factory<ITask[]>("SET_TODO_TASKS");
+const setTask = factory<{ done: boolean, newTask: ITask, oldTask: ITask }>("SET_TASK");
+const setTasks = factory<{ done: boolean, tasks: ITask[] }>("SET_TASKS");
 const startCreatingTask = factory("START_CREATING_TASK");
 const stopCreatingTask = factory("STOP_CREATING_TASK");
 const switchTaskState = factory<ITask>("SWITCH_TASK_STATE");
 
 export const actionCreators = {
     createTask,
-    getDoneTasks: () => getDoneTasks.started(null),
-    getTodoTasks: () => getTodoTasks.started(null),
-    removeDoneTask,
-    removeTodoTask,
+    getDoneTasks: () => getTasks.started(true),
+    getTodoTasks: () => getTasks.started(false),
+    removeDoneTask: (task: ITask) => removeTask({ done: true, task }),
+    removeTodoTask: (task: ITask) => removeTask({ done: false, task }),
     setCurrentTask,
-    setDoneTask: (oldTask: ITask, newTask: ITask) => setDoneTask({ newTask, oldTask }),
-    setDoneTasks,
+    setDoneTask: (oldTask: ITask, newTask: ITask) => setTask({ done: true, newTask, oldTask }),
+    setDoneTasks: (tasks: ITask[]) => setTasks({ done: true, tasks }),
     setNewTask,
-    setTodoTask: (oldTask: ITask, newTask: ITask) => setTodoTask({ newTask, oldTask }),
-    setTodoTasks,
+    setTodoTask: (oldTask: ITask, newTask: ITask) => setTask({ done: false, newTask, oldTask }),
+    setTodoTasks: (tasks: ITask[]) => setTasks({ done: false, tasks }),
     startCreatingTask,
     stopCreatingTask,
     switchTaskState,
@@ -64,12 +60,12 @@ export const initialState: ImmutableObject<IState> = Immutable({
 export const reducer = reducerWithInitialState(initialState)
     .case(createTask, (state) => state.merge({ creatingTask: false }))
     .case(resetNewTask, (state) => state.merge({ newTask: { name: "", description: "" } }))
-    .case(getDoneTasks.done, (state, { result }) => state.merge({ doneTasks: result }))
-    .case(getTodoTasks.done, (state, { result }) => state.merge({ todoTasks: result }))
+    .case(getTasks.done, (state, { params, result }) =>
+        state.merge(params ? { doneTasks: result } : { todoTasks: result }))
     .case(setCurrentTask, (state, currentTask) => state.merge({ currentTask }))
     .case(setNewTask, (state, newTask) => state.merge({ newTask }))
-    .case(setDoneTasks, (state, doneTasks) => state.merge({ doneTasks }))
-    .case(setTodoTasks, (state, todoTasks) => state.merge({ todoTasks }))
+    .case(setTasks, (state, { done, tasks }) =>
+        state.merge(done ? { doneTasks: tasks } : { todoTasks: tasks }))
     .case(startCreatingTask, (state) => state.merge({ creatingTask: true }))
     .case(stopCreatingTask, (state) => state.merge({ creatingTask: false }));
 
@@ -85,75 +81,53 @@ export const sagas = [
                 updatedAt: Date.now(),
             };
 
-            yield put(setTodoTasks([task, ...todoTasks]));
+            yield put(setTasks({ done: false, tasks: [task, ...todoTasks] }));
             yield put(setCurrentTask(task));
             yield put(resetNewTask());
         }),
     takeEvery(
-        getDoneTasks.started,
-        function* _(): SagaIterator {
-            yield put(getDoneTasks.done({ params: null, result: yield call(doneTasks.get) }));
-        }),
-    takeEvery(
-        getTodoTasks.started,
-        function* _(): SagaIterator {
-            yield put(getTodoTasks.done({ params: null, result: yield call(todoTasks.get) }));
+        getTasks.started,
+        function* _(done: boolean): SagaIterator {
+            yield put(getTasks.done({
+                params: done,
+                result: yield call(lib.tasks(done).get),
+            }));
         }),
     takeEvery(
         switchTaskState,
         function* _(task: ITask): SagaIterator {
             const { doneTasks, todoTasks }: IState = yield select(({ tasks }) => tasks);
+            const done = findIndex(doneTasks, task) >= 0;
 
-            if (findIndex(todoTasks, task) >= 0) {
-                yield put(removeTodoTask(task));
-                yield put(setDoneTasks([task, ...doneTasks]));
-            } else {
-                yield put(removeDoneTask(task));
-                yield put(setTodoTasks([task, ...todoTasks]));
-            }
+            yield put(removeTask({ done, task }));
+            yield put(setTasks({ done: !done, tasks: [task, ...(done ? todoTasks : doneTasks)] }));
         }),
     takeEvery(
-        removeDoneTask,
-        function* _(task: ITask): SagaIterator {
-            const tasks: ITask[] = [...(yield select(({ tasks: { doneTasks } }) => doneTasks))];
+        removeTask,
+        function* _({ done, task }): SagaIterator {
+            const tasks: ITask[] = [...(yield select(
+                ({ tasks: { doneTasks, todoTasks } }: { tasks: IState }) =>
+                    done ? doneTasks : todoTasks))];
 
             remove(tasks, task);
 
-            yield put(setDoneTasks(tasks));
+            yield put(setTasks({ done, tasks }));
         }),
     takeEvery(
-        removeTodoTask,
-        function* _(task: ITask): SagaIterator {
-            const tasks: ITask[] = [...(yield select(({ tasks: { todoTasks } }) => todoTasks))];
+        setTask,
+        function* _({ done, newTask, oldTask }): SagaIterator {
+            const tasks: ITask[] = [...(yield select(
+                ({ tasks: { doneTasks, todoTasks } }: { tasks: IState }) =>
+                    done ? doneTasks : todoTasks))];
 
-            remove(tasks, task);
-
-            yield put(setTodoTasks(tasks));
-        }),
-    takeEvery(
-        setDoneTask,
-        function* _({ newTask, oldTask }): SagaIterator {
-            const tasks: ITask[] = [...(yield select(({ tasks: { doneTasks } }) => doneTasks))];
             tasks[findIndex(tasks, oldTask)] = newTask;
-            yield put(setDoneTasks(tasks));
+
+            yield put(setTasks({ done, tasks }));
             yield put(setCurrentTask(newTask));
         }),
     takeEvery(
-        setDoneTasks,
-        function* _(tasks: ITask[]): SagaIterator {
-            yield call(doneTasks.set, tasks);
-        }),
-    takeEvery(
-        setTodoTask,
-        function* _({ newTask, oldTask }): SagaIterator {
-            const tasks: ITask[] = [...(yield select(({ tasks: { todoTasks } }) => todoTasks))];
-            tasks[findIndex(tasks, oldTask)] = newTask;
-            yield put(setTodoTasks(tasks));
-            yield put(setCurrentTask(newTask));
-        }),
-    takeEvery(
-        setTodoTasks,
-        function* _(tasks: ITask[]): SagaIterator {
-            yield call(todoTasks.set, tasks);
+        setTasks,
+        function* _({ done, tasks }): SagaIterator {
+            yield call(lib.tasks(done).set, tasks);
         }),
 ];

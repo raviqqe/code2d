@@ -34,5 +34,9 @@ class Tasks {
     }
 }
 
-export const todoTasks = new Tasks();
-export const doneTasks = new Tasks();
+const todoTasks = new Tasks();
+const doneTasks = new Tasks();
+
+export function tasks(done: boolean) {
+    return done ? doneTasks : todoTasks;
+}
