@@ -8,27 +8,16 @@ import { reducerWithInitialState } from "typescript-fsa-reducers";
 import * as firebase from "../lib/firebase";
 import { takeEvery } from "./utils";
 
-const signIn = actionCreatorFactory().async<
-    null,
-    null,
-    Error>("SIGN_IN");
+const signIn = actionCreatorFactory().async<null, null>("SIGN_IN");
 
-export default { signIn: () => signIn.started(null) };
+export const actionCreators = { signIn: () => signIn.started(null) };
 
-export interface IState {
-    error: Error | null;
-    halfway: boolean;
-}
-
-export const initialState: ImmutableObject<IState> = Immutable({
-    error: null,
-    halfway: false,
-});
+export const initialState = Immutable({ halfway: false });
 
 export const reducer = reducerWithInitialState(initialState)
-    .case(signIn.started, (state) => state.merge({ error: null, halfway: true }))
-    .case(signIn.done, (state) => state.merge({ error: null, halfway: false }))
-    .case(signIn.failed, (state, { error }) => state.merge({ error, halfway: false }));
+    .case(signIn.started, (state) => state.merge({ halfway: true }))
+    .case(signIn.done, (state) => state.merge({ halfway: false }))
+    .case(signIn.failed, (state) => state.merge({ halfway: false }));
 
 export const sagas = [
     takeEvery(

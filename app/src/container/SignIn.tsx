@@ -3,11 +3,10 @@ import { Github } from "react-feather";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
-import actionCreators from "../redux/sign-in";
+import { actionCreators } from "../redux/sign-in";
 import "./style/SignIn.css";
 
 interface IProps {
-    error: Error;
     halfway: boolean;
     signedIn: boolean;
     signIn: () => void;
