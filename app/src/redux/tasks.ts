@@ -14,7 +14,7 @@ const factory = actionCreatorFactory();
 
 const createTask = factory("CREATE_TASK");
 const getTasks = factory.async<boolean, ITask[]>("GET_TASKS");
-const removeTask = factory<{ done: boolean, task: ITask }>("REMOVE_TASK");
+const removeTask = factory<ITask>("REMOVE_TASK");
 const resetNewTask = factory("RESET_NEW_TASK");
 const setCurrentTask = factory<ITask | null>("SET_CURRENT_TASK");
 const setNewTask = factory<INewTask>("SET_NEW_TASK");
@@ -28,8 +28,8 @@ export const actionCreators = {
     createTask,
     getDoneTasks: () => getTasks.started(true),
     getTodoTasks: () => getTasks.started(false),
-    removeDoneTask: (task: ITask) => removeTask({ done: true, task }),
-    removeTodoTask: (task: ITask) => removeTask({ done: false, task }),
+    removeDoneTask: removeTask,
+    removeTodoTask: removeTask,
     setCurrentTask,
     setDoneTask: (oldTask: ITask, newTask: ITask) => setTask({ done: true, newTask, oldTask }),
     setDoneTasks: (tasks: ITask[]) => setTasks({ done: true, tasks }),
@@ -99,13 +99,15 @@ export const sagas = [
             const { doneTasks, todoTasks }: IState = yield select(({ tasks }) => tasks);
             const done = findIndex(doneTasks, task) >= 0;
 
-            yield put(removeTask({ done, task }));
+            yield put(removeTask(task));
             yield put(setTasks({ done: !done, tasks: [task, ...(done ? todoTasks : doneTasks)] }));
         }),
     takeEvery(
         removeTask,
-        function* _({ done, task }): SagaIterator {
-            const tasks: ITask[] = [...(yield selectTasks(done))];
+        function* _(task: ITask): SagaIterator {
+            const { doneTasks, todoTasks }: IState = yield select(({ tasks }) => tasks);
+            const done = findIndex(doneTasks, task) >= 0;
+            const tasks = [...(done ? doneTasks : todoTasks)];
 
             remove(tasks, task);
 
