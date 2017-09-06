@@ -1,29 +1,20 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 import "./style/MenuLink.css";
 
 interface IProps {
+    location: { pathname: string };
     path: string;
 }
 
-interface IState {
-    path: string;
-}
-
-export default class extends React.Component<IProps, IState> {
-    public state: IState = { path: "" };
-
-    public componentDidMount() {
-        window.onpopstate = () => this.setState({ path: window.location.pathname });
-    }
-
+class MenuLink extends React.Component<IProps> {
     public render() {
-        const { children, path } = this.props;
+        const { children, location: { pathname }, path } = this.props;
 
         return (
             <div
-                className={path === window.location.pathname
+                className={path === pathname
                     ? "MenuLink-container-highlighted"
                     : "MenuLink-container"}
             >
@@ -32,3 +23,5 @@ export default class extends React.Component<IProps, IState> {
         );
     }
 }
+
+export default withRouter(MenuLink);
