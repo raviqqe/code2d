@@ -105,9 +105,7 @@ export const sagas = [
     takeEvery(
         removeTask,
         function* _({ done, task }): SagaIterator {
-            const tasks: ITask[] = [...(yield select(
-                ({ tasks: { doneTasks, todoTasks } }: { tasks: IState }) =>
-                    done ? doneTasks : todoTasks))];
+            const tasks: ITask[] = [...(yield selectTasks(done))];
 
             remove(tasks, task);
 
@@ -116,9 +114,7 @@ export const sagas = [
     takeEvery(
         setTask,
         function* _({ done, newTask, oldTask }): SagaIterator {
-            const tasks: ITask[] = [...(yield select(
-                ({ tasks: { doneTasks, todoTasks } }: { tasks: IState }) =>
-                    done ? doneTasks : todoTasks))];
+            const tasks: ITask[] = [...(yield selectTasks(done))];
 
             tasks[findIndex(tasks, oldTask)] = newTask;
 
@@ -131,3 +127,8 @@ export const sagas = [
             yield call(lib.tasks(done).set, tasks);
         }),
 ];
+
+function selectTasks(done: boolean): any {
+    return select(({ tasks: { doneTasks, todoTasks } }: { tasks: IState }) =>
+        done ? doneTasks : todoTasks);
+}
