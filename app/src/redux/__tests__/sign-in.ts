@@ -7,16 +7,19 @@ it("tries to sign in", () => {
     expect(reducer(initialState, actionCreators.signIn()).halfway).toBe(true);
 });
 
-it("tries to sign in", async () => {
-    expect.assertions(2);
+for (const signIn of [() => undefined, () => { throw new Error(); }]) {
+    it("tries to sign in", async () => {
+        expect.assertions(1);
 
-    for (const mock of [{ signIn: () => undefined }, { signIn: () => { throw new Error(); } }]) {
-        jest.doMock("../../lib/firebase", () => mock);
+        jest.resetModules();
+        jest.doMock("../../lib/firebase", () => ({ signIn, onAuthStateChanged: () => undefined }));
 
-        const store = createStore();
+        const store = require("..").default();
 
         store.dispatch(actionCreators.signIn());
         await sleep(100);
         expect((store.getState() as any).signIn.halfway).toBe(false);
-    }
-});
+
+        jest.dontMock("../../lib/firebase");
+    });
+}
