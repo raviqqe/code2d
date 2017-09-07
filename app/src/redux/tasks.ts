@@ -56,7 +56,8 @@ export const initialState: ImmutableObject<IState> = Immutable({
 
 export const reducer = reducerWithInitialState(initialState)
     .case(createTask, (state) => state.merge({ creatingTask: false }))
-    .case(getTasks.done, (state, { result }) => state.merge({ tasks: result }))
+    .case(getTasks.done, (state, { result }) =>
+        state.merge({ tasks: result, currentTask: result[0] || null }))
     .case(setCurrentTask, (state, currentTask) => state.merge({ currentTask }))
     .case(setNewTask, (state, newTask) => state.merge({ newTask }))
     .case(setTasks, (state, tasks) => state.merge({ tasks }))

@@ -15,7 +15,6 @@ import Timer from "./Timer";
 interface IProps {
     creatingTask: boolean;
     currentTask: ITask | null;
-    setCurrentTask: (task: ITask | null) => void;
     signedIn: boolean;
     tasks: ITask[];
     done: boolean;
@@ -57,18 +56,6 @@ class Tasks extends React.Component<IProps> {
                 <div className="Tasks-blank" />
             </div>
         );
-    }
-
-    public componentDidMount() {
-        this.componentDidUpdate();
-    }
-
-    public componentDidUpdate() {
-        const { currentTask, tasks } = this.props;
-
-        if (!currentTask || _.findIndex(tasks, currentTask) < 0) {
-            this.props.setCurrentTask(tasks[0] || null);
-        }
     }
 }
 
