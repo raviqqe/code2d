@@ -11,8 +11,7 @@ const dummyTask: ITask = {
 
 jest.mock("axios", () => ({
     default: {
-        get: (): Promise<{ data: any[] }> =>
-            Promise.resolve({ data: [{}, {}, {}] }),
+        get: (): Promise<{ data: any[] }> => Promise.resolve({ data: [{}, {}, {}] }),
     },
 }));
 
