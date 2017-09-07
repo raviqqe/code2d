@@ -15,14 +15,20 @@ export interface ITask extends INewTask {
 
 class Tasks {
     private done: boolean;
+    private tasks: ITask[] | null = null;
 
     constructor(done: boolean) {
         this.done = done;
     }
 
     public get = async (): Promise<ITask[]> => {
+        if (_.isArray(this.tasks)) {
+            return this.tasks;
+        }
+
         try {
-            return (await axios.get(await this.reference.getDownloadURL())).data;
+            this.tasks = (await axios.get(await this.reference.getDownloadURL())).data;
+            return this.tasks;
         } catch (error) {
             console.log(error);
             return [];
@@ -30,6 +36,7 @@ class Tasks {
     }
 
     public set = async (tasks: ITask[]): Promise<void> => {
+        this.tasks = tasks;
         await this.reference.putString(JSON.stringify(tasks));
     }
 
