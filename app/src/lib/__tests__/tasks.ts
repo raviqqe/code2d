@@ -25,9 +25,14 @@ const dummyTask: ITask = {
     updatedAt: 42,
 };
 
-it("gets tasks", async () => {
+it("gets todo tasks", async () => {
     expect.assertions(1);
     expect((await lib.tasks(false).get()).length).toBe(3);
+});
+
+it("gets done tasks", async () => {
+    expect.assertions(1);
+    expect((await lib.tasks(true).get()).length).toBe(3);
 });
 
 it("sets tasks", async () => {
