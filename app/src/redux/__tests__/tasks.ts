@@ -38,31 +38,22 @@ it("creates a new task", async () => {
 });
 
 for (const done of [false, true]) {
-    const todo = done ? "done" : "todo";
-
-    it(`Remove a ${todo} task`, async () => {
+    it(`Remove a ${done ? "done" : "todo"} task`, async () => {
         expect.assertions(4);
 
         const store = createStore();
 
-        const tasksState = () => getState(store)[todo + "Tasks"];
-        const getTasksAction = actionCreators.getTasks(done);
+        const tasksState = () => getState(store).tasks;
+        const dispatch = async (action, length: number) => {
+            store.dispatch(action);
+            await sleep(100);
+            expect(tasksState().length).toBe(length);
+        };
 
         expect(tasksState().length).toBe(0);
 
-        store.dispatch(getTasksAction);
-        await sleep(100);
-
-        expect(tasksState().length).toBe(1);
-
-        store.dispatch(actionCreators.removeTask(tasksState()[0]));
-        await sleep(100);
-
-        expect(tasksState().length).toBe(0);
-
-        store.dispatch(getTasksAction);
-        await sleep(100);
-
-        expect(tasksState().length).toBe(0);
+        await dispatch(done ? actionCreators.toggleTasksState() : actionCreators.getTasks(), 1);
+        await dispatch(actionCreators.removeTask(tasksState()[0]), 0);
+        await dispatch(actionCreators.getTasks(), 0);
     });
 }
