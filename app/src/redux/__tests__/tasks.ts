@@ -56,7 +56,7 @@ it("cancels creating a new task", async () => {
 });
 
 for (const done of [false, true]) {
-    it(`Remove a ${done ? "done" : "todo"} task`, async () => {
+    it(`removes a ${done ? "done" : "todo"} task`, async () => {
         expect.assertions(4);
 
         const store = createStore();
@@ -76,7 +76,7 @@ for (const done of [false, true]) {
     });
 }
 
-it("toggles a tasks's state", async () => {
+it("toggles a task's state", async () => {
     expect.assertions(3);
 
     const store = createStore();
