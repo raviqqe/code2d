@@ -1,14 +1,6 @@
 import * as lib from "../tasks";
 import { ITask } from "../tasks";
 
-const dummyTask: ITask = {
-    createdAt: 42,
-    description: "bar",
-    name: "foo",
-    spentSeconds: 42,
-    updatedAt: 42,
-};
-
 jest.mock("axios", () => ({
     default: {
         get: (): Promise<{ data: any[] }> => Promise.resolve({ data: [{}, {}, {}] }),
@@ -24,6 +16,14 @@ jest.mock("firebase", () => ({
         }),
     }),
 }));
+
+const dummyTask: ITask = {
+    createdAt: 42,
+    description: "bar",
+    name: "foo",
+    spentSeconds: 42,
+    updatedAt: 42,
+};
 
 it("gets tasks", async () => {
     expect.assertions(1);
