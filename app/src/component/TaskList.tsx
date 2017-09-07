@@ -39,11 +39,4 @@ class TaskList extends React.Component<IProps> {
     }
 }
 
-export default connect(
-    ({ tasks: { todoTasks, doneTasks } }, { done }) =>
-        ({ tasks: done ? doneTasks : todoTasks } as any), // TODO: Remove `as any`.
-    (dispatch, { done }) => {
-        const { setTasks } = bindActionCreators(actionCreators, dispatch);
-        return { setTasks: (tasks: ITask[]) => setTasks(done, tasks) };
-    },
-)(TaskList);
+export default connect(({ tasks }) => tasks, actionCreators)(TaskList);

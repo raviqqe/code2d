@@ -30,8 +30,7 @@ export default function() {
             store.dispatch(authState.actionCreators.signOut());
         } else {
             store.dispatch(authState.actionCreators.signIn());
-            store.dispatch(tasks.actionCreators.getTasks(false));
-            store.dispatch(tasks.actionCreators.getTasks(true));
+            store.dispatch(tasks.actionCreators.getTasks());
         }
     });
 

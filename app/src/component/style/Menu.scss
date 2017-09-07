@@ -7,3 +7,26 @@
 	align-items: center;
 	width: 12em;
 }
+
+.Menu-button {
+	width: 100%;
+	text-align: center;
+
+	&:hover {
+		background: $light-grey;
+	}
+
+	color: $black;
+	padding: {
+		top: 0.5em;
+		bottom: 0.5em;
+		left: 1em;
+		right: 1em;
+	};
+}
+
+.Menu-button-highlighted {
+	@extend .Menu-button;
+
+	color: $light-red;
+}

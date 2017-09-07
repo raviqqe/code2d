@@ -33,8 +33,9 @@ class Tasks {
         await this.reference.putString(JSON.stringify(tasks));
     }
 
-    public include = async (task: ITask): Promise<boolean> => {
-        return _.findIndex(await this.get(), task) >= 0;
+    public create = async (task: ITask): Promise<void> => {
+        const tasks = await this.get();
+        await this.set([task, ...tasks]);
     }
 
     private get reference(): firebase.storage.Reference {

@@ -62,7 +62,7 @@ class Timer extends React.Component<IProps, IState> {
                         this.props.toggleTimer();
                     }}
                 >
-                    <Link to="/tasks/todo">stop</Link>
+                    <Link to="/tasks">stop</Link>
                 </button>
             </div>
         );

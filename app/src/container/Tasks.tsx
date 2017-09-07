@@ -40,7 +40,7 @@ class Tasks extends React.Component<IProps> {
                 </div>
                 <div className="Tasks-main">
                     <div className="Tasks-tasks">
-                        <TaskList {...{ done }} />
+                        <TaskList />
                     </div>
                     <div className="Tasks-sidebar">
                         {!creatingTask && currentTask &&
@@ -73,12 +73,6 @@ class Tasks extends React.Component<IProps> {
 }
 
 export default connect(
-    ({ authState, tasks: { creatingTask, currentTask, doneTasks, todoTasks }, timer }, { done }) => ({
-        ...authState,
-        creatingTask,
-        currentTask,
-        tasks: done ? doneTasks : todoTasks,
-        timerOn: timer.on,
-    }),
+    ({ authState, tasks, timer }, { done }) => ({ ...authState, ...tasks, timerOn: timer.on }),
     actionCreators,
 )(Tasks);

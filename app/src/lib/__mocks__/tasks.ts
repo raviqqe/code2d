@@ -29,6 +29,10 @@ class Tasks {
         this.tasks = tasks;
     }
 
+    public create = async (task: ITask): Promise<void> => {
+        this.tasks = [task, ...this.tasks];
+    }
+
     public include = async (task: ITask): Promise<boolean> => {
         return _.findIndex(this.tasks, task) >= 0;
     }
