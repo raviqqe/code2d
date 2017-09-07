@@ -21,7 +21,7 @@ const setNewTask = factory<INewTask>("SET_NEW_TASK");
 const setTasks = factory<{ done: boolean, tasks: ITask[] }>("SET_TASKS");
 const startCreatingTask = factory("START_CREATING_TASK");
 const stopCreatingTask = factory("STOP_CREATING_TASK");
-const switchTaskState = factory<ITask>("SWITCH_TASK_STATE");
+const toggleTaskState = factory<ITask>("SWITCH_TASK_STATE");
 const updateCurrentTask = factory<ITask>("UPDATE_CURRENT_TASK");
 
 export const actionCreators = {
@@ -33,7 +33,7 @@ export const actionCreators = {
     setTasks: (done: boolean, tasks: ITask[]) => setTasks({ done, tasks }),
     startCreatingTask,
     stopCreatingTask,
-    switchTaskState,
+    toggleTaskState,
     updateCurrentTask,
 };
 
@@ -90,7 +90,7 @@ export const sagas = [
             }));
         }),
     takeEvery(
-        switchTaskState,
+        toggleTaskState,
         function* _(task: ITask): SagaIterator {
             const { doneTasks, todoTasks }: IState = yield select(({ tasks }) => tasks);
             const done = findIndex(doneTasks, task) >= 0;
