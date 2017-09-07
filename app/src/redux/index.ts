@@ -3,6 +3,7 @@ import createSagaMiddleware from "redux-saga";
 import { all } from "redux-saga/effects";
 
 import * as firebase from "../lib/firebase";
+import * as tasksLib from "../lib/tasks";
 import * as authState from "./auth-state";
 import * as signIn from "./sign-in";
 import * as tasks from "./tasks";
@@ -23,7 +24,7 @@ export default function() {
         yield all([...signIn.sagas, ...tasks.sagas]);
     });
 
-    firebase.onAuthStateChanged((user) => {
+    firebase.onAuthStateChanged(async (user) => {
         store.dispatch(authState.actionCreators.initialize());
 
         if (user === null) {
@@ -31,6 +32,7 @@ export default function() {
         } else {
             store.dispatch(authState.actionCreators.signIn());
             store.dispatch(tasks.actionCreators.getTasks());
+            await tasksLib.tasks(true).get();
         }
     });
 
