@@ -38,9 +38,14 @@ class Tasks {
     }
 }
 
-const todoTasks = new Tasks();
-const doneTasks = new Tasks();
+let todoTasks = new Tasks();
+let doneTasks = new Tasks();
 
 export function tasks(done: boolean) {
     return done ? doneTasks : todoTasks;
+}
+
+export function resetMocks() {
+    todoTasks = new Tasks();
+    doneTasks = new Tasks();
 }

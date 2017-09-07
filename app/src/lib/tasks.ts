@@ -60,3 +60,7 @@ const doneTasks = new Tasks(true);
 export function tasks(done: boolean): Tasks {
     return done ? doneTasks : todoTasks;
 }
+
+export function resetMocks(): void {
+    // Do nothing in real module.
+}

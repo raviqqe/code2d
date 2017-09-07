@@ -1,4 +1,5 @@
 import createStore from "..";
+import * as lib from "../../lib/tasks";
 import { sleep } from "../../lib/utils";
 import { actionCreators, initialState, IState, reducer } from "../tasks";
 
@@ -7,6 +8,10 @@ jest.mock("../../lib/tasks");
 function getState(store): IState {
     return store.getState().tasks;
 }
+
+beforeEach(() => {
+    lib.resetMocks();
+});
 
 it("creates a new task", async () => {
     expect.assertions(3 * 3);
