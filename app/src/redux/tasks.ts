@@ -97,6 +97,7 @@ export const sagas = [
             remove(tasks, task);
 
             yield put(setTasks(tasks));
+            yield put(setCurrentTask(tasks[0] || null));
         }),
     takeEvery(
         setTasks,

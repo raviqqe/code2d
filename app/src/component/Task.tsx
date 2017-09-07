@@ -79,7 +79,10 @@ class Task extends React.Component<IProps, IState> {
                 <div
                     key="markTodo"
                     className="Task-button"
-                    onClick={() => this.props.toggleTaskState(task)}
+                    onClick={(event) => {
+                        this.props.toggleTaskState(task);
+                        event.stopPropagation();
+                    }}
                 >
                     <RotateCcw size={20} />
                 </div>,
@@ -89,7 +92,10 @@ class Task extends React.Component<IProps, IState> {
                 <div
                     key="markDone"
                     className="Task-button"
-                    onClick={() => this.props.toggleTaskState(task)}
+                    onClick={(event) => {
+                        this.props.toggleTaskState(task);
+                        event.stopPropagation();
+                    }}
                 >
                     <Check size={22} />
                 </div>,
@@ -97,9 +103,10 @@ class Task extends React.Component<IProps, IState> {
                     <div
                         key="turnOnTimer"
                         className="Task-button"
-                        onClick={() => {
+                        onClick={(event) => {
                             this.props.setCurrentTask(task);
                             this.props.toggleTimer();
+                            event.stopPropagation();
                         }}
                     >
                         <Clock size={22} />
@@ -112,7 +119,10 @@ class Task extends React.Component<IProps, IState> {
                 <div
                     key="trash"
                     className="Task-button"
-                    onClick={() => this.props.removeTask(task)}
+                    onClick={(event) => {
+                        this.props.removeTask(task);
+                        event.stopPropagation();
+                    }}
                 >
                     <Trash2 size={22} />
                 </div>,

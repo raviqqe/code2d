@@ -1,3 +1,5 @@
+import * as _ from "lodash";
+
 import createStore from "..";
 import * as lib from "../../lib/tasks";
 import { sleep } from "../../lib/utils";
@@ -80,6 +82,30 @@ for (const done of [false, true]) {
         await dispatch(actionCreators.getTasks(), 0);
     });
 }
+
+it("update a current task after removing a task", async () => {
+    expect.assertions(6);
+
+    const store = createStore();
+
+    const tasksState = () => getState(store).tasks;
+    const dispatch = async (action, length: number) => {
+        store.dispatch(action);
+        await sleep(100);
+        expect(tasksState().length).toBe(length);
+    };
+
+    expect(tasksState().length).toBe(0);
+
+    await dispatch(actionCreators.getTasks(), 1);
+    await dispatch(actionCreators.setNewTask({ description: "bar", name: "foo" }), 1);
+    await dispatch(actionCreators.createTask(), 2);
+    await dispatch(actionCreators.removeTask(tasksState()[0]), 1);
+
+    const { currentTask, tasks } = getState(store);
+
+    expect(_.findIndex(tasks, currentTask) >= 0).toBe(true);
+});
 
 it("toggles a task's state", async () => {
     expect.assertions(3);
