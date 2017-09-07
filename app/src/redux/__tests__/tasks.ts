@@ -37,6 +37,24 @@ it("creates a new task", async () => {
     check(false, "", "");
 });
 
+it("cancels creating a new task", async () => {
+    expect.assertions(3);
+
+    const store = createStore();
+
+    expect(getState(store).creatingTask).toBe(false);
+
+    store.dispatch(actionCreators.startCreatingTask());
+    await sleep(100);
+
+    expect(getState(store).creatingTask).toBe(true);
+
+    store.dispatch(actionCreators.stopCreatingTask());
+    await sleep(100);
+
+    expect(getState(store).creatingTask).toBe(false);
+});
+
 for (const done of [false, true]) {
     it(`Remove a ${done ? "done" : "todo"} task`, async () => {
         expect.assertions(4);
@@ -57,3 +75,39 @@ for (const done of [false, true]) {
         await dispatch(actionCreators.getTasks(), 0);
     });
 }
+
+it("toggles a tasks's state", async () => {
+    expect.assertions(3);
+
+    const store = createStore();
+    const dispatch = async (action, length: number) => {
+        store.dispatch(action);
+        await sleep(100);
+        expect(getState(store).tasks.length).toBe(length);
+    };
+
+    await dispatch(actionCreators.getTasks(), 1);
+    await dispatch(actionCreators.toggleTaskState(getState(store).currentTask), 0);
+    await dispatch(actionCreators.toggleTasksState(), 2);
+});
+
+it("updates a current task", async () => {
+    expect.assertions(2);
+
+    const store = createStore();
+
+    const dispatch = async (action) => {
+        store.dispatch(action);
+        await sleep(100);
+    };
+
+    expect(getState(store).currentTask).toBe(null);
+
+    await dispatch(actionCreators.getTasks());
+    await dispatch(actionCreators.updateCurrentTask({
+        ...(getState(store).currentTask),
+        name: "foo bar baz",
+    }));
+
+    expect(getState(store).currentTask.name).toBe("foo bar baz");
+});
