@@ -17,7 +17,7 @@ jest.mock("firebase", () => ({
     }),
 }));
 
-jest.mock("../cbor", () => ({
+jest.mock("../json", () => ({
     decode: () => Promise.resolve([{}, {}, {}]),
     encode: () => undefined,
 }));
