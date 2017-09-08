@@ -3,7 +3,7 @@ import { ITask } from "../tasks";
 
 jest.mock("axios", () => ({
     default: {
-        get: (): Promise<{ data: any[] }> => Promise.resolve({ data: [{}, {}, {}] }),
+        get: (): Promise<{ data: any[] }> => Promise.resolve({ data: null }),
     },
 }));
 
@@ -15,6 +15,11 @@ jest.mock("firebase", () => ({
             putString: (data: string) => undefined,
         }),
     }),
+}));
+
+jest.mock("../cbor", () => ({
+    decode: () => Promise.resolve([{}, {}, {}]),
+    encode: () => undefined,
 }));
 
 const dummyTask: ITask = {

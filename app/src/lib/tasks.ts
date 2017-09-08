@@ -2,6 +2,8 @@ import axios from "axios";
 import * as firebase from "firebase";
 import * as _ from "lodash";
 
+import * as cbor from "./cbor";
+
 export interface INewTask {
     name: string;
     description: string;
@@ -28,7 +30,8 @@ class Tasks {
         }
 
         try {
-            this.tasks = (await axios.get(await this.reference.getDownloadURL())).data;
+            this.tasks = await cbor.decode(
+                (await axios.get(await this.reference.getDownloadURL())).data);
             return this.tasks;
         } catch (error) {
             console.log(error);
@@ -38,7 +41,7 @@ class Tasks {
 
     public set = async (tasks: ITask[]): Promise<void> => {
         this.tasks = tasks;
-        await this.reference.putString(JSON.stringify(tasks));
+        await this.reference.putString(cbor.encode(tasks));
     }
 
     public create = async (task: ITask): Promise<void> => {

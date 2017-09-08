@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.16.2",
+    "cbor": "^3.0.3",
     "firebase": "^4.3.0",
     "lodash": "^4.17.4",
     "numeral": "^2.0.6",
