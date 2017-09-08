@@ -5,6 +5,11 @@ end
 task build: :deps do
   sh 'npx node-sass-chokidar src -o src'
   sh 'npx react-scripts-ts build'
+
+  sh %w[inkscape
+        --export-width 16 --export-height 16
+        --export-png build/favicon.png
+        ../images/icon.svg].join ' '
 end
 
 task test: :deps do
