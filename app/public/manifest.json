@@ -2,7 +2,7 @@
 	"short_name": "code2d",
 	"name": "code2d",
 	"icons": [{
-		"src": "favicon.ico",
+		"src": "icon.png",
 		"sizes": "192x192",
 		"type": "image/png"
 	}],

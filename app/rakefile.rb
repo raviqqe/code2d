@@ -10,6 +10,10 @@ task build: :deps do
         --export-width 16 --export-height 16
         --export-png build/favicon.png
         ../images/icon.svg].join ' '
+  sh %w[inkscape
+        --export-width 192 --export-height 192
+        --export-png build/icon.png
+        ../images/icon_circle.svg].join ' '
 end
 
 task test: :deps do
