@@ -60,6 +60,6 @@ class Tasks extends React.Component<IProps> {
 }
 
 export default connect(
-    ({ authState, tasks, timer }, { done }) => ({ ...authState, ...tasks, timerOn: timer.on }),
+    ({ authState, tasks, timer }) => ({ ...authState, ...tasks, timerOn: timer.on }),
     actionCreators,
 )(Tasks);
