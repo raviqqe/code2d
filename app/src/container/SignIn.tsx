@@ -23,13 +23,14 @@ class SignIn extends React.Component<IProps> {
         return (
             <div className="SignIn-container">
                 <div className="SignIn-main-container">
+                    <img className="SignIn-icon" src={require("../images/tsutsuji.svg")} />
                     <div className="SignIn-title">code2d</div>
                     <div className="SignIn-description">
                         Productivity tools for software engineers.
                     </div>
                 </div>
                 <button className="SignIn-button" onClick={this.props.signIn}>
-                    <div className="SignIn-icon"><Github /></div>
+                    <div className="SignIn-button-icon"><Github /></div>
                     Sign in with GitHub
                 </button>
             </div>
