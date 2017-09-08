@@ -50,7 +50,7 @@ export const initialState: ImmutableObject<IState> = Immutable({
     creatingTask: false,
     currentTask: null,
     done: false,
-    newTask: { name: "", description: "" },
+    newTask: { description: "", name: "", tags: [] },
     tasks: [],
 });
 
@@ -79,7 +79,7 @@ export const sagas = [
 
             yield put(setTasks([task, ...tasks]));
             yield put(setCurrentTask(task));
-            yield put(setNewTask({ description: "", name: "" }));
+            yield put(setNewTask({ description: "", name: "", tags: [] }));
         }),
     takeEvery(getTasks.started, getTasksSaga),
     takeEvery(toggleTasksState, getTasksSaga),

@@ -11,6 +11,7 @@ const task: ITask = {
     description: "bar",
     name: "foo",
     spentSeconds: 42,
+    tags: [],
     updatedAt: 42,
 };
 

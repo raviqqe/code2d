@@ -33,7 +33,7 @@ it("creates a new task", async () => {
 
     check(true, "", "");
 
-    store.dispatch(actionCreators.setNewTask({ name: "foo", description: "bar" }));
+    store.dispatch(actionCreators.setNewTask({ name: "foo", description: "bar", tags: [] }));
     await sleep(100);
 
     check(true, "foo", "bar");
@@ -98,7 +98,7 @@ it("update a current task after removing a task", async () => {
     expect(tasksState().length).toBe(0);
 
     await dispatch(actionCreators.getTasks(), 1);
-    await dispatch(actionCreators.setNewTask({ description: "bar", name: "foo" }), 1);
+    await dispatch(actionCreators.setNewTask({ description: "bar", name: "foo", tags: [] }), 1);
     await dispatch(actionCreators.createTask(), 2);
     await dispatch(actionCreators.removeTask(tasksState()[0]), 1);
 

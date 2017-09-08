@@ -5,6 +5,7 @@ import * as _ from "lodash";
 export interface INewTask {
     name: string;
     description: string;
+    tags: string[];
 }
 
 export interface ITask extends INewTask {
