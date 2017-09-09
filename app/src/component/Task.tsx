@@ -74,7 +74,6 @@ class Task extends React.Component<IProps, IState> {
     }
 
     private get buttons() {
-        const task = this.task;
         const buttons = [];
 
         if (this.props.done) {
@@ -83,7 +82,7 @@ class Task extends React.Component<IProps, IState> {
                     key="markTodo"
                     className="Task-button"
                     onClick={(event) => {
-                        this.props.toggleTaskState(task);
+                        this.props.toggleTaskState(this.task);
                         event.stopPropagation();
                     }}
                 >
@@ -96,7 +95,7 @@ class Task extends React.Component<IProps, IState> {
                     key="markDone"
                     className="Task-button"
                     onClick={(event) => {
-                        this.props.toggleTaskState(task);
+                        this.props.toggleTaskState(this.task);
                         event.stopPropagation();
                     }}
                 >
@@ -107,7 +106,7 @@ class Task extends React.Component<IProps, IState> {
                         key="turnOnTimer"
                         className="Task-button"
                         onClick={(event) => {
-                            this.props.setCurrentTask(task);
+                            this.props.setCurrentTask(this.task);
                             this.props.toggleTimer();
                             event.stopPropagation();
                         }}
@@ -123,7 +122,7 @@ class Task extends React.Component<IProps, IState> {
                     key="trash"
                     className="Task-button"
                     onClick={(event) => {
-                        this.props.removeTask(task);
+                        this.props.removeTask(this.task);
                         event.stopPropagation();
                     }}
                 >
