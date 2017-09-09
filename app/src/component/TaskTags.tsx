@@ -62,10 +62,12 @@ class TaskTags extends React.Component<IProps, IState> {
                     onBlur={() => this.setState({ taggingTask: false })}
                     onChange={({ target: { value } }) => this.setState({ newTag: value })}
                     onKeyDown={(event: React.KeyboardEvent<{}>) => {
-                        if (event.keyCode === 13 && newTag !== "" && !tags.includes(newTag)) {
+                        const tag = newTag.trim();
+
+                        if (event.keyCode === 13 && tag !== "" && !tags.includes(tag)) {
                             updateCurrentTask({
                                 ...currentTask,
-                                tags: [...tags, newTag],
+                                tags: [...tags, tag].sort(),
                             });
                         }
 
