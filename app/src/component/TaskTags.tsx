@@ -65,7 +65,7 @@ class TaskTags extends React.Component<IProps, IState> {
                         if (event.keyCode === 13 && newTag !== "" && !tags.includes(newTag)) {
                             updateCurrentTask({
                                 ...currentTask,
-                                tags: [...currentTask.tags, newTag],
+                                tags: [...tags, newTag],
                             });
                         }
 
