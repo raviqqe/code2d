@@ -1,5 +1,7 @@
 @import "../../style/colors.scss";
 
+$tag-size: 1.8em;
+
 .TaskTags-container {
 	font-size: 0.9em;
 	margin: {
@@ -16,20 +18,23 @@
 
 @mixin TaskTags-tag-like {
 	color: white;
-	padding: {
-		top: 0.1em;
-		bottom: 0.2em;
-		left: 0.8em;
-		right: 0.8em;
-	};
 	margin: 0.2em;
-	border-radius: 2em;
+	border-radius: $tag-size / 2;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .TaskTags-tag {
 	@include TaskTags-tag-like;
 
 	background: $grey;
+	height: $tag-size;
+	padding: {
+		bottom: 0.1em;
+		left: 0.8em;
+		right: 0.8em;
+	};
 }
 
 .TaskTags-input {
@@ -39,10 +44,9 @@
 .TaskTags-button {
 	@include TaskTags-tag-like;
 
-	padding: 0.3em;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	padding: 0;
+	width: $tag-size;
+	height: $tag-size;
 }
 
 .TaskTags-icon {
