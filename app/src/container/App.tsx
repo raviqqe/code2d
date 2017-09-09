@@ -10,6 +10,7 @@ class App extends React.Component<{ initialized: boolean }> {
         return (
             <BrowserRouter>
                 <div style={this.props.initialized ? {} : { display: "none" }}>
+                    <Route exact={true} path="/index.html" render={() => <Redirect to="/" />} />
                     <Route exact={true} path="/" render={() => <Redirect to="/tasks" />} />
                     <Route exact={true} path="/tasks" render={() => <Tasks />} />
                     <Route exact={true} path="/sign-in" component={SignIn} />
