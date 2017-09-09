@@ -11,6 +11,7 @@ import { actionCreators as timerActionCreators } from "../redux/timer";
 import "./style/Task.css";
 import TaskDescription from "./TaskDescription";
 import TaskName from "./TaskName";
+import TaskTags from "./TaskTags";
 
 interface IProps extends ITask {
     currentTask: ITask | null;
@@ -32,35 +33,37 @@ class Task extends React.Component<IProps, IState> {
 
     public render() {
         const {
-            createdAt, detailed, setCurrentTask, spentSeconds, updatedAt, updateCurrentTask,
+            createdAt, description, detailed, name, setCurrentTask,
+            spentSeconds, tags, updatedAt, updateCurrentTask,
         } = this.props;
 
         const editable = detailed;
-        const task = this.task;
 
         return (
             <div
                 className={!detailed && this.isCurrentTask
                     ? "Task-container-highlighted"
                     : "Task-container"}
-                onClick={() => setCurrentTask(task)}
+                onClick={() => setCurrentTask(this.task)}
                 onMouseOver={() => this.setState({ showButtons: true })}
                 onMouseOut={() => this.setState({ showButtons: false })}
             >
                 <div className="Task-header">
                     <TaskName
                         editable={editable}
-                        text={task.name}
-                        onEdit={(name) => updateCurrentTask({ ...task, name })}
+                        text={name}
+                        onEdit={(name) => updateCurrentTask({ ...this.task, name })}
                     />
                     {this.buttons}
                 </div>
                 {detailed && [
+                    <TaskTags key="tags" {...{ tags }} />,
                     <TaskDescription
                         key="description"
                         editable={editable}
-                        text={task.description}
-                        onEdit={(description) => updateCurrentTask({ ...task, description })}
+                        text={description}
+                        onEdit={(description) =>
+                            updateCurrentTask({ ...this.task, description })}
                     />,
                     this.renderSpentSeconds(),
                     this.renderDate("Created at", createdAt),
