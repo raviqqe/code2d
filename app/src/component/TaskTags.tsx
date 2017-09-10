@@ -81,6 +81,8 @@ class TaskTags extends React.Component<IProps, IState> {
                                 >
                                     {tag}
                                 </div>}
+                            shouldItemRender={(tag, input) =>
+                                tag.toLowerCase().slice(0, input.length) === input.toLowerCase()}
                             value={newTag}
                             onChange={({ target: { value } }) => this.setState({ newTag: value })}
                             onSelect={(newTag) => this.setState({ newTag })}
