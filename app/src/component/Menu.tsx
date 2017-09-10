@@ -38,6 +38,7 @@ class Menu extends React.Component<IProps> {
                         <TaskTag
                             key={index}
                             tag={tag}
+                            highlight={tag === currentTag}
                             onClick={() => setCurrentTag(tag === currentTag ? null : tag)}
                         />)}
                 </div>
