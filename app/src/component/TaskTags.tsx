@@ -73,7 +73,14 @@ class TaskTags extends React.Component<IProps, IState> {
                             ref={(input) => this.input = input}
                             getItemValue={(tag) => tag}
                             items={this.allTags}
-                            renderItem={(tag: string) => <div>{tag}</div>}
+                            renderItem={(tag: string, highlighted: boolean) =>
+                                <div
+                                    className={highlighted
+                                        ? "TaskTags-tag-highlighted"
+                                        : "TaskTags-tag"}
+                                >
+                                    {tag}
+                                </div>}
                             value={newTag}
                             onChange={({ target: { value } }) => this.setState({ newTag: value })}
                             onSelect={(newTag) => this.setState({ newTag })}
