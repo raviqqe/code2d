@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Plus } from "react-feather";
+import Plus = require("react-icons/lib/md/add");
 import { connect } from "react-redux";
 
 import { INewTask } from "../lib/tasks";
@@ -32,7 +32,7 @@ class CreateTask extends React.Component<IProps> {
                         className="CreateTask-plus-button"
                         onClick={this.props.startCreatingTask}
                     >
-                        <div className="CreateTask-icon"><Plus /></div>
+                        <Plus />
                     </button>
                 </div>
             );

@@ -32,15 +32,16 @@
 	align-items: flex-start;
 }
 
-.Task-buttons-container {
+.Task-buttons {
 	display: flex;
-	align-items: flex-start;
+	align-items: center;
 }
 
 .Task-button {
 	color: $black;
-	font-size: 0;
-	margin-right: 4px;
+	font-size: 1.5em;
+	display: flex;
+	margin-right: 0.1em;
 
 	&:last-child {
 		margin-right: 0;

@@ -39,9 +39,9 @@
 		left: 2em;
 		right: 2em;
 	};
-}
 
-.SignIn-button-icon {
-	font-size: 0;
-	margin-right: 10px;
+	& > svg {
+		font-size: 2em;
+		margin-right: 0.4em;
+	}
 }

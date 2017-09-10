@@ -16,10 +16,11 @@
 	width: 3em;
 	height: 3em;
 	border-radius: 1.5em;
-}
+	padding: 0;
 
-.CreateTask-icon {
-	font-size: 0;
+	& > svg {
+		font-size: 1.5em;
+	}
 }
 
 .CreateTask-form-container {

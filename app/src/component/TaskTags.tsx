@@ -1,7 +1,7 @@
 import * as _ from "lodash";
 import * as React from "react";
 import AutoComplete = require("react-autocomplete");
-import { Plus } from "react-feather";
+import Plus = require("react-icons/lib/md/add");
 import { connect } from "react-redux";
 
 import { extractTagsFromTasks, ITask } from "../lib/tasks";
@@ -49,9 +49,7 @@ class TaskTags extends React.Component<IProps, IState> {
                         className="TaskTags-button"
                         onClick={() => this.setState({ taggingTask: true })}
                     >
-                        <div className="TaskTags-icon">
-                            <Plus size={16} />
-                        </div>
+                        <Plus />
                     </button>
                 </div>
                 {taggingTask &&

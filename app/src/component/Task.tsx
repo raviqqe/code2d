@@ -1,7 +1,10 @@
 import * as _ from "lodash";
 import numeral = require("numeral");
 import * as React from "react";
-import { Check, Clock, RotateCcw, Trash2 } from "react-feather";
+import Clock = require("react-icons/lib/md/access-time");
+import Check = require("react-icons/lib/md/check");
+import Trash = require("react-icons/lib/md/delete");
+import Repeat = require("react-icons/lib/md/replay");
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -86,7 +89,7 @@ class Task extends React.Component<IProps, IState> {
                         event.stopPropagation();
                     }}
                 >
-                    <RotateCcw size={20} />
+                    <Repeat />
                 </div>,
             );
         } else {
@@ -99,7 +102,7 @@ class Task extends React.Component<IProps, IState> {
                         event.stopPropagation();
                     }}
                 >
-                    <Check size={22} />
+                    <Check />
                 </div>,
                 (
                     <div
@@ -111,7 +114,7 @@ class Task extends React.Component<IProps, IState> {
                             event.stopPropagation();
                         }}
                     >
-                        <Clock size={22} />
+                        <Clock />
                     </div>
                 ));
         }
@@ -126,13 +129,13 @@ class Task extends React.Component<IProps, IState> {
                         event.stopPropagation();
                     }}
                 >
-                    <Trash2 size={22} />
+                    <Trash />
                 </div>,
             );
         }
 
         return (
-            <div className="Task-buttons-container" style={this.buttonsStyle}>
+            <div className="Task-buttons" style={this.buttonsStyle}>
                 {buttons}
             </div>
         );

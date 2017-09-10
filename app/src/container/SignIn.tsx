@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Github } from "react-feather";
+import GitHub = require("react-icons/lib/go/mark-github");
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
@@ -30,8 +30,7 @@ class SignIn extends React.Component<IProps> {
                     </div>
                 </div>
                 <button className="SignIn-button" onClick={this.props.signIn}>
-                    <div className="SignIn-button-icon"><Github /></div>
-                    Sign in with GitHub
+                    <GitHub /> Sign in with GitHub
                 </button>
             </div>
         );
