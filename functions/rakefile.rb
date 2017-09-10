@@ -1,5 +1,5 @@
 task :build do
-  sh 'tsc'
+  sh 'npx tsc'
 end
 
 task test: :build do
