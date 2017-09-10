@@ -1,7 +1,7 @@
 import numeral = require("numeral");
 import * as React from "react";
+import Square = require("react-icons/lib/md/stop");
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 
 import { playHorn } from "../lib/audio";
 import { ITask } from "../lib/tasks";
@@ -62,7 +62,7 @@ class Timer extends React.Component<IProps, IState> {
                         this.props.toggleTimer();
                     }}
                 >
-                    <Link to="/tasks"><div className="Timer-square" /></Link>
+                    <Square />
                 </button>
             </div>
         );
