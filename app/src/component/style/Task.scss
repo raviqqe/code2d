@@ -1,6 +1,9 @@
 @import "../../style/colors.scss";
+@import "../../style/shadow.scss";
 
 @mixin Task-container {
+	@include shadow;
+
 	background: white;
 	border-radius: 0.5em;
 	padding: 0.5em;
@@ -20,7 +23,7 @@
 .Task-container-highlighted {
 	@extend .Task-container;
 
-	box-shadow: 0 0 0.2em 0.15em $light-red;
+	color: $light-red;
 }
 
 .Task-header {
@@ -35,6 +38,7 @@
 }
 
 .Task-button {
+	color: $black;
 	font-size: 0;
 	margin-right: 4px;
 
