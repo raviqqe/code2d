@@ -1,0 +1,24 @@
+@import "../../style/colors.scss";
+
+$TaskTag-size: 1.8em;
+
+@mixin TaskTag-tag-like {
+	color: white;
+	margin: 0.2em;
+	border-radius: $TaskTag-size / 2;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.TaskTag-container {
+	@include TaskTag-tag-like;
+
+	background: $grey;
+	height: $TaskTag-size;
+	padding: {
+		bottom: 0.1em;
+		left: 0.8em;
+		right: 0.8em;
+	};
+}
