@@ -1,11 +1,15 @@
+import * as _ from "lodash";
 import * as React from "react";
 import { connect } from "react-redux";
 
+import { ITask } from "../lib/tasks";
 import { actionCreators } from "../redux/tasks";
 import "./style/Menu.css";
+import TaskTag from "./TaskTag";
 
 interface IProps {
     done: boolean;
+    tasks: ITask[];
     toggleTasksState: () => void;
 }
 
@@ -27,8 +31,15 @@ class Menu extends React.Component<IProps> {
                 >
                     done
                 </div>
+                <div className="Menu-tags">
+                    {this.tags.map((tag, index) => <TaskTag key={index} tag={tag} />)}
+                </div>
             </div>
         );
+    }
+
+    private get tags(): string[] {
+        return _.uniq(_.flatMap(this.props.tasks, ({ tags }) => tags)).sort();
     }
 }
 
