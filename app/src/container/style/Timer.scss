@@ -24,7 +24,12 @@
 }
 
 .Timer-button {
-	font-size: 1.4em;
+	padding: {
+		top: 0.8em;
+		bottom: 0.8em;
+		left: 2em;
+		right: 2em;
+	};
 
 	& > a {
 		color: white;
@@ -34,4 +39,11 @@
 			color: white;
 		}
 	}
+}
+
+.Timer-square {
+	background: white;
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 2px;
 }
