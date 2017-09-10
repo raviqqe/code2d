@@ -1,4 +1,8 @@
-task :build do
+task :deps do
+  sh 'npm install'
+end
+
+task build: :deps do
   sh 'npx tsc'
 end
 
