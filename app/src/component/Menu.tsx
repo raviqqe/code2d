@@ -8,14 +8,16 @@ import "./style/Menu.css";
 import TaskTag from "./TaskTag";
 
 interface IProps {
+    currentTag: string | null;
     done: boolean;
+    setCurrentTag: (tag: string | null) => void;
     tasks: ITask[];
     toggleTasksState: () => void;
 }
 
 class Menu extends React.Component<IProps> {
     public render() {
-        const { done, toggleTasksState } = this.props;
+        const { currentTag, done, toggleTasksState, setCurrentTag } = this.props;
 
         return (
             <div className="Menu-container">
@@ -32,7 +34,12 @@ class Menu extends React.Component<IProps> {
                     done
                 </div>
                 <div className="Menu-tags">
-                    {this.tags.map((tag, index) => <TaskTag key={index} tag={tag} />)}
+                    {this.tags.map((tag, index) =>
+                        <TaskTag
+                            key={index}
+                            tag={tag}
+                            onClick={() => setCurrentTag(tag === currentTag ? null : tag)}
+                        />)}
                 </div>
             </div>
         );

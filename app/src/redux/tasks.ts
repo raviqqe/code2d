@@ -15,6 +15,7 @@ const factory = actionCreatorFactory();
 const createTask = factory("CREATE_TASK");
 const getTasks = factory.async<void, ITask[]>("GET_TASKS");
 const removeTask = factory<ITask>("REMOVE_TASK");
+const setCurrentTag = factory<string | null>("SET_CURRENT_TAG");
 const setCurrentTask = factory<ITask | null>("SET_CURRENT_TASK");
 const setNewTask = factory<INewTask>("SET_NEW_TASK");
 const setTasks = factory<ITask[]>("SET_TASKS");
@@ -28,6 +29,7 @@ export const actionCreators = {
     createTask,
     getTasks: () => getTasks.started(null),
     removeTask,
+    setCurrentTag,
     setCurrentTask,
     setNewTask,
     setTasks,
@@ -40,6 +42,7 @@ export const actionCreators = {
 
 export interface IState {
     creatingTask: boolean;
+    currentTag: string | null;
     currentTask: ITask | null;
     done: boolean;
     newTask: INewTask;
@@ -48,6 +51,7 @@ export interface IState {
 
 export const initialState: ImmutableObject<IState> = Immutable({
     creatingTask: false,
+    currentTag: null,
     currentTask: null,
     done: false,
     newTask: { description: "", name: "", tags: [] },
@@ -58,6 +62,7 @@ export const reducer = reducerWithInitialState(initialState)
     .case(createTask, (state) => state.merge({ creatingTask: false }))
     .case(getTasks.done, (state, { result }) =>
         state.merge({ tasks: result, currentTask: result[0] || null }))
+    .case(setCurrentTag, (state, currentTag) => state.merge({ currentTag }))
     .case(setCurrentTask, (state, currentTask) => state.merge({ currentTask }))
     .case(setNewTask, (state, newTask) => state.merge({ newTask }))
     .case(setTasks, (state, tasks) => state.merge({ tasks }))

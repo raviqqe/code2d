@@ -1,3 +1,4 @@
+import * as _ from "lodash";
 import * as React from "react";
 import { connect } from "react-redux";
 import { arrayMove } from "react-sortable-hoc";
@@ -10,6 +11,7 @@ import SortableTasks from "./SortableTasks";
 import "./style/TaskList.css";
 
 interface IProps {
+    currentTag: string | null;
     done: boolean;
     tasks: ITask[];
     setTasks: (tasks: ITask[]) => void;
@@ -17,25 +19,34 @@ interface IProps {
 
 class TaskList extends React.Component<IProps> {
     public render() {
-        const { done, tasks, setTasks } = this.props;
+        const { currentTag, done, setTasks } = this.props;
+        const tasks = _.filter(
+            this.props.tasks,
+            ({ tags }) => currentTag === null || tags.includes(currentTag));
 
         if (tasks.length === 0) {
             return <div>There is no task.</div>;
         }
-
-        const sortableProps = isTouchDevice() ? { pressDelay: 200 } : { distance: 5 };
 
         return (
             <div className="TaskList-container">
                 <SortableTasks
                     done={done}
                     onSortEnd={({ newIndex, oldIndex }) =>
-                        setTasks(arrayMove([...tasks], oldIndex, newIndex))}
+                        currentTag === null && setTasks(arrayMove([...tasks], oldIndex, newIndex))}
                     tasks={tasks}
-                    {...sortableProps}
+                    {...this.sortableProps}
                 />
             </div>
         );
+    }
+
+    private get sortableProps(): { distance?: number, pressDelay?: number } {
+        if (this.props.currentTag === null) {
+            return isTouchDevice() ? { pressDelay: 200 } : { distance: 5 };
+        }
+
+        return { distance: 2 ** 32 };
     }
 }
 
