@@ -10,6 +10,7 @@
     "numeral": "^2.0.6",
     "pizzicato": "^0.6.1",
     "react": "^15.6.1",
+    "react-autocomplete": "^1.7.1",
     "react-dom": "^15.6.1",
     "react-feather": "^1.0.7",
     "react-markdown": "^2.5.0",
