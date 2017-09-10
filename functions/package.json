@@ -2,6 +2,7 @@
   "name": "functions",
   "description": "Cloud Functions for Firebase",
   "dependencies": {
+    "amazon-product-api": "^0.4.4",
     "firebase-admin": "~4.2.1",
     "firebase-functions": "^0.5.7",
     "lodash": "^4.17.4"
