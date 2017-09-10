@@ -1,5 +1,6 @@
 import * as _ from "lodash";
 import * as React from "react";
+import AutoComplete = require("react-autocomplete");
 import { Plus } from "react-feather";
 import { connect } from "react-redux";
 
@@ -11,6 +12,7 @@ import TaskTag from "./TaskTag";
 interface IProps {
     currentTask: ITask;
     tags: string[];
+    tasks: ITask[];
     updateCurrentTask: (task: ITask) => void;
 }
 
@@ -52,31 +54,37 @@ class TaskTags extends React.Component<IProps, IState> {
                         </div>
                     </button>
                 </div>
-                <input
-                    ref={(input) => { this.input = input; }}
-                    style={taggingTask ? {} : { display: "none" }}
-                    className="TaskTags-input"
-                    placeholder="tag name"
-                    onBlur={() => this.setState({ taggingTask: false })}
-                    onChange={({ target: { value } }) => this.setState({ newTag: value })}
-                    onKeyDown={(event: React.KeyboardEvent<{}>) => {
-                        const tag = newTag.trim();
+                {taggingTask &&
+                    <form
+                        onSubmit={() => {
+                            const tag = newTag.trim();
 
-                        if (event.keyCode === 13 && tag !== "" && !tags.includes(tag)) {
-                            updateCurrentTask({
-                                ...currentTask,
-                                tags: [...tags, tag].sort(),
-                            });
-                        }
+                            if (tag !== "" && !tags.includes(tag)) {
+                                updateCurrentTask({
+                                    ...currentTask,
+                                    tags: [...tags, tag].sort(),
+                                });
+                            }
 
-                        if (event.keyCode === 13) {
                             this.setState({ taggingTask: false, newTag: "" });
-                            event.preventDefault();
-                        }
-                    }}
-                    value={newTag}
-                />
-            </div >
+                        }}
+                    >
+                        <AutoComplete
+                            ref={(input) => this.input = input}
+                            getItemValue={(tag) => tag}
+                            items={this.allTags}
+                            renderItem={(tag: string) => <div>{tag}</div>}
+                            value={newTag}
+                            onChange={({ target: { value } }) => this.setState({ newTag: value })}
+                            onSelect={(newTag) => this.setState({ newTag })}
+                            inputProps={{
+                                className: "TaskTags-input",
+                                onBlur: () => this.setState({ taggingTask: false }),
+                                placeholder: "tag name",
+                            }}
+                        />
+                    </form>}
+            </div>
         );
     }
 
@@ -84,6 +92,10 @@ class TaskTags extends React.Component<IProps, IState> {
         if (!taggingTask && this.state.taggingTask) {
             this.input.focus();
         }
+    }
+
+    private get allTags(): string[] {
+        return _.uniq(_.flatMap(this.props.tasks, ({ tags }) => tags)).sort();
     }
 }
 
