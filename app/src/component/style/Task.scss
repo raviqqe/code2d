@@ -1,9 +1,6 @@
 @import "../../style/colors.scss";
-@import "../../style/shadow.scss";
 
 @mixin Task-container {
-	@include shadow;
-
 	background: white;
 	border-radius: 0.5em;
 	padding: 0.5em;

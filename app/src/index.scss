@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Noto+Sans");
 
 @import "./style/colors.scss";
-@import "./style/shadow.scss";
 
 @mixin font-without-size {
 	color: $black;
@@ -27,8 +26,6 @@ body {
 }
 
 button {
-	@include shadow;
-
 	background: $light-red;
 	border: {
 		width: 0;
