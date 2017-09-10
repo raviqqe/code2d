@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { ITask } from "../lib/tasks";
 import { actionCreators } from "../redux/tasks";
 import "./style/TaskTags.css";
+import TaskTag from "./TaskTag";
 
 interface IProps {
     currentTask: ITask;
@@ -31,19 +32,16 @@ class TaskTags extends React.Component<IProps, IState> {
             <div className="TaskTags-container">
                 <div className="TaskTags-tags">
                     {tags.map((tag, index) =>
-                        <div
+                        <TaskTag
                             key={index}
-                            className="TaskTags-tag"
-                            onClick={(event) => {
+                            tag={tag}
+                            onClick={() => {
                                 updateCurrentTask({
                                     ...currentTask,
                                     tags: _.filter(tags, (x) => x !== tag),
                                 });
-                                event.stopPropagation();
                             }}
-                        >
-                            {tag}
-                        </div>)}
+                        />)}
                     <button
                         style={taggingTask ? { display: "none" } : {}}
                         className="TaskTags-button"
