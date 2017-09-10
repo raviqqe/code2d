@@ -4,6 +4,7 @@ $TaskTag-size: 1.8em;
 
 @mixin TaskTag-tag-like {
 	color: white;
+	font-size: 0.9em;
 	margin: 0.2em;
 	border-radius: $TaskTag-size / 2;
 	display: flex;
