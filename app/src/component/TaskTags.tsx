@@ -4,7 +4,7 @@ import AutoComplete = require("react-autocomplete");
 import { Plus } from "react-feather";
 import { connect } from "react-redux";
 
-import { ITask } from "../lib/tasks";
+import { extractTagsFromTasks, ITask } from "../lib/tasks";
 import { actionCreators } from "../redux/tasks";
 import "./style/TaskTags.css";
 import TaskTag from "./TaskTag";
@@ -27,7 +27,7 @@ class TaskTags extends React.Component<IProps, IState> {
     private input: { focus: () => void, value: string };
 
     public render() {
-        const { currentTask, tags, updateCurrentTask } = this.props;
+        const { currentTask, tags, tasks, updateCurrentTask } = this.props;
         const { newTag, taggingTask } = this.state;
 
         return (
@@ -72,7 +72,7 @@ class TaskTags extends React.Component<IProps, IState> {
                         <AutoComplete
                             ref={(input) => this.input = input}
                             getItemValue={(tag) => tag}
-                            items={this.allTags}
+                            items={extractTagsFromTasks(tasks)}
                             renderItem={(tag: string, highlighted: boolean) =>
                                 <div
                                     className={highlighted
@@ -101,10 +101,6 @@ class TaskTags extends React.Component<IProps, IState> {
         if (!taggingTask && this.state.taggingTask) {
             this.input.focus();
         }
-    }
-
-    private get allTags(): string[] {
-        return _.uniq(_.flatMap(this.props.tasks, ({ tags }) => tags)).sort();
     }
 }
 

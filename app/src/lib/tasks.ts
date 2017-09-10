@@ -65,6 +65,10 @@ export function tasks(done: boolean): Tasks {
     return done ? doneTasks : todoTasks;
 }
 
+export function extractTagsFromTasks(tasks: ITask[]): string[] {
+    return _.uniq(_.flatMap(tasks, ({ tags }) => tags)).sort();
+}
+
 export function resetMocks(): void {
     // Do nothing in real module.
 }

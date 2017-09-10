@@ -52,3 +52,13 @@ it("creates a task", async () => {
     await lib.tasks(false).create(dummyTask);
     expect((await lib.tasks(false).get()).length).toBe(2);
 });
+
+it("extracts tags from tasks", () => {
+    expect(lib.extractTagsFromTasks([])).toEqual([]);
+    expect(lib.extractTagsFromTasks([dummyTask])).toEqual([]);
+    expect(lib.extractTagsFromTasks([
+        dummyTask,
+        { ...dummyTask, tags: ["foo", "bar"] },
+        { ...dummyTask, tags: ["foo"] },
+    ])).toEqual(["bar", "foo"]);
+});
