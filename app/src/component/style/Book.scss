@@ -1,0 +1,27 @@
+.Book-container {
+	background: white;
+	border-radius: 3px;
+	width: 15em;
+	padding: 0.5em;
+	display: flex;
+	align-items: center;
+}
+
+.Book-details {
+	font-size: 0.9em;
+	display: flex;
+	flex-direction: column;
+	margin-left: 0.4em;
+
+	& > * {
+		margin-bottom: 0.2em;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.Book-publisher {
+	font-size: 0.8em;
+}
