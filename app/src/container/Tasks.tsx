@@ -12,13 +12,13 @@ import TaskList from "../component/TaskList";
 import * as notification from "../lib/notification";
 import { ITask } from "../lib/tasks";
 import { actionCreators } from "../redux/tasks";
+import Page from "./Page";
 import "./style/Tasks.css";
 import Timer from "./Timer";
 
 interface IProps {
     creatingTask: boolean;
     currentTask: ITask | null;
-    signedIn: boolean;
     tasks: ITask[];
     done: boolean;
     timerOn: boolean;
@@ -26,42 +26,29 @@ interface IProps {
 
 class Tasks extends React.Component<IProps> {
     public render() {
-        if (!this.props.signedIn) {
-            return <Redirect to="/sign-in" />;
-        } else if (this.props.timerOn) {
+        if (this.props.timerOn) {
             return <Timer />;
         }
 
         const { creatingTask, currentTask, done } = this.props;
 
         return (
-            <div className="Tasks-container">
-                <div className="Tasks-menu-blank" />
-                <div className="Tasks-menu">
-                    <div className="Tasks-menu-buttons">
-                        <Link to="/tasks"><Todo /></Link>
-                        <Link to="/books"><Book /></Link>
-                    </div>
-                    <Menu />
+            <Page {...{ menu: <Menu /> }}>
+                <div className="Tasks-tasks">
+                    <TaskList />
                 </div>
-                <div className="Tasks-main">
-                    <div className="Tasks-tasks">
-                        <TaskList />
-                    </div>
-                    <div className="Tasks-sidebar">
-                        {!creatingTask && currentTask &&
-                            <Task
-                                {...{
-                                    detailed: true,
-                                    done,
-                                    ...currentTask,
-                                }}
-                            />}
-                        {!done && <CreateTask />}
-                    </div>
+                <div className="Tasks-sidebar">
+                    {!creatingTask && currentTask &&
+                        <Task
+                            {...{
+                                detailed: true,
+                                done,
+                                ...currentTask,
+                            }}
+                        />}
+                    {!done && <CreateTask />}
                 </div>
-                <div className="Tasks-blank" />
-            </div>
+            </Page>
         );
     }
 
@@ -71,6 +58,6 @@ class Tasks extends React.Component<IProps> {
 }
 
 export default connect(
-    ({ authState, tasks, timer }) => ({ ...authState, ...tasks, timerOn: timer.on }),
+    ({ tasks, timer }) => ({ ...tasks, timerOn: timer.on }),
     actionCreators,
 )(Tasks);

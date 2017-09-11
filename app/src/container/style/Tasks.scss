@@ -4,52 +4,6 @@
 	margin: 1em;
 }
 
-.Tasks-container {
-	display: flex;
-	width: 100vw;
-	height: 100vh;
-}
-
-.Tasks-blank {
-	flex: 1;
-}
-
-.Tasks-menu-blank {
-	@extend .Tasks-blank;
-
-	background: white;
-	height: 100%;
-}
-
-.Tasks-menu {
-	background: white;
-	height: 100%;
-}
-
-.Tasks-menu-buttons {
-	display: flex;
-	justify-content: space-evenly;
-	align-items: center;
-	margin: 0.5em 1em;
-
-	& > a {
-		display: flex;
-		font-size: 2.5em;
-		color: $black;
-		margin: 0.2em;
-
-		&:visited {
-			color: $black;
-		}
-	}
-}
-
-.Tasks-main {
-	width: 150vh;
-	max-width: 100%;
-	display: flex;
-}
-
 .Tasks-tasks {
 	@include Tasks-sub-container;
 
