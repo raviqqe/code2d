@@ -7,6 +7,7 @@ import CreateTask from "../component/CreateTask";
 import Menu from "../component/Menu";
 import Task from "../component/Task";
 import TaskList from "../component/TaskList";
+import * as notification from "../lib/notification";
 import { ITask } from "../lib/tasks";
 import { actionCreators } from "../redux/tasks";
 import "./style/Tasks.css";
@@ -56,6 +57,10 @@ class Tasks extends React.Component<IProps> {
                 <div className="Tasks-blank" />
             </div>
         );
+    }
+
+    public componentDidMount() {
+        notification.requestPermission();
     }
 }
 

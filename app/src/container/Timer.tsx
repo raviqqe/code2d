@@ -4,6 +4,7 @@ import Square = require("react-icons/lib/md/stop");
 import { connect } from "react-redux";
 
 import { playHorn } from "../lib/audio";
+import * as notification from "../lib/notification";
 import { ITask } from "../lib/tasks";
 import { actionCreators as tasksActionCreators } from "../redux/tasks";
 import { actionCreators as timerActionCreators } from "../redux/timer";
@@ -39,6 +40,7 @@ class Timer extends React.Component<IProps, IState> {
     public componentDidUpdate(_, { seconds }: IState) {
         if (seconds !== 0 && this.state.seconds === 0) {
             playHorn();
+            notification.notify("You've earned 1 pomodoro!");
         }
     }
 
