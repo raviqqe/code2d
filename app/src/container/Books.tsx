@@ -2,6 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
+import Book from "../component/Book";
 import { IBook } from "../lib/books";
 import Page from "./Page";
 import "./style/Books.css";
@@ -15,9 +16,19 @@ class Books extends React.Component<IProps> {
     public render() {
         return (
             <Page {...{ menu: false }}>
-                {JSON.stringify(this.props.books)}
+                <div className="Books-container">
+                    {this.renderBooks()}
+                </div>
             </Page>
         );
+    }
+
+    private renderBooks() {
+        if (this.props.books === null) {
+            return "No book is available.";
+        }
+
+        return this.props.books.map((book, index) => <Book key={index} {...book} />);
     }
 }
 
