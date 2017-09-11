@@ -1,19 +1,16 @@
-import * as apac from "apac";
 import { Request, Response } from "express";
 import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
 
+import * as amazon from "./amazon";
+
 const config = functions.config();
 
 admin.initializeApp(functions.config().firebase);
-const amazonClient = new apac.OperationHelper({
-    assocId: config.aws.tag,
-    awsId: config.aws.id,
-    awsSecret: config.aws.secret,
-});
 
-export const books = functions.https.onRequest(async (request: Request, response: Response) => {
-    await admin.auth().verifyIdToken(request.query.token);
+export const books = functions.https.onRequest(
+    async ({ query: { token } }: Request, response: Response) => {
+        await admin.auth().verifyIdToken(token);
 
-    // TODO: Fetch books.
-});
+        response.send(await amazon.books());
+    });
