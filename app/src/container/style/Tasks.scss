@@ -1,4 +1,3 @@
-@import "../../component/style/sub-container.scss";
 @import "../../style/colors.scss";
 
 @mixin Tasks-sub-container {
@@ -55,11 +54,9 @@
 	@include Tasks-sub-container;
 
 	flex: 1;
-	margin-right: 0;
 }
 
 .Tasks-sidebar {
-	@include sub-container;
 	@include Tasks-sub-container;
 
 	display: flex;
