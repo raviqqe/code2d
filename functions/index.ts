@@ -4,13 +4,13 @@ import * as functions from "firebase-functions";
 
 import * as amazon from "./amazon";
 
-const config = functions.config();
-
 admin.initializeApp(functions.config().firebase);
 
 export const books = functions.https.onRequest(
     async ({ query: { token } }: Request, response: Response) => {
         await admin.auth().verifyIdToken(token);
 
+        response.set("Access-Control-Allow-Origin", "*");
+        response.set("Access-Control-Allow-Methods", "GET, POST");
         response.send(await amazon.books());
     });
