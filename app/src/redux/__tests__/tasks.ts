@@ -108,7 +108,7 @@ it("update a current task after removing a task", async () => {
 });
 
 it("toggles a task's state", async () => {
-    expect.assertions(3);
+    expect.assertions(4);
 
     const store = createStore();
     const dispatch = async (action, length: number) => {
@@ -118,8 +118,15 @@ it("toggles a task's state", async () => {
     };
 
     await dispatch(actionCreators.getTasks(), 1);
+
+    const { tasks: [{ updatedAt }] } = getState(store);
+
     await dispatch(actionCreators.toggleTaskState(getState(store).currentTask), 0);
     await dispatch(actionCreators.toggleTasksState(), 2);
+
+    const { tasks: [task] } = getState(store);
+
+    expect(task.updatedAt).not.toBe(updatedAt);
 });
 
 it("updates a current task", async () => {

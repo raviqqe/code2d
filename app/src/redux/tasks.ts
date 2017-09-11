@@ -92,7 +92,9 @@ export const sagas = [
         toggleTaskState,
         function* _(task: ITask): SagaIterator {
             yield put(removeTask(task));
-            yield call(lib.tasks(!(yield selectState()).done).create, task);
+            yield call(
+                lib.tasks(!(yield selectState()).done).create,
+                { ...task, updatedAt: Date.now() });
         }),
     takeEvery(
         removeTask,
