@@ -1,14 +1,14 @@
 import axios from "axios";
 import * as firebase from "firebase";
-import { URL } from "url";
+import * as url from "url";
 
-const endpoint = (
-    `https://${process.env.REACT_APP_FIREBASE_REGION}-` +
+const hostname = (
+    `${process.env.REACT_APP_FIREBASE_REGION}-` +
     `${process.env.REACT_APP_FIREBASE_PROJECT_ID}` +
     ".cloudfunctions.net");
 
-export async function call<R = any>(path: string): Promise<R> {
+export async function call<R = any>(pathname: string): Promise<R> {
     return (await axios.get(
-        (new URL(path, endpoint)).toString(),
+        url.format({ hostname, pathname: "/" + pathname, protocol: "https" }),
         { params: { token: await firebase.auth().currentUser.getIdToken() } })).data;
 }

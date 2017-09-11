@@ -2,9 +2,11 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
+import { IBook } from "../lib/books";
 import "./style/Books.css";
 
 interface IProps {
+    books: IBook[];
     signedIn: boolean;
 }
 
@@ -16,7 +18,7 @@ class Books extends React.Component<IProps> {
 
         return (
             <div className="Books-container">
-                No book is available.
+                {JSON.stringify(this.props.books)}
             </div>
         );
     }

@@ -35,6 +35,7 @@ export default function() {
             store.dispatch(authState.actionCreators.signIn());
             store.dispatch(tasks.actionCreators.getTasks());
             await tasksLib.tasks(true).get();
+            store.dispatch(books.actionCreators.getBooks());
         }
     });
 
