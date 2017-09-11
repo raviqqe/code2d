@@ -3,7 +3,7 @@ import * as _ from "lodash";
 import createStore from "..";
 import * as lib from "../../lib/tasks";
 import { sleep } from "../../lib/utils";
-import { actionCreators, initialState, IState, reducer } from "../tasks";
+import { actionCreators, IState } from "../tasks";
 
 jest.mock("../../lib/tasks");
 

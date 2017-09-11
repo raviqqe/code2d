@@ -1,8 +1,6 @@
-import * as _ from "lodash";
-
 import createStore from "..";
 import { sleep } from "../../lib/utils";
-import { actionCreators, IState, reducer } from "../books";
+import { actionCreators, IState } from "../books";
 
 jest.mock("../../lib/functions", () => ({ call: () => [] }));
 
