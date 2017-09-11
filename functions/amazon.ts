@@ -16,9 +16,16 @@ export async function books(): Promise<any[]> {
             SearchIndex: "Books",
         });
 
-    return Item.map(({ DetailPageURL, SmallImage, ItemAttributes: { Title } }) => ({
-        imageUri: SmallImage.URL,
-        pageUri: DetailPageURL,
-        title: Title,
-    }));
+    return Item.map(({
+        ASIN,
+        DetailPageURL,
+        SmallImage,
+        ItemAttributes: { Author, Publisher, Title } }) => ({
+            asin: ASIN,
+            author: Author,
+            imageUri: SmallImage.URL,
+            pageUri: DetailPageURL,
+            publisher: Publisher,
+            title: Title,
+        }));
 }
