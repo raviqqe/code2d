@@ -123,7 +123,7 @@ it("toggles a task's state", async () => {
 });
 
 it("updates a current task", async () => {
-    expect.assertions(2);
+    expect.assertions(4);
 
     const store = createStore();
 
@@ -141,6 +141,18 @@ it("updates a current task", async () => {
     }));
 
     expect(getState(store).currentTask.name).toBe("foo bar baz");
+
+    const updatedAt = getState(store).currentTask.updatedAt;
+
+    await dispatch(actionCreators.updateCurrentTask({
+        ...(getState(store).currentTask),
+        name: "FOO BAR BAZ",
+    }));
+
+    const { currentTask } = getState(store);
+
+    expect(currentTask.name).toBe("FOO BAR BAZ");
+    expect(currentTask.updatedAt).not.toBe(updatedAt);
 });
 
 it("sets a current tag", async () => {

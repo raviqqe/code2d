@@ -112,6 +112,8 @@ export const sagas = [
     takeEvery(
         updateCurrentTask,
         function* _(task: ITask): SagaIterator {
+            task = { ...task, updatedAt: Date.now() };
+
             const state: IState = yield selectState();
             const tasks = [...state.tasks];
 
