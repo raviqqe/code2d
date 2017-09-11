@@ -15,7 +15,7 @@ interface IProps {
 class SignIn extends React.Component<IProps> {
     public render() {
         if (this.props.signedIn) {
-            return <Redirect to="/tasks" />;
+            return <Redirect to="/" />;
         } else if (this.props.halfway) {
             return <div className="SignIn-container">Signing in...</div>;
         }
