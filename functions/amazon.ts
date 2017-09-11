@@ -5,6 +5,7 @@ const amazonClient = new apac.OperationHelper({
     assocId: functions.config().aws.tag,
     awsId: functions.config().aws.id,
     awsSecret: functions.config().aws.secret,
+    endPoint: "webservices.amazon.co.jp",
 });
 
 export async function books(): Promise<any[]> {
