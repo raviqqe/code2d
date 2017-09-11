@@ -142,3 +142,20 @@ it("updates a current task", async () => {
 
     expect(getState(store).currentTask.name).toBe("foo bar baz");
 });
+
+it("sets a current tag", async () => {
+    expect.assertions(2);
+
+    const store = createStore();
+
+    const dispatch = async (action) => {
+        store.dispatch(action);
+        await sleep(100);
+    };
+
+    expect(getState(store).currentTag).toBe(null);
+
+    await dispatch(actionCreators.setCurrentTag("foo"));
+
+    expect(getState(store).currentTag).toBe("foo");
+});
