@@ -9,14 +9,18 @@ const amazonClient = new apac.OperationHelper({
 });
 
 export async function books(): Promise<any[]> {
-    const { result: { ItemSearchResponse: { Items: { Item } } } }
+    const { result: { ItemSearchErrorResponse, ItemSearchResponse } }
         = await amazonClient.execute("ItemSearch", {
             BrowseNode: "466298",
             ResponseGroup: "Images,ItemAttributes",
             SearchIndex: "Books",
         });
 
-    return Item.map(({
+    if (ItemSearchErrorResponse) {
+        throw new Error(ItemSearchErrorResponse.Error.Message);
+    }
+
+    return ItemSearchResponse.Items.Item.map(({
         ASIN,
         DetailPageURL,
         SmallImage,
