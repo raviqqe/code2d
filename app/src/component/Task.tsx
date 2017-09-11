@@ -6,7 +6,6 @@ import Check = require("react-icons/lib/md/check");
 import Trash = require("react-icons/lib/md/delete");
 import Repeat = require("react-icons/lib/md/replay");
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 
 import { ITask } from "../lib/tasks";
 import { actionCreators as tasksActionCreators } from "../redux/tasks";
