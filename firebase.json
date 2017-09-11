@@ -1,16 +1,20 @@
 {
-  "database": {
-    "rules": "database.rules.json"
-  },
-  "storage": {
-    "rules": "storage.rules"
-  },
-  "hosting": {
-    "public": "app/build",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ]
-  }
+	"database": {
+		"rules": "database.rules.json"
+	},
+	"storage": {
+		"rules": "storage.rules"
+	},
+	"hosting": {
+		"public": "app/build",
+		"ignore": [
+			"firebase.json",
+			"**/.*",
+			"**/node_modules/**"
+		],
+		"rewrites": [{
+			"source": "/functions/books",
+			"function": "books"
+		}]
+	}
 }
