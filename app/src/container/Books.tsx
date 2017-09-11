@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import { IBook } from "../lib/books";
+import Page from "./Page";
 import "./style/Books.css";
 
 interface IProps {
@@ -12,19 +13,12 @@ interface IProps {
 
 class Books extends React.Component<IProps> {
     public render() {
-        if (!this.props.signedIn) {
-            return <Redirect to="/sign-in" />;
-        }
-
         return (
-            <div className="Books-container">
+            <Page {...{ menu: false }}>
                 {JSON.stringify(this.props.books)}
-            </div>
+            </Page>
         );
     }
 }
 
-export default connect(
-    ({ authState, books }) => ({ ...authState, ...books }),
-    {},
-)(Books);
+export default connect(({ books }) => books)(Books);
