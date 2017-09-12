@@ -6,12 +6,12 @@ import Immutable = require("seamless-immutable");
 import actionCreatorFactory from "typescript-fsa";
 import { reducerWithInitialState } from "typescript-fsa-reducers";
 
-import { articlesRepository, IArticle } from "../lib/articles";
+import { articlesRepository, IArticle, uriToArticle } from "../lib/articles";
 import { takeEvery } from "./utils";
 
 const factory = actionCreatorFactory();
 
-const addArticle = factory<IArticle>("ADD_ARTICLE");
+const addArticle = factory<string>("ADD_ARTICLE");
 const getArticles = factory.async<void, IArticle[]>("GET_ARTICLES");
 const removeArticle = factory<IArticle>("REMOVE_ARTICLE");
 const setArticles = factory<IArticle[]>("SET_ARTICLES");
@@ -46,8 +46,11 @@ export const reducer = reducerWithInitialState(initialState)
 export const sagas = [
     takeEvery(
         addArticle,
-        function* _(article: IArticle): SagaIterator {
-            yield put(setArticles([article, ...(yield selectState()).articles]));
+        function* _(uri: string): SagaIterator {
+            yield put(setArticles([
+                yield call(uriToArticle, uri),
+                ...(yield selectState()).articles,
+            ]));
         }),
     takeEvery(getArticles.started, getArticlesSaga),
     takeEvery(toggleArticlesState, getArticlesSaga),
