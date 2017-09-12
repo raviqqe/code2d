@@ -54,7 +54,7 @@ class TaskTags extends React.Component<IProps, IState> {
                 </div>
                 {taggingTask &&
                     <form
-                        onSubmit={() => {
+                        onSubmit={(event) => {
                             const tag = newTag.trim();
 
                             if (tag !== "" && !tags.includes(tag)) {
@@ -65,6 +65,7 @@ class TaskTags extends React.Component<IProps, IState> {
                             }
 
                             this.setState({ taggingTask: false, newTag: "" });
+                            event.preventDefault();
                         }}
                     >
                         <AutoComplete
