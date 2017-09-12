@@ -21,11 +21,11 @@ class Page extends React.Component<IProps> {
             <div className="Page-container">
                 <div className="Page-menu-blank" />
                 <div className="Page-menu">
+                    {this.props.menu}
                     <div className="Page-menu-buttons">
                         <Link to="/tasks"><Todo /></Link>
                         <Link to="/books"><Book /></Link>
                     </div>
-                    {this.props.menu}
                 </div>
                 <div className="Page-main">
                     {this.props.children}

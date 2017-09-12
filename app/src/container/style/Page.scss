@@ -20,6 +20,10 @@
 .Page-menu {
 	background: white;
 	height: 100%;
+	padding: 1em 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 .Page-menu-buttons {
