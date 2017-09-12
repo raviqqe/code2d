@@ -26,10 +26,17 @@ export const books = httpsFunction(async (_, response: Response) => {
 function httpsFunction(handler: (request: Request, response: Response) => void | Promise<void>) {
     return functions.https.onRequest(
         async (request: Request, response: Response) => {
+            response.set("Access-Control-Allow-Origin", "*");
+            response.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+            response.set("Access-Control-Allow-Headers", "Authorization");
+
+            if (request.method === "OPTIONS") {
+                response.end();
+                return;
+            }
+
             await admin.auth().verifyIdToken(request.get("Authorization").split(" ")[1]);
 
-            response.set("Access-Control-Allow-Origin", "*");
-            response.set("Access-Control-Allow-Methods", "GET, POST");
             response.set(
                 "Cache-Control",
                 `private, max-age=${cacheSeconds}, s-maxage=${cacheSeconds}`);
