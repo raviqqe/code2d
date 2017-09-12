@@ -4,6 +4,7 @@ import { all } from "redux-saga/effects";
 
 import * as firebase from "../lib/firebase";
 import * as tasksLib from "../lib/tasks";
+import * as articles from "./articles";
 import * as authState from "./auth-state";
 import * as books from "./books";
 import * as signIn from "./sign-in";
@@ -14,6 +15,7 @@ export default function() {
     const sagaMiddleware = createSagaMiddleware();
     const store = createStore(
         combineReducers({
+            articles: articles.reducer,
             authState: authState.reducer,
             books: books.reducer,
             signIn: signIn.reducer,
@@ -23,7 +25,12 @@ export default function() {
         compose(applyMiddleware(sagaMiddleware)));
 
     sagaMiddleware.run(function* _() {
-        yield all([...books.sagas, ...signIn.sagas, ...tasks.sagas]);
+        yield all([
+            ...articles.sagas,
+            ...books.sagas,
+            ...signIn.sagas,
+            ...tasks.sagas,
+        ]);
     });
 
     firebase.onAuthStateChanged(async (user) => {
