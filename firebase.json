@@ -13,6 +13,9 @@
 			"**/node_modules/**"
 		],
 		"rewrites": [{
+			"source": "/functions/article",
+			"function": "article"
+		}, {
 			"source": "/functions/books",
 			"function": "books"
 		}]
