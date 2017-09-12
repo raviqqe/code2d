@@ -1,6 +1,3 @@
-import * as firebase from "firebase";
-import * as _ from "lodash";
-
 export interface INewTask {
     name: string;
     description: string;
@@ -31,10 +28,6 @@ class Tasks {
 
     public create = async (task: ITask): Promise<void> => {
         this.tasks = [task, ...this.tasks];
-    }
-
-    public include = async (task: ITask): Promise<boolean> => {
-        return _.findIndex(this.tasks, task) >= 0;
     }
 }
 
