@@ -1,6 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
+import AddArticle from "../component/AddArticle";
 import Article from "../component/Article";
 import { IArticle } from "../lib/articles";
 import Page from "./Page";
@@ -17,6 +18,7 @@ class Articles extends React.Component<IProps> {
             <Page {...{ menu: false }}>
                 <div className="Articles-container">
                     {this.renderArticles()}
+                    <AddArticle />
                 </div>
             </Page>
         );
