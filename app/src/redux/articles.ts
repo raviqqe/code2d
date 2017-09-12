@@ -81,8 +81,12 @@ function selectState() {
 }
 
 function* getArticlesSaga(): SagaIterator {
-    yield put(getArticles.done({
-        params: null,
-        result: yield call(articlesRepository((yield selectState()).done).get),
-    }));
+    try {
+        yield put(getArticles.done({
+            params: null,
+            result: yield call(articlesRepository((yield selectState()).done).get),
+        }));
+    } catch (error) {
+        console.error(error);
+    }
 }
