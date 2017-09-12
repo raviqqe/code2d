@@ -34,7 +34,7 @@ class AddArticle extends React.Component<IProps, IState> {
                     className="AddArticle-input"
                     onSubmit={(event) => {
                         this.props.addArticle(uri);
-                        this.setState({ addingArticle: false });
+                        this.setState({ addingArticle: false, uri: "" });
                         event.preventDefault();
                     }}
                 >
