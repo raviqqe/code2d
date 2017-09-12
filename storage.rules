@@ -1,13 +1,25 @@
 service firebase.storage {
   match /b/{bucket}/o {
-    match /users/{userId}/tasks {
-      match /todo {
-        allow read: if request.auth.uid == userId;
-        allow write: if request.auth.uid == userId && request.resource.size < 256 * 1024;
+    match /users/{userId} {
+      match /tasks {
+        match /todo {
+          allow read: if request.auth.uid == userId;
+          allow write: if request.auth.uid == userId && request.resource.size < 256 * 1024;
+        }
+        match /done {
+          allow read: if request.auth.uid == userId;
+          allow write: if request.auth.uid == userId && request.resource.size < 256 * 1024;
+        }
       }
-      match /done {
-        allow read: if request.auth.uid == userId;
-        allow write: if request.auth.uid == userId && request.resource.size < 256 * 1024;
+      match /articles {
+        match /todo {
+          allow read: if request.auth.uid == userId;
+          allow write: if request.auth.uid == userId && request.resource.size < 256 * 1024;
+        }
+        match /done {
+          allow read: if request.auth.uid == userId;
+          allow write: if request.auth.uid == userId && request.resource.size < 256 * 1024;
+        }
       }
     }
   }
