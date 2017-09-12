@@ -41,7 +41,7 @@ class Tasks {
 let todoTasks = new Tasks();
 let doneTasks = new Tasks();
 
-export function tasks(done: boolean) {
+export function tasksRepository(done: boolean) {
     return done ? doneTasks : todoTasks;
 }
 

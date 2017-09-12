@@ -3,7 +3,7 @@ import createSagaMiddleware from "redux-saga";
 import { all } from "redux-saga/effects";
 
 import * as firebase from "../lib/firebase";
-import * as tasksLib from "../lib/tasks";
+import { tasksRepository } from "../lib/tasks";
 import * as articles from "./articles";
 import * as authState from "./auth-state";
 import * as books from "./books";
@@ -41,7 +41,7 @@ export default function() {
         } else {
             store.dispatch(authState.actionCreators.signIn());
             store.dispatch(tasks.actionCreators.getTasks());
-            await tasksLib.tasks(true).get();
+            await tasksRepository(true).get();
             store.dispatch(books.actionCreators.getBooks());
         }
     });

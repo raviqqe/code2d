@@ -6,8 +6,7 @@ import Immutable = require("seamless-immutable");
 import actionCreatorFactory from "typescript-fsa";
 import { reducerWithInitialState } from "typescript-fsa-reducers";
 
-import * as lib from "../lib/tasks";
-import { INewTask, ITask } from "../lib/tasks";
+import { INewTask, ITask, tasksRepository } from "../lib/tasks";
 import { takeEvery } from "./utils";
 
 const factory = actionCreatorFactory();
@@ -93,7 +92,7 @@ export const sagas = [
         function* _(task: ITask): SagaIterator {
             yield put(removeTask(task));
             yield call(
-                lib.tasks(!(yield selectState()).done).create,
+                tasksRepository(!(yield selectState()).done).create,
                 { ...task, updatedAt: Date.now() });
         }),
     takeEvery(
@@ -109,7 +108,7 @@ export const sagas = [
     takeEvery(
         setTasks,
         function* _(tasks): SagaIterator {
-            yield call(lib.tasks((yield selectState()).done).set, tasks);
+            yield call(tasksRepository((yield selectState()).done).set, tasks);
         }),
     takeEvery(
         updateCurrentTask,
@@ -132,5 +131,5 @@ function selectState() {
 
 function* getTasksSaga(): SagaIterator {
     const { done }: IState = yield selectState();
-    yield put(getTasks.done({ params: null, result: yield call(lib.tasks(done).get) }));
+    yield put(getTasks.done({ params: null, result: yield call(tasksRepository(done).get) }));
 }

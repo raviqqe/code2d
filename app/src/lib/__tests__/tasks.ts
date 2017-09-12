@@ -1,5 +1,4 @@
-import * as lib from "../tasks";
-import { ITask } from "../tasks";
+import { extractTagsFromTasks, ITask, tasksRepository } from "../tasks";
 
 jest.mock("axios", () => ({
     default: {
@@ -33,30 +32,30 @@ const dummyTask: ITask = {
 
 it("gets todo tasks", async () => {
     expect.assertions(1);
-    expect((await lib.tasks(false).get()).length).toBe(3);
+    expect((await tasksRepository(false).get()).length).toBe(3);
 });
 
 it("gets done tasks", async () => {
     expect.assertions(1);
-    expect((await lib.tasks(true).get()).length).toBe(3);
+    expect((await tasksRepository(true).get()).length).toBe(3);
 });
 
 it("sets tasks", async () => {
     expect.assertions(1);
-    await lib.tasks(false).set([dummyTask]);
-    expect((await lib.tasks(false).get()).length).toBe(1);
+    await tasksRepository(false).set([dummyTask]);
+    expect((await tasksRepository(false).get()).length).toBe(1);
 });
 
 it("creates a task", async () => {
     expect.assertions(1);
-    await lib.tasks(false).create(dummyTask);
-    expect((await lib.tasks(false).get()).length).toBe(2);
+    await tasksRepository(false).create(dummyTask);
+    expect((await tasksRepository(false).get()).length).toBe(2);
 });
 
 it("extracts tags from tasks", () => {
-    expect(lib.extractTagsFromTasks([])).toEqual([]);
-    expect(lib.extractTagsFromTasks([dummyTask])).toEqual([]);
-    expect(lib.extractTagsFromTasks([
+    expect(extractTagsFromTasks([])).toEqual([]);
+    expect(extractTagsFromTasks([dummyTask])).toEqual([]);
+    expect(extractTagsFromTasks([
         dummyTask,
         { ...dummyTask, tags: ["foo", "bar"] },
         { ...dummyTask, tags: ["foo"] },

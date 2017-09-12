@@ -1,5 +1,4 @@
-import * as lib from "../tasks";
-import { ITask } from "../tasks";
+import { ITask, tasksRepository } from "../tasks";
 
 jest.mock("axios", () => ({
     default: {
@@ -19,5 +18,5 @@ jest.mock("firebase", () => ({
 
 it("gets no task on error", async () => {
     expect.assertions(1);
-    expect((await lib.tasks(false).get()).length).toBe(0);
+    expect((await tasksRepository(false).get()).length).toBe(0);
 });

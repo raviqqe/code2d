@@ -16,7 +16,7 @@ export interface ITask extends INewTask {
 
 const repository = new StatefulItemsRepository<ITask>("tasks");
 
-export const tasks = repository.state;
+export const tasksRepository = repository.state;
 
 export function extractTagsFromTasks(tasks: ITask[]): string[] {
     return _.uniq(_.flatMap(tasks, ({ tags }) => tags)).sort();
