@@ -9,5 +9,10 @@ export async function call<R = any>(pathname: string, params: { [key: string]: s
             pathname: "/functions/" + pathname,
             protocol: "https",
         }),
-        { params: { ...params, token: await firebase.auth().currentUser.getIdToken() } })).data;
+        {
+            headers: {
+                Authorization: `Bearer ${await firebase.auth().currentUser.getIdToken()}`,
+            },
+            params,
+        })).data;
 }
