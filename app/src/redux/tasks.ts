@@ -131,5 +131,10 @@ function selectState() {
 
 function* getTasksSaga(): SagaIterator {
     const { done }: IState = yield selectState();
-    yield put(getTasks.done({ params: null, result: yield call(tasksRepository(done).get) }));
+
+    try {
+        yield put(getTasks.done({ params: null, result: yield call(tasksRepository(done).get) }));
+    } catch (error) {
+        console.log(error);
+    }
 }
