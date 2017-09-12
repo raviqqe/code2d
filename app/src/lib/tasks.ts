@@ -3,6 +3,7 @@ import * as firebase from "firebase";
 import * as _ from "lodash";
 
 import * as json from "./json";
+import StatefulItemsRepository from "./stateful_items_repository";
 
 export interface INewTask {
     name: string;
@@ -16,54 +17,9 @@ export interface ITask extends INewTask {
     updatedAt: number;
 }
 
-class Tasks {
-    private done: boolean;
-    private tasks: ITask[] | null = null;
+const repository = new StatefulItemsRepository<ITask>("tasks");
 
-    constructor(done: boolean) {
-        this.done = done;
-    }
-
-    public get = async (): Promise<ITask[]> => {
-        if (_.isArray(this.tasks)) {
-            return this.tasks;
-        }
-
-        try {
-            this.tasks = await json.decode(
-                (await axios.get(await this.reference.getDownloadURL())).data);
-            return this.tasks;
-        } catch (error) {
-            console.log(error);
-            return [];
-        }
-    }
-
-    public set = async (tasks: ITask[]): Promise<void> => {
-        this.tasks = tasks;
-        await this.reference.putString(json.encode(tasks));
-    }
-
-    public create = async (task: ITask): Promise<void> => {
-        const tasks = await this.get();
-        await this.set([task, ...tasks]);
-    }
-
-    private get reference(): firebase.storage.Reference {
-        return firebase.storage().ref(this.path);
-    }
-
-    private get path(): string {
-        return `users/${firebase.auth().currentUser.uid}/tasks/${this.done ? "done" : "todo"}`;
-    }
-}
-
-const todoTasks = new Tasks(false);
-const doneTasks = new Tasks(true);
-
-export function tasks(done: boolean): Tasks {
-    return done ? doneTasks : todoTasks;
-}
+export const tasks = repository.state;
 
 export function extractTagsFromTasks(tasks: ITask[]): string[] {
     return _.uniq(_.flatMap(tasks, ({ tags }) => tags)).sort();
