@@ -26,9 +26,13 @@ export const sagas = [
     takeEvery(
         getBooks.started,
         function* getTasksSaga(): SagaIterator {
-            yield put(getBooks.done({
-                params: null,
-                result: yield call(functions.call, "books"),
-            }));
+            try {
+                yield put(getBooks.done({
+                    params: null,
+                    result: yield call(functions.call, "books"),
+                }));
+            } catch (error) {
+                console.error(error);
+            }
         }),
 ];
