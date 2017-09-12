@@ -1,8 +1,5 @@
-import axios from "axios";
-import * as firebase from "firebase";
 import * as _ from "lodash";
 
-import * as json from "./json";
 import StatefulItemsRepository from "./stateful_items_repository";
 
 export interface INewTask {
