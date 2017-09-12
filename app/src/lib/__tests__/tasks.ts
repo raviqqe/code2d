@@ -6,16 +6,6 @@ jest.mock("axios", () => ({
     },
 }));
 
-jest.mock("firebase", () => ({
-    auth: () => ({ currentUser: { uid: "testUid" } }),
-    storage: () => ({
-        ref: (path: string) => ({
-            getDownloadURL: () => "testUrl",
-            putString: (data: string) => undefined,
-        }),
-    }),
-}));
-
 jest.mock("../json", () => ({
     decode: () => Promise.resolve([{}, {}, {}]),
     encode: () => undefined,

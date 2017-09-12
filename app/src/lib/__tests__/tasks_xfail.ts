@@ -6,16 +6,6 @@ jest.mock("axios", () => ({
     },
 }));
 
-jest.mock("firebase", () => ({
-    auth: () => ({ currentUser: { uid: "testUid" } }),
-    storage: () => ({
-        ref: (path: string) => ({
-            getDownloadURL: () => "testUrl",
-            putString: (data: string) => undefined,
-        }),
-    }),
-}));
-
 it("gets no task on error", async () => {
     expect.assertions(1);
     expect((await tasksRepository(false).get()).length).toBe(0);
