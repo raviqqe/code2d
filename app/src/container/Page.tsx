@@ -1,4 +1,5 @@
 import * as React from "react";
+import Article = require("react-icons/lib/fa/file-code-o");
 import Book = require("react-icons/lib/go/book");
 import Todo = require("react-icons/lib/md/playlist-add-check");
 import { connect } from "react-redux";
@@ -24,7 +25,7 @@ class Page extends React.Component<IProps> {
                     {this.props.menu}
                     <div className="Page-menu-buttons">
                         <Link to="/tasks"><Todo /></Link>
-                        <Link to="/books"><Book /></Link>
+                        <Link to="/articles"><Article /></Link>
                     </div>
                 </div>
                 <div className="Page-main">
