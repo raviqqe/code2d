@@ -42,6 +42,7 @@ export default function() {
             store.dispatch(authState.actionCreators.signIn());
             store.dispatch(tasks.actionCreators.getTasks());
             await tasksRepository(true).get();
+            store.dispatch(articles.actionCreators.getArticles());
             store.dispatch(books.actionCreators.getBooks());
         }
     });
