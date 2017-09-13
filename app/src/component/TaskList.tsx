@@ -7,8 +7,9 @@ import { bindActionCreators } from "redux";
 import { isTouchDevice } from "../lib/device";
 import { ITask } from "../lib/tasks";
 import { actionCreators } from "../redux/tasks";
-import SortableTasks from "./SortableTasks";
+import SortableItems from "./SortableItems";
 import "./style/TaskList.css";
+import Task from "./Task";
 
 interface IProps {
     currentTag: string | null;
@@ -32,10 +33,11 @@ class TaskList extends React.Component<IProps> {
 
         return (
             <div className="TaskList-container">
-                <SortableTasks
+                <SortableItems
+                    component={Task}
+                    items={tasks}
                     onSortEnd={({ newIndex, oldIndex }) =>
                         setTasks(arrayMove([...tasks], oldIndex, newIndex))}
-                    tasks={tasks}
                     {...this.sortableProps}
                 />
             </div>
