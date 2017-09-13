@@ -1,9 +1,5 @@
-import * as _ from "lodash";
 import * as React from "react";
-import Book = require("react-icons/lib/go/book");
-import Todo = require("react-icons/lib/md/playlist-add-check");
 import { connect } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
 
 import CreateTask from "../component/CreateTask";
 import Menu from "../component/Menu";
