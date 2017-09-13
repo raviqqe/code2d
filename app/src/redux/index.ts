@@ -1,3 +1,4 @@
+import localForage = require("localforage");
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import { autoRehydrate, createTransform, persistStore } from "redux-persist";
 import createSagaMiddleware from "redux-saga";
@@ -37,6 +38,7 @@ export default function() {
     });
 
     persistStore(store, {
+        storage: localForage,
         transforms: [createTransform(
             (immutable: ImmutableObject<any>) => immutable.asMutable(),
             (mutable) => Immutable(mutable),
