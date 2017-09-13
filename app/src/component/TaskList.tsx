@@ -12,8 +12,10 @@ import "./style/TaskList.css";
 
 interface IProps {
     currentTag: string | null;
+    currentTask: ITask | null;
     done: boolean;
     tasks: ITask[];
+    setCurrentTask: (task: ITask) => void;
     setTasks: (tasks: ITask[]) => void;
 }
 
@@ -33,7 +35,7 @@ class TaskList extends React.Component<IProps> {
                 <SortableTasks
                     done={done}
                     onSortEnd={({ newIndex, oldIndex }) =>
-                        currentTag === null && setTasks(arrayMove([...tasks], oldIndex, newIndex))}
+                        setTasks(arrayMove([...tasks], oldIndex, newIndex))}
                     tasks={tasks}
                     {...this.sortableProps}
                 />
@@ -41,12 +43,29 @@ class TaskList extends React.Component<IProps> {
         );
     }
 
+    public componentDidUpdate() {
+        const { currentTask, setCurrentTask } = this.props;
+        const tasks = this.tasks;
+
+        if (tasks.length !== 0 && (currentTask === null || !_.find(tasks, currentTask))) {
+            setCurrentTask(tasks[0] || null);
+        }
+    }
+
     private get sortableProps(): { distance?: number, pressDelay?: number } {
         if (this.props.currentTag === null) {
             return isTouchDevice() ? { pressDelay: 200 } : { distance: 5 };
         }
 
-        return { distance: 2 ** 32 };
+        return { distance: 2 ** 32 }; // Disable sorting.
+    }
+
+    private get tasks(): ITask[] {
+        const { currentTag, tasks } = this.props;
+
+        return currentTag === null
+            ? tasks
+            : _.filter(tasks, ({ tags }) => tags.includes(currentTag));
     }
 }
 
