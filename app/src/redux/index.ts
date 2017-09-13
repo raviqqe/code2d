@@ -45,8 +45,6 @@ export default function() {
     });
 
     firebase.onAuthStateChanged(async (user) => {
-        store.dispatch(authState.actionCreators.initialize());
-
         if (user === null) {
             store.dispatch(authState.actionCreators.signOut());
         } else {
