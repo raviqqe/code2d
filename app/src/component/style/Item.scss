@@ -1,0 +1,41 @@
+@import "../../style/colors.scss";
+
+.Item-container {
+	background: white;
+	border-radius: 0.5em;
+	padding: 0.5em 0.7em;
+	width: 100%;
+	margin-bottom: 0.5em;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.Item-container-highlighted {
+	@extend .Item-container;
+
+	color: $light-red;
+}
+
+.Item-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+
+.Item-buttons {
+	display: flex;
+	align-items: center;
+}
+
+.Item-button {
+	color: $black;
+	font-size: 1.5em;
+	display: flex;
+	margin-right: 0.1em;
+
+	&:last-child {
+		margin-right: 0;
+	}
+}
