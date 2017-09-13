@@ -18,7 +18,7 @@ import TaskTags from "./TaskTags";
 interface IProps extends ITask {
     currentTask: ITask | null;
     detailed: boolean;
-    done?: boolean;
+    done: boolean;
     updateCurrentTask: (task: ITask) => void;
     toggleTaskState: (task: ITask) => void;
     removeTask: (task: ITask) => void;

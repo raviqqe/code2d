@@ -33,7 +33,6 @@ class TaskList extends React.Component<IProps> {
         return (
             <div className="TaskList-container">
                 <SortableTasks
-                    done={done}
                     onSortEnd={({ newIndex, oldIndex }) =>
                         setTasks(arrayMove([...tasks], oldIndex, newIndex))}
                     tasks={tasks}
