@@ -13,16 +13,16 @@ import Task from "./Task";
 
 interface IProps {
     currentTag: string | null;
-    currentTask: ITask | null;
+    currentItem: ITask | null;
     done: boolean;
-    tasks: ITask[];
-    setCurrentTask: (task: ITask) => void;
-    setTasks: (tasks: ITask[]) => void;
+    items: ITask[];
+    setCurrentItem: (task: ITask) => void;
+    setItems: (tasks: ITask[]) => void;
 }
 
 class TaskList extends React.Component<IProps> {
     public render() {
-        const { currentTag, done, setTasks } = this.props;
+        const { currentTag, done, setItems } = this.props;
         const tasks = this.tasks;
 
         if (tasks.length === 0) {
@@ -35,7 +35,7 @@ class TaskList extends React.Component<IProps> {
                     component={Task}
                     items={tasks}
                     onSortEnd={({ newIndex, oldIndex }) =>
-                        setTasks(arrayMove([...tasks], oldIndex, newIndex))}
+                        setItems(arrayMove([...tasks], oldIndex, newIndex))}
                     {...this.sortableProps}
                 />
             </div>
@@ -43,11 +43,11 @@ class TaskList extends React.Component<IProps> {
     }
 
     public componentDidUpdate() {
-        const { currentTask, setCurrentTask } = this.props;
+        const { currentItem, setCurrentItem } = this.props;
         const tasks = this.tasks;
 
-        if (tasks.length !== 0 && (currentTask === null || !_.find(tasks, currentTask))) {
-            setCurrentTask(tasks[0] || null);
+        if (tasks.length !== 0 && (currentItem === null || !_.find(tasks, currentItem))) {
+            setCurrentItem(tasks[0] || null);
         }
     }
 
@@ -60,11 +60,11 @@ class TaskList extends React.Component<IProps> {
     }
 
     private get tasks(): ITask[] {
-        const { currentTag, tasks } = this.props;
+        const { currentTag, items } = this.props;
 
         return currentTag === null
-            ? tasks
-            : _.filter(tasks, ({ tags }) => tags.includes(currentTag));
+            ? items
+            : _.filter(items, ({ tags }) => tags.includes(currentTag));
     }
 }
 

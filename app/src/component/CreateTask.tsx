@@ -7,30 +7,30 @@ import { actionCreators } from "../redux/tasks";
 import "./style/CreateTask.css";
 
 interface IProps {
-    createTask: () => void;
-    creatingTask: boolean;
-    newTask: INewTask;
-    setNewTask: (task: INewTask) => void;
-    startCreatingTask: () => void;
-    stopCreatingTask: () => void;
+    createItem: () => void;
+    creatingItem: boolean;
+    newItem: INewTask;
+    setNewItem: (task: INewTask) => void;
+    startCreatingItem: () => void;
+    stopCreatingItem: () => void;
 }
 
 class CreateTask extends React.Component<IProps> {
     private name: { focus: () => void };
 
-    public componentDidUpdate({ creatingTask }) {
-        if (!creatingTask && this.props.creatingTask) {
+    public componentDidUpdate({ creatingItem }) {
+        if (!creatingItem && this.props.creatingItem) {
             this.name.focus(); // Do this after rendering.
         }
     }
 
     public render() {
-        if (!this.props.creatingTask) {
+        if (!this.props.creatingItem) {
             return (
                 <div className="CreateTask-plus-button-container">
                     <button
                         className="CreateTask-plus-button"
-                        onClick={this.props.startCreatingTask}
+                        onClick={this.props.startCreatingItem}
                     >
                         <Plus />
                     </button>
@@ -38,35 +38,35 @@ class CreateTask extends React.Component<IProps> {
             );
         }
 
-        const { newTask, setNewTask } = this.props;
+        const { newItem, setNewItem } = this.props;
 
         return (
             <form
                 className="CreateTask-form-container"
                 onSubmit={(event) => {
-                    this.props.createTask();
+                    this.props.createItem();
                     event.preventDefault();
                 }}
             >
                 <input
                     ref={(name) => { this.name = name; }}
                     placeholder="Name"
-                    value={newTask.name}
+                    value={newItem.name}
                     onChange={({ target: { value } }) =>
-                        setNewTask({ ...newTask, name: value })}
+                        setNewItem({ ...newItem, name: value })}
                 />
                 <textarea
                     className="CreateTask-description"
                     placeholder="Description"
-                    value={newTask.description}
+                    value={newItem.description}
                     onChange={({ target: { value } }) =>
-                        setNewTask({ ...newTask, description: value })}
+                        setNewItem({ ...newItem, description: value })}
                 />
                 <div className="CreateTask-buttons">
                     <button className="CreateTask-button" type="submit">Create</button>
                     <button
                         className="CreateTask-cancel-button"
-                        onClick={this.props.stopCreatingTask}
+                        onClick={this.props.stopCreatingItem}
                     >
                         Cancel
                     </button>

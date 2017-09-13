@@ -11,30 +11,30 @@ interface IProps {
     currentTag: string | null;
     done: boolean;
     setCurrentTag: (tag: string | null) => void;
-    tasks: ITask[];
-    toggleTasksState: () => void;
+    items: ITask[];
+    toggleItemsState: () => void;
 }
 
 class Menu extends React.Component<IProps> {
     public render() {
-        const { currentTag, done, tasks, toggleTasksState, setCurrentTag } = this.props;
+        const { currentTag, done, items, toggleItemsState, setCurrentTag } = this.props;
 
         return (
             <div className="Menu-container">
                 <div
                     className={done ? "Menu-button" : "Menu-button-highlighted"}
-                    onClick={() => done && toggleTasksState()}
+                    onClick={() => done && toggleItemsState()}
                 >
                     todo
                 </div>
                 <div
                     className={done ? "Menu-button-highlighted" : "Menu-button"}
-                    onClick={() => !done && toggleTasksState()}
+                    onClick={() => !done && toggleItemsState()}
                 >
                     done
                 </div>
                 <div className="Menu-tags">
-                    {extractTagsFromTasks(tasks).map((tag, index) =>
+                    {extractTagsFromTasks(items).map((tag, index) =>
                         <TaskTag
                             key={index}
                             tag={tag}

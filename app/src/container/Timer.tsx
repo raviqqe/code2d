@@ -13,8 +13,8 @@ import "./style/Timer.css";
 const initialSeconds = 25 * 60;
 
 interface IProps {
-    currentTask: ITask;
-    updateCurrentTask: (task: ITask) => void;
+    currentItem: ITask;
+    updateCurrentItem: (task: ITask) => void;
     toggleTimer: () => void;
 }
 
@@ -71,10 +71,10 @@ class Timer extends React.Component<IProps, IState> {
     }
 
     private saveSpentTime = () => {
-        const { currentTask, updateCurrentTask } = this.props;
-        const spentSeconds = currentTask.spentSeconds + (initialSeconds - this.state.seconds);
+        const { currentItem, updateCurrentItem } = this.props;
+        const spentSeconds = currentItem.spentSeconds + (initialSeconds - this.state.seconds);
 
-        updateCurrentTask({ ...currentTask, spentSeconds });
+        updateCurrentItem({ ...currentItem, spentSeconds });
     }
 }
 

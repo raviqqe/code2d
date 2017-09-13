@@ -10,10 +10,10 @@ import "./style/TaskTags.css";
 import TaskTag from "./TaskTag";
 
 interface IProps {
-    currentTask: ITask;
+    currentItem: ITask;
     tags: string[];
-    tasks: ITask[];
-    updateCurrentTask: (task: ITask) => void;
+    items: ITask[];
+    updateCurrentItem: (task: ITask) => void;
 }
 
 interface IState {
@@ -27,7 +27,7 @@ class TaskTags extends React.Component<IProps, IState> {
     private input: { focus: () => void, value: string };
 
     public render() {
-        const { currentTask, tags, tasks, updateCurrentTask } = this.props;
+        const { currentItem, tags, items, updateCurrentItem } = this.props;
         const { newTag, taggingTask } = this.state;
 
         return (
@@ -38,8 +38,8 @@ class TaskTags extends React.Component<IProps, IState> {
                             key={index}
                             tag={tag}
                             onClick={() => {
-                                updateCurrentTask({
-                                    ...currentTask,
+                                updateCurrentItem({
+                                    ...currentItem,
                                     tags: _.filter(tags, (x) => x !== tag),
                                 });
                             }}
@@ -58,8 +58,8 @@ class TaskTags extends React.Component<IProps, IState> {
                             const tag = newTag.trim();
 
                             if (tag !== "" && !tags.includes(tag)) {
-                                updateCurrentTask({
-                                    ...currentTask,
+                                updateCurrentItem({
+                                    ...currentItem,
                                     tags: [...tags, tag].sort(),
                                 });
                             }
@@ -71,7 +71,7 @@ class TaskTags extends React.Component<IProps, IState> {
                         <AutoComplete
                             ref={(input) => this.input = input}
                             getItemValue={(tag) => tag}
-                            items={extractTagsFromTasks(tasks)}
+                            items={extractTagsFromTasks(items)}
                             renderItem={(tag: string, highlighted: boolean) =>
                                 <div
                                     className={highlighted

@@ -13,8 +13,8 @@ import "./style/Tasks.css";
 import Timer from "./Timer";
 
 interface IProps {
-    creatingTask: boolean;
-    currentTask: ITask | null;
+    creatingItem: boolean;
+    currentItem: ITask | null;
     tasks: ITask[];
     done: boolean;
     timerOn: boolean;
@@ -26,7 +26,7 @@ class Tasks extends React.Component<IProps> {
             return <Timer />;
         }
 
-        const { creatingTask, currentTask, done } = this.props;
+        const { creatingItem, currentItem, done } = this.props;
 
         return (
             <Page menu={<Menu />}>
@@ -34,8 +34,8 @@ class Tasks extends React.Component<IProps> {
                     <TaskList />
                 </div>
                 <div className="Tasks-sidebar">
-                    {!creatingTask && currentTask &&
-                        <Task detailed={true} done={done} {...currentTask} />}
+                    {!creatingItem && currentItem &&
+                        <Task detailed={true} done={done} {...currentItem} />}
                     {!done && <CreateTask />}
                 </div>
             </Page>

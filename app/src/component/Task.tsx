@@ -16,13 +16,13 @@ import TaskName from "./TaskName";
 import TaskTags from "./TaskTags";
 
 interface IProps extends ITask {
-    currentTask: ITask | null;
+    currentItem: ITask | null;
     detailed: boolean;
     done: boolean;
-    updateCurrentTask: (task: ITask) => void;
-    toggleTaskState: (task: ITask) => void;
-    removeTask: (task: ITask) => void;
-    setCurrentTask: (task: ITask | null) => void;
+    updateCurrentItem: (task: ITask) => void;
+    toggleItemState: (task: ITask) => void;
+    removeItem: (task: ITask) => void;
+    setCurrentItem: (task: ITask | null) => void;
     toggleTimer: () => void;
 }
 
@@ -35,18 +35,18 @@ class Task extends React.Component<IProps, IState> {
 
     public render() {
         const {
-            createdAt, description, detailed, name, setCurrentTask,
-            spentSeconds, tags, updatedAt, updateCurrentTask,
+            createdAt, description, detailed, name, setCurrentItem,
+            spentSeconds, tags, updatedAt, updateCurrentItem,
         } = this.props;
 
         const editable = detailed;
 
         return (
             <div
-                className={!detailed && this.isCurrentTask
+                className={!detailed && this.isCurrentItem
                     ? "Task-container-highlighted"
                     : "Task-container"}
-                onClick={detailed ? undefined : () => setCurrentTask(this.task)}
+                onClick={detailed ? undefined : () => setCurrentItem(this.task)}
                 onMouseOver={() => this.setState({ showButtons: true })}
                 onMouseOut={() => this.setState({ showButtons: false })}
             >
@@ -54,7 +54,7 @@ class Task extends React.Component<IProps, IState> {
                     <TaskName
                         editable={editable}
                         text={name}
-                        onEdit={(name) => updateCurrentTask({ ...this.task, name })}
+                        onEdit={(name) => updateCurrentItem({ ...this.task, name })}
                     />
                     {this.buttons}
                 </div>
@@ -65,7 +65,7 @@ class Task extends React.Component<IProps, IState> {
                         editable={editable}
                         text={description}
                         onEdit={(description) =>
-                            updateCurrentTask({ ...this.task, description })}
+                            updateCurrentItem({ ...this.task, description })}
                     />,
                     this.renderSpentSeconds(),
                     this.renderDate("Created at", createdAt),
@@ -84,7 +84,7 @@ class Task extends React.Component<IProps, IState> {
                     key="markTodo"
                     className="Task-button"
                     onClick={(event) => {
-                        this.props.toggleTaskState(this.task);
+                        this.props.toggleItemState(this.task);
                         event.stopPropagation();
                     }}
                 >
@@ -97,7 +97,7 @@ class Task extends React.Component<IProps, IState> {
                     key="markDone"
                     className="Task-button"
                     onClick={(event) => {
-                        this.props.toggleTaskState(this.task);
+                        this.props.toggleItemState(this.task);
                         event.stopPropagation();
                     }}
                 >
@@ -108,7 +108,7 @@ class Task extends React.Component<IProps, IState> {
                         key="turnOnTimer"
                         className="Task-button"
                         onClick={(event) => {
-                            this.props.setCurrentTask(this.task);
+                            this.props.setCurrentItem(this.task);
                             this.props.toggleTimer();
                             event.stopPropagation();
                         }}
@@ -124,7 +124,7 @@ class Task extends React.Component<IProps, IState> {
                     key="trash"
                     className="Task-button"
                     onClick={(event) => {
-                        this.props.removeTask(this.task);
+                        this.props.removeItem(this.task);
                         event.stopPropagation();
                     }}
                 >
@@ -150,8 +150,8 @@ class Task extends React.Component<IProps, IState> {
         return { visibility: "hidden" };
     }
 
-    private get isCurrentTask(): boolean {
-        return _.isEqual(this.task, this.props.currentTask);
+    private get isCurrentItem(): boolean {
+        return _.isEqual(this.task, this.props.currentItem);
     }
 
     private get task(): ITask {

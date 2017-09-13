@@ -25,7 +25,7 @@ export const reducer = reducerWithInitialState(initialState)
 export const sagas = [
     takeEvery(
         getBooks.started,
-        function* getTasksSaga(): SagaIterator {
+        function* getItemsSaga(): SagaIterator {
             try {
                 yield put(getBooks.done({
                     params: null,

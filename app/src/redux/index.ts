@@ -51,7 +51,7 @@ export default function() {
             store.dispatch(authState.actionCreators.signOut());
         } else {
             store.dispatch(authState.actionCreators.signIn());
-            store.dispatch(tasks.actionCreators.getTasks());
+            store.dispatch(tasks.actionCreators.getItems());
             await tasksRepository(false).get();
             await tasksRepository(true).get();
             store.dispatch(articles.actionCreators.getArticles());

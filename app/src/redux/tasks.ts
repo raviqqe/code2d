@@ -11,115 +11,115 @@ import { takeEvery } from "./utils";
 
 const factory = actionCreatorFactory();
 
-const createTask = factory("CREATE_TASK");
-const getTasks = factory.async<void, ITask[]>("GET_TASKS");
-const removeTask = factory<ITask>("REMOVE_TASK");
+const createItem = factory("CREATE_TASK");
+const getItems = factory.async<void, ITask[]>("GET_TASKS");
+const removeItem = factory<ITask>("REMOVE_TASK");
 const setCurrentTag = factory<string | null>("SET_CURRENT_TAG");
-const setCurrentTask = factory<ITask | null>("SET_CURRENT_TASK");
-const setNewTask = factory<INewTask>("SET_NEW_TASK");
-const setTasks = factory<ITask[]>("SET_TASKS");
-const startCreatingTask = factory("START_CREATING_TASK");
-const stopCreatingTask = factory("STOP_CREATING_TASK");
-const toggleTaskState = factory<ITask>("TOGGLE_TASK_STATE");
-const toggleTasksState = factory("TOGGLE_TASKS_STATE");
-const updateCurrentTask = factory<ITask>("UPDATE_CURRENT_TASK");
+const setCurrentItem = factory<ITask | null>("SET_CURRENT_TASK");
+const setNewItem = factory<INewTask>("SET_NEW_TASK");
+const setItems = factory<ITask[]>("SET_TASKS");
+const startCreatingItem = factory("START_CREATING_TASK");
+const stopCreatingItem = factory("STOP_CREATING_TASK");
+const toggleItemState = factory<ITask>("TOGGLE_TASK_STATE");
+const toggleItemsState = factory("TOGGLE_TASKS_STATE");
+const updateCurrentItem = factory<ITask>("UPDATE_CURRENT_TASK");
 
 export const actionCreators = {
-    createTask,
-    getTasks: () => getTasks.started(null),
-    removeTask,
+    createItem,
+    getItems: () => getItems.started(null),
+    removeItem,
+    setCurrentItem,
     setCurrentTag,
-    setCurrentTask,
-    setNewTask,
-    setTasks,
-    startCreatingTask,
-    stopCreatingTask,
-    toggleTaskState,
-    toggleTasksState,
-    updateCurrentTask,
+    setItems,
+    setNewItem,
+    startCreatingItem,
+    stopCreatingItem,
+    toggleItemState,
+    toggleItemsState,
+    updateCurrentItem,
 };
 
 export interface IState {
-    creatingTask: boolean;
+    creatingItem: boolean;
     currentTag: string | null;
-    currentTask: ITask | null;
+    currentItem: ITask | null;
     done: boolean;
-    newTask: INewTask;
-    tasks: ITask[];
+    newItem: INewTask;
+    items: ITask[];
 }
 
 export const initialState: ImmutableObject<IState> = Immutable({
-    creatingTask: false,
+    creatingItem: false,
+    currentItem: null,
     currentTag: null,
-    currentTask: null,
     done: false,
-    newTask: { description: "", name: "", tags: [] },
-    tasks: [],
+    items: [],
+    newItem: { description: "", name: "", tags: [] },
 });
 
 export const reducer = reducerWithInitialState(initialState)
-    .case(createTask, (state) => state.merge({ creatingTask: false }))
-    .case(getTasks.done, (state, { result }) => state.merge({ tasks: result }))
+    .case(createItem, (state) => state.merge({ creatingItem: false }))
+    .case(getItems.done, (state, { result }) => state.merge({ items: result }))
     .case(setCurrentTag, (state, currentTag) => state.merge({ currentTag }))
-    .case(setCurrentTask, (state, currentTask) => state.merge({ currentTask }))
-    .case(setNewTask, (state, newTask) => state.merge({ newTask }))
-    .case(setTasks, (state, tasks) => state.merge({ tasks }))
-    .case(startCreatingTask, (state) => state.merge({ creatingTask: true }))
-    .case(stopCreatingTask, (state) => state.merge({ creatingTask: false }))
-    .case(toggleTasksState, (state) => state.merge({ done: !state.done }));
+    .case(setCurrentItem, (state, currentItem) => state.merge({ currentItem }))
+    .case(setNewItem, (state, newItem) => state.merge({ newItem }))
+    .case(setItems, (state, items) => state.merge({ items }))
+    .case(startCreatingItem, (state) => state.merge({ creatingItem: true }))
+    .case(stopCreatingItem, (state) => state.merge({ creatingItem: false }))
+    .case(toggleItemsState, (state) => state.merge({ done: !state.done }));
 
 export const sagas = [
     takeEvery(
-        createTask,
+        createItem,
         function* _(): SagaIterator {
-            const { newTask, tasks }: IState = yield selectState();
+            const { newItem, items }: IState = yield selectState();
             const task: ITask = {
-                ...newTask,
+                ...newItem,
                 createdAt: Date.now(),
                 spentSeconds: 0,
                 updatedAt: Date.now(),
             };
 
-            yield put(setTasks([task, ...tasks]));
-            yield put(setCurrentTask(task));
-            yield put(setNewTask({ description: "", name: "", tags: [] }));
+            yield put(setItems([task, ...items]));
+            yield put(setCurrentItem(task));
+            yield put(setNewItem({ description: "", name: "", tags: [] }));
         }),
-    takeEvery(getTasks.started, getTasksSaga),
-    takeEvery(toggleTasksState, getTasksSaga),
+    takeEvery(getItems.started, getItemsSaga),
+    takeEvery(toggleItemsState, getItemsSaga),
     takeEvery(
-        toggleTaskState,
+        toggleItemState,
         function* _(task: ITask): SagaIterator {
-            yield put(removeTask(task));
+            yield put(removeItem(task));
             yield call(
                 tasksRepository(!(yield selectState()).done).create,
                 { ...task, updatedAt: Date.now() });
         }),
     takeEvery(
-        removeTask,
+        removeItem,
         function* _(task: ITask): SagaIterator {
-            const tasks = [...(yield selectState()).tasks];
+            const items = [...(yield selectState()).items];
 
-            remove(tasks, task);
+            remove(items, task);
 
-            yield put(setTasks(tasks));
+            yield put(setItems(items));
         }),
     takeEvery(
-        setTasks,
-        function* _(tasks: ITask[]): SagaIterator {
-            yield call(tasksRepository((yield selectState()).done).set, tasks);
+        setItems,
+        function* _(items: ITask[]): SagaIterator {
+            yield call(tasksRepository((yield selectState()).done).set, items);
         }),
     takeEvery(
-        updateCurrentTask,
+        updateCurrentItem,
         function* _(task: ITask): SagaIterator {
             task = { ...task, updatedAt: Date.now() };
 
             const state: IState = yield selectState();
-            const tasks = [...state.tasks];
+            const items = [...state.items];
 
-            tasks[findIndex(tasks, state.currentTask)] = task;
+            items[findIndex(items, state.currentItem)] = task;
 
-            yield put(setTasks(tasks));
-            yield put(setCurrentTask(task));
+            yield put(setItems(items));
+            yield put(setCurrentItem(task));
         }),
 ];
 
@@ -127,11 +127,11 @@ function selectState() {
     return select(({ tasks }) => tasks);
 }
 
-function* getTasksSaga(): SagaIterator {
+function* getItemsSaga(): SagaIterator {
     const { done }: IState = yield selectState();
 
     try {
-        yield put(getTasks.done({ params: null, result: yield call(tasksRepository(done).get) }));
+        yield put(getItems.done({ params: null, result: yield call(tasksRepository(done).get) }));
     } catch (error) {
         console.log(error);
     }
