@@ -48,6 +48,7 @@ export default function createItemsDuck<A extends IItem, B>(
     }
 
     return {
+        actionCreatorFactory: factory,
         actionCreators: {
             createItem,
             getItems: () => getItems.started(null),
