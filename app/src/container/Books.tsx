@@ -15,7 +15,7 @@ interface IProps {
 class Books extends React.Component<IProps> {
     public render() {
         return (
-            <Page {...{ menu: false }}>
+            <Page menu={false}>
                 <div className="Books-container">
                     {this.renderBooks()}
                 </div>

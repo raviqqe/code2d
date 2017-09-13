@@ -24,7 +24,7 @@ it("renders a done tasks page", () => {
         <Provider store={createStore()}>
             <BrowserRouter>
                 <div>
-                    <Route exact={true} path="/" render={() => <Tasks {...{ done: true }} />} />
+                    <Route exact={true} path="/" render={() => <Tasks done={true} />} />
                     <Route exact={true} path="/sign-in" render={() => <div>sign-in page mock</div>} />
                 </div>
             </BrowserRouter>

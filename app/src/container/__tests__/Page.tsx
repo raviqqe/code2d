@@ -14,7 +14,7 @@ it("renders a todo tasks page", () => {
                     <Route
                         exact={true}
                         path="/"
-                        render={() => <Page {...{ menu: <div>menu</div> }}><div>main</div></Page>}
+                        render={() => <Page menu={<div>menu</div>}><div>main</div></Page>}
                     />
                     <Route
                         exact={true}

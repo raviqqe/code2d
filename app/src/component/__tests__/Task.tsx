@@ -26,7 +26,7 @@ it("renders a todo task", () => {
 it("renders a done task", () => {
     ReactDOM.render(
         <Provider store={createStore()}>
-            <Task {...{ ...task, done: true }} />
+            <Task {...task} done={true} />
         </Provider>,
         document.createElement("div"));
 });
@@ -34,7 +34,7 @@ it("renders a done task", () => {
 it("renders a detailed todo task", () => {
     ReactDOM.render(
         <Provider store={createStore()}>
-            <Task {...{ ...task, detailed: true }} />
+            <Task {...task} detailed={true} />
         </Provider>,
         document.createElement("div"));
 });
@@ -42,7 +42,7 @@ it("renders a detailed todo task", () => {
 it("renders a detailed done task", () => {
     ReactDOM.render(
         <Provider store={createStore()}>
-            <Task {...{ ...task, detailed: true, done: true }} />
+            <Task {...task} detailed={true} done={true} />
         </Provider>,
         document.createElement("div"));
 });

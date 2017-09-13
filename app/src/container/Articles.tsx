@@ -15,7 +15,7 @@ interface IProps {
 class Articles extends React.Component<IProps> {
     public render() {
         return (
-            <Page {...{ menu: false }}>
+            <Page menu={false}>
                 <div className="Articles-container">
                     {this.renderArticles()}
                     <AddArticle />

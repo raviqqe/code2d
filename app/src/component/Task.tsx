@@ -59,7 +59,7 @@ class Task extends React.Component<IProps, IState> {
                     {this.buttons}
                 </div>
                 {detailed && [
-                    <TaskTags key="tags" {...{ tags }} />,
+                    <TaskTags key="tags" tags={tags} />,
                     <TaskDescription
                         key="description"
                         editable={editable}

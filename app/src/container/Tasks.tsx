@@ -29,19 +29,13 @@ class Tasks extends React.Component<IProps> {
         const { creatingTask, currentTask, done } = this.props;
 
         return (
-            <Page {...{ menu: <Menu /> }}>
+            <Page menu={<Menu />}>
                 <div className="Tasks-tasks">
                     <TaskList />
                 </div>
                 <div className="Tasks-sidebar">
                     {!creatingTask && currentTask &&
-                        <Task
-                            {...{
-                                detailed: true,
-                                done,
-                                ...currentTask,
-                            }}
-                        />}
+                        <Task detailed={true} done={done} {...currentTask} />}
                     {!done && <CreateTask />}
                 </div>
             </Page>
