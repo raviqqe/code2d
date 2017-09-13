@@ -1,6 +1,9 @@
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
+import { autoRehydrate, createTransform, persistStore } from "redux-persist";
 import createSagaMiddleware from "redux-saga";
 import { all } from "redux-saga/effects";
+import Immutable = require("seamless-immutable");
+import { ImmutableObject } from "seamless-immutable";
 
 import * as firebase from "../lib/firebase";
 import { tasksRepository } from "../lib/tasks";
@@ -22,7 +25,7 @@ export default function() {
             tasks: tasks.reducer,
             timer: timer.reducer,
         }),
-        compose(applyMiddleware(sagaMiddleware)));
+        compose(applyMiddleware(sagaMiddleware), autoRehydrate()));
 
     sagaMiddleware.run(function* _() {
         yield all([
@@ -33,6 +36,14 @@ export default function() {
         ]);
     });
 
+    persistStore(store, {
+        transforms: [createTransform(
+            (immutable: ImmutableObject<any>) => immutable.asMutable(),
+            (mutable) => Immutable(mutable),
+        )],
+        whitelist: ["articles", "books", "tasks"],
+    });
+
     firebase.onAuthStateChanged(async (user) => {
         store.dispatch(authState.actionCreators.initialize());
 
@@ -41,6 +52,7 @@ export default function() {
         } else {
             store.dispatch(authState.actionCreators.signIn());
             store.dispatch(tasks.actionCreators.getTasks());
+            await tasksRepository(false).get();
             await tasksRepository(true).get();
             store.dispatch(articles.actionCreators.getArticles());
             store.dispatch(books.actionCreators.getBooks());
