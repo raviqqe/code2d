@@ -23,9 +23,7 @@ interface IProps {
 class TaskList extends React.Component<IProps> {
     public render() {
         const { currentTag, done, setTasks } = this.props;
-        const tasks = _.filter(
-            this.props.tasks,
-            ({ tags }) => currentTag === null || tags.includes(currentTag));
+        const tasks = this.tasks;
 
         if (tasks.length === 0) {
             return <div>There is no task.</div>;
