@@ -107,7 +107,7 @@ export const sagas = [
         }),
     takeEvery(
         setTasks,
-        function* _(tasks): SagaIterator {
+        function* _(tasks: ITask[]): SagaIterator {
             yield call(tasksRepository((yield selectState()).done).set, tasks);
         }),
     takeEvery(
