@@ -42,7 +42,7 @@ export default class Item<A extends IItem> extends React.Component<IProps<A>, IS
             >
                 <div className="Item-header">
                     <ItemName
-                        text={name}
+                        text={item.name}
                         onEdit={onEditName}
                     />
                     {this.buttons}
