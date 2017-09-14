@@ -11,37 +11,28 @@ function getState(store): IState {
     return store.getState().tasks;
 }
 
+async function dispatch(store, action) {
+    store.dispatch(action);
+    await sleep(100);
+}
+
 beforeEach(() => {
     lib.resetMocks();
 });
 
 it("creates a new task", async () => {
-    expect.assertions(3 * 3);
+    expect.assertions(3);
 
     const store = createStore();
 
-    const check = (creatingItem: boolean, name: string, description: string) => {
-        const state = getState(store);
+    expect(getState(store).items.length).toBe(0);
 
-        expect(state.creatingItem).toBe(creatingItem);
-        expect(state.newItem.name).toBe(name);
-        expect(state.newItem.description).toBe(description);
-    };
+    await dispatch(store, actionCreators.startCreatingItem());
+    expect(getState(store).creatingItem).toBe(true);
 
-    store.dispatch(actionCreators.startCreatingItem());
-    await sleep(100);
-
-    check(true, "", "");
-
-    store.dispatch(actionCreators.setNewItem({ name: "foo", description: "bar", tags: [] }));
-    await sleep(100);
-
-    check(true, "foo", "bar");
-
-    store.dispatch(actionCreators.createItem());
-    await sleep(100);
-
-    check(false, "", "");
+    await dispatch(store,
+        actionCreators.createItem({ name: "foo", description: "bar", tags: [] }));
+    expect(getState(store).items.length).toBe(1);
 });
 
 it("cancels creating a new task", async () => {

@@ -7,15 +7,20 @@ import { actionCreators } from "../redux/tasks";
 import "./style/CreateTask.css";
 
 interface IProps {
-    createItem: () => void;
+    createItem: (task: INewTask) => void;
     creatingItem: boolean;
-    newItem: INewTask;
-    setNewItem: (task: INewTask) => void;
     startCreatingItem: () => void;
     stopCreatingItem: () => void;
 }
 
-class CreateTask extends React.Component<IProps> {
+interface IState {
+    description: string;
+    name: string;
+}
+
+class CreateTask extends React.Component<IProps, IState> {
+    public state: IState = { description: "", name: "" };
+
     private name: { focus: () => void };
 
     public componentDidUpdate({ creatingItem }) {
@@ -38,29 +43,27 @@ class CreateTask extends React.Component<IProps> {
             );
         }
 
-        const { newItem, setNewItem } = this.props;
+        const { description, name } = this.state;
 
         return (
             <form
                 className="CreateTask-form-container"
                 onSubmit={(event) => {
-                    this.props.createItem();
+                    this.props.createItem({ description, name, tags: [] });
                     event.preventDefault();
                 }}
             >
                 <input
                     ref={(name) => { this.name = name; }}
                     placeholder="Name"
-                    value={newItem.name}
-                    onChange={({ target: { value } }) =>
-                        setNewItem({ ...newItem, name: value })}
+                    value={name}
+                    onChange={({ target: { value } }) => this.setState({ name: value })}
                 />
                 <textarea
                     className="CreateTask-description"
                     placeholder="Description"
-                    value={newItem.description}
-                    onChange={({ target: { value } }) =>
-                        setNewItem({ ...newItem, description: value })}
+                    value={description}
+                    onChange={({ target: { value } }) => this.setState({ description: value })}
                 />
                 <div className="CreateTask-buttons">
                     <button className="CreateTask-button" type="submit">Create</button>
