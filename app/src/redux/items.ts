@@ -4,16 +4,26 @@ import { call, put, select } from "redux-saga/effects";
 import { ImmutableObject } from "seamless-immutable";
 import Immutable = require("seamless-immutable");
 import actionCreatorFactory from "typescript-fsa";
-import { reducerWithInitialState } from "typescript-fsa-reducers";
+import { ReducerBuilder, reducerWithInitialState } from "typescript-fsa-reducers";
 
 import { IItem } from "../lib/items";
 import ItemsRepository from "../lib/items_repository";
 import { takeEvery } from "./utils";
 
+export interface IState<A> {
+    currentItem: A | null;
+    done: boolean;
+    items: A[];
+}
+
+export type Reducer<A, S extends IState<A>>
+    = ReducerBuilder<ImmutableObject<S>, ImmutableObject<S>>;
+
 export default function createItemsDuck<A extends IItem, B>(
     reducerName: string,
     repository: (done: boolean) => ItemsRepository<A>,
-    initialize: (itemSource: B) => A) {
+    initialize: (itemSource: B) => A,
+    partialInitialState = {}) {
     const factory = actionCreatorFactory(reducerName.toUpperCase());
 
     const createItem = factory<B>("CREATE_ITEM");
@@ -24,13 +34,8 @@ export default function createItemsDuck<A extends IItem, B>(
     const toggleItemState = factory<A>("TOGGLE_ITEM_STATE");
     const toggleItemsState = factory("TOGGLE_ITEMS_STATE");
 
-    interface IState {
-        currentItem: A | null;
-        done: boolean;
-        items: A[];
-    }
-
-    const initialState: ImmutableObject<IState> = Immutable({
+    const initialState: ImmutableObject<IState<A>> = Immutable({
+        ...partialInitialState,
         currentItem: null,
         done: false,
         items: [],
@@ -61,17 +66,16 @@ export default function createItemsDuck<A extends IItem, B>(
         initialState,
         reducer: reducerWithInitialState(initialState)
             .case(getItems.done, (state, { result }) => state.merge({ items: result }))
-            .case(setCurrentItem, (state, currentItem: A | null) => state.merge({ currentItem }))
+            .case(setCurrentItem, (state, currentItem) => state.merge({ currentItem }))
             .case(setItems, (state, items) => state.merge({ items }))
             .case(toggleItemsState, (state) => state.merge({ done: !state.done })),
         sagas: [
             takeEvery(
                 createItem,
                 function* _(itemSource: B): SagaIterator {
-                    yield put(setItems([
-                        yield call(initialize, itemSource),
-                        ...(yield selectState()).items,
-                    ]));
+                    const item = yield call(initialize, itemSource);
+                    yield put(setItems([item, ...(yield selectState()).items]));
+                    yield put(setCurrentItem(item));
                 }),
             takeEvery(getItems.started, getItemsSaga),
             takeEvery(toggleItemsState, getItemsSaga),
