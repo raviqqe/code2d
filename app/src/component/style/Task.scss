@@ -1,48 +1,8 @@
 @import "../../style/colors.scss";
-
-@mixin Task-container {
-	background: white;
-	border-radius: 0.5em;
-	padding: 0.5em 0.7em;
-}
-
-.Task-container {
-	@include Task-container;
-
-	width: 100%;
-	margin-bottom: 0.5em;
-
-	&:last-child {
-		margin-bottom: 0;
-	}
-}
-
-.Task-container-highlighted {
-	@extend .Task-container;
-
-	color: $light-red;
-}
-
-.Task-header {
-	display: flex;
-	justify-content: space-between;
-	align-items: flex-start;
-}
-
-.Task-buttons {
-	display: flex;
-	align-items: center;
-}
+@import "./Item.scss";
 
 .Task-button {
-	color: $black;
-	font-size: 1.5em;
-	display: flex;
-	margin-right: 0.1em;
-
-	&:last-child {
-		margin-right: 0;
-	}
+	@extend .Item-button;
 }
 
 @mixin Task-sub-information {

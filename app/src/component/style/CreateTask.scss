@@ -1,7 +1,6 @@
 @import "../../style/colors.scss";
-@import "./Task.scss";
+@import "./Item.scss";
 @import "./TaskDescription.scss";
-@import "./TaskName.scss";
 
 .CreateTask-plus-button-container {
 	width: 100%;
@@ -24,7 +23,7 @@
 }
 
 .CreateTask-form-container {
-	@include Task-container;
+	@extend .Item-container;
 
 	flex: 1;
 	display: flex;
