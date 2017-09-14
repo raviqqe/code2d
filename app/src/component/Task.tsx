@@ -1,18 +1,14 @@
-import * as _ from "lodash";
 import numeral = require("numeral");
 import * as React from "react";
 import Clock = require("react-icons/lib/md/access-time");
-import Check = require("react-icons/lib/md/check");
-import Trash = require("react-icons/lib/md/delete");
-import Repeat = require("react-icons/lib/md/replay");
 import { connect } from "react-redux";
 
 import { ITask } from "../lib/tasks";
 import { actionCreators as tasksActionCreators } from "../redux/tasks";
 import { actionCreators as timerActionCreators } from "../redux/timer";
+import Item from "./Item";
 import "./style/Task.css";
 import TaskDescription from "./TaskDescription";
-import TaskName from "./TaskName";
 import TaskTags from "./TaskTags";
 
 interface IProps extends ITask {
@@ -42,23 +38,22 @@ class Task extends React.Component<IProps, IState> {
         const editable = detailed;
 
         return (
-            <div
-                className={!detailed && this.isCurrentItem
-                    ? "Task-container-highlighted"
-                    : "Task-container"}
-                onClick={detailed ? undefined : () => setCurrentItem(this.task)}
-                onMouseOver={() => this.setState({ showButtons: true })}
-                onMouseOut={() => this.setState({ showButtons: false })}
-            >
-                <div className="Task-header">
-                    <TaskName
-                        editable={editable}
-                        text={name}
-                        onEdit={(name) => updateCurrentItem({ ...this.task, name })}
-                    />
-                    {this.buttons}
-                </div>
-                {detailed && [
+            <Item
+                {...this.props}
+                buttons={[
+                    <div
+                        key="turnOnTimer"
+                        className="Task-button"
+                        onClick={(event) => {
+                            this.props.setCurrentItem(this.task);
+                            this.props.toggleTimer();
+                            event.stopPropagation();
+                        }}
+                    >
+                        <Clock />
+                    </div>,
+                ]}
+                details={[
                     <TaskTags key="tags" tags={tags} />,
                     <TaskDescription
                         key="description"
@@ -71,87 +66,10 @@ class Task extends React.Component<IProps, IState> {
                     this.renderDate("Created at", createdAt),
                     this.renderDate("Updated at", updatedAt),
                 ]}
-            </div>
+                item={this.task}
+                onEditName={(name) => updateCurrentItem({ ...this.task, name })}
+            />
         );
-    }
-
-    private get buttons() {
-        const buttons = [];
-
-        if (this.props.done) {
-            buttons.push(
-                <div
-                    key="markTodo"
-                    className="Task-button"
-                    onClick={(event) => {
-                        this.props.toggleItemState(this.task);
-                        event.stopPropagation();
-                    }}
-                >
-                    <Repeat />
-                </div>,
-            );
-        } else {
-            buttons.push(
-                <div
-                    key="markDone"
-                    className="Task-button"
-                    onClick={(event) => {
-                        this.props.toggleItemState(this.task);
-                        event.stopPropagation();
-                    }}
-                >
-                    <Check />
-                </div>,
-                (
-                    <div
-                        key="turnOnTimer"
-                        className="Task-button"
-                        onClick={(event) => {
-                            this.props.setCurrentItem(this.task);
-                            this.props.toggleTimer();
-                            event.stopPropagation();
-                        }}
-                    >
-                        <Clock />
-                    </div>
-                ));
-        }
-
-        if (this.props.detailed) {
-            buttons.push(
-                <div
-                    key="trash"
-                    className="Task-button"
-                    onClick={(event) => {
-                        this.props.removeItem(this.task);
-                        event.stopPropagation();
-                    }}
-                >
-                    <Trash />
-                </div>,
-            );
-        }
-
-        return (
-            <div className="Task-buttons" style={this.buttonsStyle}>
-                {buttons}
-            </div>
-        );
-    }
-
-    private get buttonsStyle() {
-        if (this.state.showButtons) {
-            return {};
-        } else if (this.props.detailed) {
-            return { display: "none" };
-        }
-
-        return { visibility: "hidden" };
-    }
-
-    private get isCurrentItem(): boolean {
-        return _.isEqual(this.task, this.props.currentItem);
     }
 
     private get task(): ITask {
