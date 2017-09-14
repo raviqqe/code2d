@@ -7,7 +7,6 @@ import Immutable = require("seamless-immutable");
 import { ImmutableObject } from "seamless-immutable";
 
 import * as firebase from "../lib/firebase";
-import { tasksRepository } from "../lib/tasks";
 import * as articles from "./articles";
 import * as authState from "./auth-state";
 import * as books from "./books";
@@ -30,6 +29,7 @@ export default function() {
 
     sagaMiddleware.run(function* _() {
         yield all([
+            ...authState.sagas,
             ...articles.sagas,
             ...books.sagas,
             ...signIn.sagas,
@@ -51,11 +51,6 @@ export default function() {
             store.dispatch(authState.actionCreators.signOut());
         } else {
             store.dispatch(authState.actionCreators.signIn());
-            store.dispatch(tasks.actionCreators.getItems());
-            await tasksRepository(false).get();
-            await tasksRepository(true).get();
-            store.dispatch(articles.actionCreators.getArticles());
-            store.dispatch(books.actionCreators.getBooks());
         }
     });
 
