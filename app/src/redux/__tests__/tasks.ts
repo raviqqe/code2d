@@ -88,7 +88,7 @@ it("toggles a task's state", async () => {
 
     const { items: [{ updatedAt }] } = getState(store);
 
-    await dispatch(actionCreators.toggleItemState(getState(store).currentItem), 0);
+    await dispatch(actionCreators.toggleItemState(getState(store).items[0]), 0);
     await dispatch(actionCreators.toggleItemsState(), 2);
 
     const { items: [task] } = getState(store);

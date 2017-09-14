@@ -22,9 +22,12 @@ const duck = createItemsDuck(
         updatedAt: Date.now(),
     }),
     {
-        creatingItem: false,
-        currentTag: null as string | null,
-        newItem: { description: "", name: "", tags: [] },
+        onToggleTaskState: (task: ITask): ITask => ({ ...task, updatedAt: Date.now() }),
+        partialInitialState: {
+            creatingItem: false,
+            currentTag: null,
+            newItem: { description: "", name: "", tags: [] },
+        },
     },
 );
 

@@ -23,7 +23,11 @@ export default function createItemsDuck<A extends IItem, B>(
     reducerName: string,
     repository: (done: boolean) => ItemsRepository<A>,
     initialize: (itemSource: B) => A,
-    partialInitialState = {}) {
+    options: { partialInitialState?: {}, onToggleTaskState?: (item: A) => A } = {}) {
+    options = Object.assign(
+        { partialInitialState: {}, onToggleTaskState: (item: A): A => item },
+        options);
+
     const factory = actionCreatorFactory(reducerName.toUpperCase());
 
     const createItem = factory<B>("CREATE_ITEM");
@@ -35,7 +39,7 @@ export default function createItemsDuck<A extends IItem, B>(
     const toggleItemsState = factory("TOGGLE_ITEMS_STATE");
 
     const initialState: ImmutableObject<IState<A>> = Immutable({
-        ...partialInitialState,
+        ...options.partialInitialState,
         currentItem: null,
         done: false,
         items: [],
@@ -83,7 +87,9 @@ export default function createItemsDuck<A extends IItem, B>(
                 toggleItemState,
                 function* _(item: A): SagaIterator {
                     yield put(removeItem(item));
-                    yield call(repository(!(yield selectState()).done).create, item);
+                    yield call(
+                        repository(!(yield selectState()).done).create,
+                        options.onToggleTaskState(item));
                 }),
             takeEvery(
                 removeItem,
