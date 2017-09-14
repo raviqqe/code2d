@@ -22,13 +22,7 @@ interface IProps extends ITask {
     toggleTimer: () => void;
 }
 
-interface IState {
-    showButtons: boolean;
-}
-
-class Task extends React.Component<IProps, IState> {
-    public state: IState = { showButtons: false };
-
+class Task extends React.Component<IProps> {
     public render() {
         const {
             createdAt, description, detailed, name, setCurrentItem,
