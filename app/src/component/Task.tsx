@@ -25,11 +25,9 @@ interface IProps extends ITask {
 class Task extends React.Component<IProps> {
     public render() {
         const {
-            createdAt, description, detailed, name, setCurrentItem,
+            createdAt, description, setCurrentItem,
             spentSeconds, tags, updatedAt, updateCurrentItem,
         } = this.props;
-
-        const editable = detailed;
 
         return (
             <Item
@@ -51,10 +49,8 @@ class Task extends React.Component<IProps> {
                     <TaskTags key="tags" tags={tags} />,
                     <TaskDescription
                         key="description"
-                        editable={editable}
                         text={description}
-                        onEdit={(description) =>
-                            updateCurrentItem({ ...this.task, description })}
+                        onEdit={(description) => updateCurrentItem({ ...this.task, description })}
                     />,
                     this.renderSpentSeconds(),
                     this.renderDate("Created at", createdAt),
