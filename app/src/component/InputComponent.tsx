@@ -16,7 +16,7 @@ export default abstract class InputComponent<P extends IProps> extends React.Com
     protected formProps = {
         onBlur: () => this.setState({ editing: false }),
         onChange: ({ target: { value } }) => this.setState({ text: value }),
-        ref: (form) => { this.form = form; },
+        ref: (form) => this.form = form,
     };
 
     public componentDidUpdate(_, { editing }: IState) {
