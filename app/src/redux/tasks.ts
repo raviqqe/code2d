@@ -1,132 +1,70 @@
-import { findIndex, remove } from "lodash";
+import { findIndex } from "lodash";
 import { SagaIterator } from "redux-saga";
-import { call, put, select } from "redux-saga/effects";
-import { ImmutableObject } from "seamless-immutable";
-import Immutable = require("seamless-immutable");
-import actionCreatorFactory from "typescript-fsa";
-import { reducerWithInitialState } from "typescript-fsa-reducers";
+import { put, select } from "redux-saga/effects";
 
 import { INewTask, ITask, tasksRepository } from "../lib/tasks";
+import createItemsDuck, { IState as IItemsState, Reducer } from "./items";
 import { takeEvery } from "./utils";
 
-const factory = actionCreatorFactory();
+export interface IState extends IItemsState<ITask> {
+    creatingItem: boolean;
+    currentTag: string | null;
+    newItem: INewTask;
+}
 
-const createItem = factory<INewTask>("CREATE_TASK");
-const getItems = factory.async<void, ITask[]>("GET_TASKS");
-const removeItem = factory<ITask>("REMOVE_TASK");
+const duck = createItemsDuck(
+    "tasks",
+    tasksRepository,
+    (task: INewTask) => ({
+        ...task,
+        createdAt: Date.now(),
+        spentSeconds: 0,
+        updatedAt: Date.now(),
+    }),
+    {
+        creatingItem: false,
+        currentTag: null as string | null,
+        newItem: { description: "", name: "", tags: [] },
+    },
+);
+
+const factory = duck.actionCreatorFactory;
+
 const setCurrentTag = factory<string | null>("SET_CURRENT_TAG");
-const setCurrentItem = factory<ITask | null>("SET_CURRENT_TASK");
-const setItems = factory<ITask[]>("SET_TASKS");
 const startCreatingItem = factory("START_CREATING_TASK");
 const stopCreatingItem = factory("STOP_CREATING_TASK");
-const toggleItemState = factory<ITask>("TOGGLE_TASK_STATE");
-const toggleItemsState = factory("TOGGLE_TASKS_STATE");
 const updateCurrentItem = factory<ITask>("UPDATE_CURRENT_TASK");
 
 export const actionCreators = {
-    createItem,
-    getItems: () => getItems.started(null),
-    removeItem,
-    setCurrentItem,
+    ...duck.actionCreators,
     setCurrentTag,
-    setItems,
     startCreatingItem,
     stopCreatingItem,
-    toggleItemState,
-    toggleItemsState,
     updateCurrentItem,
 };
 
-export interface IState {
-    creatingItem: boolean;
-    currentTag: string | null;
-    currentItem: ITask | null;
-    done: boolean;
-    items: ITask[];
-}
+export const initialState = duck.initialState;
 
-export const initialState: ImmutableObject<IState> = Immutable({
-    creatingItem: false,
-    currentItem: null,
-    currentTag: null,
-    done: false,
-    items: [],
-});
-
-export const reducer = reducerWithInitialState(initialState)
-    .case(createItem, (state) => state.merge({ creatingItem: false, currentTag: null }))
-    .case(getItems.done, (state, { result }) => state.merge({ items: result }))
-    .case(setCurrentTag, (state, currentTag) => state.merge({ currentTag }))
-    .case(setCurrentItem, (state, currentItem) => state.merge({ currentItem }))
-    .case(setItems, (state, items) => state.merge({ items }))
-    .case(startCreatingItem, (state) => state.merge({ creatingItem: true }))
-    .case(stopCreatingItem, (state) => state.merge({ creatingItem: false }))
-    .case(toggleItemsState, (state) => state.merge({ done: !state.done }));
+export const reducer =
+    (duck.reducer as Reducer<ITask, IState>)
+        .case(duck.actionCreators.createItem, (state) => state.merge({ creatingItem: false }))
+        .case(setCurrentTag, (state, currentTag) => state.merge({ currentTag }))
+        .case(startCreatingItem, (state) => state.merge({ creatingItem: true }))
+        .case(stopCreatingItem, (state) => state.merge({ creatingItem: false }));
 
 export const sagas = [
-    takeEvery(
-        createItem,
-        function* _(newTask: INewTask): SagaIterator {
-            const { items }: IState = yield selectState();
-            const task: ITask = {
-                ...newTask,
-                createdAt: Date.now(),
-                spentSeconds: 0,
-                updatedAt: Date.now(),
-            };
-
-            yield put(setItems([task, ...items]));
-            yield put(setCurrentItem(task));
-        }),
-    takeEvery(getItems.started, getItemsSaga),
-    takeEvery(toggleItemsState, getItemsSaga),
-    takeEvery(
-        toggleItemState,
-        function* _(task: ITask): SagaIterator {
-            yield put(removeItem(task));
-            yield call(
-                tasksRepository(!(yield selectState()).done).create,
-                { ...task, updatedAt: Date.now() });
-        }),
-    takeEvery(
-        removeItem,
-        function* _(task: ITask): SagaIterator {
-            const items = [...(yield selectState()).items];
-
-            remove(items, task);
-
-            yield put(setItems(items));
-        }),
-    takeEvery(
-        setItems,
-        function* _(items: ITask[]): SagaIterator {
-            yield call(tasksRepository((yield selectState()).done).set, items);
-        }),
+    ...duck.sagas,
     takeEvery(
         updateCurrentItem,
         function* _(task: ITask): SagaIterator {
             task = { ...task, updatedAt: Date.now() };
 
-            const state: IState = yield selectState();
+            const state = yield duck.selectState();
             const items = [...state.items];
 
             items[findIndex(items, state.currentItem)] = task;
 
-            yield put(setItems(items));
-            yield put(setCurrentItem(task));
+            yield put(actionCreators.setItems(items));
+            yield put(actionCreators.setCurrentItem(task));
         }),
 ];
-
-function selectState() {
-    return select(({ tasks }) => tasks);
-}
-
-function* getItemsSaga(): SagaIterator {
-    const { done }: IState = yield selectState();
-
-    try {
-        yield put(getItems.done({ params: null, result: yield call(tasksRepository(done).get) }));
-    } catch (error) {
-        console.log(error);
-    }
-}
