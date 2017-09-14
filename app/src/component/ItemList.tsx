@@ -40,8 +40,8 @@ export default class ItemList<A extends IItem> extends React.Component<IProps<A>
     public componentDidUpdate() {
         const { currentItem, items, setCurrentItem } = this.props;
 
-        if (items.length !== 0 && (currentItem === null || !_.find(items, currentItem))) {
-            setCurrentItem(items[0]);
+        if (currentItem === null || !_.find(items, currentItem)) {
+            setCurrentItem(items[0] || null);
         }
     }
 
