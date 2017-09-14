@@ -50,11 +50,17 @@ class CreateTask extends React.Component<IProps, IState> {
                 className="CreateTask-form-container"
                 onSubmit={(event) => {
                     this.props.createItem({ description, name, tags: [] });
+                    this.setState({ description: "", name: "" });
+                    event.preventDefault();
+                }}
+                onReset={(event) => {
+                    this.props.stopCreatingItem();
+                    this.setState({ description: "", name: "" });
                     event.preventDefault();
                 }}
             >
                 <input
-                    ref={(name) => { this.name = name; }}
+                    ref={(name) => this.name = name}
                     placeholder="Name"
                     value={name}
                     onChange={({ target: { value } }) => this.setState({ name: value })}
@@ -67,12 +73,7 @@ class CreateTask extends React.Component<IProps, IState> {
                 />
                 <div className="CreateTask-buttons">
                     <button className="CreateTask-button" type="submit">Create</button>
-                    <button
-                        className="CreateTask-cancel-button"
-                        onClick={this.props.stopCreatingItem}
-                    >
-                        Cancel
-                    </button>
+                    <button className="CreateTask-cancel-button" type="reset">Cancel</button>
                 </div>
             </form>
         );
