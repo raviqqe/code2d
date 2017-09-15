@@ -2,26 +2,29 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import { IArticle } from "../lib/articles";
-import "./style/Article.css";
+import { actionCreators } from "../redux/articles";
+import Item from "./Item";
 
-interface IState {
-    showButtons: boolean;
+interface IProps extends IArticle {
+    currentItem: IArticle | null;
+    detailed: boolean;
+    done: boolean;
+    toggleItemState: (article: IArticle) => void;
+    removeItem: (article: IArticle) => void;
+    setCurrentItem: (article: IArticle | null) => void;
 }
 
-export default class extends React.Component<IArticle, IState> {
-    public state: IState = { showButtons: false };
-
+class Article extends React.Component<IProps> {
     public render() {
-        const { title, uri } = this.props;
-
         return (
-            <div
-                className="Article-container"
-                onMouseOver={() => this.setState({ showButtons: true })}
-                onMouseOut={() => this.setState({ showButtons: false })}
-            >
-                <a href={uri} target="_blank">{title}</a>
-            </div>
+            <Item {...this.props} item={this.article} />
         );
     }
+
+    private get article(): IArticle {
+        const { name, uri } = this.props;
+        return { name, uri };
+    }
 }
+
+export default connect(({ articles }) => articles, actionCreators)(Article);

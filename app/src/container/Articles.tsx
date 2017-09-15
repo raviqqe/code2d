@@ -1,36 +1,41 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import AddArticle from "../component/AddArticle";
 import Article from "../component/Article";
+import CreateArticle from "../component/CreateArticle";
+import ItemList from "../component/ItemList";
+import Menu from "../component/Menu";
 import { IArticle } from "../lib/articles";
+import { actionCreators } from "../redux/articles";
 import Items from "./Items";
-import "./style/Articles.css";
 
 interface IProps {
-    articles: IArticle[];
-    signedIn: boolean;
+    currentItem: IArticle | null;
+    items: IArticle[];
+    done: boolean;
+    setCurrentItem: (article: IArticle) => void;
+    setItems: (articles: IArticle[]) => void;
 }
 
 class Articles extends React.Component<IProps> {
     public render() {
+        const { currentItem, done, items } = this.props;
+
         return (
-            <Items menu={false}>
-                <div className="Articles-container">
-                    {this.renderArticles()}
-                    <AddArticle />
-                </div>
-            </Items>
+            <Items
+                createItem={!done && <CreateArticle />}
+                currentItem={currentItem &&
+                    <Article detailed={true} done={done} {...currentItem} />}
+                list={
+                    <ItemList
+                        component={Article}
+                        {...this.props}
+                        items={items}
+                    />}
+                menu={<Menu />}
+            />
         );
-    }
-
-    private renderArticles() {
-        if (this.props.articles === null) {
-            return "No articles is available.";
-        }
-
-        return this.props.articles.map((article, index) => <Article key={index} {...article} />);
     }
 }
 
-export default connect(({ articles }) => articles)(Articles);
+export default connect(({ articles }) => articles, actionCreators)(Articles);

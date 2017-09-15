@@ -12,7 +12,7 @@ interface IProps<A extends IItem> {
     buttons?: any[];
     currentItem: A | null;
     detailed: boolean;
-    details: any;
+    details?: any;
     done?: boolean;
     item: A;
     onEditName?: (name: string) => void;

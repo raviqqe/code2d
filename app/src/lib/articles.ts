@@ -2,7 +2,7 @@ import * as functions from "./functions";
 import StatefulItemsRepository from "./stateful_items_repository";
 
 export interface IArticle {
-    title: string;
+    name: string;
     uri: string;
 }
 

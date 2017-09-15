@@ -6,6 +6,7 @@ import { ImmutableObject } from "seamless-immutable";
 import actionCreatorFactory from "typescript-fsa";
 import { reducerWithInitialState } from "typescript-fsa-reducers";
 
+import { articlesRepository } from "../lib/articles";
 import { tasksRepository } from "../lib/tasks";
 import * as articles from "./articles";
 import * as books from "./books";
@@ -44,8 +45,9 @@ function* initialize(): SagaIterator {
 
     if (rehydrated && signedIn) {
         yield all([
-            put(articles.actionCreators.getArticles()),
-            put(books.actionCreators.getBooks()),
+            put(articles.actionCreators.getItems()),
+            call(articlesRepository(false).get),
+            call(articlesRepository(true).get),
             put(tasks.actionCreators.getItems()),
             call(tasksRepository(false).get),
             call(tasksRepository(true).get),

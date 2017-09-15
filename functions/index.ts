@@ -11,7 +11,7 @@ admin.initializeApp(functions.config().firebase);
 
 export const article = httpsFunction(async ({ query: { uri } }: Request, response: Response) => {
     const { title } = unfluff((await axios.get(uri)).data);
-    const article = { title, uri };
+    const article = { name: title, uri };
 
     console.log("Article:", article);
 

@@ -22,7 +22,7 @@ export type Reducer<A, S extends IState<A>>
 export default function createItemsDuck<A extends IItem, B>(
     reducerName: string,
     repository: (done: boolean) => ItemsRepository<A>,
-    initialize: (itemSource: B) => A,
+    initialize: (itemSource: B) => A | Promise<A>,
     options: { partialInitialState?: {}, onToggleTaskState?: (item: A) => A } = {}) {
     options = Object.assign(
         { partialInitialState: {}, onToggleTaskState: (item: A): A => item },
