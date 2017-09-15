@@ -10,14 +10,14 @@
 .ItemsMenu-button {
 	width: 100%;
 	padding: 0.5em 1em;
-	color: $black;
+	color: $grey;
 	cursor: pointer;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 
 	&:hover {
-		background: $light-grey;
+		color: $black;
 	}
 
 	& > svg {
@@ -33,6 +33,6 @@
 	cursor: auto;
 
 	&:hover {
-		background: initial;
+		color: $light-red;
 	}
 }
