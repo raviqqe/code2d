@@ -9,13 +9,20 @@
 
 .ItemsMenu-button {
 	width: 100%;
-	text-align: center;
 	padding: 0.5em 1em;
 	color: $black;
 	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
 	&:hover {
 		background: $light-grey;
+	}
+
+	& > svg {
+		font-size: 1.6em;
+		margin-right: 0.2em;
 	}
 }
 
