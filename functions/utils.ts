@@ -28,6 +28,11 @@ export function httpsFunction(handler: (request: Request, response: Response) =>
                 "Cache-Control",
                 `private, max-age=${cacheSeconds}, s-maxage=${cacheSeconds}`);
 
-            await handler(request, response);
+            try {
+                await handler(request, response);
+            } catch (error) {
+                console.error(error);
+                response.sendStatus(500);
+            }
         });
 }
