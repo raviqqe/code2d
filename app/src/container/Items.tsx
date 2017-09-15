@@ -36,7 +36,7 @@ class Items extends React.Component<IProps> {
                 <div className="Items-main">
                     {list}
                     <div className="Items-side-bar">
-                        {currentItem}
+                        {currentItem || <div />}
                         {createItem}
                     </div>
                 </div>
