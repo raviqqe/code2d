@@ -1,34 +1,5 @@
 @import "../../style/colors.scss";
-@import "./Item.scss";
 @import "./TaskDescription.scss";
-
-.CreateTask-plus-button-container {
-	width: 100%;
-	display: flex;
-	justify-content: flex-end;
-}
-
-.CreateTask-plus-button {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 3em;
-	height: 3em;
-	border-radius: 1.5em;
-	padding: 0;
-
-	& > svg {
-		font-size: 1.5em;
-	}
-}
-
-.CreateTask-form-container {
-	@extend .Item-container;
-
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-}
 
 .CreateTask-description {
 	@extend .TaskDescription-input;

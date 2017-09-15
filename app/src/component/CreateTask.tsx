@@ -4,11 +4,11 @@ import { connect } from "react-redux";
 
 import { INewTask } from "../lib/tasks";
 import { actionCreators } from "../redux/tasks";
+import CreateItem from "./CreateItem";
 import "./style/CreateTask.css";
 
 interface IProps {
     createItem: (task: INewTask) => void;
-    creatingItem: boolean;
     startCreatingItem: () => void;
     stopCreatingItem: () => void;
 }
@@ -21,46 +21,21 @@ interface IState {
 class CreateTask extends React.Component<IProps, IState> {
     public state: IState = { description: "", name: "" };
 
-    private name: { focus: () => void };
-
-    public componentDidUpdate({ creatingItem }) {
-        if (!creatingItem && this.props.creatingItem) {
-            this.name.focus(); // Do this after rendering.
-        }
-    }
-
     public render() {
-        if (!this.props.creatingItem) {
-            return (
-                <div className="CreateTask-plus-button-container">
-                    <button
-                        className="CreateTask-plus-button"
-                        onClick={this.props.startCreatingItem}
-                    >
-                        <Plus />
-                    </button>
-                </div>
-            );
-        }
-
         const { description, name } = this.state;
 
         return (
-            <form
-                className="CreateTask-form-container"
-                onSubmit={(event) => {
+            <CreateItem
+                createItem={() => {
                     this.props.createItem({ description, name, tags: [] });
                     this.setState({ description: "", name: "" });
-                    event.preventDefault();
                 }}
-                onReset={(event) => {
-                    this.props.stopCreatingItem();
-                    this.setState({ description: "", name: "" });
-                    event.preventDefault();
-                }}
+                onChangeState={(creatingTask) => creatingTask
+                    ? this.props.startCreatingItem()
+                    : this.props.stopCreatingItem()}
             >
                 <input
-                    ref={(name) => this.name = name}
+                    autoFocus={true}
                     placeholder="Name"
                     value={name}
                     onChange={({ target: { value } }) => this.setState({ name: value })}
@@ -75,9 +50,9 @@ class CreateTask extends React.Component<IProps, IState> {
                     <button className="CreateTask-button" type="submit">Create</button>
                     <button className="CreateTask-cancel-button" type="reset">Cancel</button>
                 </div>
-            </form>
+            </CreateItem>
         );
     }
 }
 
-export default connect(({ tasks }) => tasks, actionCreators)(CreateTask);
+export default connect(null, actionCreators)(CreateTask);
