@@ -19,7 +19,7 @@ export default class ItemsRepository<A> {
                 (await axios.get(await this.reference.getDownloadURL())).data);
             return this.items;
         } catch (error) {
-            console.log(error);
+            console.error(error);
             return [];
         }
     }
