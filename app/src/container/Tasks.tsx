@@ -34,14 +34,12 @@ class Tasks extends React.Component<IProps> {
 
         return (
             <Page menu={<Menu />}>
-                <div className="Tasks-tasks">
-                    <ItemList
-                        component={Task}
-                        fixed={currentTag !== null}
-                        {...this.props}
-                        items={this.itemsByTag}
-                    />
-                </div>
+                <ItemList
+                    component={Task}
+                    fixed={currentTag !== null}
+                    {...this.props}
+                    items={this.itemsByTag}
+                />
                 <div className="Tasks-sidebar">
                     {!creatingItem && currentItem &&
                         <Task detailed={true} done={done} {...currentItem} />}

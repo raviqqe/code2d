@@ -49,4 +49,9 @@
 	width: 150vh;
 	max-width: 100%;
 	display: flex;
+
+	& > * {
+		flex: 1;
+		margin: 1em;
+	}
 }

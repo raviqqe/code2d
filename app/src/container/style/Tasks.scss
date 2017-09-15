@@ -1,17 +1,6 @@
 @import "../../style/colors.scss";
 
-@mixin Tasks-sub-container {
-	flex: 1;
-	margin: 1em;
-}
-
-.Tasks-tasks {
-	@include Tasks-sub-container;
-}
-
 .Tasks-sidebar {
-	@include Tasks-sub-container;
-
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
