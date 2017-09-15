@@ -10,7 +10,6 @@ import * as notification from "../lib/notification";
 import { ITask } from "../lib/tasks";
 import { actionCreators } from "../redux/tasks";
 import Page from "./Page";
-import "./style/Tasks.css";
 import Timer from "./Timer";
 
 interface IProps {
@@ -33,19 +32,19 @@ class Tasks extends React.Component<IProps> {
         const { creatingItem, currentItem, currentTag, done } = this.props;
 
         return (
-            <Page menu={<Menu />}>
-                <ItemList
-                    component={Task}
-                    fixed={currentTag !== null}
-                    {...this.props}
-                    items={this.itemsByTag}
-                />
-                <div className="Tasks-sidebar">
-                    {!creatingItem && currentItem &&
-                        <Task detailed={true} done={done} {...currentItem} />}
-                    {!done && <CreateTask />}
-                </div>
-            </Page>
+            <Page
+                createItem={!done && <CreateTask />}
+                currentItem={!creatingItem && currentItem &&
+                    <Task detailed={true} done={done} {...currentItem} />}
+                list={
+                    <ItemList
+                        component={Task}
+                        fixed={currentTag !== null}
+                        {...this.props}
+                        items={this.itemsByTag}
+                    />}
+                menu={<Menu />}
+            />
         );
     }
 

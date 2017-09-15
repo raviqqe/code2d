@@ -8,13 +8,16 @@ import { Link, Redirect } from "react-router-dom";
 import "./style/Page.css";
 
 interface IProps {
-    menu: any;
+    createItem: JSX.Element;
+    currentItem: JSX.Element;
+    list: JSX.Element;
+    menu: JSX.Element;
     signedIn: boolean;
 }
 
 class Page extends React.Component<IProps> {
     public render() {
-        const { children, menu, signedIn } = this.props;
+        const { createItem, currentItem, list, menu, signedIn } = this.props;
 
         if (!signedIn) {
             return <Redirect to="/sign-in" />;
@@ -31,7 +34,11 @@ class Page extends React.Component<IProps> {
                     </div>
                 </div>
                 <div className="Page-main">
-                    {children}
+                    {list}
+                    <div className="Page-side-bar">
+                        {currentItem}
+                        {createItem}
+                    </div>
                 </div>
                 <div className="Page-blank" />
             </div>
