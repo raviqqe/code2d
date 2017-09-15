@@ -1,5 +1,4 @@
 import * as React from "react";
-import Plus = require("react-icons/lib/md/add");
 import { connect } from "react-redux";
 
 import { INewTask } from "../lib/tasks";
