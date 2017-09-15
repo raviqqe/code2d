@@ -37,6 +37,10 @@ export default class ItemList<A extends IItem> extends React.Component<IProps<A>
         );
     }
 
+    public componentDidMount() {
+        this.componentDidUpdate();
+    }
+
     public componentDidUpdate() {
         const { currentItem, items, setCurrentItem } = this.props;
 
