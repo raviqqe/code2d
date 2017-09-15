@@ -77,9 +77,14 @@ export default function createItemsDuck<A extends IItem, B>(
             takeEvery(
                 createItem,
                 function* _(itemSource: B): SagaIterator {
-                    const item = yield call(initialize, itemSource);
-                    yield put(setItems([item, ...(yield selectState()).items]));
-                    yield put(setCurrentItem(item));
+                    try {
+                        const item: A = yield call(initialize, itemSource);
+
+                        yield put(setItems([item, ...(yield selectState()).items]));
+                        yield put(setCurrentItem(item));
+                    } catch (error) {
+                        console.error(error);
+                    }
                 }),
             takeEvery(getItems.started, getItemsSaga),
             takeEvery(toggleItemsState, getItemsSaga),
