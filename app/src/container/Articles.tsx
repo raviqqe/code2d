@@ -2,9 +2,9 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import Article from "../component/Article";
+import ArticlesMenu from "../component/ArticlesMenu";
 import CreateArticle from "../component/CreateArticle";
 import ItemList from "../component/ItemList";
-import Menu from "../component/Menu";
 import { IArticle } from "../lib/articles";
 import { actionCreators } from "../redux/articles";
 import Items from "./Items";
@@ -32,7 +32,7 @@ class Articles extends React.Component<IProps> {
                         {...this.props}
                         items={items}
                     />}
-                menu={<Menu />}
+                menu={<ArticlesMenu />}
             />
         );
     }
