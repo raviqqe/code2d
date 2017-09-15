@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter, Route } from "react-router-dom";
 
 import createStore from "../../redux";
-import Page from "../Page";
+import Items from "../Items";
 
 it("renders a todo tasks page", () => {
     ReactDOM.render(
@@ -14,7 +14,7 @@ it("renders a todo tasks page", () => {
                     <Route
                         exact={true}
                         path="/"
-                        render={() => <Page menu={<div>menu</div>}><div>main</div></Page>}
+                        render={() => <Items menu={<div>menu</div>}><div>main</div></Items>}
                     />
                     <Route
                         exact={true}

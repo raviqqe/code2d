@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 
 import Book from "../component/Book";
 import { IBook } from "../lib/books";
-import Page from "./Page";
+import Items from "./Items";
 import "./style/Books.css";
 
 interface IProps {
@@ -15,11 +15,11 @@ interface IProps {
 class Books extends React.Component<IProps> {
     public render() {
         return (
-            <Page menu={false}>
+            <Items menu={false}>
                 <div className="Books-container">
                     {this.renderBooks()}
                 </div>
-            </Page>
+            </Items>
         );
     }
 

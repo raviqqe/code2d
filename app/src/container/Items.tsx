@@ -5,7 +5,7 @@ import Todo = require("react-icons/lib/md/playlist-add-check");
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 
-import "./style/Page.css";
+import "./style/Items.css";
 
 interface IProps {
     createItem: JSX.Element;
@@ -15,7 +15,7 @@ interface IProps {
     signedIn: boolean;
 }
 
-class Page extends React.Component<IProps> {
+class Items extends React.Component<IProps> {
     public render() {
         const { createItem, currentItem, list, menu, signedIn } = this.props;
 
@@ -24,26 +24,26 @@ class Page extends React.Component<IProps> {
         }
 
         return (
-            <div className="Page-container">
-                <div className="Page-menu-blank" />
-                <div className="Page-menu">
+            <div className="Items-container">
+                <div className="Items-menu-blank" />
+                <div className="Items-menu">
                     {menu}
-                    <div className="Page-menu-buttons">
+                    <div className="Items-menu-buttons">
                         <Link to="/tasks"><Todo /></Link>
                         <Link to="/articles"><Article /></Link>
                     </div>
                 </div>
-                <div className="Page-main">
+                <div className="Items-main">
                     {list}
-                    <div className="Page-side-bar">
+                    <div className="Items-side-bar">
                         {currentItem}
                         {createItem}
                     </div>
                 </div>
-                <div className="Page-blank" />
+                <div className="Items-blank" />
             </div>
         );
     }
 }
 
-export default connect(({ authState }) => authState)(Page);
+export default connect(({ authState }) => authState)(Items);

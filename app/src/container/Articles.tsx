@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import AddArticle from "../component/AddArticle";
 import Article from "../component/Article";
 import { IArticle } from "../lib/articles";
-import Page from "./Page";
+import Items from "./Items";
 import "./style/Articles.css";
 
 interface IProps {
@@ -15,12 +15,12 @@ interface IProps {
 class Articles extends React.Component<IProps> {
     public render() {
         return (
-            <Page menu={false}>
+            <Items menu={false}>
                 <div className="Articles-container">
                     {this.renderArticles()}
                     <AddArticle />
                 </div>
-            </Page>
+            </Items>
         );
     }
 

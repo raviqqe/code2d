@@ -9,7 +9,7 @@ import Task from "../component/Task";
 import * as notification from "../lib/notification";
 import { ITask } from "../lib/tasks";
 import { actionCreators } from "../redux/tasks";
-import Page from "./Page";
+import Items from "./Items";
 import Timer from "./Timer";
 
 interface IProps {
@@ -32,7 +32,7 @@ class Tasks extends React.Component<IProps> {
         const { creatingItem, currentItem, currentTag, done } = this.props;
 
         return (
-            <Page
+            <Items
                 createItem={!done && <CreateTask />}
                 currentItem={!creatingItem && currentItem &&
                     <Task detailed={true} done={done} {...currentItem} />}
