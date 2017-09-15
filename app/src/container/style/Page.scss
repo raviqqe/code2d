@@ -53,5 +53,9 @@
 	& > * {
 		flex: 1;
 		margin: 1em;
+
+		&:last-child {
+			margin-left: 0;
+		}
 	}
 }
