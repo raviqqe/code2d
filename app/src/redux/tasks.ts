@@ -9,7 +9,6 @@ import { takeEvery } from "./utils";
 export interface IState extends IItemsState<ITask> {
     creatingItem: boolean;
     currentTag: string | null;
-    newItem: INewTask;
 }
 
 const duck = createItemsDuck(
@@ -26,7 +25,6 @@ const duck = createItemsDuck(
         partialInitialState: {
             creatingItem: false,
             currentTag: null,
-            newItem: { description: "", name: "", tags: [] },
         },
     },
 );
