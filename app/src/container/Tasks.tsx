@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 
 import CreateTask from "../component/CreateTask";
 import ItemList from "../component/ItemList";
-import Menu from "../component/Menu";
 import Task from "../component/Task";
+import TasksMenu from "../component/TasksMenu";
 import * as notification from "../lib/notification";
 import { ITask } from "../lib/tasks";
 import { actionCreators } from "../redux/tasks";
@@ -43,7 +43,7 @@ class Tasks extends React.Component<IProps> {
                         {...this.props}
                         items={this.itemsByTag}
                     />}
-                menu={<Menu />}
+                menu={<TasksMenu />}
             />
         );
     }

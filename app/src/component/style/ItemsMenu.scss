@@ -1,0 +1,31 @@
+@import "../../style/colors.scss";
+
+.ItemsMenu-container {
+	background: white;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.ItemsMenu-button {
+	width: 100%;
+	text-align: center;
+	padding: 0.5em 1em;
+	color: $black;
+	cursor: pointer;
+
+	&:hover {
+		background: $light-grey;
+	}
+}
+
+.ItemsMenu-button-highlighted {
+	@extend .ItemsMenu-button;
+
+	color: $light-red;
+	cursor: auto;
+
+	&:hover {
+		background: initial;
+	}
+}
