@@ -6,6 +6,7 @@ import "./style/CreateItem.css";
 interface IProps {
     createItem: () => void;
     onChangeState?: (creatingItem: boolean) => void;
+    formStyle?: { [key: string]: any };
 }
 
 interface IState {
@@ -22,11 +23,12 @@ export default class extends React.Component<IProps, IState> {
     }
 
     public render() {
-        const { children, createItem } = this.props;
+        const { children, createItem, formStyle } = this.props;
 
         if (this.state.creatingItem) {
             return (
                 <form
+                    style={formStyle}
                     className="CreateItem-form-container"
                     onSubmit={(event) => {
                         createItem();
