@@ -14,7 +14,9 @@ interface IProps {
 
 class Page extends React.Component<IProps> {
     public render() {
-        if (!this.props.signedIn) {
+        const { children, menu, signedIn } = this.props;
+
+        if (!signedIn) {
             return <Redirect to="/sign-in" />;
         }
 
@@ -22,14 +24,14 @@ class Page extends React.Component<IProps> {
             <div className="Page-container">
                 <div className="Page-menu-blank" />
                 <div className="Page-menu">
-                    {this.props.menu}
+                    {menu}
                     <div className="Page-menu-buttons">
                         <Link to="/tasks"><Todo /></Link>
                         <Link to="/articles"><Article /></Link>
                     </div>
                 </div>
                 <div className="Page-main">
-                    {this.props.children}
+                    {children}
                 </div>
                 <div className="Page-blank" />
             </div>
