@@ -26,13 +26,12 @@ body {
 }
 
 a {
-	@include font;
-
-	font-size: 1em;
+	color: inherit;
+	font-size: inherit;
 	text-decoration: none;
 
 	&:visited {
-		@include font;
+		color: inherit;
 	}
 }
 
