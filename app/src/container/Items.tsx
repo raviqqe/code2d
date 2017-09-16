@@ -5,6 +5,7 @@ import Todo = require("react-icons/lib/md/playlist-add-check");
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 
+import ItemsMenuButton from "../component/ItemsMenuButton";
 import "./style/Items.css";
 
 interface IProps {
@@ -29,8 +30,8 @@ class Items extends React.Component<IProps> {
                 <div className="Items-menu">
                     {menu}
                     <div className="Items-menu-buttons">
-                        <Link to="/tasks"><Todo /></Link>
-                        <Link to="/articles"><Article /></Link>
+                        <ItemsMenuButton path="/tasks"><Todo /></ItemsMenuButton>
+                        <ItemsMenuButton path="/articles"><Article /></ItemsMenuButton>
                     </div>
                 </div>
                 <div className="Items-main">

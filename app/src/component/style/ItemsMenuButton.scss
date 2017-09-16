@@ -1,0 +1,14 @@
+@import "../../style/colors.scss";
+
+.ItemsMenuButton-container {
+	display: flex;
+	font-size: 2.5em;
+	color: $light-grey;
+	margin: 0.2em;
+}
+
+.ItemsMenuButton-container-highlighted {
+	@extend .ItemsMenuButton-container;
+
+	color: $light-red;
+}
