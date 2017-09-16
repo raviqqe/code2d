@@ -1,11 +1,11 @@
 import * as functions from "./functions";
+import { IItem } from "./items";
 import StatefulItemsRepository from "./stateful_items_repository";
 
-export interface IArticle {
+export interface IArticle extends IItem {
     date?: string;
     favicon?: string;
     image?: string;
-    name: string;
     text?: string;
     uri: string;
 }

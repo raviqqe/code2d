@@ -1,6 +1,7 @@
+import { IItem } from "./items";
 import ItemsRepository from "./items_repository";
 
-export default class StatefulItemsRepository<A> {
+export default class StatefulItemsRepository<A extends IItem> {
     private todoItems: ItemsRepository<A>;
     private doneItems: ItemsRepository<A>;
 

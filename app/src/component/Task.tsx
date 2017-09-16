@@ -63,8 +63,8 @@ class Task extends React.Component<IProps> {
     }
 
     private get task(): ITask {
-        const { createdAt, description, name, spentSeconds, tags, updatedAt } = this.props;
-        return { createdAt, description, name, spentSeconds, tags, updatedAt };
+        const { createdAt, description, id, name, spentSeconds, tags, updatedAt } = this.props;
+        return { createdAt, description, id, name, spentSeconds, tags, updatedAt };
     }
 
     private renderSpentSeconds = () => {

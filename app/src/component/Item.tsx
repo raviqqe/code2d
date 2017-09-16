@@ -1,10 +1,9 @@
-import * as _ from "lodash";
 import * as React from "react";
 import Check = require("react-icons/lib/md/check");
 import Trash = require("react-icons/lib/md/delete");
 import Repeat = require("react-icons/lib/md/replay");
 
-import { IItem } from "../lib/items";
+import { equal, IItem } from "../lib/items";
 import ItemName from "./ItemName";
 import "./style/Item.css";
 
@@ -29,11 +28,11 @@ export default class Item<A extends IItem> extends React.Component<IProps<A>, IS
     public state: IState = { showButtons: false };
 
     public render() {
-        const { detailed, details, item, onEditName, setCurrentItem } = this.props;
+        const { currentItem, detailed, details, item, onEditName, setCurrentItem } = this.props;
 
         return (
             <div
-                className={!detailed && this.isCurrentItem
+                className={!detailed && currentItem && equal(item, currentItem)
                     ? "Item-container-highlighted"
                     : "Item-container"}
                 onClick={detailed ? undefined : () => setCurrentItem(item)}
@@ -54,6 +53,7 @@ export default class Item<A extends IItem> extends React.Component<IProps<A>, IS
 
     private get buttons() {
         const { detailed, done, item, removeItem, toggleItemState } = this.props;
+
         const buttons = [(
             <div
                 key="toggleState"
@@ -67,7 +67,7 @@ export default class Item<A extends IItem> extends React.Component<IProps<A>, IS
             </div>
         )];
 
-        if (!done && _.isArray(this.props.buttons)) {
+        if (!done && this.props.buttons) {
             buttons.push(...this.props.buttons);
         }
 
@@ -101,9 +101,5 @@ export default class Item<A extends IItem> extends React.Component<IProps<A>, IS
         }
 
         return { visibility: "hidden" };
-    }
-
-    private get isCurrentItem(): boolean {
-        return _.isEqual(this.props.item, this.props.currentItem);
     }
 }

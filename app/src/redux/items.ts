@@ -6,7 +6,7 @@ import Immutable = require("seamless-immutable");
 import actionCreatorFactory from "typescript-fsa";
 import { ReducerBuilder, reducerWithInitialState } from "typescript-fsa-reducers";
 
-import { IItem } from "../lib/items";
+import { createId, IItem } from "../lib/items";
 import ItemsRepository from "../lib/items_repository";
 import { takeEvery } from "./utils";
 
@@ -78,7 +78,7 @@ export default function createItemsDuck<A extends IItem, B>(
                 createItem,
                 function* _(itemSource: B): SagaIterator {
                     try {
-                        const item: A = yield call(initialize, itemSource);
+                        const item: A = createId(yield call(initialize, itemSource));
 
                         yield put(setItems([item, ...(yield selectState()).items]));
                         yield put(setCurrentItem(item));

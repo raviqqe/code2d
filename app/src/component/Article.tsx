@@ -22,8 +22,8 @@ class Article extends React.Component<IProps> {
     }
 
     private get article(): IArticle {
-        const { name, uri } = this.props;
-        return { name, uri };
+        const { id, name, uri } = this.props;
+        return { id, name, uri };
     }
 }
 

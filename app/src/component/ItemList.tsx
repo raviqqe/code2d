@@ -1,9 +1,8 @@
-import * as _ from "lodash";
 import * as React from "react";
 import { arrayMove } from "react-sortable-hoc";
 
 import { isTouchDevice } from "../lib/device";
-import { IItem } from "../lib/items";
+import { IItem, include } from "../lib/items";
 import SortableItems from "./SortableItems";
 import "./style/ItemList.css";
 
@@ -44,7 +43,7 @@ export default class ItemList<A extends IItem> extends React.Component<IProps<A>
     public componentDidUpdate() {
         const { currentItem, items, setCurrentItem } = this.props;
 
-        if (currentItem === null || !_.find(items, currentItem)) {
+        if (currentItem === null || !include(items, currentItem)) {
             setCurrentItem(items[0] || null);
         }
     }
