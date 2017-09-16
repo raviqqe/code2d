@@ -171,3 +171,16 @@ it("gets tags", async () => {
 
     expect(getState(store).tags).toEqual(["javascript"]);
 });
+
+it("resets a current tag after creating a task", async () => {
+    expect.assertions(3);
+
+    const store = createStore();
+
+    expect(getState(store).currentTag).toBe(null);
+    await dispatch(store, actionCreators.setCurrentTag("foo"));
+    expect(getState(store).currentTag).toBe("foo");
+    await dispatch(store,
+        actionCreators.createItem({ name: "foo", description: "bar", tags: [] }));
+    expect(getState(store).currentTag).toBe(null);
+});
