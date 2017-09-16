@@ -52,7 +52,8 @@ export const initialState = duck.initialState;
 
 export const reducer =
     (duck.reducer as Reducer<ITask, IState>)
-        .case(duck.actionCreators.createItem, (state) => state.merge({ creatingItem: false }))
+        .case(duck.actionCreators.createItem, (state) =>
+            state.merge({ creatingItem: false, currentTag: null }))
         .case(getTags.done, (state, { result }) => state.merge({ tags: result }))
         .case(setCurrentTag, (state, currentTag) => state.merge({ currentTag }))
         .case(startCreatingItem, (state) => state.merge({ creatingItem: true }))
