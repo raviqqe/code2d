@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { IArticle } from "../lib/articles";
 import { actionCreators } from "../redux/articles";
 import Item from "./Item";
+import "./style/Article.css";
 
 interface IProps extends IArticle {
     currentItem: IArticle | null;
@@ -16,14 +17,30 @@ interface IProps extends IArticle {
 
 class Article extends React.Component<IProps> {
     public render() {
+        const { date, favicon, image, name, text, uri } = this.article;
+
         return (
-            <Item {...this.props} item={this.article} />
+            <Item
+                {...this.props}
+                details={[
+                    image &&
+                    <a href={image} target="_blank">
+                        <img className="Article-image" src={image} />
+                    </a>,
+                    text && <div key="text" style={{ overflow: "scroll" }}>{text}</div>,
+                    date &&
+                    <div key="date" className="Article-date">
+                        Edited on: {(new Date(date)).toLocaleDateString()}
+                    </div>,
+                ]}
+                item={this.article}
+            />
         );
     }
 
     private get article(): IArticle {
-        const { id, name, uri } = this.props;
-        return { id, name, uri };
+        const { date, favicon, id, image, name, text, uri } = this.props;
+        return { date, favicon, id, image, name, text, uri };
     }
 }
 
