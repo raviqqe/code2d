@@ -11,6 +11,7 @@
 	width: 100%;
 	display: flex;
 	justify-content: flex-end;
+	flex-shrink: 0;
 }
 
 .CreateItem-plus-button {
