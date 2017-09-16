@@ -14,6 +14,7 @@ jest.mock("../../lib/json", () => ({
         id: "dummyId",
         name: "testName",
         spentSeconds: 42,
+        tags: ["javascript"],
         updatedAt: 42,
     }],
     encode: () => undefined,
@@ -157,4 +158,16 @@ it("sets a current tag", async () => {
     await dispatch(actionCreators.setCurrentTag("foo"));
 
     expect(getState(store).currentTag).toBe("foo");
+});
+
+it("gets tags", async () => {
+    expect.assertions(2);
+
+    const store = createStore();
+
+    expect(getState(store).tags).toEqual([]);
+
+    await dispatch(store, actionCreators.getTags());
+
+    expect(getState(store).tags).toEqual(["javascript"]);
 });
