@@ -2,7 +2,7 @@ import * as _ from "lodash";
 
 import createStore from "..";
 import { ITask, tasksRepository } from "../../lib/tasks";
-import { sleep } from "../../lib/utils";
+import { dispatch } from "../../lib/utils";
 import { actionCreators, IState } from "../tasks";
 
 jest.mock("axios", () => ({ default: { get: () => ({ data: null }) } }));
@@ -22,11 +22,6 @@ jest.mock("../../lib/json", () => ({
 
 function getState(store): IState {
     return store.getState().tasks;
-}
-
-async function dispatch(store, action) {
-    store.dispatch(action);
-    await sleep(100);
 }
 
 beforeEach(() => {

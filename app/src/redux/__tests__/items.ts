@@ -4,7 +4,7 @@ import { all } from "redux-saga/effects";
 
 import { IItem } from "../../lib/items";
 import StatefulItemsRepository from "../../lib/stateful_items_repository";
-import { sleep } from "../../lib/utils";
+import { dispatch } from "../../lib/utils";
 import createItemsDuck from "../items";
 
 jest.mock("axios", () => ({
@@ -48,11 +48,6 @@ function initialize() {
 
 function getState(store) {
     return store.getState().items;
-}
-
-async function dispatch(store, action) {
-    store.dispatch(action);
-    await sleep(100);
 }
 
 it("creates an items duck", () => {

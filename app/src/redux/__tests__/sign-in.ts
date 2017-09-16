@@ -1,5 +1,5 @@
 import createStore from "..";
-import { sleep } from "../../lib/utils";
+import { dispatch } from "../../lib/utils";
 import { actionCreators, initialState, reducer } from "../sign-in";
 
 it("tries to sign in", () => {
@@ -16,8 +16,7 @@ for (const signIn of [() => undefined, () => { throw new Error(); }]) {
 
         const store = require("..").default();
 
-        store.dispatch(actionCreators.signIn());
-        await sleep(100);
+        await dispatch(store, actionCreators.signIn());
         expect((store.getState() as any).signIn.halfway).toBe(false);
 
         jest.dontMock("../../lib/firebase");

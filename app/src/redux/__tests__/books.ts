@@ -1,5 +1,5 @@
 import createStore from "..";
-import { sleep } from "../../lib/utils";
+import { dispatch } from "../../lib/utils";
 import { actionCreators, IState } from "../books";
 
 jest.mock("../../lib/functions", () => ({ call: () => [] }));
@@ -13,14 +13,9 @@ it("gets books", async () => {
 
     const store = createStore();
 
-    const dispatch = async (action) => {
-        store.dispatch(action);
-        await sleep(100);
-    };
-
     expect(getState(store).books).toBe(null);
 
-    await dispatch(actionCreators.getBooks());
+    await dispatch(store, actionCreators.getBooks());
 
     expect(getState(store).books).toEqual([]);
 });
