@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { extractTagsFromTasks, ITask } from "../lib/tasks";
+import { ITask } from "../lib/tasks";
 import { actionCreators } from "../redux/tasks";
 import ItemsMenu from "./ItemsMenu";
 import "./style/TasksMenu.css";
@@ -11,18 +11,18 @@ interface IProps {
     currentTag: string | null;
     done: boolean;
     setCurrentTag: (tag: string | null) => void;
-    items: ITask[];
+    tags: string[];
     toggleItemsState: () => void;
 }
 
 class TasksMenu extends React.Component<IProps> {
     public render() {
-        const { currentTag, items, setCurrentTag } = this.props;
+        const { currentTag, setCurrentTag, tags } = this.props;
 
         return (
             <ItemsMenu {...this.props}>
                 <div className="TasksMenu-tags">
-                    {extractTagsFromTasks(items).map((tag, index) =>
+                    {tags.map((tag, index) =>
                         <TaskTag
                             key={index}
                             tag={tag}

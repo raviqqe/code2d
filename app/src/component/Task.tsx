@@ -90,6 +90,6 @@ class Task extends React.Component<IProps> {
 }
 
 export default connect(
-    ({ tasks }) => tasks,
+    ({ tasks: { tags, ...rest } }) => rest,
     { ...tasksActionCreators, ...timerActionCreators },
 )(Task);

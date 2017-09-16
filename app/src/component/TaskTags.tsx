@@ -4,15 +4,15 @@ import AutoComplete = require("react-autocomplete");
 import Plus = require("react-icons/lib/md/add");
 import { connect } from "react-redux";
 
-import { extractTagsFromTasks, ITask } from "../lib/tasks";
+import { ITask } from "../lib/tasks";
 import { actionCreators } from "../redux/tasks";
 import "./style/TaskTags.css";
 import TaskTag from "./TaskTag";
 
 interface IProps {
+    allTags: string[];
     currentItem: ITask;
     tags: string[];
-    items: ITask[];
     updateCurrentItem: (task: ITask) => void;
 }
 
@@ -27,7 +27,7 @@ class TaskTags extends React.Component<IProps, IState> {
     private input: { focus: () => void, value: string };
 
     public render() {
-        const { currentItem, tags, items, updateCurrentItem } = this.props;
+        const { allTags, currentItem, tags, updateCurrentItem } = this.props;
         const { newTag, taggingTask } = this.state;
 
         return (
@@ -71,7 +71,7 @@ class TaskTags extends React.Component<IProps, IState> {
                         <AutoComplete
                             ref={(input) => this.input = input}
                             getItemValue={(tag) => tag}
-                            items={extractTagsFromTasks(items)}
+                            items={allTags}
                             renderItem={(tag: string, highlighted: boolean) =>
                                 <div
                                     className={highlighted
@@ -103,4 +103,7 @@ class TaskTags extends React.Component<IProps, IState> {
     }
 }
 
-export default connect(({ tasks }) => tasks, actionCreators)(TaskTags);
+export default connect(
+    ({ tasks: { tags, ...rest } }) => ({ ...rest, allTags: tags }),
+    actionCreators,
+)(TaskTags);

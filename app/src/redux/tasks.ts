@@ -1,14 +1,15 @@
 import { findIndex } from "lodash";
 import { SagaIterator } from "redux-saga";
-import { put, select } from "redux-saga/effects";
+import { call, put, select } from "redux-saga/effects";
 
-import { INewTask, ITask, tasksRepository } from "../lib/tasks";
+import { extractTagsFromTasks, INewTask, ITask, tasksRepository } from "../lib/tasks";
 import createItemsDuck, { IState as IItemsState, Reducer } from "./items";
 import { takeEvery } from "./utils";
 
 export interface IState extends IItemsState<ITask> {
     creatingItem: boolean;
     currentTag: string | null;
+    tags: string[];
 }
 
 const duck = createItemsDuck(
@@ -25,12 +26,14 @@ const duck = createItemsDuck(
         partialInitialState: {
             creatingItem: false,
             currentTag: null,
+            tags: [],
         },
     },
 );
 
 const factory = duck.actionCreatorFactory;
 
+const getTags = factory.async<void, string[]>("GET_TAGS");
 const setCurrentTag = factory<string | null>("SET_CURRENT_TAG");
 const startCreatingItem = factory("START_CREATING_TASK");
 const stopCreatingItem = factory("STOP_CREATING_TASK");
@@ -38,6 +41,7 @@ const updateCurrentItem = factory<ITask>("UPDATE_CURRENT_TASK");
 
 export const actionCreators = {
     ...duck.actionCreators,
+    getTags: () => getTags.started(null),
     setCurrentTag,
     startCreatingItem,
     stopCreatingItem,
@@ -49,12 +53,24 @@ export const initialState = duck.initialState;
 export const reducer =
     (duck.reducer as Reducer<ITask, IState>)
         .case(duck.actionCreators.createItem, (state) => state.merge({ creatingItem: false }))
+        .case(getTags.done, (state, { result }) => state.merge({ tags: result }))
         .case(setCurrentTag, (state, currentTag) => state.merge({ currentTag }))
         .case(startCreatingItem, (state) => state.merge({ creatingItem: true }))
         .case(stopCreatingItem, (state) => state.merge({ creatingItem: false }));
 
 export const sagas = [
     ...duck.sagas,
+    takeEvery(
+        getTags.started,
+        function* _(): SagaIterator {
+            yield put(getTags.done({
+                params: null,
+                result: extractTagsFromTasks([
+                    ...(yield call(tasksRepository(false).get)),
+                    ...(yield call(tasksRepository(true).get)),
+                ]),
+            }));
+        }),
     takeEvery(
         updateCurrentItem,
         function* _(task: ITask): SagaIterator {
@@ -67,5 +83,6 @@ export const sagas = [
 
             yield put(actionCreators.setItems(items));
             yield put(actionCreators.setCurrentItem(task));
+            yield put(getTags.started(null));
         }),
 ];

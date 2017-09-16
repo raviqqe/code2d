@@ -49,6 +49,7 @@ function* initialize(): SagaIterator {
             call(articlesRepository(false).get),
             call(articlesRepository(true).get),
             put(tasks.actionCreators.getItems()),
+            put(tasks.actionCreators.getTags()),
             call(tasksRepository(false).get),
             call(tasksRepository(true).get),
         ]);
