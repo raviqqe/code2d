@@ -29,13 +29,11 @@ export default class Item<A extends IItem> extends React.Component<IProps<A>, IS
     public state: IState = { showButtons: false };
 
     public render() {
-        const { currentItem, detailed, details, href, item, onEditName, setCurrentItem } = this.props;
+        const { detailed, details, href, item, onEditName, setCurrentItem } = this.props;
 
         return (
             <div
-                className={!detailed && currentItem && equal(item, currentItem)
-                    ? "Item-container-highlighted"
-                    : "Item-container"}
+                className={this.containerClassName}
                 onClick={detailed ? undefined : () => setCurrentItem(item)}
                 onMouseOver={() => this.setState({ showButtons: true })}
                 onMouseOut={() => this.setState({ showButtons: false })}
@@ -103,5 +101,17 @@ export default class Item<A extends IItem> extends React.Component<IProps<A>, IS
         }
 
         return { visibility: "hidden" };
+    }
+
+    private get containerClassName(): string {
+        const { currentItem, detailed, item } = this.props;
+
+        if (detailed) {
+            return "Item-container-detailed";
+        }
+
+        return currentItem && equal(item, currentItem)
+            ? "Item-container-highlighted"
+            : "Item-container";
     }
 }
