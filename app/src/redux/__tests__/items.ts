@@ -18,6 +18,10 @@ jest.mock("../../lib/json", () => ({
     encode: () => undefined,
 }));
 
+jest.mock("../../lib/items", () => ({
+    createId: (item) => Object.assign({}, item, { id: "dummyId" }),
+}));
+
 interface ITestItem extends IItem {
     data: string;
 }
@@ -68,7 +72,7 @@ it("creates a new item", async () => {
 
     await dispatch(store, actionCreators.createItem({ name: "foo", data: "bar" }));
 
-    expect(getState(store).items).toEqual([{ name: "foo", data: "bar" }]);
+    expect(getState(store).items).toEqual([{ name: "foo", data: "bar", id: "dummyId" }]);
 });
 
 for (const done of [false, true]) {
