@@ -7,13 +7,18 @@
 	align-items: center;
 }
 
+.ItemsMenu-buttons {
+	display: flex;
+	flex-direction: column;
+}
+
 .ItemsMenu-button {
 	width: 100%;
 	padding: 0.5em 1em;
 	color: $light-grey;
 	cursor: pointer;
 	display: flex;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
 
 	&:hover {

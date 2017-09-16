@@ -16,17 +16,19 @@ export default class extends React.Component<IProps> {
 
         return (
             <div className="ItemsMenu-container">
-                <div
-                    className={done ? "ItemsMenu-button" : "ItemsMenu-button-highlighted"}
-                    onClick={() => done && toggleItemsState()}
-                >
-                    <Todo /> todo
-                </div>
-                <div
-                    className={done ? "ItemsMenu-button-highlighted" : "ItemsMenu-button"}
-                    onClick={() => !done && toggleItemsState()}
-                >
-                    <Done /> done
+                <div className="ItemsMenu-buttons">
+                    <div
+                        className={done ? "ItemsMenu-button" : "ItemsMenu-button-highlighted"}
+                        onClick={() => done && toggleItemsState()}
+                    >
+                        <Todo /> todo
+                    </div>
+                    <div
+                        className={done ? "ItemsMenu-button-highlighted" : "ItemsMenu-button"}
+                        onClick={() => !done && toggleItemsState()}
+                    >
+                        <Done /> done
+                    </div>
                 </div>
                 {children}
             </div>
