@@ -10,8 +10,8 @@ import { httpsFunction } from "./utils";
 admin.initializeApp(functions.config().firebase);
 
 export const article = httpsFunction(async ({ query: { uri } }: Request, response: Response) => {
-    const { title } = unfluff((await axios.get(uri)).data);
-    const article = { name: title, uri };
+    const { date, favicon, image, text, title } = unfluff((await axios.get(uri)).data);
+    const article = { date, favicon, image, name: title, text, uri };
 
     console.log("Article:", article);
 
