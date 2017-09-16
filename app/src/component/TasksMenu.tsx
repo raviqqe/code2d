@@ -26,7 +26,7 @@ class TasksMenu extends React.Component<IProps> {
                         <TaskTag
                             key={index}
                             tag={tag}
-                            highlight={tag === currentTag}
+                            highlight={currentTag && tag === currentTag}
                             onClick={() => setCurrentTag(tag === currentTag ? null : tag)}
                         />)}
                 </div>

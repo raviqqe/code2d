@@ -15,7 +15,7 @@ export default class extends React.Component<IProps> {
 
         return (
             <div
-                className={highlight ? "TaskTag-container-highlighted" : "TaskTag-container"}
+                className={this.containerClassName}
                 onClick={(event) => {
                     if (onClick) {
                         onClick();
@@ -27,5 +27,15 @@ export default class extends React.Component<IProps> {
                 {tag}
             </div>
         );
+    }
+
+    private get containerClassName(): string {
+        const { highlight } = this.props;
+
+        if (_.isBoolean(highlight)) {
+            return highlight ? "TaskTag-container-highlighted" : "TaskTag-container-unhighlighted";
+        }
+
+        return "TaskTag-container";
     }
 }

@@ -14,7 +14,8 @@ $TaskTag-size: 1.8em;
 .TaskTag-container {
 	@include TaskTag-tag-like;
 
-	background: $light-light-blue;
+	background: $light-blue;
+	color: white;
 	height: $TaskTag-size;
 	padding: {
 		bottom: 0.1em;
@@ -26,5 +27,13 @@ $TaskTag-size: 1.8em;
 .TaskTag-container-highlighted {
 	@extend .TaskTag-container;
 
-	color: $light-red;
+	background: $light-red;
+	color: white;
+}
+
+.TaskTag-container-unhighlighted {
+	@extend .TaskTag-container;
+
+	background: $light-grey;
+	color: white;
 }
