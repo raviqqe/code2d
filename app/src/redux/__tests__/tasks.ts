@@ -56,14 +56,10 @@ it("cancels creating a new task", async () => {
 
     expect(getState(store).creatingItem).toBe(false);
 
-    store.dispatch(actionCreators.startCreatingItem());
-    await sleep(100);
-
+    await dispatch(store, actionCreators.startCreatingItem());
     expect(getState(store).creatingItem).toBe(true);
 
-    store.dispatch(actionCreators.stopCreatingItem());
-    await sleep(100);
-
+    await dispatch(store, actionCreators.stopCreatingItem());
     expect(getState(store).creatingItem).toBe(false);
 });
 
@@ -74,17 +70,16 @@ for (const done of [false, true]) {
         const store = createStore();
 
         const tasksState = () => getState(store).items;
-        const dispatch = async (action, length: number) => {
-            store.dispatch(action);
-            await sleep(100);
+        const check = async (action, length: number) => {
+            await dispatch(store, action);
             expect(tasksState().length).toBe(length);
         };
 
         expect(tasksState().length).toBe(0);
 
-        await dispatch(done ? actionCreators.toggleItemsState() : actionCreators.getItems(), 1);
-        await dispatch(actionCreators.removeItem(tasksState()[0]), 0);
-        await dispatch(actionCreators.getItems(), 0);
+        await check(done ? actionCreators.toggleItemsState() : actionCreators.getItems(), 1);
+        await check(actionCreators.removeItem(tasksState()[0]), 0);
+        await check(actionCreators.getItems(), 0);
     });
 }
 
@@ -92,18 +87,17 @@ it("toggles a task's state", async () => {
     expect.assertions(4);
 
     const store = createStore();
-    const dispatch = async (action, length: number) => {
-        store.dispatch(action);
-        await sleep(100);
+    const check = async (action, length: number) => {
+        await dispatch(store, action);
         expect(getState(store).items.length).toBe(length);
     };
 
-    await dispatch(actionCreators.getItems(), 1);
+    await check(actionCreators.getItems(), 1);
 
     const { items: [{ updatedAt }] } = getState(store);
 
-    await dispatch(actionCreators.toggleItemState(getState(store).items[0]), 0);
-    await dispatch(actionCreators.toggleItemsState(), 2);
+    await check(actionCreators.toggleItemState(getState(store).items[0]), 0);
+    await check(actionCreators.toggleItemsState(), 2);
 
     const { items: [task] } = getState(store);
 
@@ -115,15 +109,10 @@ it("updates a current task", async () => {
 
     const store = createStore();
 
-    const dispatch = async (action) => {
-        store.dispatch(action);
-        await sleep(100);
-    };
-
     expect(getState(store).currentItem).toBe(null);
 
-    await dispatch(actionCreators.getItems());
-    await dispatch(actionCreators.updateCurrentItem({
+    await dispatch(store, actionCreators.getItems());
+    await dispatch(store, actionCreators.updateCurrentItem({
         ...(getState(store).currentItem),
         name: "foo bar baz",
     }));
@@ -132,7 +121,7 @@ it("updates a current task", async () => {
 
     const updatedAt = getState(store).currentItem.updatedAt;
 
-    await dispatch(actionCreators.updateCurrentItem({
+    await dispatch(store, actionCreators.updateCurrentItem({
         ...(getState(store).currentItem),
         name: "FOO BAR BAZ",
     }));
@@ -148,14 +137,9 @@ it("sets a current tag", async () => {
 
     const store = createStore();
 
-    const dispatch = async (action) => {
-        store.dispatch(action);
-        await sleep(100);
-    };
-
     expect(getState(store).currentTag).toBe(null);
 
-    await dispatch(actionCreators.setCurrentTag("foo"));
+    await dispatch(store, actionCreators.setCurrentTag("foo"));
 
     expect(getState(store).currentTag).toBe("foo");
 });
