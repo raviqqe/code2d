@@ -34,6 +34,10 @@ export default class ItemsRepository<A extends IItem> {
         await this.set([item, ...(await this.get())]);
     }
 
+    public initialize = () => {
+        this.items = null;
+    }
+
     private get reference(): firebase.storage.Reference {
         return firebase.storage().ref(this.path);
     }

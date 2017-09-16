@@ -22,7 +22,3 @@ export const tasksRepository = repository.state;
 export function extractTagsFromTasks(tasks: ITask[]): string[] {
     return _.uniq(_.flatMap(tasks, ({ tags }) => tags)).sort();
 }
-
-export function resetMocks(): void {
-    // Do nothing in real module.
-}

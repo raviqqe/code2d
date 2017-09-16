@@ -1,11 +1,23 @@
 import * as _ from "lodash";
 
 import createStore from "..";
-import * as lib from "../../lib/tasks";
+import { ITask, tasksRepository } from "../../lib/tasks";
 import { sleep } from "../../lib/utils";
 import { actionCreators, IState } from "../tasks";
 
-jest.mock("../../lib/tasks");
+jest.mock("axios", () => ({ default: { get: () => ({ data: null }) } }));
+
+jest.mock("../../lib/json", () => ({
+    decode: () => [{
+        createdAt: 42,
+        description: "testDescription",
+        id: "dummyId",
+        name: "testName",
+        spentSeconds: 42,
+        updatedAt: 42,
+    }],
+    encode: () => undefined,
+}));
 
 function getState(store): IState {
     return store.getState().tasks;
@@ -17,7 +29,8 @@ async function dispatch(store, action) {
 }
 
 beforeEach(() => {
-    lib.resetMocks();
+    tasksRepository(false).initialize();
+    tasksRepository(true).initialize();
 });
 
 it("creates a new task", async () => {
