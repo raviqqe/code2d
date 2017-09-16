@@ -25,6 +25,17 @@ body {
 	padding: 0;
 }
 
+a {
+	@include font;
+
+	font-size: 1em;
+	text-decoration: none;
+
+	&:visited {
+		@include font;
+	}
+}
+
 button {
 	background: $light-red;
 	border: {

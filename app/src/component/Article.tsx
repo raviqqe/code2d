@@ -33,6 +33,7 @@ class Article extends React.Component<IProps> {
                         Edited on: {(new Date(date)).toLocaleDateString()}
                     </div>,
                 ]}
+                href={uri}
                 item={this.article}
             />
         );

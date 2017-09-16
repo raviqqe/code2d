@@ -5,12 +5,15 @@ import InputComponent from "./InputComponent";
 import "./style/ItemName.css";
 
 interface IProps {
+    href?: string;
     onEdit?: (text: string) => void;
     text: string;
 }
 
 export default class extends InputComponent<IProps> {
     public render() {
+        const { href, onEdit, text } = this.props;
+
         if (this.state.editing) {
             return (
                 <input
@@ -18,7 +21,7 @@ export default class extends InputComponent<IProps> {
                     onKeyDown={(event: React.KeyboardEvent<{}>) => {
                         if (event.keyCode === 13) {
                             this.setState({ editing: false });
-                            this.props.onEdit(this.state.text);
+                            onEdit(this.state.text);
                             event.preventDefault();
                         }
                     }}
@@ -33,7 +36,7 @@ export default class extends InputComponent<IProps> {
                 className="ItemName-container"
                 onClick={() => this.setState({ editing: this.props.onEdit !== undefined })}
             >
-                {this.props.text}
+                {href ? <a href={href} target="_blank">{text}</a> : text}
             </div>
         );
     }

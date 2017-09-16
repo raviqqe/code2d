@@ -13,6 +13,7 @@ interface IProps<A extends IItem> {
     detailed: boolean;
     details?: any;
     done?: boolean;
+    href?: string;
     item: A;
     onEditName?: (name: string) => void;
     removeItem: (item: A) => void;
@@ -28,7 +29,7 @@ export default class Item<A extends IItem> extends React.Component<IProps<A>, IS
     public state: IState = { showButtons: false };
 
     public render() {
-        const { currentItem, detailed, details, item, onEditName, setCurrentItem } = this.props;
+        const { currentItem, detailed, details, href, item, onEditName, setCurrentItem } = this.props;
 
         return (
             <div
@@ -41,8 +42,9 @@ export default class Item<A extends IItem> extends React.Component<IProps<A>, IS
             >
                 <div className="Item-header">
                     <ItemName
-                        text={item.name}
+                        href={href}
                         onEdit={onEditName}
+                        text={item.name}
                     />
                     {this.buttons}
                 </div>
