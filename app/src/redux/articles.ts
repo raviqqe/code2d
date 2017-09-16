@@ -1,6 +1,5 @@
-import { articlesRepository, IArticle, uriToArticle } from "../lib/articles";
-import createItemsDuck, { IState as IItemsState, Reducer } from "./items";
-import { takeEvery } from "./utils";
+import { articlesRepository, uriToArticle } from "../lib/articles";
+import createItemsDuck from "./items";
 
 const duck = createItemsDuck("articles", articlesRepository, uriToArticle);
 
