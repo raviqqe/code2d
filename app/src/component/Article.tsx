@@ -24,7 +24,7 @@ class Article extends React.Component<IProps> {
                 {...this.props}
                 details={[
                     image &&
-                    <a href={image} target="_blank">
+                    <a key="image" href={image} target="_blank">
                         <img className="Article-image" src={image} />
                     </a>,
                     text && <div key="text" style={{ overflow: "scroll" }}>{text}</div>,
