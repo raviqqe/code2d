@@ -5,10 +5,18 @@
 	font-size: 2.5em;
 	color: $light-grey;
 	margin: 0.2em;
+
+	&:hover {
+		color: $black;
+	}
 }
 
 .ItemsMenuButton-container-highlighted {
 	@extend .ItemsMenuButton-container;
 
 	color: $light-red;
+
+	&:hover {
+		color: $light-red;
+	}
 }
