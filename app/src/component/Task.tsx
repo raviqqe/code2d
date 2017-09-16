@@ -53,8 +53,8 @@ class Task extends React.Component<IProps> {
                         onEdit={(description) => updateCurrentItem({ ...this.task, description })}
                     />,
                     this.renderSpentSeconds(),
-                    this.renderDate("Created at", createdAt),
-                    this.renderDate("Updated at", updatedAt),
+                    this.renderDate("Created on", createdAt),
+                    this.renderDate("Updated on", updatedAt),
                 ]}
                 item={this.task}
                 onEditName={(name) => updateCurrentItem({ ...this.task, name })}
