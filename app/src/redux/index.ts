@@ -10,6 +10,7 @@ import * as firebase from "../lib/firebase";
 import * as articles from "./articles";
 import * as authState from "./auth-state";
 import * as books from "./books";
+import * as message from "./message";
 import * as signIn from "./sign-in";
 import * as tasks from "./tasks";
 import * as timer from "./timer";
@@ -21,6 +22,7 @@ export default function() {
             articles: articles.reducer,
             authState: authState.reducer,
             books: books.reducer,
+            message: message.reducer,
             signIn: signIn.reducer,
             tasks: tasks.reducer,
             timer: timer.reducer,
@@ -32,6 +34,7 @@ export default function() {
             ...authState.sagas,
             ...articles.sagas,
             ...books.sagas,
+            ...message.sagas,
             ...signIn.sagas,
             ...tasks.sagas,
         ]);

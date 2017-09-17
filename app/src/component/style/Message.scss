@@ -1,0 +1,20 @@
+@import "../../style/colors.scss";
+
+.Message-container {
+	position: fixed;
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+}
+
+.Message-box {
+	color: white;
+	background: $grey;
+	border-radius: 3px;
+}
+
+.Message-box-error {
+	@extend .Message-box;
+
+	background: $yellow;
+}
