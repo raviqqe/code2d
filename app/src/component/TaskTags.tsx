@@ -54,6 +54,7 @@ class TaskTags extends React.Component<IProps, IState> {
                 </div>
                 {taggingTask &&
                     <form
+                        className={tags.length === 0 ? undefined : "TaskTags-margined-form"}
                         onSubmit={(event) => {
                             const tag = newTag.trim();
 
@@ -86,7 +87,6 @@ class TaskTags extends React.Component<IProps, IState> {
                             onChange={({ target: { value } }) => this.setState({ newTag: value })}
                             onSelect={(newTag) => this.setState({ newTag })}
                             inputProps={{
-                                className: "TaskTags-input",
                                 onBlur: () => this.setState({ taggingTask: false }),
                                 placeholder: "tag name",
                             }}
