@@ -17,7 +17,7 @@ interface IProps extends IVideo {
 
 class Video extends React.Component<IProps> {
     public render() {
-        const { embedUri, name, uri } = this.video;
+        const { description, embedUri, name, publishedAt, uri } = this.video;
 
         return (
             <Item
@@ -29,7 +29,9 @@ class Video extends React.Component<IProps> {
                             src={embedUri}
                             frameBorder="0"
                         />
-                    </div>]}
+                    </div>,
+                    description && <div>{description}</div>,
+                    publishedAt && <div>Published on: {(new Date(publishedAt)).toLocaleDateString()}</div>]}
                 href={uri}
                 item={this.video}
             />
@@ -37,8 +39,8 @@ class Video extends React.Component<IProps> {
     }
 
     private get video(): IVideo {
-        const { id, embedUri, name, uri } = this.props;
-        return { id, embedUri, name, uri };
+        const { id, description, embedUri, name, publishedAt, uri } = this.props;
+        return { id, description, embedUri, name, publishedAt, uri };
     }
 }
 
