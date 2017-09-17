@@ -1,13 +1,6 @@
 @import "../../style/colors.scss";
 @import "./TaskTag.scss";
 
-.TaskTags-container {
-	margin: {
-		top: 0.5em;
-		bottom: 0.5em;
-	};
-}
-
 .TaskTags-tags {
 	display: flex;
 	align-items: center;

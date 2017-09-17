@@ -30,10 +30,7 @@ export default class extends InputComponent<IProps> {
         }
 
         return (
-            <div
-                className="TaskDescription-normal"
-                onClick={() => this.setState({ editing: true })}
-            >
+            <div onClick={() => this.setState({ editing: true })}>
                 {this.props.text.trim()
                     ? <Markdown className="TaskDescription-markdown" source={this.props.text} />
                     : <div className="TaskDescription-message">No description</div>}

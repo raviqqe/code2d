@@ -31,7 +31,7 @@ class TaskTags extends React.Component<IProps, IState> {
         const { newTag, taggingTask } = this.state;
 
         return (
-            <div className="TaskTags-container">
+            <div>
                 <div className="TaskTags-tags">
                     {tags.map((tag, index) =>
                         <TaskTag

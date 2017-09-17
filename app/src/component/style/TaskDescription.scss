@@ -1,12 +1,6 @@
 @import "../../style/colors.scss";
 
-.TaskDescription-normal {
-	margin-top: 0.4em;
-}
-
 .TaskDescription-input {
-	@extend .TaskDescription-normal;
-
 	height: 20vh;
 	resize: vertical;
 }
