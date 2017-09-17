@@ -8,6 +8,7 @@ import { ReducerBuilder, reducerWithInitialState } from "typescript-fsa-reducers
 
 import { createId, IItem } from "../lib/items";
 import ItemsRepository from "../lib/items_repository";
+import * as message from "./message";
 import { takeEvery } from "./utils";
 
 export interface IState<A> {
@@ -83,7 +84,7 @@ export default function createItemsDuck<A extends IItem, B>(
                         yield put(setItems([item, ...(yield selectState()).items]));
                         yield put(setCurrentItem(item));
                     } catch (error) {
-                        console.error(error);
+                        yield put(message.actionCreators.sendMessage(error.message, true));
                     }
                 }),
             takeEvery(getItems.started, getItemsSaga),
