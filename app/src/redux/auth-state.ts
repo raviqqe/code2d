@@ -8,10 +8,12 @@ import { reducerWithInitialState } from "typescript-fsa-reducers";
 
 import { articlesRepository } from "../lib/articles";
 import { tasksRepository } from "../lib/tasks";
+import { videosRepository } from "../lib/videos";
 import * as articles from "./articles";
 import * as books from "./books";
 import * as tasks from "./tasks";
 import * as utils from "./utils";
+import * as videos from "./videos";
 
 const actionCreator = actionCreatorFactory("AUTH_STATE");
 
@@ -52,6 +54,9 @@ function* initialize(): SagaIterator {
             put(tasks.actionCreators.getTags()),
             call(tasksRepository(false).get),
             call(tasksRepository(true).get),
+            put(videos.actionCreators.getItems()),
+            call(videosRepository(false).get),
+            call(videosRepository(true).get),
         ]);
     }
 }
