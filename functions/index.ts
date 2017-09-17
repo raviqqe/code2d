@@ -44,9 +44,9 @@ export const books = httpsFunction(async (_, response: Response) => {
 });
 
 export const video = httpsFunction(async ({ query: { uri } }: Request, response: Response) => {
-    const details = await youtube.getVideoDetails(uri);
+    const { description, publishedAt, title } = await youtube.getVideoDetails(uri);
 
-    console.log("Video:", details);
+    console.log("Video:", { description, publishedAt, title });
 
-    response.send({ name: details.title });
+    response.send({ name: title, description, publishedAt });
 });
