@@ -3,6 +3,7 @@
 .Message-container {
 	position: fixed;
 	bottom: 0;
+	width: 100vw;
 	display: flex;
 	justify-content: center;
 }
@@ -11,6 +12,8 @@
 	color: white;
 	background: $grey;
 	border-radius: 3px;
+	padding: 1em 2em;
+	margin: 1em;
 }
 
 .Message-box-error {
