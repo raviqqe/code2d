@@ -18,6 +18,9 @@
 		}, {
 			"source": "/functions/books",
 			"function": "books"
+		}, {
+			"source": "/functions/video",
+			"function": "video"
 		}]
 	}
 }

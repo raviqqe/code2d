@@ -8,6 +8,7 @@ import * as url from "url";
 
 import * as amazon from "./amazon";
 import { httpsFunction } from "./utils";
+import * as youtube from "./youtube";
 
 admin.initializeApp(functions.config().firebase);
 
@@ -40,4 +41,12 @@ export const article = httpsFunction(async ({ query: { uri } }: Request, respons
 
 export const books = httpsFunction(async (_, response: Response) => {
     response.send(await amazon.books());
+});
+
+export const video = httpsFunction(async ({ query: { uri } }: Request, response: Response) => {
+    const details = await youtube.getVideoDetails(uri);
+
+    console.log("Video:", details);
+
+    response.send({ name: details.title });
 });
