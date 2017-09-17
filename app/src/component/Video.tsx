@@ -30,9 +30,9 @@ class Video extends React.Component<IProps> {
                             frameBorder="0"
                         />
                     </div>,
-                    description && <div>{description}</div>,
+                    description && <div key="description">{description}</div>,
                     publishedAt &&
-                    <div className="Video-date">
+                    <div key="publishedOn" className="Video-date">
                         Published on: {(new Date(publishedAt)).toLocaleDateString()}
                     </div>]}
                 href={uri}
