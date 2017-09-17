@@ -84,7 +84,8 @@ export default function createItemsDuck<A extends IItem, B>(
                         yield put(setItems([item, ...(yield selectState()).items]));
                         yield put(setCurrentItem(item));
                     } catch (error) {
-                        yield put(message.actionCreators.sendMessage(error.message, true));
+                        yield put(message.actionCreators.sendMessage(
+                            "Failed to create an item.", true));
                     }
                 }),
             takeEvery(getItems.started, getItemsSaga),
