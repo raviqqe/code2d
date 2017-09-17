@@ -5,4 +5,3 @@
 .runtimeconfig.json
 .terraform
 node_modules
-package-lock.json
