@@ -16,11 +16,18 @@ interface IProps extends IVideo {
 
 class Video extends React.Component<IProps> {
     public render() {
-        const { name, uri } = this.video;
+        const { embedUri, name, uri } = this.video;
 
         return (
             <Item
                 {...this.props}
+                details={[
+                    <iframe
+                        key="video"
+                        id="ytplayer"
+                        src={embedUri}
+                        frameBorder="0"
+                    />]}
                 href={uri}
                 item={this.video}
             />
@@ -28,8 +35,8 @@ class Video extends React.Component<IProps> {
     }
 
     private get video(): IVideo {
-        const { id, name, uri } = this.props;
-        return { id, name, uri };
+        const { id, embedUri, name, uri } = this.props;
+        return { id, embedUri, name, uri };
     }
 }
 
