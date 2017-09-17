@@ -5,7 +5,7 @@ import { all } from "redux-saga/effects";
 import { IItem } from "../../lib/items";
 import StatefulItemsRepository from "../../lib/stateful_items_repository";
 import { dispatch } from "../../lib/utils";
-import createItemsDuck from "../items";
+import createItemsDuck, { IState } from "../items";
 
 jest.mock("axios", () => ({
     default: {
@@ -14,7 +14,7 @@ jest.mock("axios", () => ({
 }));
 
 jest.mock("../../lib/json", () => ({
-    decode: () => [{ name: "foo", data: "bar" }],
+    decode: () => [{ name: "foo", data: "bar", id: "dummyId" }],
     encode: () => undefined,
 }));
 
@@ -46,7 +46,7 @@ function initialize() {
     return { actionCreators, store };
 }
 
-function getState(store) {
+function getState(store): IState<ITestItem> {
     return store.getState().items;
 }
 
@@ -95,9 +95,9 @@ it("sets a current item", async () => {
 
     const { actionCreators, store } = initialize();
 
-    await dispatch(store, actionCreators.setCurrentItem({ name: "foo", data: "bar" }));
+    await dispatch(store, actionCreators.setCurrentItem({ name: "foo", data: "bar", id: "dummyId" }));
 
-    expect(getState(store).currentItem).toEqual({ name: "foo", data: "bar" });
+    expect(getState(store).currentItem).toEqual({ name: "foo", data: "bar", id: "dummyId" });
 });
 
 it("toggles an item's state", async () => {
@@ -110,6 +110,6 @@ it("toggles an item's state", async () => {
     };
 
     await check(actionCreators.getItems(), 1);
-    await check(actionCreators.toggleItemState(getState(store).currentItem), 0);
+    await check(actionCreators.toggleItemState(getState(store).items[0]), 0);
     await check(actionCreators.toggleItemsState(), 2);
 });
