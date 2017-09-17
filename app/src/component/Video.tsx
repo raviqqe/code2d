@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { IVideo } from "../lib/videos";
 import { actionCreators } from "../redux/videos";
 import Item from "./Item";
+import "./style/Video.css";
 
 interface IProps extends IVideo {
     currentItem: IVideo | null;
@@ -22,12 +23,13 @@ class Video extends React.Component<IProps> {
             <Item
                 {...this.props}
                 details={[
-                    <iframe
-                        key="video"
-                        id="ytplayer"
-                        src={embedUri}
-                        frameBorder="0"
-                    />]}
+                    <div key="video" className="Video-wrapper">
+                        <iframe
+                            id="ytplayer"
+                            src={embedUri}
+                            frameBorder="0"
+                        />
+                    </div>]}
                 href={uri}
                 item={this.video}
             />
