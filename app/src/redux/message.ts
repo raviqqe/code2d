@@ -24,7 +24,7 @@ export const sagas = [
     takeEvery(
         sendMessage,
         function* _(): SagaIterator {
-            yield call(sleep, 3000);
+            yield call(sleep, 5000);
             yield put(sendMessage({ error: false, message: "" }));
         }),
 ];
