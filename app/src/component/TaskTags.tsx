@@ -81,6 +81,14 @@ class TaskTags extends React.Component<IProps, IState> {
                                 >
                                     {tag}
                                 </div>}
+                            renderMenu={(tags, currentTag) =>
+                                <div
+                                    className="TaskTags-suggestions"
+                                    style={tags.length === 0 ? { display: "none" } : {}}
+                                >
+                                    {tags.map((item, index) =>
+                                        <div key={index}>{item}</div>)}
+                                </div>}
                             shouldItemRender={(tag, input) =>
                                 tag.toLowerCase().slice(0, input.length) === input.toLowerCase()}
                             value={newTag}

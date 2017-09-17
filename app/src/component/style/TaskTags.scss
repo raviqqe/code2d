@@ -30,3 +30,17 @@
 .TaskTags-tag-highlighted {
 	color: $light-red;
 }
+
+.TaskTags-suggestions {
+	margin-top: 0.2em;
+	border: {
+		color: $grey;
+		style: solid;
+		width: 1px;
+		radius: 3px;
+	};
+
+	& > * {
+		margin: 0.2em;
+	}
+}
