@@ -1,0 +1,15 @@
+@mixin button-shadow {
+	&:hover {
+		position: relative;
+		top: -1px;
+		left: -1px;
+		box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+	}
+
+	&:active {
+		position: relative;
+		top: 0px;
+		left: 0px;
+		box-shadow: none;
+	}
+}
