@@ -100,10 +100,10 @@ export default function createItemsDuck<A extends IItem, B>(
                 }),
             takeEvery(
                 removeItem,
-                function* _(item: A): SagaIterator {
+                function* _({ id }: A): SagaIterator {
                     const items = [...(yield selectState()).items];
 
-                    remove(items, item);
+                    remove(items, { id });
 
                     yield put(setItems(items));
                 }),
