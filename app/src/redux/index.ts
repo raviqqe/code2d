@@ -14,6 +14,7 @@ import * as message from "./message";
 import * as signIn from "./sign-in";
 import * as tasks from "./tasks";
 import * as timer from "./timer";
+import * as videos from "./videos";
 
 export default function() {
     const sagaMiddleware = createSagaMiddleware();
@@ -26,6 +27,7 @@ export default function() {
             signIn: signIn.reducer,
             tasks: tasks.reducer,
             timer: timer.reducer,
+            videos: videos.reducer,
         }),
         compose(applyMiddleware(sagaMiddleware), autoRehydrate()));
 
@@ -37,6 +39,7 @@ export default function() {
             ...message.sagas,
             ...signIn.sagas,
             ...tasks.sagas,
+            ...videos.sagas,
         ]);
     });
 

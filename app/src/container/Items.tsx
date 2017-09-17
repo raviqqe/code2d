@@ -1,6 +1,7 @@
 import * as React from "react";
 import Article = require("react-icons/lib/fa/file-code-o");
 import Book = require("react-icons/lib/go/book");
+import Video = require("react-icons/lib/md/ondemand-video");
 import Todo = require("react-icons/lib/md/playlist-add-check");
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
@@ -32,6 +33,7 @@ class Items extends React.Component<IProps> {
                     <div className="Items-menu-buttons">
                         <ItemsMenuButton path="/tasks"><Todo /></ItemsMenuButton>
                         <ItemsMenuButton path="/articles"><Article /></ItemsMenuButton>
+                        <ItemsMenuButton path="/videos"><Video /></ItemsMenuButton>
                     </div>
                 </div>
                 <div className="Items-main">
