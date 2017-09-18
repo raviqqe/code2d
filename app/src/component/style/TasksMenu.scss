@@ -1,5 +1,13 @@
+@import "../../style/colors.scss";
+
 .TasksMenu-tags {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
+}
+
+.TasksMenu-tags-title {
+	color: $grey;
+	width: 100%;
+	padding-bottom: 0.5em;
 }

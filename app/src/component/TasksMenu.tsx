@@ -22,15 +22,17 @@ class TasksMenu extends React.Component<IProps> {
 
         return (
             <ItemsMenu {...this.props} createItem={<CreateTask />}>
-                <div className="TasksMenu-tags">
-                    {tags.map((tag, index) =>
-                        <TaskTag
-                            key={index}
-                            tag={tag}
-                            highlight={currentTag && tag === currentTag}
-                            onClick={() => setCurrentTag(tag === currentTag ? null : tag)}
-                        />)}
-                </div>
+                {tags.length !== 0 &&
+                    <div className="TasksMenu-tags">
+                        <div className="TasksMenu-tags-title">tags</div>
+                        {tags.map((tag, index) =>
+                            <TaskTag
+                                key={index}
+                                tag={tag}
+                                highlight={currentTag && tag === currentTag}
+                                onClick={() => setCurrentTag(tag === currentTag ? null : tag)}
+                            />)}
+                    </div>}
             </ItemsMenu>
         );
     }
