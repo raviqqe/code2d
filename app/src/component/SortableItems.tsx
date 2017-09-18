@@ -2,6 +2,7 @@ import * as React from "react";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 
 import { IItem } from "../lib/items";
+import "./style/SortableItems.css";
 
 class SortableItems<A extends IItem> extends React.Component<{ component: any, items: A[] }> {
     public render() {
@@ -9,7 +10,7 @@ class SortableItems<A extends IItem> extends React.Component<{ component: any, i
         const SortableItem = SortableElement(component);
 
         return (
-            <div>
+            <div className="SortableItems-container">
                 {items.map((item, index) =>
                     <SortableItem key={index} index={index} {...item} />)}
             </div>

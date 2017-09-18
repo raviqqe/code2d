@@ -5,6 +5,18 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+
+	& > * {
+		margin: 0.5em;
+
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
 }
 
 .ItemsMenu-buttons {

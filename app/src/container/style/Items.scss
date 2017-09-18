@@ -60,17 +60,3 @@
 		}
 	}
 }
-
-.Items-side-bar {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-
-	& > .Item-container-detailed {
-		margin-bottom: 1em;
-
-		&:last-child {
-			margin-bottom: 0;
-		}
-	}
-}

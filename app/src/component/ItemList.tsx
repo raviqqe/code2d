@@ -4,7 +4,6 @@ import { arrayMove } from "react-sortable-hoc";
 import { isTouchDevice } from "../lib/device";
 import { IItem, include } from "../lib/items";
 import SortableItems from "./SortableItems";
-import "./style/ItemList.css";
 
 interface IProps<A extends IItem> {
     component: any;
@@ -24,15 +23,13 @@ export default class ItemList<A extends IItem> extends React.Component<IProps<A>
         }
 
         return (
-            <div className="ItemList-container">
-                <SortableItems
-                    component={component}
-                    items={items}
-                    onSortEnd={({ newIndex, oldIndex }) =>
-                        setItems(arrayMove([...items], oldIndex, newIndex))}
-                    {...this.sortableProps}
-                />
-            </div>
+            <SortableItems
+                component={component}
+                items={items}
+                onSortEnd={({ newIndex, oldIndex }) =>
+                    setItems(arrayMove([...items], oldIndex, newIndex))}
+                {...this.sortableProps}
+            />
         );
     }
 

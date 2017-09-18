@@ -17,39 +17,35 @@ export default class extends React.Component<IProps, IState> {
     public render() {
         const { children, createItem } = this.props;
 
-        if (this.state.creatingItem) {
-            return (
-                <div
-                    className="CreateItem-form-container"
-                    onClick={() => this.setState({ creatingItem: false })}
-                >
-                    <form
-                        className="CreateItem-form"
-                        onClick={(event) => event.stopPropagation()}
-                        onSubmit={(event) => {
-                            createItem();
-                            this.setState({ creatingItem: false });
-                            event.preventDefault();
-                        }}
-                        onReset={(event) => {
-                            this.setState({ creatingItem: false });
-                            event.preventDefault();
-                        }}
-                    >
-                        {children}
-                    </form>
-                </div>
-            );
-        }
-
         return (
-            <div className="CreateItem-plus-button-container">
+            <div>
                 <button
-                    className="CreateItem-plus-button"
+                    className="CreateItem-button"
                     onClick={() => this.setState({ creatingItem: true })}
                 >
-                    <Plus />
+                    <Plus /><div>new</div>
                 </button>
+                {this.state.creatingItem &&
+                    <div
+                        className="CreateItem-form-container"
+                        onClick={() => this.setState({ creatingItem: false })}
+                    >
+                        <form
+                            className="CreateItem-form"
+                            onClick={(event) => event.stopPropagation()}
+                            onSubmit={(event) => {
+                                createItem();
+                                this.setState({ creatingItem: false });
+                                event.preventDefault();
+                            }}
+                            onReset={(event) => {
+                                this.setState({ creatingItem: false });
+                                event.preventDefault();
+                            }}
+                        >
+                            {children}
+                        </form>
+                    </div>}
             </div>
         );
     }

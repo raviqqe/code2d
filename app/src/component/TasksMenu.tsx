@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import { ITask } from "../lib/tasks";
 import { actionCreators } from "../redux/tasks";
+import CreateTask from "./CreateTask";
 import ItemsMenu from "./ItemsMenu";
 import "./style/TasksMenu.css";
 import TaskTag from "./TaskTag";
@@ -21,6 +22,7 @@ class TasksMenu extends React.Component<IProps> {
 
         return (
             <ItemsMenu {...this.props}>
+                <CreateTask />
                 <div className="TasksMenu-tags">
                     {tags.map((tag, index) =>
                         <TaskTag

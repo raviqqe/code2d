@@ -24,8 +24,6 @@ interface IState {
 class TaskTags extends React.Component<IProps, IState> {
     public state: IState = { newTag: "", taggingTask: false };
 
-    private input: { focus: () => void, value: string };
-
     public render() {
         const { allTags, currentItem, tags, updateCurrentItem } = this.props;
         const { newTag, taggingTask } = this.state;
@@ -70,7 +68,6 @@ class TaskTags extends React.Component<IProps, IState> {
                         }}
                     >
                         <AutoComplete
-                            ref={(input) => this.input = input}
                             getItemValue={(tag) => tag}
                             items={allTags}
                             renderItem={(tag: string, highlighted: boolean) =>
@@ -95,6 +92,7 @@ class TaskTags extends React.Component<IProps, IState> {
                             onChange={({ target: { value } }) => this.setState({ newTag: value })}
                             onSelect={(newTag) => this.setState({ newTag })}
                             inputProps={{
+                                autoFocus: true,
                                 onBlur: () => this.setState({ taggingTask: false }),
                                 placeholder: "tag name",
                             }}
@@ -102,12 +100,6 @@ class TaskTags extends React.Component<IProps, IState> {
                     </form>}
             </div>
         );
-    }
-
-    public componentDidUpdate(_, { taggingTask }: IState) {
-        if (!taggingTask && this.state.taggingTask) {
-            this.input.focus();
-        }
     }
 }
 

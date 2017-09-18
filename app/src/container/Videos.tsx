@@ -1,7 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import CreateVideo from "../component/CreateVideo";
 import ItemList from "../component/ItemList";
 import Video from "../component/Video";
 import VideosMenu from "../component/VideosMenu";
@@ -23,7 +22,6 @@ class Videos extends React.Component<IProps> {
 
         return (
             <Items
-                createItem={!done && <CreateVideo />}
                 currentItem={currentItem &&
                     <Video detailed={true} done={done} {...currentItem} />}
                 list={

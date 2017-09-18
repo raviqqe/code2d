@@ -2,6 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import { actionCreators } from "../redux/videos";
+import CreateVideo from "./CreateVideo";
 import ItemsMenu from "./ItemsMenu";
 
 interface IProps {
@@ -11,7 +12,7 @@ interface IProps {
 
 class VideosMenu extends React.Component<IProps> {
     public render() {
-        return <ItemsMenu {...this.props} />;
+        return <ItemsMenu {...this.props}><CreateVideo /></ItemsMenu>;
     }
 }
 

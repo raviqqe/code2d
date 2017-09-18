@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 
 import Article from "../component/Article";
 import ArticlesMenu from "../component/ArticlesMenu";
-import CreateArticle from "../component/CreateArticle";
 import ItemList from "../component/ItemList";
 import { IArticle } from "../lib/articles";
 import { actionCreators } from "../redux/articles";
@@ -23,7 +22,6 @@ class Articles extends React.Component<IProps> {
 
         return (
             <Items
-                createItem={!done && <CreateArticle />}
                 currentItem={currentItem &&
                     <Article detailed={true} done={done} {...currentItem} />}
                 list={

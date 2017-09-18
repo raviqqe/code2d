@@ -10,7 +10,6 @@ import ItemsMenuButton from "../component/ItemsMenuButton";
 import "./style/Items.css";
 
 interface IProps {
-    createItem: JSX.Element;
     currentItem: JSX.Element;
     list: JSX.Element;
     menu: JSX.Element;
@@ -19,7 +18,7 @@ interface IProps {
 
 class Items extends React.Component<IProps> {
     public render() {
-        const { createItem, currentItem, list, menu, signedIn } = this.props;
+        const { currentItem, list, menu, signedIn } = this.props;
 
         if (!signedIn) {
             return <Redirect to="/sign-in" />;
@@ -38,10 +37,7 @@ class Items extends React.Component<IProps> {
                 </div>
                 <div className="Items-main">
                     {list}
-                    <div className="Items-side-bar">
-                        {currentItem || <div />}
-                        {createItem}
-                    </div>
+                    {currentItem || <div />}
                 </div>
                 <div className="Items-blank" />
             </div>

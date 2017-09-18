@@ -2,7 +2,6 @@ import * as _ from "lodash";
 import * as React from "react";
 import { connect } from "react-redux";
 
-import CreateTask from "../component/CreateTask";
 import ItemList from "../component/ItemList";
 import Task from "../component/Task";
 import TasksMenu from "../component/TasksMenu";
@@ -32,7 +31,6 @@ class Tasks extends React.Component<IProps> {
 
         return (
             <Items
-                createItem={!done && <CreateTask />}
                 currentItem={currentItem && <Task detailed={true} done={done} {...currentItem} />}
                 list={
                     <ItemList
