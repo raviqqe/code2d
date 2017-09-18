@@ -87,20 +87,13 @@ export default class Item<A extends IItem> extends React.Component<IProps<A>, IS
         }
 
         return (
-            <div className="Item-buttons" style={this.buttonsStyle} >
+            <div
+                className="Item-buttons"
+                style={this.state.showButtons ? {} : { visibility: "hidden" }}
+            >
                 {buttons}
             </div>
         );
-    }
-
-    private get buttonsStyle() {
-        if (this.state.showButtons) {
-            return {};
-        } else if (this.props.detailed) {
-            return { display: "none" };
-        }
-
-        return { visibility: "hidden" };
     }
 
     private get containerClassName(): string {
