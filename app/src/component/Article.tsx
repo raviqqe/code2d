@@ -27,7 +27,7 @@ class Article extends React.Component<IProps> {
                     <a key="image" href={image} target="_blank">
                         <img className="Article-image" src={image} />
                     </a>,
-                    text && <div key="text" style={{ overflow: "scroll" }}>{text}</div>,
+                    text && <div key="text">{text}</div>,
                     date &&
                     <div key="date" className="Article-date">
                         Edited on: {(new Date(date)).toLocaleDateString()}
