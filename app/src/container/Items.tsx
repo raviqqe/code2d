@@ -37,7 +37,7 @@ class Items extends React.Component<IProps> {
                 </div>
                 <div className="Items-main">
                     {list}
-                    {currentItem || <div />}
+                    <div className="Items-current-item-container">{currentItem || <div />}</div>
                 </div>
                 <div className="Items-blank" />
             </div>
