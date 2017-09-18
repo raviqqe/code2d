@@ -28,6 +28,7 @@ class Video extends React.Component<IProps> {
                             id="ytplayer"
                             src={embedUri}
                             frameBorder="0"
+                            allowFullScreen={true}
                         />
                     </div>,
                     description && <div key="description">{description}</div>,
