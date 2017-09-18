@@ -19,9 +19,13 @@ export default class extends React.Component<IProps, IState> {
 
         if (this.state.creatingItem) {
             return (
-                <div className="CreateItem-form-container">
+                <div
+                    className="CreateItem-form-container"
+                    onClick={() => this.setState({ creatingItem: false })}
+                >
                     <form
                         className="CreateItem-form"
+                        onClick={(event) => event.stopPropagation()}
                         onSubmit={(event) => {
                             createItem();
                             this.setState({ creatingItem: false });
