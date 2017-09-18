@@ -63,6 +63,10 @@ export const sagas = [
                 ]),
             }));
         }),
+    takeEvery(duck.actionCreators.removeItem,
+        function* _(): SagaIterator {
+            yield put(actionCreators.getTags());
+        }),
     takeEvery(
         updateCurrentItem,
         function* _(task: ITask): SagaIterator {
