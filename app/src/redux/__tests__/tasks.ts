@@ -30,32 +30,15 @@ beforeEach(() => {
 });
 
 it("creates a new task", async () => {
-    expect.assertions(3);
+    expect.assertions(2);
 
     const store = createStore();
 
     expect(getState(store).items.length).toBe(0);
 
-    await dispatch(store, actionCreators.startCreatingItem());
-    expect(getState(store).creatingItem).toBe(true);
-
     await dispatch(store,
         actionCreators.createItem({ name: "foo", description: "bar", tags: [] }));
     expect(getState(store).items.length).toBe(1);
-});
-
-it("cancels creating a new task", async () => {
-    expect.assertions(3);
-
-    const store = createStore();
-
-    expect(getState(store).creatingItem).toBe(false);
-
-    await dispatch(store, actionCreators.startCreatingItem());
-    expect(getState(store).creatingItem).toBe(true);
-
-    await dispatch(store, actionCreators.stopCreatingItem());
-    expect(getState(store).creatingItem).toBe(false);
 });
 
 for (const done of [false, true]) {

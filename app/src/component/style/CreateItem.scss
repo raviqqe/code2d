@@ -2,11 +2,24 @@
 @import "./Item.scss";
 
 .CreateItem-form-container {
+	background: rgba(0, 0, 0, 0.5);
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.CreateItem-form {
 	@extend .Item-container;
 
+	width: 100vh;
+	margin: 1em;
 	display: flex;
 	flex-direction: column;
-	flex-shrink: 0;
 }
 
 .CreateItem-plus-button-container {

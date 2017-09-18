@@ -5,8 +5,6 @@ import "./style/CreateItem.css";
 
 interface IProps {
     createItem: () => void;
-    onChangeState?: (creatingItem: boolean) => void;
-    formStyle?: { [key: string]: any };
 }
 
 interface IState {
@@ -16,32 +14,27 @@ interface IState {
 export default class extends React.Component<IProps, IState> {
     public state: IState = { creatingItem: false };
 
-    public componentWillUpdate({ onChangeState }: IProps, { creatingItem }: IState) {
-        if (onChangeState) {
-            onChangeState(creatingItem);
-        }
-    }
-
     public render() {
-        const { children, createItem, formStyle } = this.props;
+        const { children, createItem } = this.props;
 
         if (this.state.creatingItem) {
             return (
-                <form
-                    style={formStyle}
-                    className="CreateItem-form-container"
-                    onSubmit={(event) => {
-                        createItem();
-                        this.setState({ creatingItem: false });
-                        event.preventDefault();
-                    }}
-                    onReset={(event) => {
-                        this.setState({ creatingItem: false });
-                        event.preventDefault();
-                    }}
-                >
-                    {children}
-                </form>
+                <div className="CreateItem-form-container">
+                    <form
+                        className="CreateItem-form"
+                        onSubmit={(event) => {
+                            createItem();
+                            this.setState({ creatingItem: false });
+                            event.preventDefault();
+                        }}
+                        onReset={(event) => {
+                            this.setState({ creatingItem: false });
+                            event.preventDefault();
+                        }}
+                    >
+                        {children}
+                    </form>
+                </div>
             );
         }
 

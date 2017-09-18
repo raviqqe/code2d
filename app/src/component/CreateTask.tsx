@@ -8,8 +8,6 @@ import "./style/CreateTask.css";
 
 interface IProps {
     createItem: (task: INewTask) => void;
-    startCreatingItem: () => void;
-    stopCreatingItem: () => void;
 }
 
 interface IState {
@@ -29,10 +27,6 @@ class CreateTask extends React.Component<IProps, IState> {
                     this.props.createItem({ description, name, tags: [] });
                     this.setState({ description: "", name: "" });
                 }}
-                formStyle={{ flex: 1 }}
-                onChangeState={(creatingTask) => creatingTask
-                    ? this.props.startCreatingItem()
-                    : this.props.stopCreatingItem()}
             >
                 <input
                     autoFocus={true}

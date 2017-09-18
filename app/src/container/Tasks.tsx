@@ -13,7 +13,6 @@ import Items from "./Items";
 import Timer from "./Timer";
 
 interface IProps {
-    creatingItem: boolean;
     currentTag: string | null;
     currentItem: ITask | null;
     items: ITask[];
@@ -29,13 +28,12 @@ class Tasks extends React.Component<IProps> {
             return <Timer />;
         }
 
-        const { creatingItem, currentItem, currentTag, done } = this.props;
+        const { currentItem, currentTag, done } = this.props;
 
         return (
             <Items
                 createItem={!done && <CreateTask />}
-                currentItem={!creatingItem && currentItem &&
-                    <Task detailed={true} done={done} {...currentItem} />}
+                currentItem={currentItem && <Task detailed={true} done={done} {...currentItem} />}
                 list={
                     <ItemList
                         component={Task}
