@@ -12,7 +12,7 @@ interface IProps {
 
 class ArticlesMenu extends React.Component<IProps> {
     public render() {
-        return <ItemsMenu {...this.props}><CreateArticle /></ItemsMenu>;
+        return <ItemsMenu {...this.props} createItem={<CreateArticle />} />;
     }
 }
 

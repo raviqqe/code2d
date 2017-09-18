@@ -21,8 +21,7 @@ class TasksMenu extends React.Component<IProps> {
         const { currentTag, setCurrentTag, tags } = this.props;
 
         return (
-            <ItemsMenu {...this.props}>
-                <CreateTask />
+            <ItemsMenu {...this.props} createItem={<CreateTask />}>
                 <div className="TasksMenu-tags">
                     {tags.map((tag, index) =>
                         <TaskTag

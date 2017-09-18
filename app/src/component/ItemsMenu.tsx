@@ -6,13 +6,14 @@ import { connect } from "react-redux";
 import "./style/ItemsMenu.css";
 
 interface IProps {
+    createItem: JSX.Element;
     done: boolean;
     toggleItemsState: () => void;
 }
 
 export default class extends React.Component<IProps> {
     public render() {
-        const { children, done, toggleItemsState } = this.props;
+        const { createItem, children, done, toggleItemsState } = this.props;
 
         return (
             <div className="ItemsMenu-container">
@@ -30,6 +31,7 @@ export default class extends React.Component<IProps> {
                         <Done /> done
                     </div>
                 </div>
+                {!done && createItem}
                 {children}
             </div>
         );

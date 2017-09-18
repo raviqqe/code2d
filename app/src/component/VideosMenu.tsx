@@ -12,7 +12,7 @@ interface IProps {
 
 class VideosMenu extends React.Component<IProps> {
     public render() {
-        return <ItemsMenu {...this.props}><CreateVideo /></ItemsMenu>;
+        return <ItemsMenu {...this.props} createItem={<CreateVideo />} />;
     }
 }
 
