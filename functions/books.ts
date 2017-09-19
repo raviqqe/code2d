@@ -1,5 +1,8 @@
 import * as apac from "apac";
+import { Request, Response } from "express";
 import * as functions from "firebase-functions";
+
+import { httpsFunction } from "./utils";
 
 const amazonClient = new apac.OperationHelper({
     assocId: functions.config().aws.tag,
@@ -8,7 +11,7 @@ const amazonClient = new apac.OperationHelper({
     endPoint: "webservices.amazon.co.jp",
 });
 
-export async function books(): Promise<any[]> {
+async function getBooks(): Promise<any[]> {
     const { result: { ItemSearchErrorResponse, ItemSearchResponse } }
         = await amazonClient.execute("ItemSearch", {
             BrowseNode: "466298",
@@ -33,3 +36,7 @@ export async function books(): Promise<any[]> {
             title: Title,
         }));
 }
+
+export default httpsFunction(async (_, response: Response) => {
+    response.send(await getBooks());
+});
