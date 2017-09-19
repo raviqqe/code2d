@@ -2,6 +2,15 @@
 
 .ItemsMenu-container {
 	background: white;
+	width: 12em;
+	height: 100%;
+	padding: 1em 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.ItemsMenu-main {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -19,12 +28,12 @@
 	}
 }
 
-.ItemsMenu-buttons {
+.ItemsMenu-states {
 	display: flex;
 	flex-direction: column;
 }
 
-.ItemsMenu-button {
+.ItemsMenu-state {
 	width: 100%;
 	padding: 0.5em 1em;
 	color: $light-grey;
@@ -43,13 +52,31 @@
 	}
 }
 
-.ItemsMenu-button-highlighted {
-	@extend .ItemsMenu-button;
+.ItemsMenu-state-highlighted {
+	@extend .ItemsMenu-state;
 
 	color: $light-red;
 	cursor: auto;
 
 	&:hover {
 		color: $light-red;
+	}
+}
+
+.ItemsMenu-pages {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	margin: 0.5em 1em;
+
+	& > a {
+		display: flex;
+		font-size: 2.5em;
+		color: $black;
+		margin: 0.2em;
+
+		&:visited {
+			color: $black;
+		}
 	}
 }
