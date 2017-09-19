@@ -1,11 +1,5 @@
-@import "../../style/colors.scss";
 @import "./Item.scss";
 
 .Task-button {
 	@extend .Item-button;
-}
-
-.Task-spent-time {
-	color: $grey;
-	font-size: 0.95em;
 }

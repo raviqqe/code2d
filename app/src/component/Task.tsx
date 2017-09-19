@@ -9,6 +9,7 @@ import { actionCreators as timerActionCreators } from "../redux/timer";
 import Item from "./Item";
 import LabeledDate from "./LabeledDate";
 import "./style/Task.css";
+import SubInformation from "./SubInformation";
 import TaskDescription from "./TaskDescription";
 import TaskTags from "./TaskTags";
 
@@ -75,9 +76,9 @@ class Task extends React.Component<IProps> {
             : `${numeral(minutes / 60).format("0[.]0")} hours`;
 
         return (
-            <div key="spentTime" className="Task-spent-time">
+            <SubInformation key="spentTime">
                 Spent for: {time}
-            </div>
+            </SubInformation>
         );
     }
 }
