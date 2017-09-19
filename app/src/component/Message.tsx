@@ -9,15 +9,28 @@ interface IProps {
     message: string;
 }
 
-class Message extends React.Component<IProps> {
+// Keep previous messages until they go away from screens.
+interface IState {
+    message: string;
+}
+
+class Message extends React.Component<IProps, IState> {
+    public state: IState = { message: "" };
+
     public render() {
         return (
             <div className="Message-container">
                 <div className={this.boxClassName}>
-                    {this.props.message}
+                    {this.state.message}
                 </div>
             </div>
         );
+    }
+
+    public componentWillUpdate({ message }) {
+        if (!this.state.message && message) {
+            this.setState({ message });
+        }
     }
 
     private get boxClassName(): string {
