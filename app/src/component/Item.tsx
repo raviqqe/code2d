@@ -54,24 +54,28 @@ export default class Item<A extends IItem> extends React.Component<IProps<A>, IS
     private get buttons() {
         const { detailed, done, item, removeItem, toggleItemState } = this.props;
 
-        const buttons = [(
-            <div
-                key="toggleState"
-                className="Item-button"
-                onClick={(event) => {
-                    toggleItemState(item);
-                    event.stopPropagation();
-                }}
-            >
-                {done ? <Repeat /> : <Check />}
-            </div>
-        )];
+        const buttons: JSX.Element[] = [];
+
+        if (!done || detailed) {
+            buttons.push(
+                <div
+                    key="toggleState"
+                    className="Item-button"
+                    onClick={(event) => {
+                        toggleItemState(item);
+                        event.stopPropagation();
+                    }}
+                >
+                    {done ? <Repeat /> : <Check />}
+                </div>,
+            );
+        }
 
         if (!done && this.props.buttons) {
             buttons.push(...this.props.buttons);
         }
 
-        if (detailed) {
+        if (done || detailed) {
             buttons.push(
                 <div
                     key="trash"
