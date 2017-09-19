@@ -79,13 +79,20 @@ export default function createItemsDuck<A extends IItem, B>(
                 createItem,
                 function* _(itemSource: B): SagaIterator {
                     try {
+                        yield put(message.actionCreators.sendMessage(
+                            "Creating an item...",
+                            { temporary: false }));
+
                         const item: A = createId(yield call(initialize, itemSource));
 
                         yield put(setItems([item, ...(yield selectState()).items]));
                         yield put(setCurrentItem(item));
+
+                        yield put(message.actionCreators.clearMessage());
                     } catch (error) {
                         yield put(message.actionCreators.sendMessage(
-                            "Failed to create an item.", true));
+                            "Failed to create an item.",
+                            { error: true }));
                     }
                 }),
             takeEvery(getItems.started, getItemsSaga),

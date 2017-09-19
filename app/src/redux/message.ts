@@ -10,11 +10,12 @@ import { takeEvery } from "./utils";
 const factory = actionCreatorFactory("MESSAGE");
 
 const clearMessage = factory("CLEAR_MESSAGE");
-const sendMessage = factory<{ error: boolean, message: string }>("SET_MESSAGE");
+const sendMessage = factory<{ error: boolean, message: string, temporary: boolean }>("SET_MESSAGE");
 
 export const actionCreators = {
     clearMessage,
-    sendMessage: (message: string, error: boolean = false) => sendMessage({ error, message }),
+    sendMessage: (message: string, options: { error?: boolean, temporary?: boolean } = {}) =>
+        sendMessage({ message, error: false, temporary: true, ...options }),
 };
 
 export const initialState = Immutable({ error: false, message: "" });
@@ -26,8 +27,10 @@ export const reducer = reducerWithInitialState(initialState)
 export const sagas = [
     takeEvery(
         sendMessage,
-        function* _(): SagaIterator {
-            yield call(sleep, 5000);
-            yield put(clearMessage());
+        function* _({ temporary }): SagaIterator {
+            if (temporary) {
+                yield call(sleep, 5000);
+                yield put(clearMessage());
+            }
         }),
 ];
