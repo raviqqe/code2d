@@ -35,6 +35,7 @@ class TaskTags extends React.Component<IProps, IState> {
                         <TaskTag
                             key={index}
                             tag={tag}
+                            showRemoveButton={true}
                             onClick={() => {
                                 updateCurrentItem({
                                     ...currentItem,

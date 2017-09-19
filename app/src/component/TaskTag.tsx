@@ -1,17 +1,26 @@
 import * as _ from "lodash";
 import * as React from "react";
+import Remove = require("react-icons/lib/md/close");
 
 import "./style/TaskTag.css";
 
 interface IProps {
+    showRemoveButton?: boolean;
     highlight?: boolean;
     onClick?: () => void;
     tag: string;
 }
 
-export default class extends React.Component<IProps> {
+interface IState {
+    mouseOver: boolean;
+}
+
+export default class extends React.Component<IProps, IState> {
+    public state: IState = { mouseOver: false };
+
     public render() {
         const { highlight, onClick, tag } = this.props;
+        const showRemoveButton = this.props.showRemoveButton && this.state.mouseOver;
 
         return (
             <div
@@ -23,8 +32,16 @@ export default class extends React.Component<IProps> {
 
                     event.stopPropagation();
                 }}
+                onMouseOver={() => this.setState({ mouseOver: true })}
+                onMouseOut={() => this.setState({ mouseOver: false })}
             >
-                {tag}
+                <div style={showRemoveButton ? { visibility: "hidden" } : {}}>{tag}</div>
+                <div
+                    className="TaskTag-remove-button"
+                    style={showRemoveButton ? {} : { display: "none" }}
+                >
+                    <Remove />
+                </div>
             </div>
         );
     }
