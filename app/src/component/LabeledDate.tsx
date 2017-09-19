@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import "./style/LabeledDate.css";
+import SubInformation from "./SubInformation";
 
 interface IProps {
     label: string;
@@ -12,9 +12,9 @@ export default class extends React.Component<IProps> {
         const { label, value } = this.props;
 
         return (
-            <div className="LabeledDate-container">
+            <SubInformation>
                 {label}: {(new Date(value)).toLocaleDateString()}
-            </div>
+            </SubInformation>
         );
     }
 }
