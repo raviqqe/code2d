@@ -28,7 +28,7 @@
 .Item-container-detailed {
 	@extend .Item-container;
 
-	overflow: scroll;
+	overflow-y: scroll;
 }
 
 .Item-header {
