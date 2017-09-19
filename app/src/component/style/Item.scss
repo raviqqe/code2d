@@ -1,3 +1,4 @@
+@import "../../style/animation.scss";
 @import "../../style/colors.scss";
 
 .Item-container {
@@ -46,6 +47,7 @@
 	font-size: 1.5em;
 	display: flex;
 	margin-right: 0.1em;
+	transition: color $duration, transform $duration;
 
 	&:last-child {
 		margin-right: 0;
@@ -53,5 +55,6 @@
 
 	&:hover {
 		color: $light-red;
+		transform: scale(1.5, 1.5);
 	}
 }
