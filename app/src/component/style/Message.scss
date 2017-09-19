@@ -1,8 +1,12 @@
 @import "../../style/colors.scss";
 
+@mixin Message-hidden-box {
+	transform: translateY(-200%);
+}
+
 .Message-container {
 	position: fixed;
-	bottom: 0;
+	top: 0;
 	width: 100vw;
 	display: flex;
 	justify-content: center;
@@ -11,14 +15,28 @@
 
 .Message-box {
 	color: white;
+	font-size: 1.2em;
 	background: $grey;
 	border-radius: 3px;
 	padding: 1em 2em;
 	margin: 1em;
+	transition: 0.2s;
+}
+
+.Message-box-hidden {
+	@extend .Message-box;
+
+	@include Message-hidden-box;
 }
 
 .Message-box-error {
 	@extend .Message-box;
 
 	background: $yellow;
+}
+
+.Message-box-error-hidden {
+	@extend .Message-box-error;
+
+	@include Message-hidden-box;
 }

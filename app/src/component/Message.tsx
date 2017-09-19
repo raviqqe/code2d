@@ -11,15 +11,18 @@ interface IProps {
 
 class Message extends React.Component<IProps> {
     public render() {
-        const { error, message } = this.props;
-
         return (
-            <div className="Message-container" style={message === "" ? { display: "none" } : {}}>
-                <div className={error ? "Message-box-error" : "Message-box"}>
-                    {message}
+            <div className="Message-container">
+                <div className={this.boxClassName}>
+                    {this.props.message}
                 </div>
             </div>
         );
+    }
+
+    private get boxClassName(): string {
+        const { error, message } = this.props;
+        return "Message-box" + (error ? "-error" : "") + (message ? "" : "-hidden");
     }
 }
 
