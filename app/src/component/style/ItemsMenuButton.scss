@@ -1,6 +1,9 @@
+@import "../../style/animation.scss";
 @import "../../style/colors.scss";
 
 .ItemsMenuButton-container {
+	@include color-transition;
+
 	display: flex;
 	font-size: 2.5em;
 	color: $light-grey;

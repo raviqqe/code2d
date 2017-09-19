@@ -1,3 +1,4 @@
+@import "../../style/animation.scss";
 @import "../../style/colors.scss";
 
 .ItemsMenu-container {
@@ -34,6 +35,8 @@
 }
 
 .ItemsMenu-state {
+	@include color-transition;
+
 	width: 100%;
 	padding: 0.5em 1em;
 	color: $light-grey;
