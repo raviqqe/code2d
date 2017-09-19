@@ -5,15 +5,7 @@
 	@extend .Item-button;
 }
 
-@mixin Task-sub-information {
+.Task-spent-time {
 	color: $grey;
 	font-size: 0.95em;
-}
-
-.Task-spent-time {
-	@include Task-sub-information;
-}
-
-.Task-date {
-	@include Task-sub-information;
 }

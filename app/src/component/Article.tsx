@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { IArticle } from "../lib/articles";
 import { actionCreators } from "../redux/articles";
 import Item from "./Item";
+import LabeledDate from "./LabeledDate";
 import "./style/Article.css";
 
 interface IProps extends IArticle {
@@ -29,9 +30,7 @@ class Article extends React.Component<IProps> {
                     </a>,
                     text && <div key="text">{text}</div>,
                     date &&
-                    <div key="date" className="Article-date">
-                        Edited on: {(new Date(date)).toLocaleDateString()}
-                    </div>,
+                    <LabeledDate key="date" label="Edited on" value={date} />,
                 ]}
                 href={uri}
                 item={this.article}

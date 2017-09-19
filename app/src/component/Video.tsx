@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { IVideo } from "../lib/videos";
 import { actionCreators } from "../redux/videos";
 import Item from "./Item";
+import LabeledDate from "./LabeledDate";
 import "./style/Video.css";
 
 interface IProps extends IVideo {
@@ -33,9 +34,8 @@ class Video extends React.Component<IProps> {
                     </div>,
                     description && <div key="description">{description}</div>,
                     publishedAt &&
-                    <div key="publishedOn" className="Video-date">
-                        Published on: {(new Date(publishedAt)).toLocaleDateString()}
-                    </div>]}
+                    <LabeledDate key="publishedOn" label="Published on" value={publishedAt} />,
+                ]}
                 href={uri}
                 item={this.video}
             />

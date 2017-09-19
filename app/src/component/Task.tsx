@@ -7,6 +7,7 @@ import { ITask } from "../lib/tasks";
 import { actionCreators as tasksActionCreators } from "../redux/tasks";
 import { actionCreators as timerActionCreators } from "../redux/timer";
 import Item from "./Item";
+import LabeledDate from "./LabeledDate";
 import "./style/Task.css";
 import TaskDescription from "./TaskDescription";
 import TaskTags from "./TaskTags";
@@ -53,8 +54,8 @@ class Task extends React.Component<IProps> {
                         onEdit={(description) => updateCurrentItem({ ...this.task, description })}
                     />,
                     this.renderSpentSeconds(),
-                    this.renderDate("Created on", createdAt),
-                    this.renderDate("Updated on", updatedAt),
+                    <LabeledDate key="createdAt" label="Created on" value={createdAt} />,
+                    <LabeledDate key="updatedAt" label="Updated on" value={updatedAt} />,
                 ]}
                 item={this.task}
                 onEditName={(name) => updateCurrentItem({ ...this.task, name })}
@@ -76,14 +77,6 @@ class Task extends React.Component<IProps> {
         return (
             <div key="spentTime" className="Task-spent-time">
                 Spent for: {time}
-            </div>
-        );
-    }
-
-    private renderDate = (label: string, timestamp: number) => {
-        return (
-            <div key={label} className="Task-date">
-                {label}: {(new Date(timestamp).toLocaleDateString())}
             </div>
         );
     }
