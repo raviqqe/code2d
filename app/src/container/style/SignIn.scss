@@ -1,8 +1,24 @@
-.SignIn-container {
+@import "../../style/colors.scss";
+
+@mixin SignIn-page {
 	height: 100vh;
+}
+
+.SignIn-title-page {
+	@include SignIn-page;
+
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
+	align-items: center;
+}
+
+.SignIn-description-page {
+	@include SignIn-page;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 	align-items: center;
 }
 
@@ -24,7 +40,7 @@
 	margin-bottom: 1em;
 }
 
-.SignIn-description {
+.SignIn-catch-phrase {
 	font-size: 1.2em;
 	margin-top: 0.8em;
 }
@@ -43,5 +59,30 @@
 	& > svg {
 		font-size: 2em;
 		margin-right: 0.4em;
+	}
+}
+
+.SignIn-description-paper {
+	background: white;
+	width: 70vw;
+	flex: 1;
+	position: relative;
+	top: -8vh;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	box-shadow: 0.5em 0.5em 2em rgba(0, 0, 0, 0.3);
+}
+
+.SignIn-footer {
+	background: $black;
+	color: white;
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+
+	& > * {
+		margin: 1em 2em;
 	}
 }
