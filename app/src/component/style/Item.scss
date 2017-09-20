@@ -40,6 +40,7 @@
 .Item-buttons {
 	display: flex;
 	align-items: center;
+	transition: opacity $short-duration, visibility $short-duration;
 }
 
 .Item-button {
