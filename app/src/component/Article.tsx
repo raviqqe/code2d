@@ -25,7 +25,7 @@ class Article extends React.Component<IProps> {
                 {...this.props}
                 details={[
                     image &&
-                    <a key="image" href={image} target="_blank">
+                    <a key="image" href={uri} target="_blank">
                         <img className="Article-image" src={image} />
                     </a>,
                     text && <div key="text">{text}</div>,
