@@ -17,7 +17,8 @@ export function convertIntoUrl(urlOrPath: string, baseUrl: string): string {
 }
 
 export default httpsFunction(async ({ query: { url } }: Request, response: Response) => {
-    const { date, favicon, image, softTitle, text, title } = unfluff((await axios.get(url)).data);
+    const { date, favicon, image, softTitle, text, title }
+        = unfluff((await axios.get(url, { headers: { Accept: "text/html" } })).data);
     const name = title || softTitle;
 
     if (!name) {
