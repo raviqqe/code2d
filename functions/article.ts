@@ -17,13 +17,18 @@ export function convertIntoUrl(urlOrPath: string, baseUrl: string): string {
 }
 
 export default httpsFunction(async ({ query: { url } }: Request, response: Response) => {
-    const { date, favicon, image, text, title } = unfluff((await axios.get(url)).data);
+    const { date, favicon, image, softTitle, text, title } = unfluff((await axios.get(url)).data);
+    const name = title || softTitle;
+
+    if (!name) {
+        throw new Error("Failed to extract title.");
+    }
 
     const article = {
         date,
         favicon: convertIntoUrl(favicon, url),
         image: convertIntoUrl(image, url),
-        name: title,
+        name,
         text,
         url,
     };
