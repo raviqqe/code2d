@@ -58,11 +58,11 @@
 .ItemsMenu-state-highlighted {
 	@extend .ItemsMenu-state;
 
-	color: $light-red;
+	color: $red;
 	cursor: auto;
 
 	&:hover {
-		color: $light-red;
+		color: $red;
 	}
 }
 

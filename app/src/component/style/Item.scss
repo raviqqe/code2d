@@ -22,7 +22,7 @@
 .Item-container-highlighted {
 	@extend .Item-container;
 
-	color: $light-red;
+	color: $red;
 }
 
 .Item-container-detailed {
@@ -56,7 +56,7 @@
 	}
 
 	&:hover {
-		color: $light-red;
+		color: $red;
 		transform: scale(1.5, 1.5);
 	}
 }

@@ -31,7 +31,7 @@ $TaskTag-size: 1.8em;
 .TaskTag-container-highlighted {
 	@extend .TaskTag-container;
 
-	background: $light-red;
+	background: $red;
 	color: white;
 }
 

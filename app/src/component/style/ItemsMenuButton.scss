@@ -17,9 +17,9 @@
 .ItemsMenuButton-container-highlighted {
 	@extend .ItemsMenuButton-container;
 
-	color: $light-red;
+	color: $red;
 
 	&:hover {
-		color: $light-red;
+		color: $red;
 	}
 }
