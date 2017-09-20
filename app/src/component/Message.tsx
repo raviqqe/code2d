@@ -28,7 +28,7 @@ class Message extends React.Component<IProps, IState> {
     }
 
     public componentWillUpdate({ message }) {
-        if (!this.state.message && message) {
+        if (message && message !== this.state.message) {
             this.setState({ message });
         }
     }
