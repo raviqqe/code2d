@@ -7,13 +7,13 @@ export interface IArticle extends IItem {
     favicon?: string;
     image?: string;
     text?: string;
-    uri: string;
+    url: string;
 }
 
 const repository = new StatefulItemsRepository<IArticle>("articles");
 
 export const articlesRepository = repository.state;
 
-export async function uriToArticle(uri: string): Promise<IArticle> {
-    return await functions.call("article", { uri });
+export async function urlToArticle(url: string): Promise<IArticle> {
+    return await functions.call("article", { url });
 }

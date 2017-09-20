@@ -1,8 +1,8 @@
 export interface IBook {
     asin: string;
     author: string;
-    imageUri: string;
-    pageUri: string;
+    imageUrl: string;
+    pageUrl: string;
     publisher: string;
     title: string;
 }

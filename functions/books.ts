@@ -30,8 +30,8 @@ async function getBooks(): Promise<any[]> {
         ItemAttributes: { Author, Publisher, Title } }) => ({
             asin: ASIN,
             author: Author,
-            imageUri: SmallImage.URL,
-            pageUri: DetailPageURL,
+            imageUrl: SmallImage.URL,
+            pageUrl: DetailPageURL,
             publisher: Publisher,
             title: Title,
         }));

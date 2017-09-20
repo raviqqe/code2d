@@ -6,26 +6,26 @@ import * as url from "url";
 
 import { httpsFunction } from "./utils";
 
-export function convertIntoUri(uriOrPath: string, baseUri: string): string {
-    if (!uriOrPath || is.url(uriOrPath)) {
-        return uriOrPath;
+export function convertIntoUrl(urlOrPath: string, baseUrl: string): string {
+    if (!urlOrPath || is.url(urlOrPath)) {
+        return urlOrPath;
     }
 
-    const { host, protocol } = url.parse(baseUri);
+    const { host, protocol } = url.parse(baseUrl);
 
-    return url.format({ host, pathname: uriOrPath, protocol });
+    return url.format({ host, pathname: urlOrPath, protocol });
 }
 
-export default httpsFunction(async ({ query: { uri } }: Request, response: Response) => {
-    const { date, favicon, image, text, title } = unfluff((await axios.get(uri)).data);
+export default httpsFunction(async ({ query: { url } }: Request, response: Response) => {
+    const { date, favicon, image, text, title } = unfluff((await axios.get(url)).data);
 
     const article = {
         date,
-        favicon: convertIntoUri(favicon, uri),
-        image: convertIntoUri(image, uri),
+        favicon: convertIntoUrl(favicon, url),
+        image: convertIntoUrl(image, url),
         name: title,
         text,
-        uri,
+        url,
     };
 
     console.log("Article:", article);

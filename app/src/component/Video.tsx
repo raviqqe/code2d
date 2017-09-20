@@ -18,7 +18,7 @@ interface IProps extends IVideo {
 
 class Video extends React.Component<IProps> {
     public render() {
-        const { description, embedUri, name, publishedAt, uri } = this.video;
+        const { description, embedUrl, name, publishedAt, url } = this.video;
 
         return (
             <Item
@@ -27,7 +27,7 @@ class Video extends React.Component<IProps> {
                     <div key="video" className="Video-wrapper">
                         <iframe
                             id="ytplayer"
-                            src={embedUri}
+                            src={embedUrl}
                             frameBorder="0"
                             allowFullScreen={true}
                         />
@@ -36,15 +36,15 @@ class Video extends React.Component<IProps> {
                     publishedAt &&
                     <LabeledDate key="publishedOn" label="Published on" value={publishedAt} />,
                 ]}
-                href={uri}
+                href={url}
                 item={this.video}
             />
         );
     }
 
     private get video(): IVideo {
-        const { id, description, embedUri, name, publishedAt, uri } = this.props;
-        return { id, description, embedUri, name, publishedAt, uri };
+        const { id, description, embedUrl, name, publishedAt, url } = this.props;
+        return { id, description, embedUrl, name, publishedAt, url };
     }
 }
 

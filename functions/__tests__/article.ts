@@ -1,13 +1,13 @@
-import { convertIntoUri } from "../article";
+import { convertIntoUrl } from "../article";
 
-const baseUri = "https://foo.com";
+const baseUrl = "https://foo.com";
 
-test("Convert URI-like strings into complete URIs", () => {
-    expect(convertIntoUri("/foo", baseUri)).toBe("https://foo.com/foo");
-    expect(convertIntoUri(baseUri, baseUri)).toBe("https://foo.com");
+test("Convert URL-like strings into complete URLs", () => {
+    expect(convertIntoUrl("/foo", baseUrl)).toBe("https://foo.com/foo");
+    expect(convertIntoUrl(baseUrl, baseUrl)).toBe("https://foo.com");
 });
 
-test("Don't convert falsy values into URIs", () => {
-    expect(convertIntoUri(null, baseUri)).toBe(null);
-    expect(convertIntoUri(undefined, baseUri)).toBe(undefined);
+test("Don't convert falsy values into URLs", () => {
+    expect(convertIntoUrl(null, baseUrl)).toBe(null);
+    expect(convertIntoUrl(undefined, baseUrl)).toBe(undefined);
 });

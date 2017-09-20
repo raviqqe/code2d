@@ -1,7 +1,7 @@
-import { articlesRepository, uriToArticle } from "../lib/articles";
+import { articlesRepository, urlToArticle } from "../lib/articles";
 import createItemsDuck from "./items";
 
-const duck = createItemsDuck("articles", articlesRepository, uriToArticle);
+const duck = createItemsDuck("articles", articlesRepository, urlToArticle);
 
 export const actionCreators = duck.actionCreators;
 

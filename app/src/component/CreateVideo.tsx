@@ -5,31 +5,31 @@ import { actionCreators } from "../redux/videos";
 import CreateItem from "./CreateItem";
 
 interface IProps {
-    createItem: (uri: string) => void;
+    createItem: (url: string) => void;
 }
 
 interface IState {
-    uri: string;
+    url: string;
 }
 
 class CreateVideo extends React.Component<IProps, IState> {
-    public state: IState = { uri: "" };
+    public state: IState = { url: "" };
 
     public render() {
-        const { uri } = this.state;
+        const { url } = this.state;
 
         return (
             <CreateItem
                 createItem={() => {
-                    this.props.createItem(uri);
-                    this.setState({ uri: "" });
+                    this.props.createItem(url);
+                    this.setState({ url: "" });
                 }}
             >
                 <input
                     autoFocus={true}
                     placeholder="YouTube URL"
-                    value={uri}
-                    onChange={({ target: { value } }) => this.setState({ uri: value })}
+                    value={url}
+                    onChange={({ target: { value } }) => this.setState({ url: value })}
                 />
             </CreateItem>
         );

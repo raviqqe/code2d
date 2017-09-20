@@ -18,29 +18,29 @@ interface IProps extends IArticle {
 
 class Article extends React.Component<IProps> {
     public render() {
-        const { date, favicon, image, name, text, uri } = this.article;
+        const { date, favicon, image, name, text, url } = this.article;
 
         return (
             <Item
                 {...this.props}
                 details={[
                     image &&
-                    <a key="image" href={uri} target="_blank">
+                    <a key="image" href={url} target="_blank">
                         <img className="Article-image" src={image} />
                     </a>,
                     text && <div key="text">{text}</div>,
                     date &&
                     <LabeledDate key="date" label="Edited on" value={date} />,
                 ]}
-                href={uri}
+                href={url}
                 item={this.article}
             />
         );
     }
 
     private get article(): IArticle {
-        const { date, favicon, id, image, name, text, uri } = this.props;
-        return { date, favicon, id, image, name, text, uri };
+        const { date, favicon, id, image, name, text, url } = this.props;
+        return { date, favicon, id, image, name, text, url };
     }
 }
 

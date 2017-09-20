@@ -12,7 +12,7 @@ export default class extends React.Component<IBook, IState> {
     public state: IState = { showButtons: false };
 
     public render() {
-        const { imageUri, pageUri, publisher, title } = this.props;
+        const { imageUrl, pageUrl, publisher, title } = this.props;
 
         return (
             <div
@@ -20,7 +20,7 @@ export default class extends React.Component<IBook, IState> {
                 onMouseOver={() => this.setState({ showButtons: true })}
                 onMouseOut={() => this.setState({ showButtons: false })}
             >
-                <a href={pageUri} target="_blank"><img src={imageUri} /></a>
+                <a href={pageUrl} target="_blank"><img src={imageUrl} /></a>
                 <div className="Book-details">
                     <div>{title}</div>
                     <div className="Book-publisher">{publisher}</div>
