@@ -50,4 +50,8 @@ task :clean do
   cd 'app' do
     sh 'rake clean'
   end
+
+  cd 'functions' do
+    sh 'rake clean'
+  end
 end
