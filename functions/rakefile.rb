@@ -9,3 +9,7 @@ end
 task test: :build do
   sh 'npx jest'
 end
+
+task :clean do
+  sh 'git clean -dfx'
+end
