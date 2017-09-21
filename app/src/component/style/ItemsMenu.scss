@@ -70,6 +70,7 @@
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
+	flex-wrap: wrap;
 	margin: 0.5em 1em;
 
 	& > a {

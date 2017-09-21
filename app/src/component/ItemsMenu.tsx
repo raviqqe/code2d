@@ -7,7 +7,8 @@ import Video = require("react-icons/lib/md/ondemand-video");
 import Task = require("react-icons/lib/md/playlist-add-check");
 import { connect } from "react-redux";
 
-import ItemsMenuButton from "../component/ItemsMenuButton";
+import ItemsMenuButton from "./ItemsMenuButton";
+import SettingsButton from "./SettingsButton";
 import "./style/ItemsMenu.css";
 
 interface IProps {
@@ -44,6 +45,7 @@ export default class extends React.Component<IProps> {
                     <ItemsMenuButton path="/tasks"><Task /></ItemsMenuButton>
                     <ItemsMenuButton path="/articles"><Article /></ItemsMenuButton>
                     <ItemsMenuButton path="/videos"><Video /></ItemsMenuButton>
+                    <SettingsButton />
                 </div>
             </div>
         );
