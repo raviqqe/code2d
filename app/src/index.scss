@@ -33,6 +33,10 @@ a {
 	&:visited {
 		color: inherit;
 	}
+
+	&:hover {
+		text-decoration: underline;
+	}
 }
 
 button {
