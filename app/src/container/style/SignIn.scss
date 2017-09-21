@@ -82,5 +82,9 @@
 
 	& > * {
 		margin: 1em 2em;
+
+		&:last-child {
+			margin-right: 4em;
+		}
 	}
 }
