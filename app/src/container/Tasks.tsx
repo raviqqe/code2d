@@ -5,9 +5,9 @@ import { connect } from "react-redux";
 import ItemList from "../component/ItemList";
 import Task from "../component/Task";
 import TasksMenu from "../component/TasksMenu";
-import * as notification from "../lib/notification";
 import { ITask } from "../lib/tasks";
-import { actionCreators } from "../redux/tasks";
+import { actionCreators as settingsActionCreators } from "../redux/settings";
+import { actionCreators as tasksActionCreators } from "../redux/tasks";
 import Items from "./Items";
 import Timer from "./Timer";
 
@@ -16,6 +16,8 @@ interface IProps {
     currentItem: ITask | null;
     items: ITask[];
     done: boolean;
+    notificationOn: boolean | null;
+    requestNotificationPermission: () => void;
     setCurrentItem: (task: ITask) => void;
     setItems: (tasks: ITask[]) => void;
     timerOn: boolean;
@@ -45,7 +47,9 @@ class Tasks extends React.Component<IProps> {
     }
 
     public componentDidMount() {
-        notification.requestPermission();
+        if (this.props.notificationOn === null) {
+            this.props.requestNotificationPermission();
+        }
     }
 
     private get itemsByTag(): ITask[] {
@@ -58,6 +62,6 @@ class Tasks extends React.Component<IProps> {
 }
 
 export default connect(
-    ({ tasks, timer }) => ({ ...tasks, timerOn: timer.on }),
-    actionCreators,
+    ({ settings, tasks, timer }) => ({ ...settings, ...tasks, timerOn: timer.on }),
+    { ...settingsActionCreators, ...tasksActionCreators },
 )(Tasks);
