@@ -26,7 +26,7 @@ class SignIn extends React.Component<IProps> {
                 <div className="SignIn-main">
                     <div className="SignIn-title-container">
                         <img className="SignIn-icon" src={require("../images/icon.svg")} />
-                        <div className="SignIn-title">code2d</div>
+                        <div className="SignIn-title">{process.env.REACT_APP_NAME}</div>
                         <div className="SignIn-catch-phrase">
                             Productivity tools for software engineers.
                         </div>
@@ -59,7 +59,7 @@ class SignIn extends React.Component<IProps> {
                     </Feature>
                 </div>
                 <div className="SignIn-footer">
-                    <a href="https://github.com/raviqqe/code2d" target="_blank">GitHub</a>
+                    <a href={process.env.REACT_APP_REPOSITORY_URL} target="_blank">GitHub</a>
                 </div>
             </div>
         );
