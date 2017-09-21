@@ -14,7 +14,11 @@ const checkNotificationPermission = actionCreator("CHECK_NOTIFICATION_PERMISSION
 const requestNotificationPermission = actionCreator("REQUEST_NOTIFICATION_PERMISSION");
 const setNotificationState = actionCreator<boolean | null>("SET_NOTIFICATION_STATE");
 
-export const actionCreators = { requestNotificationPermission, setNotificationState };
+export const actionCreators = {
+    checkNotificationPermission,
+    requestNotificationPermission,
+    setNotificationState,
+};
 
 export interface IState {
     notificationOn: boolean | null;

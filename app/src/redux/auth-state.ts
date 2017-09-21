@@ -11,6 +11,7 @@ import { tasksRepository } from "../lib/tasks";
 import { videosRepository } from "../lib/videos";
 import * as articles from "./articles";
 import * as books from "./books";
+import * as settings from "./settings";
 import * as tasks from "./tasks";
 import * as utils from "./utils";
 import * as videos from "./videos";
@@ -50,13 +51,17 @@ function* initialize(): SagaIterator {
             put(articles.actionCreators.getItems()),
             call(articlesRepository(false).get),
             call(articlesRepository(true).get),
+
             put(tasks.actionCreators.getItems()),
             put(tasks.actionCreators.getTags()),
             call(tasksRepository(false).get),
             call(tasksRepository(true).get),
+
             put(videos.actionCreators.getItems()),
             call(videosRepository(false).get),
             call(videosRepository(true).get),
+
+            put(settings.actionCreators.checkNotificationPermission()),
         ]);
     }
 }
