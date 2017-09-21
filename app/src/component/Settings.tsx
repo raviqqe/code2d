@@ -9,12 +9,11 @@ import Switch from "./Switch";
 interface IProps {
     notificationOn: boolean | null;
     onBlur: () => void;
-    requestNotificationPermission: () => void;
 }
 
 class Settings extends React.Component<IProps> {
     public render() {
-        const { notificationOn, onBlur, requestNotificationPermission } = this.props;
+        const { notificationOn, onBlur } = this.props;
 
         return (
             <div className="Settings-container" onClick={onBlur}>
