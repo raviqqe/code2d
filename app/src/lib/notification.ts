@@ -13,12 +13,12 @@ export function permission(): boolean | null {
 }
 
 export async function requestPermission(): Promise<boolean | null> {
-    if (isNotificationSupported()) {
-        await new Promise((resolve) => Notification.requestPermission(resolve));
-        return permission();
+    if (!isNotificationSupported()) {
+        return null;
     }
 
-    return false;
+    await new Promise((resolve) => Notification.requestPermission(resolve));
+    return permission();
 }
 
 export function notify(message: string): void {
