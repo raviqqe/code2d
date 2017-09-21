@@ -1,5 +1,11 @@
 @import "../../style/colors.scss";
 
+.SignIn-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
 .SignIn-main {
 	height: 95vh;
 	display: flex;
@@ -53,16 +59,20 @@
 
 .SignIn-features-paper {
 	background: white;
-	width: 70vw;
-	margin: 0 auto;
 	display: flex;
 	justify-content: space-evenly;
 	align-items: flex-start;
 	box-shadow: 0.5em 0.5em 2em rgba(0, 0, 0, 0.3);
+	width: 70vw;
 	padding: 10vh 0;
+
+	& > * {
+		width: 15vw;
+	}
 }
 
 .SignIn-footer {
+	width: 100%;
 	margin-top: 10vh;
 	background: $black;
 	color: white;

@@ -1,22 +1,23 @@
+@import "../../style/colors.scss";
+
 .Feature-container {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
-
-	& > * {
-		margin-bottom: 0.5em;
-
-		&:last-child {
-			margin-bottom: 0;
-		}
-	}
 }
 
 .Feature-image {
 	width: 90%;
+	margin-bottom: 1em;
 }
 
 .Feature-title {
 	font-size: 1.2em;
+	font-weight: bold;
+	margin-bottom: 0.2em;
+}
+
+.Feature-description {
+	color: $dark-grey;
 }
