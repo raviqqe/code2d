@@ -1,3 +1,5 @@
+@import "../../style/colors.scss";
+
 .Settings-container {
 	position: fixed;
 	top: 0;
@@ -12,12 +14,37 @@
 }
 
 .Settings-box {
+	font-size: 1.2em;
 	background: white;
 	margin: 10vh 0;
 	width: 80vw;
 	border-radius: 3px;
 
 	& > * {
-		margin: 1em;
+		margin: 1em 10vw;
+
+		&:first-child {
+			margin-top: 10vh;
+		}
+
+		&:last-child {
+			margin-bottom: 10vh;
+		}
 	}
+}
+
+@mixin Settings-notification {
+	font-weight: bold;
+}
+
+.Settings-notification-enabled {
+	@include Settings-notification;
+
+	color: $green;
+}
+
+.Settings-notification-disabled {
+	@include Settings-notification;
+
+	color: $grey;
 }

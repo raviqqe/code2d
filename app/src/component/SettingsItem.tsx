@@ -13,7 +13,7 @@ export default class extends React.Component<IProps> {
 
         return (
             <div className="SettingsItem-container">
-                <div className="SettingsItem-label">{label}</div>
+                {label}
                 {value}
             </div>
         );

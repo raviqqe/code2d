@@ -21,11 +21,9 @@ class Settings extends React.Component<IProps> {
                 <div className="Settings-box" onClick={(event) => event.stopPropagation()}>
                     <SettingsItem
                         label="Notification"
-                        value={
-                            <Switch
-                                on={notificationOn}
-                                onClick={requestNotificationPermission}
-                            />
+                        value={notificationOn
+                            ? <div className="Settings-notification-enabled">enabled</div>
+                            : <div className="Settings-notification-disabled">disabled</div>
                         }
                     />
                 </div>
