@@ -11,6 +11,7 @@ import * as articles from "./articles";
 import * as authState from "./auth-state";
 import * as books from "./books";
 import * as message from "./message";
+import * as settings from "./settings";
 import * as signIn from "./sign-in";
 import * as tasks from "./tasks";
 import * as timer from "./timer";
@@ -24,6 +25,7 @@ export default function() {
             authState: authState.reducer,
             books: books.reducer,
             message: message.reducer,
+            settings: settings.reducer,
             signIn: signIn.reducer,
             tasks: tasks.reducer,
             timer: timer.reducer,
@@ -37,6 +39,7 @@ export default function() {
             ...articles.sagas,
             ...books.sagas,
             ...message.sagas,
+            ...settings.sagas,
             ...signIn.sagas,
             ...tasks.sagas,
             ...videos.sagas,
