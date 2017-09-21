@@ -1,24 +1,10 @@
 @import "../../style/colors.scss";
 
-@mixin SignIn-page {
-	height: 100vh;
-}
-
-.SignIn-title-page {
-	@include SignIn-page;
-
+.SignIn-main {
+	height: 95vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
-	align-items: center;
-}
-
-.SignIn-description-page {
-	@include SignIn-page;
-
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
 	align-items: center;
 }
 
@@ -36,7 +22,10 @@
 }
 
 .SignIn-icon {
-	height: 30vh;
+	background: white;
+	height: 40vh;
+	padding: 3vh;
+	border-radius: 20vh;
 	margin-bottom: 1em;
 }
 
@@ -62,22 +51,21 @@
 	}
 }
 
-.SignIn-description-paper {
+.SignIn-features-paper {
 	background: white;
 	width: 70vw;
-	flex: 1;
-	position: relative;
-	top: -8vh;
+	margin: 0 auto;
 	display: flex;
 	justify-content: space-evenly;
-	align-items: center;
+	align-items: flex-start;
 	box-shadow: 0.5em 0.5em 2em rgba(0, 0, 0, 0.3);
+	padding: 10vh 0;
 }
 
 .SignIn-footer {
+	margin-top: 10vh;
 	background: $black;
 	color: white;
-	width: 100%;
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;

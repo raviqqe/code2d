@@ -22,7 +22,7 @@ class SignIn extends React.Component<IProps> {
 
         return (
             <div>
-                <div className="SignIn-title-page">
+                <div className="SignIn-main">
                     <div className="SignIn-title-container">
                         <img className="SignIn-icon" src={require("../images/icon.svg")} />
                         <div className="SignIn-title">code2d</div>
@@ -34,25 +34,23 @@ class SignIn extends React.Component<IProps> {
                         <GitHub /> Sign in with GitHub
                     </button>
                 </div>
-                <div className="SignIn-description-page">
-                    <div className="SignIn-description-paper">
-                        <div>
-                            Manage everything to do in one place.
-                            <div>Tasks to do</div>
-                            <div>Articles to read</div>
-                            <div>Videos to watch</div>
-                            <div>Books to read (WIP)</div>
-                        </div>
-                        <div>
-                            Keep other things away.
-                            Focus on engineering and growing yourself.
-                        </div>
+                <div className="SignIn-features-paper">
+                    <div>
+                        Manage everything to do in one place.
+                        <div>Tasks to do</div>
+                        <div>Articles to read</div>
+                        <div>Videos to watch</div>
+                        <div>Books to read (WIP)</div>
                     </div>
-                    <div className="SignIn-footer">
-                        <a href="https://github.com/raviqqe/code2d" target="_blank">GitHub</a>
+                    <div>
+                        Keep other things away.
+                        Focus on engineering and growing yourself.
                     </div>
                 </div>
-            </div >
+                <div className="SignIn-footer">
+                    <a href="https://github.com/raviqqe/code2d" target="_blank">GitHub</a>
+                </div>
+            </div>
         );
     }
 }
