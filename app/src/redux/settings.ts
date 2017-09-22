@@ -28,7 +28,7 @@ export interface IState {
 }
 
 export const initialState: ImmutableObject<IState>
-    = Immutable({ alarmVolume: 1, notificationOn: null });
+    = Immutable({ alarmVolume: 0.5, notificationOn: null });
 
 export const reducer = reducerWithInitialState(initialState)
     .case(setAlarmVolume, (state, alarmVolume) => state.merge({ alarmVolume }))
