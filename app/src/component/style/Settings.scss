@@ -11,25 +11,29 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	overflow-y: scroll;
+
+	& > * {
+		height: auto;
+		max-height: 90%;
+	}
 }
 
 .Settings-box {
 	font-size: 1.2em;
 	background: white;
-	margin: 10vh 0;
+	padding: 10vh 10vw;
 	width: 80vw;
 	border-radius: 3px;
 
 	& > * {
-		margin: 2em 10vw;
+		margin: 2em 0;
 
 		&:first-child {
-			margin-top: 10vh;
+			margin-top: 0;
 		}
 
 		&:last-child {
-			margin-bottom: 10vh;
+			margin-bottom: 0;
 		}
 	}
 }

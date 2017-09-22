@@ -1,6 +1,8 @@
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import * as React from "react";
+import ScrollBar = require("react-perfect-scrollbar");
+import "react-perfect-scrollbar/dist/css/styles.css";
 import { connect } from "react-redux";
 
 import { actionCreators as authenticationActionCreators } from "../redux/authentication";
@@ -27,46 +29,48 @@ class Settings extends React.Component<IProps> {
 
         return (
             <div className="Settings-container" onClick={onBlur}>
-                <div className="Settings-box" onClick={(event) => event.stopPropagation()}>
-                    <SettingsItem
-                        label="Notification"
-                        value={notificationOn
-                            ? <div className="Settings-notification-enabled">enabled</div>
-                            : <div className="Settings-notification-disabled">disabled</div>
-                        }
-                    />
-                    <SettingsItem
-                        label="Alarm volume"
-                        value={
-                            <div className="Settings-volume-slider">
-                                <Slider
-                                    min={0}
-                                    max={1}
-                                    defaultValue={alarmVolume}
-                                    value={alarmVolume}
-                                    step={0.125}
-                                    marks={{ 0: "0", 0.5: "0.5", 1: "1" }}
-                                    railStyle={{ backgroundColor: grey }}
-                                    trackStyle={{ backgroundColor: green }}
-                                    dotStyle={{ borderColor: grey }}
-                                    activeDotStyle={{ borderColor: green }}
-                                    handleStyle={{ borderColor: green, boxShadow: "none" }}
-                                    onChange={setAlarmVolume}
-                                />
-                            </div>
-                        }
-                    />
-                    <div className="Settings-buttons">
-                        <button onClick={signOut}>Sign out</button>
-                        <button className="Settings-negative-button" onClick={deleteAccount}>
-                            Delete account
+                <ScrollBar>
+                    <div className="Settings-box" onClick={(event) => event.stopPropagation()}>
+                        <SettingsItem
+                            label="Notification"
+                            value={notificationOn
+                                ? <div className="Settings-notification-enabled">enabled</div>
+                                : <div className="Settings-notification-disabled">disabled</div>
+                            }
+                        />
+                        <SettingsItem
+                            label="Alarm volume"
+                            value={
+                                <div className="Settings-volume-slider">
+                                    <Slider
+                                        min={0}
+                                        max={1}
+                                        defaultValue={alarmVolume}
+                                        value={alarmVolume}
+                                        step={0.125}
+                                        marks={{ 0: "0", 0.5: "0.5", 1: "1" }}
+                                        railStyle={{ backgroundColor: grey }}
+                                        trackStyle={{ backgroundColor: green }}
+                                        dotStyle={{ borderColor: grey }}
+                                        activeDotStyle={{ borderColor: green }}
+                                        handleStyle={{ borderColor: green, boxShadow: "none" }}
+                                        onChange={setAlarmVolume}
+                                    />
+                                </div>
+                            }
+                        />
+                        <div className="Settings-buttons">
+                            <button onClick={signOut}>Sign out</button>
+                            <button className="Settings-negative-button" onClick={deleteAccount}>
+                                Delete account
                         </button>
+                        </div>
+                        <div className="Settings-footer">
+                            <a href={process.env.REACT_APP_FEEDBACK_URL} target="_blank">Feedback</a>
+                            <a href={process.env.REACT_APP_REPOSITORY_URL} target="_blank">GitHub</a>
+                        </div>
                     </div>
-                    <div className="Settings-footer">
-                        <a href={process.env.REACT_APP_FEEDBACK_URL} target="_blank">Feedback</a>
-                        <a href={process.env.REACT_APP_REPOSITORY_URL} target="_blank">GitHub</a>
-                    </div>
-                </div>
+                </ScrollBar>
             </div>
         );
     }

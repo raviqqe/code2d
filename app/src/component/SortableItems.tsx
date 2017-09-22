@@ -1,4 +1,6 @@
 import * as React from "react";
+import ScrollBar = require("react-perfect-scrollbar");
+import "react-perfect-scrollbar/dist/css/styles.css";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 
 import { IItem } from "../lib/items";
@@ -10,10 +12,12 @@ class SortableItems<A extends IItem> extends React.Component<{ component: any, i
         const SortableItem = SortableElement(component);
 
         return (
-            <div className="SortableItems-container">
-                {items.map((item, index) =>
-                    <SortableItem key={index} index={index} {...item} />)}
-            </div>
+            <ScrollBar>
+                <div className="SortableItems-container">
+                    {items.map((item, index) =>
+                        <SortableItem key={index} index={index} {...item} />)}
+                </div>
+            </ScrollBar>
         );
     }
 }
