@@ -50,7 +50,7 @@ export default function() {
             (immutable: ImmutableObject<any>) => immutable.asMutable(),
             (mutable) => Immutable(mutable),
         )],
-        whitelist: ["articles", "books", "settings", "tasks"],
+        whitelist: ["articles", "books", "settings", "tasks", "videos"],
     });
 
     firebase.onAuthStateChanged(async (user) => {
