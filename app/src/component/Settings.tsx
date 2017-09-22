@@ -25,6 +25,10 @@ class Settings extends React.Component<IProps> {
                             : <div className="Settings-notification-disabled">disabled</div>
                         }
                     />
+                    <div className="Settings-footer">
+                        <a href={process.env.REACT_APP_FEEDBACK_URL} target="_blank">Feedback</a>
+                        <a href={process.env.REACT_APP_REPOSITORY_URL} target="_blank">GitHub</a>
+                    </div>
                 </div>
             </div>
         );

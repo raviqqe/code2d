@@ -49,3 +49,20 @@
 
 	color: $grey;
 }
+
+.Settings-footer {
+	border-top: {
+		style: solid;
+		width: 1px;
+		color: $light-grey;
+	};
+	padding-top: 1em;
+	margin-top: 3em;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+
+	& > * {
+		margin: 0 1em;
+	}
+}
