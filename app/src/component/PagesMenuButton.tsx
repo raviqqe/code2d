@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 
-import "./style/ItemsMenuButton.css";
+import "./style/PagesMenuButton.css";
 
 interface IProps {
     path: string;
@@ -14,8 +14,8 @@ export default class extends React.Component<IProps> {
         return (
             <div
                 className={path === window.location.pathname
-                    ? "ItemsMenuButton-container-highlighted"
-                    : "ItemsMenuButton-container"}
+                    ? "PagesMenuButton-container-highlighted"
+                    : "PagesMenuButton-container"}
             >
                 <Link to={path}>{children}</Link>
             </div>

@@ -4,7 +4,7 @@ import Menu = require("react-icons/lib/md/menu");
 import Video = require("react-icons/lib/md/ondemand-video");
 import Task = require("react-icons/lib/md/playlist-add-check");
 
-import ItemsMenuButton from "./ItemsMenuButton";
+import PagesMenuButton from "./PagesMenuButton";
 import "./style/PagesMenu.css";
 
 interface IState {
@@ -31,9 +31,9 @@ export default class extends React.Component<{}, IState> {
                     onMouseOver={() => this.setState({ mouseOver: true })}
                     onMouseOut={() => this.setState({ mouseOver: false })}
                 >
-                    <ItemsMenuButton path="/tasks"><Task /></ItemsMenuButton>
-                    <ItemsMenuButton path="/articles"><Article /></ItemsMenuButton>
-                    <ItemsMenuButton path="/videos"><Video /></ItemsMenuButton>
+                    <PagesMenuButton path="/tasks"><Task /></PagesMenuButton>
+                    <PagesMenuButton path="/articles"><Article /></PagesMenuButton>
+                    <PagesMenuButton path="/videos"><Video /></PagesMenuButton>
                 </div>
             </div>
         );

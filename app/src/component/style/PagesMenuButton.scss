@@ -1,7 +1,7 @@
 @import "../../style/animation.scss";
 @import "../../style/colors.scss";
 
-.ItemsMenuButton-container {
+.PagesMenuButton-container {
 	@include color-transition;
 
 	display: flex;
@@ -18,8 +18,8 @@
 	}
 }
 
-.ItemsMenuButton-container-highlighted {
-	@extend .ItemsMenuButton-container;
+.PagesMenuButton-container-highlighted {
+	@extend .PagesMenuButton-container;
 
 	color: $red;
 
