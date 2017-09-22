@@ -16,12 +16,16 @@ export default class extends React.Component<{}, IState> {
 
         return (
             <div>
-                <div className="SettingsButton-icon" onClick={() => this.setState({ on: true })}>
+                <div
+                    className={"SettingsButton-icon" + (on ? "-active" : "")}
+                    onClick={() => this.setState({ on: true })}
+                >
                     <Gear />
                 </div>
                 <div style={on ? {} : { display: "none" }}>
                     <Settings onBlur={() => this.setState({ on: false })} />
                 </div>
-            </div >);
+            </div>
+        );
     }
 }

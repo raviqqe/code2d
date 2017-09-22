@@ -5,6 +5,14 @@
 	cursor: pointer;
 
 	& > svg {
-		@include hover-rotate;
+		transition: transform $short-duration;
+	}
+}
+
+.SettingsButton-icon-active {
+	@extend .SettingsButton-icon;
+
+	& > svg {
+		transform: rotate(90deg);
 	}
 }
