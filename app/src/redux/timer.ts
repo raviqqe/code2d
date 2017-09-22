@@ -24,6 +24,6 @@ export const sagas = [
         playAlarm,
         function* _(): SagaIterator {
             const { alarmVolume } = yield select(({ settings }) => settings);
-            yield call(audio.playHorn, alarmVolume);
+            yield call(audio.playAlarm, alarmVolume);
         }),
 ];

@@ -1,6 +1,6 @@
 import Pizzicato = require("pizzicato");
 
-export function playHorn(volume: number = 1): void {
+export function playAlarm(volume: number = 1): void {
     const sound = new Pizzicato.Sound({ source: "wave", options: { release: 3 } });
     sound.volume = volume;
     sound.play();
