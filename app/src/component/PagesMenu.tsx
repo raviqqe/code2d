@@ -26,15 +26,17 @@ export default class extends React.Component<{}, IState> {
                     <Menu />
                 </div>
                 <div
-                    className={"PagesMenu-menu-container" + (showMenu ? "" : "-invisible")}
+                    className={"PagesMenu-box-container" + (showMenu ? "" : "-invisible")}
                     onClick={(event) => {
                         this.setState({ showMenu: false });
                         event.stopPropagation();
                     }}
                 >
-                    <PagesMenuButton path="/tasks" icon={<Task />}>tasks</PagesMenuButton>
-                    <PagesMenuButton path="/articles" icon={<Article />}>articles</PagesMenuButton>
-                    <PagesMenuButton path="/videos" icon={<Video />}>videos</PagesMenuButton>
+                    <div className="PagesMenu-box" onClick={(event) => event.stopPropagation()}>
+                        <PagesMenuButton path="/tasks" icon={<Task />}>tasks</PagesMenuButton>
+                        <PagesMenuButton path="/articles" icon={<Article />}>articles</PagesMenuButton>
+                        <PagesMenuButton path="/videos" icon={<Video />}>videos</PagesMenuButton>
+                    </div>
                 </div>
             </div>
         );

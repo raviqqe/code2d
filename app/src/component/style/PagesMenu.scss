@@ -8,27 +8,36 @@ $PagesMenu-icon-size: 2.5em;
 	position: relative;
 }
 
-.PagesMenu-menu-container {
+.PagesMenu-box-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	transition: opacity $short-duration, visibility $short-duration;
+	z-index: 100;
+}
+
+.PagesMenu-box-container-invisible {
+	@extend .PagesMenu-box-container;
+
+	visibility: hidden;
+	opacity: 0;
+}
+
+.PagesMenu-box {
 	@include paper-shadow;
 	@include paper-border;
 
 	background: white;
 	align-items: center;
 	position: absolute;
-	bottom: $PagesMenu-icon-size + 0.5em;
-	transition: opacity $short-duration;
-	z-index: 100;
+	bottom: $PagesMenu-icon-size + 2em;
+	left: 1em;
 
 	& > * {
 		margin: 1em 2em;
 	}
-}
-
-.PagesMenu-menu-container-invisible {
-	@extend .PagesMenu-menu-container;
-
-	visibility: hidden;
-	opacity: 0;
 }
 
 .PagesMenu-icon {
