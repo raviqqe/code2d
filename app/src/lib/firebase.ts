@@ -16,6 +16,14 @@ export async function signIn(): Promise<void> {
     await firebase.auth().getRedirectResult();
 }
 
+export async function signOut(): Promise<void> {
+    await firebase.auth().signOut();
+}
+
+export async function deleteAccount(): Promise<void> {
+    await firebase.auth().currentUser.delete();
+}
+
 export function onAuthStateChanged(callback: (user: firebase.User) => void): void {
     firebase.auth().onAuthStateChanged(callback);
 }
