@@ -17,7 +17,7 @@ import * as tasks from "./tasks";
 import * as utils from "./utils";
 import * as videos from "./videos";
 
-const actionCreator = actionCreatorFactory("AUTH_STATE");
+const actionCreator = actionCreatorFactory("AUTHENTICATION");
 
 const setSignInState = actionCreator<boolean>("SET_SIGN_IN_STATE");
 const signIn = actionCreatorFactory().async<null, null>("SIGN_IN");
