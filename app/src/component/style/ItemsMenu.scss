@@ -44,6 +44,7 @@
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
+	white-space: nowrap;
 
 	&:hover {
 		color: $black;
