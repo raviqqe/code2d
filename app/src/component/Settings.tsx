@@ -27,7 +27,6 @@ class Settings extends React.Component<IProps> {
                             : <div className="Settings-notification-disabled">disabled</div>
                         }
                     />
-
                     <div className="Settings-buttons">
                         <button onClick={signOut}>Sign out</button>
                     </div>
