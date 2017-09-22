@@ -8,6 +8,7 @@ import "./style/Settings.css";
 import Switch from "./Switch";
 
 interface IProps {
+    deleteAccount: () => void;
     notificationOn: boolean | null;
     onBlur: () => void;
     signOut: () => void;
@@ -15,7 +16,7 @@ interface IProps {
 
 class Settings extends React.Component<IProps> {
     public render() {
-        const { notificationOn, onBlur, signOut } = this.props;
+        const { deleteAccount, notificationOn, onBlur, signOut } = this.props;
 
         return (
             <div className="Settings-container" onClick={onBlur}>
@@ -29,6 +30,9 @@ class Settings extends React.Component<IProps> {
                     />
                     <div className="Settings-buttons">
                         <button onClick={signOut}>Sign out</button>
+                        <button className="Settings-negative-button" onClick={deleteAccount}>
+                            Delete account
+                        </button>
                     </div>
                     <div className="Settings-footer">
                         <a href={process.env.REACT_APP_FEEDBACK_URL} target="_blank">Feedback</a>
