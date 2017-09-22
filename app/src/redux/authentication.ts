@@ -21,10 +21,12 @@ const actionCreator = actionCreatorFactory("AUTHENTICATION");
 
 const setSignInState = actionCreator<boolean>("SET_SIGN_IN_STATE");
 const signIn = actionCreatorFactory().async<null, null>("SIGN_IN");
+const signOut = actionCreatorFactory().async<null, null>("SIGN_OUT");
 
 export const actionCreators = {
     setSignInState,
     signIn: () => signIn.started(null),
+    signOut: () => signOut.started(null),
 };
 
 export interface IState {
@@ -84,6 +86,16 @@ export const sagas = [
                 yield put(signIn.done({ params: null, result: null }));
             } catch (error) {
                 yield put(signIn.failed({ params: null, error }));
+            }
+        }),
+    utils.takeEvery(
+        signOut.started,
+        function* _(): SagaIterator {
+            try {
+                yield call(firebase.signOut);
+                yield put(signOut.done({ params: null, result: null }));
+            } catch (error) {
+                yield put(signOut.failed({ params: null, error }));
             }
         }),
 ];
