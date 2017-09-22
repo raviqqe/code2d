@@ -32,7 +32,7 @@ export default class extends React.Component<IProps> {
                             className={done ? "ItemsMenu-state" : "ItemsMenu-state-highlighted"}
                             onClick={() => done && toggleItemsState()}
                         >
-                            <Todo /> {todoButtonText || "to-do"}
+                            <Todo /> {todoButtonText || "to do"}
                         </div>
                         <div
                             className={done ? "ItemsMenu-state-highlighted" : "ItemsMenu-state"}

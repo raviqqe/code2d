@@ -17,7 +17,7 @@ class VideosMenu extends React.Component<IProps> {
                 {...this.props}
                 createItem={<CreateVideo />}
                 doneButtonText="watched"
-                todoButtonText="to-watch"
+                todoButtonText="to watch"
             />
         );
     }

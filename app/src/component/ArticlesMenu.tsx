@@ -17,7 +17,7 @@ class ArticlesMenu extends React.Component<IProps> {
                 {...this.props}
                 createItem={<CreateArticle />}
                 doneButtonText="read"
-                todoButtonText="to-read"
+                todoButtonText="to read"
             />
         );
     }
