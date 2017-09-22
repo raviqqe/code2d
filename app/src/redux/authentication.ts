@@ -7,6 +7,7 @@ import actionCreatorFactory from "typescript-fsa";
 import { reducerWithInitialState } from "typescript-fsa-reducers";
 
 import { articlesRepository } from "../lib/articles";
+import * as firebase from "../lib/firebase";
 import { tasksRepository } from "../lib/tasks";
 import { videosRepository } from "../lib/videos";
 import * as articles from "./articles";
@@ -19,19 +20,27 @@ import * as videos from "./videos";
 const actionCreator = actionCreatorFactory("AUTH_STATE");
 
 const setSignInState = actionCreator<boolean>("SET_SIGN_IN_STATE");
+const signIn = actionCreatorFactory().async<null, null>("SIGN_IN");
 
-export const actionCreators = { setSignInState };
+export const actionCreators = {
+    setSignInState,
+    signIn: () => signIn.started(null),
+};
 
 export interface IState {
     rehydrated: boolean;
     signedIn: boolean | null;
+    signingIn: boolean;
 }
 
 export const initialState: ImmutableObject<IState>
-    = Immutable({ rehydrated: false, signedIn: null });
+    = Immutable({ rehydrated: false, signedIn: null, signingIn: false });
 
 const subReducer = reducerWithInitialState(initialState)
-    .case(setSignInState, (state, signedIn) => state.merge({ signedIn }));
+    .case(setSignInState, (state, signedIn) => state.merge({ signedIn }))
+    .case(signIn.started, (state) => state.merge({ signingIn: true }))
+    .case(signIn.done, (state) => state.merge({ signingIn: false }))
+    .case(signIn.failed, (state) => state.merge({ signingIn: false }));
 
 export function reducer(state: ImmutableObject<IState> = initialState, action) {
     if (action.type === REHYDRATE) {
@@ -67,4 +76,14 @@ function* initialize(): SagaIterator {
 export const sagas = [
     takeEvery(REHYDRATE, initialize),
     utils.takeEvery(setSignInState, initialize),
+    utils.takeEvery(
+        signIn.started,
+        function* _(): SagaIterator {
+            try {
+                yield call(firebase.signIn);
+                yield put(signIn.done({ params: null, result: null }));
+            } catch (error) {
+                yield put(signIn.failed({ params: null, error }));
+            }
+        }),
 ];

@@ -4,11 +4,11 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import Feature from "../component/Feature";
-import { actionCreators } from "../redux/sign-in";
+import { actionCreators } from "../redux/authentication";
 import "./style/SignIn.css";
 
 interface IProps {
-    halfway: boolean;
+    signingIn: boolean;
     signedIn: boolean;
     signIn: () => void;
 }
@@ -17,7 +17,7 @@ class SignIn extends React.Component<IProps> {
     public render() {
         if (this.props.signedIn) {
             return <Redirect to="/" />;
-        } else if (this.props.halfway) {
+        } else if (this.props.signingIn) {
             return <div className="SignIn-container">Signing in...</div>;
         }
 
@@ -68,6 +68,6 @@ class SignIn extends React.Component<IProps> {
 }
 
 export default connect(
-    ({ authentication, signIn }) => ({ ...authentication, ...signIn }),
+    ({ authentication }) => authentication,
     actionCreators,
 )(SignIn);
