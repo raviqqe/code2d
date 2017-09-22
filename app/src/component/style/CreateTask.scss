@@ -1,5 +1,4 @@
 @import "../../style/colors.scss";
-@import "../../style/shadow.scss";
 @import "./TaskDescription.scss";
 
 .CreateTask-description {
@@ -13,8 +12,6 @@
 }
 
 .CreateTask-button {
-	@include button-shadow;
-
 	flex: 1;
 	margin-right: 0.5em;
 

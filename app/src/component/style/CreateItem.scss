@@ -1,4 +1,3 @@
-@import "../../style/shadow.scss";
 @import "./Item.scss";
 
 .CreateItem-form-container {
@@ -24,8 +23,6 @@
 }
 
 .CreateItem-button {
-	@include button-shadow;
-
 	display: flex;
 	justify-content: center;
 	align-items: center;

@@ -1,9 +1,6 @@
 @import "../../style/colors.scss";
-@import "../../style/shadow.scss";
 
 @mixin Switch-button {
-	@include button-shadow;
-
 	height: 2em;
 	border-radius: 1em;
 }
