@@ -18,10 +18,9 @@ import * as videos from "./videos";
 
 const actionCreator = actionCreatorFactory("AUTH_STATE");
 
-const signIn = actionCreator("SIGN_IN");
-const signOut = actionCreator("SIGN_OUT");
+const setSignInState = actionCreator<boolean>("SET_SIGN_IN_STATE");
 
-export const actionCreators = { signIn, signOut };
+export const actionCreators = { setSignInState };
 
 export interface IState {
     rehydrated: boolean;
@@ -32,8 +31,7 @@ export const initialState: ImmutableObject<IState>
     = Immutable({ rehydrated: false, signedIn: null });
 
 const subReducer = reducerWithInitialState(initialState)
-    .case(signIn, (state) => state.merge({ signedIn: true }))
-    .case(signOut, (state) => state.merge({ signedIn: false }));
+    .case(setSignInState, (state, signedIn) => state.merge({ signedIn }));
 
 export function reducer(state: ImmutableObject<IState> = initialState, action) {
     if (action.type === REHYDRATE) {
@@ -68,5 +66,5 @@ function* initialize(): SagaIterator {
 
 export const sagas = [
     takeEvery(REHYDRATE, initialize),
-    utils.takeEvery(signIn, initialize),
+    utils.takeEvery(setSignInState, initialize),
 ];
