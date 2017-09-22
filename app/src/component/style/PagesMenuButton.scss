@@ -5,7 +5,7 @@
 	@include color-transition;
 
 	display: flex;
-	font-size: 2.5em;
+	font-size: 1.2em;
 	color: $light-grey;
 	margin: 0.2em;
 
@@ -15,6 +15,11 @@
 
 	& > a {
 		display: flex;
+		align-items: center;
+
+		&:hover {
+			text-decoration: none;
+		}
 	}
 }
 
@@ -26,4 +31,10 @@
 	&:hover {
 		color: $red;
 	}
+}
+
+.PagesMenuButton-icon {
+	display: flex;
+	font-size: 1.8em;
+	margin-right: 0.3em;
 }

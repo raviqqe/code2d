@@ -31,9 +31,9 @@ export default class extends React.Component<{}, IState> {
                     onMouseOver={() => this.setState({ mouseOver: true })}
                     onMouseOut={() => this.setState({ mouseOver: false })}
                 >
-                    <PagesMenuButton path="/tasks"><Task /></PagesMenuButton>
-                    <PagesMenuButton path="/articles"><Article /></PagesMenuButton>
-                    <PagesMenuButton path="/videos"><Video /></PagesMenuButton>
+                    <PagesMenuButton path="/tasks" icon={<Task />}>tasks</PagesMenuButton>
+                    <PagesMenuButton path="/articles" icon={<Article />}>articles</PagesMenuButton>
+                    <PagesMenuButton path="/videos" icon={<Video />}>videos</PagesMenuButton>
                 </div>
             </div>
         );

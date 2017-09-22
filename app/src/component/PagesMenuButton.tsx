@@ -4,12 +4,13 @@ import { Link } from "react-router-dom";
 import "./style/PagesMenuButton.css";
 
 interface IProps {
+    icon: JSX.Element;
     path: string;
 }
 
 export default class extends React.Component<IProps> {
     public render() {
-        const { children, path } = this.props;
+        const { children, icon, path } = this.props;
 
         return (
             <div
@@ -17,7 +18,9 @@ export default class extends React.Component<IProps> {
                     ? "PagesMenuButton-container-highlighted"
                     : "PagesMenuButton-container"}
             >
-                <Link to={path}>{children}</Link>
+                <Link to={path}>
+                    <div className="PagesMenuButton-icon">{icon}</div> {children}
+                </Link>
             </div>
         );
     }
