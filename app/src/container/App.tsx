@@ -28,4 +28,4 @@ class App extends React.Component<{ signedIn: boolean | null }> {
     }
 }
 
-export default connect(({ authState }) => authState)(App);
+export default connect(({ authentication }) => authentication)(App);

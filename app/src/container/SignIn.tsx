@@ -68,6 +68,6 @@ class SignIn extends React.Component<IProps> {
 }
 
 export default connect(
-    ({ authState, signIn }) => ({ ...authState, ...signIn }),
+    ({ authentication, signIn }) => ({ ...authentication, ...signIn }),
     actionCreators,
 )(SignIn);

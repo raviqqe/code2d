@@ -42,7 +42,7 @@ export function reducer(state: ImmutableObject<IState> = initialState, action) {
 }
 
 function* initialize(): SagaIterator {
-    const { rehydrated, signedIn }: IState = yield select(({ authState }) => authState);
+    const { rehydrated, signedIn }: IState = yield select(({ authentication }) => authentication);
 
     if (rehydrated && signedIn) {
         yield all([

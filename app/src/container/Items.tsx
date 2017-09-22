@@ -33,4 +33,4 @@ class Items extends React.Component<IProps> {
     }
 }
 
-export default connect(({ authState }) => authState)(Items);
+export default connect(({ authentication }) => authentication)(Items);

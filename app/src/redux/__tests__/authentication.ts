@@ -1,6 +1,6 @@
 import { REHYDRATE } from "redux-persist/constants";
 
-import { actionCreators, initialState, reducer } from "../auth-state";
+import { actionCreators, initialState, reducer } from "../authentication";
 
 it("changes auth state signed in", () => {
     expect(initialState.signedIn).toBe(null);
