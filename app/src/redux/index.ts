@@ -39,6 +39,7 @@ export default function() {
             ...message.sagas,
             ...settings.sagas,
             ...tasks.sagas,
+            ...timer.sagas,
             ...videos.sagas,
         ]);
     });

@@ -3,7 +3,6 @@ import * as React from "react";
 import Square = require("react-icons/lib/md/stop");
 import { connect } from "react-redux";
 
-import { playHorn } from "../lib/audio";
 import * as notification from "../lib/notification";
 import { ITask } from "../lib/tasks";
 import { actionCreators as tasksActionCreators } from "../redux/tasks";
@@ -14,8 +13,9 @@ const initialSeconds = 25 * 60;
 
 interface IProps {
     currentItem: ITask;
-    updateCurrentItem: (task: ITask) => void;
+    playAlarm: () => void;
     toggleTimer: () => void;
+    updateCurrentItem: (task: ITask) => void;
 }
 
 interface IState {
@@ -39,7 +39,7 @@ class Timer extends React.Component<IProps, IState> {
 
     public componentDidUpdate(_, { seconds }: IState) {
         if (seconds !== 0 && this.state.seconds === 0) {
-            playHorn();
+            this.props.playAlarm();
             notification.notify("You've earned 1 pomodoro!");
         }
     }
