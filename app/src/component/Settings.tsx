@@ -1,7 +1,8 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { actionCreators } from "../redux/settings";
+import { actionCreators as authenticationActionCreators } from "../redux/authentication";
+import { actionCreators as settingsActionCreators } from "../redux/settings";
 import SettingsItem from "./SettingsItem";
 import "./style/Settings.css";
 import Switch from "./Switch";
@@ -9,11 +10,12 @@ import Switch from "./Switch";
 interface IProps {
     notificationOn: boolean | null;
     onBlur: () => void;
+    signOut: () => void;
 }
 
 class Settings extends React.Component<IProps> {
     public render() {
-        const { notificationOn, onBlur } = this.props;
+        const { notificationOn, onBlur, signOut } = this.props;
 
         return (
             <div className="Settings-container" onClick={onBlur}>
@@ -25,6 +27,10 @@ class Settings extends React.Component<IProps> {
                             : <div className="Settings-notification-disabled">disabled</div>
                         }
                     />
+
+                    <div className="Settings-buttons">
+                        <button onClick={signOut}>Sign out</button>
+                    </div>
                     <div className="Settings-footer">
                         <a href={process.env.REACT_APP_FEEDBACK_URL} target="_blank">Feedback</a>
                         <a href={process.env.REACT_APP_REPOSITORY_URL} target="_blank">GitHub</a>
@@ -35,4 +41,7 @@ class Settings extends React.Component<IProps> {
     }
 }
 
-export default connect(({ settings }) => settings, actionCreators)(Settings);
+export default connect(
+    ({ settings }) => settings,
+    { ...authenticationActionCreators, ...settingsActionCreators },
+)(Settings);

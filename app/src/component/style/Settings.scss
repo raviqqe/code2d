@@ -22,7 +22,7 @@
 	border-radius: 3px;
 
 	& > * {
-		margin: 1em 10vw;
+		margin: 2em 10vw;
 
 		&:first-child {
 			margin-top: 10vh;
@@ -50,6 +50,16 @@
 	color: $grey;
 }
 
+.Settings-buttons {
+	& > * {
+		margin: 0 1em;
+
+		&:first-child {
+			margin-left: 0;
+		}
+	}
+}
+
 .Settings-footer {
 	border-top: {
 		style: solid;
@@ -57,7 +67,6 @@
 		color: $light-grey;
 	};
 	padding-top: 1em;
-	margin-top: 3em;
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
