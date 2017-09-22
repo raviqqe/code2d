@@ -1,4 +1,6 @@
 import * as React from "react";
+import ScrollBar = require("react-perfect-scrollbar");
+import "react-perfect-scrollbar/dist/css/styles.css";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 
@@ -25,7 +27,9 @@ class Items extends React.Component<IProps> {
                 {menu}
                 <div className="Items-main">
                     {list}
-                    <div className="Items-current-item-container">{currentItem || <div />}</div>
+                    <ScrollBar>
+                        <div className="Items-current-item-container">{currentItem || <div />}</div>
+                    </ScrollBar>
                 </div>
                 <div className="Items-blank" />
             </div>

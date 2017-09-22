@@ -2,8 +2,6 @@ import * as React from "react";
 import Check = require("react-icons/lib/md/check");
 import Trash = require("react-icons/lib/md/delete");
 import Repeat = require("react-icons/lib/md/replay");
-import ScrollBar = require("react-perfect-scrollbar");
-import "react-perfect-scrollbar/dist/css/styles.css";
 
 import { equal, IItem } from "../lib/items";
 import ItemName from "./ItemName";
@@ -34,24 +32,22 @@ export default class Item<A extends IItem> extends React.Component<IProps<A>, IS
         const { detailed, details, href, item, onEditName, setCurrentItem } = this.props;
 
         return (
-            <ScrollBar>
-                <div
-                    className={this.containerClassName}
-                    onClick={detailed ? undefined : () => setCurrentItem(item)}
-                    onMouseOver={() => this.setState({ showButtons: true })}
-                    onMouseOut={() => this.setState({ showButtons: false })}
-                >
-                    <div className="Item-header">
-                        <ItemName
-                            href={href}
-                            onEdit={onEditName}
-                            text={item.name}
-                        />
-                        {this.buttons}
-                    </div>
-                    {detailed && details}
+            <div
+                className={this.containerClassName}
+                onClick={detailed ? undefined : () => setCurrentItem(item)}
+                onMouseOver={() => this.setState({ showButtons: true })}
+                onMouseOut={() => this.setState({ showButtons: false })}
+            >
+                <div className="Item-header">
+                    <ItemName
+                        href={href}
+                        onEdit={onEditName}
+                        text={item.name}
+                    />
+                    {this.buttons}
                 </div>
-            </ScrollBar>
+                {detailed && details}
+            </div>
         );
     }
 
