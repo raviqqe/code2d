@@ -41,7 +41,7 @@
 .Settings-notification-enabled {
 	@include Settings-notification;
 
-	color: $green;
+	color: $light-green;
 }
 
 .Settings-notification-disabled {
@@ -74,4 +74,9 @@
 	& > * {
 		margin: 0 1em;
 	}
+}
+
+.Settings-volume-slider {
+	width: 40%;
+	padding-bottom: 1.5em;
 }
