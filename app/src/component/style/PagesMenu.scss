@@ -17,6 +17,7 @@ $PagesMenu-icon-size: 2.5em;
 	position: absolute;
 	bottom: $PagesMenu-icon-size + 0.5em;
 	transition: opacity $short-duration;
+	z-index: 100;
 
 	& > * {
 		margin: 1em 2em;
@@ -32,6 +33,7 @@ $PagesMenu-icon-size: 2.5em;
 
 .PagesMenu-icon {
 	font-size: $PagesMenu-icon-size;
+	cursor: pointer;
 
 	& > svg {
 		transition: transform $short-duration;

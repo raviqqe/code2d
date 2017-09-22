@@ -8,28 +8,29 @@ import PagesMenuButton from "./PagesMenuButton";
 import "./style/PagesMenu.css";
 
 interface IState {
-    mouseOver: boolean;
+    showMenu: boolean;
 }
 
 export default class extends React.Component<{}, IState> {
-    public state: IState = { mouseOver: false };
+    public state: IState = { showMenu: false };
 
     public render() {
-        const { mouseOver } = this.state;
+        const { showMenu } = this.state;
 
         return (
             <div className="PagesMenu-container">
                 <div
-                    className={"PagesMenu-icon" + (mouseOver ? "-active" : "")}
-                    onMouseOver={() => this.setState({ mouseOver: true })}
-                    onMouseOut={() => this.setState({ mouseOver: false })}
+                    className={"PagesMenu-icon" + (showMenu ? "-active" : "")}
+                    onClick={() => this.setState({ showMenu: !showMenu })}
                 >
                     <Menu />
                 </div>
                 <div
-                    className={"PagesMenu-menu-container" + (mouseOver ? "" : "-invisible")}
-                    onMouseOver={() => this.setState({ mouseOver: true })}
-                    onMouseOut={() => this.setState({ mouseOver: false })}
+                    className={"PagesMenu-menu-container" + (showMenu ? "" : "-invisible")}
+                    onClick={(event) => {
+                        this.setState({ showMenu: false });
+                        event.stopPropagation();
+                    }}
                 >
                     <PagesMenuButton path="/tasks" icon={<Task />}>tasks</PagesMenuButton>
                     <PagesMenuButton path="/articles" icon={<Article />}>articles</PagesMenuButton>
