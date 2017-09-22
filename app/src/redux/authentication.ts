@@ -19,11 +19,13 @@ import * as videos from "./videos";
 
 const actionCreator = actionCreatorFactory("AUTHENTICATION");
 
+const deleteAccount = actionCreator("DELETE_ACCOUNT");
 const setSignInState = actionCreator<boolean>("SET_SIGN_IN_STATE");
 const signIn = actionCreator.async<null, null>("SIGN_IN");
 const signOut = actionCreator("SIGN_OUT");
 
 export const actionCreators = {
+    deleteAccount,
     setSignInState,
     signIn: () => signIn.started(null),
     signOut,
@@ -76,6 +78,11 @@ function* initialize(): SagaIterator {
 }
 
 export const sagas = [
+    utils.takeEvery(
+        deleteAccount,
+        function* _(): SagaIterator {
+            yield call(firebase.deleteAccount);
+        }),
     takeEvery(REHYDRATE, initialize),
     utils.takeEvery(setSignInState, initialize),
     utils.takeEvery(
