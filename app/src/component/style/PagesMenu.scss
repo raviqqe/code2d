@@ -1,0 +1,46 @@
+@import "../../style/animation.scss";
+@import "../../style/shadow.scss";
+
+$PagesMenu-icon-size: 2.5em;
+
+.PagesMenu-container {
+	position: relative;
+}
+
+.PagesMenu-menu-container {
+	@include paper-shadow;
+
+	background: white;
+	border-radius: 3px;
+	align-items: center;
+	position: absolute;
+	bottom: $PagesMenu-icon-size + 0.5em;
+	transition: opacity $short-duration;
+
+	& > * {
+		margin: 0.5em;
+	}
+}
+
+.PagesMenu-menu-container-invisible {
+	@extend .PagesMenu-menu-container;
+
+	visibility: hidden;
+	opacity: 0;
+}
+
+.PagesMenu-icon {
+	font-size: $PagesMenu-icon-size;
+
+	& > svg {
+		transition: transform $short-duration;
+	}
+}
+
+.PagesMenu-icon-active {
+	@extend .PagesMenu-icon;
+
+	& > svg {
+		transform: rotate(90deg);
+	}
+}

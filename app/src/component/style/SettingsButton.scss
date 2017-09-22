@@ -1,3 +1,10 @@
+@import "../../style/animation.scss";
+
 .SettingsButton-icon {
-	font-size: 2.5em;
+	font-size: 2em;
+	cursor: pointer;
+
+	& > svg {
+		@include hover-rotate;
+	}
 }

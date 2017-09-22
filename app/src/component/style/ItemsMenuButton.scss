@@ -12,6 +12,10 @@
 	&:hover {
 		color: $black;
 	}
+
+	& > a {
+		display: flex;
+	}
 }
 
 .ItemsMenuButton-container-highlighted {

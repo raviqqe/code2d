@@ -4,3 +4,11 @@ $short-duration: 0.1s;
 @mixin color-transition {
 	transition: color $duration;
 }
+
+@mixin hover-rotate {
+	transition: transform $short-duration;
+
+	&:hover {
+		transform: rotate(90deg);
+	}
+}
