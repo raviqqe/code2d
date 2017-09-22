@@ -12,22 +12,26 @@ const actionCreator = actionCreatorFactory("SETTINGS");
 
 const checkNotificationPermission = actionCreator("CHECK_NOTIFICATION_PERMISSION");
 const requestNotificationPermission = actionCreator("REQUEST_NOTIFICATION_PERMISSION");
+const setAlarmVolume = actionCreator<number>("SET_ALARM_VOLUME");
 const setNotificationState = actionCreator<boolean | null>("SET_NOTIFICATION_STATE");
 
 export const actionCreators = {
     checkNotificationPermission,
     requestNotificationPermission,
+    setAlarmVolume,
     setNotificationState,
 };
 
 export interface IState {
+    alarmVolume: number; // 0 to 1
     notificationOn: boolean | null;
 }
 
 export const initialState: ImmutableObject<IState>
-    = Immutable({ notificationOn: null });
+    = Immutable({ alarmVolume: 1, notificationOn: null });
 
 export const reducer = reducerWithInitialState(initialState)
+    .case(setAlarmVolume, (state, alarmVolume) => state.merge({ alarmVolume }))
     .case(setNotificationState, (state, notificationOn) => state.merge({ notificationOn }));
 
 export const sagas = [

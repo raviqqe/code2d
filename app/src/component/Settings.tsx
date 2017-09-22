@@ -13,15 +13,17 @@ const grey = "#bcc";
 const green = "#9db634";
 
 interface IProps {
+    alarmVolume: number;
     deleteAccount: () => void;
     notificationOn: boolean | null;
     onBlur: () => void;
+    setAlarmVolume: () => void;
     signOut: () => void;
 }
 
 class Settings extends React.Component<IProps> {
     public render() {
-        const { deleteAccount, notificationOn, onBlur, signOut } = this.props;
+        const { alarmVolume, deleteAccount, notificationOn, onBlur, setAlarmVolume, signOut } = this.props;
 
         return (
             <div className="Settings-container" onClick={onBlur}>
@@ -40,7 +42,8 @@ class Settings extends React.Component<IProps> {
                                 <Slider
                                     min={0}
                                     max={1}
-                                    defaultValue={1}
+                                    defaultValue={alarmVolume}
+                                    value={alarmVolume}
                                     step={0.125}
                                     marks={{ 0: "0", 0.5: "0.5", 1: "1" }}
                                     railStyle={{ backgroundColor: grey }}
@@ -48,6 +51,7 @@ class Settings extends React.Component<IProps> {
                                     dotStyle={{ borderColor: grey }}
                                     activeDotStyle={{ borderColor: green }}
                                     handleStyle={{ borderColor: green, boxShadow: "none" }}
+                                    onChange={setAlarmVolume}
                                 />
                             </div>
                         }
