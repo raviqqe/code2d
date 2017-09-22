@@ -1,3 +1,4 @@
+@import "../../style/border.scss";
 @import "../../style/colors.scss";
 @import "./TaskTag.scss";
 
@@ -37,7 +38,7 @@
 		color: $grey;
 		style: solid;
 		width: 1px;
-		radius: 3px;
+		radius: $paper-border-radius;
 	};
 
 	& > * {

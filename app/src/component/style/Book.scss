@@ -1,6 +1,9 @@
+@import "../../style/border.scss";
+
 .Book-container {
+	@include paper-border;
+
 	background: white;
-	border-radius: 3px;
 	width: 15em;
 	padding: 0.5em;
 	display: flex;

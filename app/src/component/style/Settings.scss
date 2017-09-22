@@ -1,3 +1,4 @@
+@import "../../style/border.scss";
 @import "../../style/colors.scss";
 
 .Settings-container {
@@ -19,11 +20,12 @@
 }
 
 .Settings-box {
+	@include paper-border;
+
 	font-size: 1.2em;
 	background: white;
 	padding: 10vh 10vw;
 	width: 80vw;
-	border-radius: 3px;
 
 	& > * {
 		margin: 2em 0;
@@ -55,6 +57,8 @@
 }
 
 .Settings-buttons {
+	font-size: 0.9em;
+
 	& > * {
 		margin: 0 0.5em;
 	}

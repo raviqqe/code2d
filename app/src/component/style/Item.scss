@@ -1,9 +1,11 @@
 @import "../../style/animation.scss";
+@import "../../style/border.scss";
 @import "../../style/colors.scss";
 
 .Item-container {
+	@include paper-border;
+
 	background: white;
-	border-radius: 0.5em;
 	padding: 0.5em 0.7em;
 
 	& > * {

@@ -1,4 +1,5 @@
 @import "../../style/animation.scss";
+@import "../../style/border.scss";
 @import "../../style/shadow.scss";
 
 $PagesMenu-icon-size: 2.5em;
@@ -9,9 +10,9 @@ $PagesMenu-icon-size: 2.5em;
 
 .PagesMenu-menu-container {
 	@include paper-shadow;
+	@include paper-border;
 
 	background: white;
-	border-radius: 3px;
 	align-items: center;
 	position: absolute;
 	bottom: $PagesMenu-icon-size + 0.5em;

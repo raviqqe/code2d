@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Noto+Sans");
 
 @import "./style/colors.scss";
+@import "./style/border.scss";
 @import "./style/shadow.scss";
 
 @mixin font-without-size {
@@ -42,12 +43,9 @@ a {
 
 button {
 	@include button-shadow;
+	@include button-border;
 
 	background: $red;
-	border: {
-		width: 0;
-		radius: 0.5em;
-	};
 	color: white;
 	cursor: pointer;
 	font-size: 1em;
@@ -65,7 +63,7 @@ input, textarea {
 	border: {
 		style: solid;
 		color: $grey;
-		radius: 3px;
+		radius: $paper-border-radius;
 		width: 1px;
 	};
 	outline: none;

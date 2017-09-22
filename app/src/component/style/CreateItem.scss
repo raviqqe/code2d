@@ -1,3 +1,4 @@
+@import "../../style/border.scss";
 @import "./Item.scss";
 
 .CreateItem-form-container {
@@ -26,7 +27,6 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border-radius: 3px;
 
 	& > svg {
 		font-size: 1.5em;
