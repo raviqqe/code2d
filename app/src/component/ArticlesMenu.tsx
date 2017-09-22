@@ -12,7 +12,14 @@ interface IProps {
 
 class ArticlesMenu extends React.Component<IProps> {
     public render() {
-        return <ItemsMenu {...this.props} createItem={<CreateArticle />} />;
+        return (
+            <ItemsMenu
+                {...this.props}
+                createItem={<CreateArticle />}
+                doneButtonText="read"
+                todoButtonText="to-read"
+            />
+        );
     }
 }
 
