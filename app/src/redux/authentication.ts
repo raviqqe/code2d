@@ -20,13 +20,13 @@ import * as videos from "./videos";
 const actionCreator = actionCreatorFactory("AUTHENTICATION");
 
 const setSignInState = actionCreator<boolean>("SET_SIGN_IN_STATE");
-const signIn = actionCreatorFactory().async<null, null>("SIGN_IN");
-const signOut = actionCreatorFactory().async<null, null>("SIGN_OUT");
+const signIn = actionCreator.async<null, null>("SIGN_IN");
+const signOut = actionCreator("SIGN_OUT");
 
 export const actionCreators = {
     setSignInState,
     signIn: () => signIn.started(null),
-    signOut: () => signOut.started(null),
+    signOut,
 };
 
 export interface IState {
@@ -89,13 +89,8 @@ export const sagas = [
             }
         }),
     utils.takeEvery(
-        signOut.started,
+        signOut,
         function* _(): SagaIterator {
-            try {
-                yield call(firebase.signOut);
-                yield put(signOut.done({ params: null, result: null }));
-            } catch (error) {
-                yield put(signOut.failed({ params: null, error }));
-            }
+            yield call(firebase.signOut);
         }),
 ];
