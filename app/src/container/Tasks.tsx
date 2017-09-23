@@ -25,11 +25,11 @@ interface IProps {
 
 class Tasks extends React.Component<IProps> {
     public render() {
-        if (this.props.timerOn) {
+        const { currentItem, currentTag, done, timerOn } = this.props;
+
+        if (timerOn) {
             return <Timer />;
         }
-
-        const { currentItem, currentTag, done } = this.props;
 
         return (
             <Items
