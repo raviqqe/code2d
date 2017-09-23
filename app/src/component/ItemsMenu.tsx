@@ -11,12 +11,12 @@ interface IProps {
     done: boolean;
     doneButtonText?: string;
     todoButtonText?: string;
-    toggleItemsState: () => void;
+    onItemsStateChange: (done: boolean) => void;
 }
 
 export default class extends React.Component<IProps> {
     public render() {
-        const { createItem, children, done, doneButtonText, todoButtonText, toggleItemsState }
+        const { createItem, children, done, doneButtonText, todoButtonText, onItemsStateChange }
             = this.props;
 
         return (
@@ -25,13 +25,13 @@ export default class extends React.Component<IProps> {
                     <div className="ItemsMenu-states">
                         <div
                             className={done ? "ItemsMenu-state" : "ItemsMenu-state-highlighted"}
-                            onClick={() => done && toggleItemsState()}
+                            onClick={() => onItemsStateChange(false)}
                         >
                             <Todo /> {todoButtonText || "to do"}
                         </div>
                         <div
                             className={done ? "ItemsMenu-state-highlighted" : "ItemsMenu-state"}
-                            onClick={() => !done && toggleItemsState()}
+                            onClick={() => onItemsStateChange(true)}
                         >
                             <Done /> {doneButtonText || "done"}
                         </div>

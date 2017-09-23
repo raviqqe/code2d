@@ -7,7 +7,7 @@ import ItemsMenu from "./ItemsMenu";
 
 interface IProps {
     done: boolean;
-    toggleItemsState: () => void;
+    onItemsStateChange: (done: boolean) => void;
 }
 
 class ArticlesMenu extends React.Component<IProps> {

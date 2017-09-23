@@ -13,7 +13,7 @@ interface IProps {
     done: boolean;
     setCurrentTag: (tag: string | null) => void;
     tags: string[];
-    toggleItemsState: () => void;
+    onItemsStateChange: (done: boolean) => void;
 }
 
 class TasksMenu extends React.Component<IProps> {
