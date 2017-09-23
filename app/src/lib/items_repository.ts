@@ -30,10 +30,6 @@ export default class ItemsRepository<A extends IItem> {
         await this.reference.putString(json.encode(items));
     }
 
-    public create = async (item: A): Promise<void> => {
-        await this.set([item, ...(await this.get())]);
-    }
-
     public initialize = () => {
         this.items = null;
     }

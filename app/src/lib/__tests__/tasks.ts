@@ -36,12 +36,6 @@ it("sets tasks", async () => {
     expect((await tasksRepository(false).get()).length).toBe(1);
 });
 
-it("creates a task", async () => {
-    expect.assertions(1);
-    await tasksRepository(false).create(dummyTask);
-    expect((await tasksRepository(false).get()).length).toBe(2);
-});
-
 it("extracts tags from tasks", () => {
     expect(extractTagsFromTasks([])).toEqual([]);
     expect(extractTagsFromTasks([dummyTask])).toEqual([]);

@@ -60,18 +60,9 @@ function* initialize(): SagaIterator {
     if (rehydrated && signedIn) {
         yield all([
             put(articles.actionCreators.getItems()),
-            call(articlesRepository(false).get),
-            call(articlesRepository(true).get),
-
             put(tasks.actionCreators.getItems()),
             put(tasks.actionCreators.getTags()),
-            call(tasksRepository(false).get),
-            call(tasksRepository(true).get),
-
             put(videos.actionCreators.getItems()),
-            call(videosRepository(false).get),
-            call(videosRepository(true).get),
-
             put(settings.actionCreators.checkNotificationPermission()),
         ]);
     }

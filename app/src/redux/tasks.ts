@@ -2,6 +2,7 @@ import { findIndex } from "lodash";
 import { SagaIterator } from "redux-saga";
 import { call, put, select } from "redux-saga/effects";
 
+import { include } from "../lib/items";
 import { extractTagsFromTasks, INewTask, ITask, tasksRepository } from "../lib/tasks";
 import createItemsDuck, { IState as IItemsState, Reducer } from "./items";
 import { takeEvery } from "./utils";
@@ -33,7 +34,7 @@ const factory = duck.actionCreatorFactory;
 
 const getTags = factory.async<void, string[]>("GET_TAGS");
 const setCurrentTag = factory<string | null>("SET_CURRENT_TAG");
-const updateCurrentItem = factory<ITask>("UPDATE_CURRENT_TASK");
+const updateCurrentItem = factory<ITask>("UPDATE_CURRENT_ITEM");
 
 export const actionCreators = {
     ...duck.actionCreators,
@@ -69,16 +70,17 @@ export const sagas = [
         }),
     takeEvery(
         updateCurrentItem,
-        function* _(task: ITask): SagaIterator {
-            task = { ...task, updatedAt: Date.now() };
+        function* _(item: ITask): SagaIterator {
+            item = { ...item, updatedAt: Date.now() };
 
-            const state = yield duck.selectState();
-            const items = [...state.items];
+            const { currentItem, doneItems, todoItems } = yield duck.selectState();
+            const done = include(doneItems, item);
+            const items = [...(done ? doneItems : todoItems)];
 
-            items[findIndex(items, state.currentItem)] = task;
+            items[findIndex(items, { id: currentItem.id })] = item;
 
-            yield put(actionCreators.setItems(items));
-            yield put(actionCreators.setCurrentItem(task));
+            yield put(actionCreators.setItems({ done, items }));
+            yield put(actionCreators.setCurrentItem(item));
             yield put(getTags.started(null));
         }),
 ];
