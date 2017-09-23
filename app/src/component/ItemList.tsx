@@ -8,6 +8,7 @@ import SortableItems from "./SortableItems";
 interface IProps<A extends IItem> {
     component: any;
     currentItem: A | null;
+    done: boolean;
     fixed?: boolean;
     items: A[];
     setCurrentItem: (item: A) => void;
@@ -16,7 +17,7 @@ interface IProps<A extends IItem> {
 
 export default class ItemList<A extends IItem> extends React.Component<IProps<A>> {
     public render() {
-        const { component, items, setItems } = this.props;
+        const { component, done, items, setItems } = this.props;
 
         if (items.length === 0) {
             return <div>There is no item.</div>;
@@ -25,6 +26,7 @@ export default class ItemList<A extends IItem> extends React.Component<IProps<A>
         return (
             <SortableItems
                 component={component}
+                done={done}
                 items={items}
                 onSortEnd={({ newIndex, oldIndex }) =>
                     setItems(arrayMove([...items], oldIndex, newIndex))}
