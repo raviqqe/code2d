@@ -30,7 +30,7 @@ class Videos extends React.Component<IProps> {
                         {...this.props}
                         items={items}
                     />}
-                menu={<VideosMenu />}
+                menu={<VideosMenu done={done} />}
             />
         );
     }

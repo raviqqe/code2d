@@ -41,7 +41,7 @@ class Tasks extends React.Component<IProps> {
                         {...this.props}
                         items={this.itemsByTag}
                     />}
-                menu={<TasksMenu />}
+                menu={<TasksMenu done={done} />}
             />
         );
     }

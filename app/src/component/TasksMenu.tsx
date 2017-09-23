@@ -38,4 +38,7 @@ class TasksMenu extends React.Component<IProps> {
     }
 }
 
-export default connect(({ tasks }) => tasks, actionCreators)(TasksMenu);
+export default connect(
+    ({ tasks: { currentTag, tags } }) => ({ currentTag, tags }),
+    actionCreators,
+)(TasksMenu);

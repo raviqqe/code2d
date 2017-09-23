@@ -23,4 +23,4 @@ class VideosMenu extends React.Component<IProps> {
     }
 }
 
-export default connect(({ videos }) => videos, actionCreators)(VideosMenu);
+export default connect(null, actionCreators)(VideosMenu);

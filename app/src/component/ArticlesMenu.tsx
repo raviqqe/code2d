@@ -23,4 +23,4 @@ class ArticlesMenu extends React.Component<IProps> {
     }
 }
 
-export default connect(({ articles }) => articles, actionCreators)(ArticlesMenu);
+export default connect(null, actionCreators)(ArticlesMenu);

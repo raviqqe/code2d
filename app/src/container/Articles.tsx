@@ -30,7 +30,7 @@ class Articles extends React.Component<IProps> {
                         {...this.props}
                         items={items}
                     />}
-                menu={<ArticlesMenu />}
+                menu={<ArticlesMenu done={done} />}
             />
         );
     }
