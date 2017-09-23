@@ -28,9 +28,8 @@ class Article extends React.Component<IProps> {
                     <a key="image" href={url} target="_blank">
                         <img className="Article-image" src={image} />
                     </a>,
+                    date && <LabeledDate key="date" label="Edited on" value={date} />,
                     text && <div key="text">{text}</div>,
-                    date &&
-                    <LabeledDate key="date" label="Edited on" value={date} />,
                 ]}
                 href={url}
                 item={this.article}
