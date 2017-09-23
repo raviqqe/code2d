@@ -6,3 +6,7 @@ export async function dispatch(store, action) {
     store.dispatch(action);
     await sleep(100);
 }
+
+export function isDate(date: any): boolean {
+    return date && (new Date(date)).toString() !== "Invalid Date";
+}

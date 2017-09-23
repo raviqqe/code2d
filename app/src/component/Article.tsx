@@ -2,6 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import { IArticle } from "../lib/articles";
+import { isDate } from "../lib/utils";
 import { actionCreators } from "../redux/articles";
 import Item from "./Item";
 import LabeledDate from "./LabeledDate";
@@ -28,7 +29,7 @@ class Article extends React.Component<IProps> {
                     <a key="image" href={url} target="_blank">
                         <img className="Article-image" src={image} />
                     </a>,
-                    date && <LabeledDate key="date" label="Edited on" value={date} />,
+                    isDate(date) && < LabeledDate key="date" label="Edited on" value={date} />,
                     text && <div key="text">{text}</div>,
                 ]}
                 href={url}
