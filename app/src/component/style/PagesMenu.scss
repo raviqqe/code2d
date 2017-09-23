@@ -8,7 +8,7 @@ $PagesMenu-icon-size: 2.5em;
 	position: relative;
 }
 
-.PagesMenu-box-container {
+.PagesMenu-box-background {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -18,13 +18,6 @@ $PagesMenu-icon-size: 2.5em;
 	z-index: 100;
 }
 
-.PagesMenu-box-container-invisible {
-	@extend .PagesMenu-box-container;
-
-	visibility: hidden;
-	opacity: 0;
-}
-
 .PagesMenu-box {
 	@include paper-shadow;
 	@include paper-border;
@@ -32,12 +25,19 @@ $PagesMenu-icon-size: 2.5em;
 	background: white;
 	align-items: center;
 	position: absolute;
-	bottom: $PagesMenu-icon-size + 2em;
-	left: 1em;
+	bottom: $PagesMenu-icon-size + 1em;
+	z-index: 200;
 
 	& > * {
 		margin: 1em 2em;
 	}
+}
+
+.PagesMenu-box-invisible {
+	@extend .PagesMenu-box;
+
+	visibility: hidden;
+	opacity: 0;
 }
 
 .PagesMenu-icon {
