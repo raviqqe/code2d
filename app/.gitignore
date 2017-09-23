@@ -1,3 +1,4 @@
+*.css
 build
 coverage
-*.css
+public/*.png

@@ -3,17 +3,17 @@ task :deps do
 end
 
 task build: :deps do
-  sh 'npx node-sass-chokidar src -o src'
-  sh 'npx react-scripts-ts build'
-
   sh %w[inkscape
         --export-width 16 --export-height 16
-        --export-png build/favicon.png
+        --export-png public/favicon.png
         ../images/icon.svg].join ' '
   sh %w[inkscape
         --export-width 192 --export-height 192
-        --export-png build/icon.png
+        --export-png public/icon.png
         ../images/icon.svg].join ' '
+
+  sh 'npx node-sass-chokidar src -o src'
+  sh 'npx react-scripts-ts build'
 end
 
 task test: :deps do
