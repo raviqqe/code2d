@@ -17,7 +17,7 @@ interface IProps {
     notificationOn: boolean | null;
     requestNotificationPermission: () => void;
     setCurrentItem: (task: ITask) => void;
-    setItems: (args: { done: boolean, items: ITask[] }) => void;
+    setItems: (items: ITask[], done: boolean) => void;
     timerOn: boolean;
     todoItems: ITask[];
 }

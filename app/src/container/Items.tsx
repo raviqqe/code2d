@@ -15,7 +15,7 @@ interface IProps<A extends IItem> {
     fixed?: boolean;
     menuComponent: (props) => JSX.Element;
     setCurrentItem: (item: A) => void;
-    setItems: (args: { done: boolean, items: A[] }) => void;
+    setItems: (items: A[], done: boolean) => void;
     signedIn: boolean;
     todoItems: A[];
 }

@@ -11,7 +11,7 @@ interface IProps<A extends IItem> {
     done: boolean;
     fixed?: boolean;
     items: A[];
-    setItems: (args: { done: boolean, items: A[] }) => void;
+    setItems: (items: A[], done: boolean) => void;
 }
 
 export default class ItemList<A extends IItem> extends React.Component<IProps<A>> {
@@ -30,13 +30,9 @@ export default class ItemList<A extends IItem> extends React.Component<IProps<A>
                         return;
                     }
 
-                    setItems({
-                        done,
-                        items: arrayMove(
-                            [...this.props.items],
-                            source.index,
-                            destination.index),
-                    });
+                    setItems(
+                        arrayMove([...this.props.items], source.index, destination.index),
+                        done);
                 }}
             >
                 <Droppable droppableId={`droppable-${done}`} isDropDisabled={fixed}>
@@ -69,7 +65,7 @@ export default class ItemList<A extends IItem> extends React.Component<IProps<A>
                             {provided.placeholder}
                         </div>}
                 </Droppable>
-            </DragDropContext>
+            </DragDropContext >
         );
     }
 }

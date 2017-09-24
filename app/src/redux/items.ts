@@ -56,7 +56,7 @@ export default function createItemsDuck<A extends IItem, B>(
             getItems: () => getItems.started(null),
             removeItem,
             setCurrentItem,
-            setItems,
+            setItems: (items: A[], done: boolean) => setItems({ done, items }),
             toggleItemState,
         },
         initialState,

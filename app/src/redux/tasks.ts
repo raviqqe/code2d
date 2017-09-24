@@ -79,7 +79,7 @@ export const sagas = [
 
             items[findIndex(items, { id: currentItem.id })] = item;
 
-            yield put(actionCreators.setItems({ done, items }));
+            yield put(actionCreators.setItems(items, done));
             yield put(actionCreators.setCurrentItem(item));
             yield put(getTags.started(null));
         }),
