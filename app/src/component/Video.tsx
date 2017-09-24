@@ -11,6 +11,7 @@ interface IProps extends IVideo {
     currentItem: IVideo | null;
     detailed: boolean;
     done: boolean;
+    highlighted?: boolean;
     toggleItemState: (video: IVideo) => void;
     removeItem: (video: IVideo) => void;
     setCurrentItem: (video: IVideo | null) => void;
@@ -48,4 +49,4 @@ class Video extends React.Component<IProps> {
     }
 }
 
-export default connect(({ videos }) => videos, actionCreators)(Video);
+export default connect(null, actionCreators)(Video);

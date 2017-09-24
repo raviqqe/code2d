@@ -14,9 +14,9 @@ import TaskDescription from "./TaskDescription";
 import TaskTags from "./TaskTags";
 
 interface IProps extends ITask {
-    currentItem: ITask | null;
     detailed: boolean;
     done: boolean;
+    highlighted?: boolean;
     updateCurrentItem: (task: ITask) => void;
     toggleItemState: (task: ITask) => void;
     removeItem: (task: ITask) => void;
@@ -83,7 +83,4 @@ class Task extends React.Component<IProps> {
     }
 }
 
-export default connect(
-    ({ tasks: { tags, ...rest } }) => rest,
-    { ...tasksActionCreators, ...timerActionCreators },
-)(Task);
+export default connect(null, { ...tasksActionCreators, ...timerActionCreators })(Task);

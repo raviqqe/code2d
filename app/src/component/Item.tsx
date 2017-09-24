@@ -9,10 +9,10 @@ import "./style/Item.css";
 
 interface IProps<A extends IItem> {
     buttons?: any[];
-    currentItem: A | null;
     detailed: boolean;
     details?: any;
-    done?: boolean;
+    done: boolean;
+    highlighted?: boolean;
     href?: string;
     item: A;
     onEditName?: (name: string) => void;
@@ -29,11 +29,12 @@ export default class Item<A extends IItem> extends React.Component<IProps<A>, IS
     public state: IState = { showButtons: false };
 
     public render() {
-        const { detailed, details, href, item, onEditName, setCurrentItem } = this.props;
+        const { detailed, details, highlighted, href, item, onEditName, setCurrentItem }
+            = this.props;
 
         return (
             <div
-                className={this.containerClassName}
+                className={highlighted ? "Item-container-highlighted" : "Item-container"}
                 onClick={detailed ? undefined : () => setCurrentItem(item)}
                 onMouseOver={() => this.setState({ showButtons: true })}
                 onMouseOut={() => this.setState({ showButtons: false })}
@@ -98,13 +99,5 @@ export default class Item<A extends IItem> extends React.Component<IProps<A>, IS
                 {buttons}
             </div>
         );
-    }
-
-    private get containerClassName(): string {
-        const { currentItem, detailed, item } = this.props;
-
-        return !detailed && currentItem && equal(item, currentItem)
-            ? "Item-container-highlighted"
-            : "Item-container";
     }
 }

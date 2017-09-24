@@ -9,9 +9,9 @@ import LabeledDate from "./LabeledDate";
 import "./style/Article.css";
 
 interface IProps extends IArticle {
-    currentItem: IArticle | null;
     detailed: boolean;
     done: boolean;
+    highlighted?: boolean;
     toggleItemState: (article: IArticle) => void;
     removeItem: (article: IArticle) => void;
     setCurrentItem: (article: IArticle | null) => void;
@@ -44,4 +44,4 @@ class Article extends React.Component<IProps> {
     }
 }
 
-export default connect(({ articles }) => articles, actionCreators)(Article);
+export default connect(null, actionCreators)(Article);
