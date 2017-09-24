@@ -2,7 +2,7 @@ import * as React from "react";
 import { arrayMove } from "react-sortable-hoc";
 
 import { isTouchDevice } from "../lib/device";
-import { IItem, include } from "../lib/items";
+import { IItem } from "../lib/items";
 import SortableItems from "./SortableItems";
 
 interface IProps<A extends IItem> {
@@ -33,18 +33,6 @@ export default class ItemList<A extends IItem> extends React.Component<IProps<A>
                 {...this.sortableProps}
             />
         );
-    }
-
-    public componentDidMount() {
-        this.componentDidUpdate();
-    }
-
-    public componentDidUpdate() {
-        const { currentItem, items, setCurrentItem } = this.props;
-
-        if (currentItem === null || !include(items, currentItem)) {
-            setCurrentItem(items[0] || null);
-        }
     }
 
     private get sortableProps(): { distance?: number, pressDelay?: number } {

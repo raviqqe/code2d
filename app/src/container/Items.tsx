@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 
 import ItemList from "../component/ItemList";
-import { IItem } from "../lib/items";
+import { IItem, include } from "../lib/items";
 import "./style/Items.css";
 
 interface IProps<A extends IItem> {
@@ -57,6 +57,20 @@ class Items<A extends IItem> extends React.Component<IProps<A>, IState> {
                 <div className="Items-blank" />
             </div>
         );
+    }
+
+    public componentDidMount() {
+        this.componentDidUpdate();
+    }
+
+    public componentDidUpdate() {
+        const { currentItem, doneItems, setCurrentItem, todoItems } = this.props;
+        const items = this.state.done ? doneItems : todoItems;
+
+        if (currentItem === null && items.length !== 0 ||
+            currentItem !== null && !include(items, currentItem)) {
+            setCurrentItem(items[0] || null);
+        }
     }
 }
 
