@@ -44,10 +44,16 @@ class Items<A extends IItem> extends React.Component<IProps<A>, IState> {
                 <ItemsMenu done={done} onItemsStateChange={(done) => this.setState({ done })} />
                 <div className="Items-main">
                     <ScrollBar>
-                        <div style={done ? { display: "none" } : {}}>
+                        <div
+                            className="Items-item-list-container"
+                            style={done ? { display: "none" } : {}}
+                        >
                             <ItemList component={Item} done={false} items={todoItems} {...this.props} />
                         </div>
-                        <div style={done ? {} : { display: "none" }}>
+                        <div
+                            className="Items-item-list-container"
+                            style={done ? {} : { display: "none" }}
+                        >
                             <ItemList component={Item} done={true} items={doneItems} {...this.props} />
                         </div>
                     </ScrollBar>

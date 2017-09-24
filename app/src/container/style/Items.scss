@@ -24,13 +24,17 @@
 	display: flex;
 	padding: 0 0.5em;
 
-	& > * {
+	> * {
 		flex: 1;
-		padding: 1em 0.5em;
 	}
+}
+
+.Items-item-list-container > .ItemList-container {
+	padding: 1em 0.5em;
 }
 
 .Items-current-item-container {
 	display: flex;
 	flex-direction: column;
+	padding: 1em 0.5em;
 }
