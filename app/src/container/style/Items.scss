@@ -22,18 +22,11 @@
 	width: 150vh;
 	max-width: 100%;
 	display: flex;
+	padding: 0 0.5em;
 
 	& > * {
 		flex: 1;
 		padding: 1em 0.5em;
-
-		&:first-child {
-			padding-left: 1em;
-		}
-
-		&:last-child {
-			padding-right: 1em;
-		}
 	}
 }
 
