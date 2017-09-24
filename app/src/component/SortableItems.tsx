@@ -1,5 +1,6 @@
 import * as React from "react";
-import { SortableContainer, SortableElement } from "react-sortable-hoc";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { arrayMove } from "react-sortable-hoc";
 
 import { equal, IItem } from "../lib/items";
 import "./style/SortableItems.css";
@@ -7,27 +8,65 @@ import "./style/SortableItems.css";
 interface IProps<A extends IItem> {
     component: any;
     done: boolean;
+    fixed: boolean;
     currentItem: A | null;
     items: A[];
+    setItems: (args: { done: boolean, items: A[] }) => void;
 }
 
-class SortableItems<A extends IItem> extends React.Component<IProps<A>> {
+export default class SortableItems<A extends IItem> extends React.Component<IProps<A>> {
     public render() {
-        const { component, currentItem, done, items } = this.props;
-        const SortableItem = SortableElement(component);
+        const { component, currentItem, done, fixed, items, setItems } = this.props;
+        const Item = component;
 
         return (
             <div className="SortableItems-container">
-                {items.map((item, index) =>
-                    <SortableItem
-                        key={item.id}
-                        index={index}
-                        highlighted={currentItem && equal(item, currentItem)}
-                        {...{ done, ...(item as any) }}
-                    />)}
-            </div>
+                <DragDropContext
+                    onDragEnd={({ destination, source }) => {
+                        if (!destination) {
+                            return;
+                        }
+
+                        setItems({
+                            done,
+                            items: arrayMove(
+                                [...this.props.items],
+                                source.index,
+                                destination.index),
+                        });
+                    }}
+                >
+                    <Droppable droppableId={`droppable-${done}`} isDropDisabled={fixed}>
+                        {(provided, snapshot) =>
+                            <div ref={provided.innerRef}>
+                                {items.map((item) =>
+                                    <Draggable
+                                        key={item.id}
+                                        draggableId={item.id}
+                                        isDragDisabled={fixed}
+                                    >
+                                        {(provided, snapshot) =>
+                                            <div>
+                                                <div
+                                                    ref={provided.innerRef}
+                                                    style={provided.draggableStyle}
+                                                    {...provided.dragHandleProps}
+                                                >
+                                                    <Item
+                                                        done={done}
+                                                        highlighted={
+                                                            currentItem && equal(item, currentItem)}
+                                                        {...item}
+                                                    />
+                                                </div>
+                                                {provided.placeholder}
+                                            </div>}
+                                    </Draggable>)}
+                                {provided.placeholder}
+                            </div>}
+                    </Droppable>
+                </DragDropContext>
+            </div >
         );
     }
 }
-
-export default SortableContainer(SortableItems);

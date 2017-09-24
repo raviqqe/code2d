@@ -17,14 +17,14 @@ interface IProps {
     notificationOn: boolean | null;
     requestNotificationPermission: () => void;
     setCurrentItem: (task: ITask) => void;
-    setItems: (tasks: ITask[]) => void;
+    setItems: (args: { done: boolean, items: ITask[] }) => void;
     timerOn: boolean;
     todoItems: ITask[];
 }
 
 class Tasks extends React.Component<IProps> {
     public render() {
-        const { doneItems, todoItems, timerOn } = this.props;
+        const { currentTag, doneItems, todoItems, timerOn } = this.props;
 
         if (timerOn) {
             return <Timer />;
@@ -32,6 +32,7 @@ class Tasks extends React.Component<IProps> {
 
         return (
             <Items
+                fixed={currentTag !== null}
                 itemComponent={Task}
                 menuComponent={TasksMenu}
                 {...this.props}

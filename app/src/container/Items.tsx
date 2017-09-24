@@ -12,9 +12,10 @@ interface IProps<A extends IItem> {
     itemComponent: (props) => JSX.Element;
     currentItem: A | null;
     doneItems: A[];
+    fixed?: boolean;
     menuComponent: (props) => JSX.Element;
     setCurrentItem: (item: A) => void;
-    setItems: (items: A[]) => void;
+    setItems: (args: { done: boolean, items: A[] }) => void;
     signedIn: boolean;
     todoItems: A[];
 }

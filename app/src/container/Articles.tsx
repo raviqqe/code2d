@@ -11,7 +11,7 @@ interface IProps {
     currentItem: IArticle | null;
     doneItems: IArticle[];
     setCurrentItem: (article: IArticle) => void;
-    setItems: (articles: IArticle[]) => void;
+    setItems: (args: { done: boolean, items: IArticle[] }) => void;
     todoItems: IArticle[];
 }
 

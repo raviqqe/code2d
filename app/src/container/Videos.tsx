@@ -11,7 +11,7 @@ interface IProps {
     currentItem: IVideo | null;
     doneItems: IVideo[];
     setCurrentItem: (video: IVideo) => void;
-    setItems: (videos: IVideo[]) => void;
+    setItems: (args: { done: boolean, items: IVideo[] }) => void;
     todoItems: IVideo[];
 }
 
