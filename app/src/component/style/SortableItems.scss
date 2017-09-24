@@ -1,9 +1,8 @@
 .SortableItems-container {
-	& > * {
-		margin-bottom: 0.5em;
+	// HACK
+	margin-bottom: -0.5em;
+}
 
-		&:last-child {
-			margin-bottom: 0;
-		}
-	}
+.SortableItems-item {
+	margin-bottom: 0.5em;
 }

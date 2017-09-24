@@ -20,53 +20,52 @@ export default class SortableItems<A extends IItem> extends React.Component<IPro
         const Item = component;
 
         return (
-            <div className="SortableItems-container">
-                <DragDropContext
-                    onDragEnd={({ destination, source }) => {
-                        if (!destination) {
-                            return;
-                        }
+            <DragDropContext
+                onDragEnd={({ destination, source }) => {
+                    if (!destination) {
+                        return;
+                    }
 
-                        setItems({
-                            done,
-                            items: arrayMove(
-                                [...this.props.items],
-                                source.index,
-                                destination.index),
-                        });
-                    }}
-                >
-                    <Droppable droppableId={`droppable-${done}`} isDropDisabled={fixed}>
-                        {(provided, snapshot) =>
-                            <div ref={provided.innerRef}>
-                                {items.map((item) =>
-                                    <Draggable
-                                        key={item.id}
-                                        draggableId={item.id}
-                                        isDragDisabled={fixed}
-                                    >
-                                        {(provided, snapshot) =>
-                                            <div>
-                                                <div
-                                                    ref={provided.innerRef}
-                                                    style={provided.draggableStyle}
-                                                    {...provided.dragHandleProps}
-                                                >
-                                                    <Item
-                                                        done={done}
-                                                        highlighted={
-                                                            currentItem && equal(item, currentItem)}
-                                                        {...item}
-                                                    />
-                                                </div>
-                                                {provided.placeholder}
-                                            </div>}
-                                    </Draggable>)}
-                                {provided.placeholder}
-                            </div>}
-                    </Droppable>
-                </DragDropContext>
-            </div >
+                    setItems({
+                        done,
+                        items: arrayMove(
+                            [...this.props.items],
+                            source.index,
+                            destination.index),
+                    });
+                }}
+            >
+                <Droppable droppableId={`droppable-${done}`} isDropDisabled={fixed}>
+                    {(provided, snapshot) =>
+                        <div ref={provided.innerRef} className="SortableItems-container">
+                            {items.map((item) =>
+                                <Draggable
+                                    key={item.id}
+                                    draggableId={item.id}
+                                    isDragDisabled={fixed}
+                                >
+                                    {(provided, snapshot) =>
+                                        <div>
+                                            <div
+                                                className="SortableItems-item"
+                                                ref={provided.innerRef}
+                                                style={provided.draggableStyle}
+                                                {...provided.dragHandleProps}
+                                            >
+                                                <Item
+                                                    done={done}
+                                                    highlighted={
+                                                        currentItem && equal(item, currentItem)}
+                                                    {...item}
+                                                />
+                                            </div>
+                                            {provided.placeholder}
+                                        </div>}
+                                </Draggable>)}
+                            {provided.placeholder}
+                        </div>}
+                </Droppable>
+            </DragDropContext>
         );
     }
 }
