@@ -70,7 +70,7 @@ class TaskTags extends React.Component<IProps, IState> {
                     >
                         <AutoComplete
                             getItemValue={(tag) => tag}
-                            items={allTags}
+                            items={_.difference(allTags, tags)}
                             renderItem={(tag: string, highlighted: boolean) =>
                                 <div
                                     className={highlighted
