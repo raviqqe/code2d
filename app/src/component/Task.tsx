@@ -27,7 +27,7 @@ interface IProps extends ITask {
 class Task extends React.Component<IProps> {
     public render() {
         const {
-            createdAt, description, setCurrentItem,
+            createdAt, detailed, description, setCurrentItem,
             spentSeconds, tags, updatedAt, updateCurrentItem,
         } = this.props;
 
@@ -59,7 +59,7 @@ class Task extends React.Component<IProps> {
                     <LabeledDate key="updatedAt" label="Updated on" value={updatedAt} />,
                 ]}
                 item={this.task}
-                onEditName={(name) => updateCurrentItem({ ...this.task, name })}
+                onEditName={detailed && ((name) => updateCurrentItem({ ...this.task, name }))}
             />
         );
     }
