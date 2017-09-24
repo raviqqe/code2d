@@ -4,18 +4,34 @@ import "react-perfect-scrollbar/dist/css/styles.css";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 
+import ItemList from "../component/ItemList";
+import { IItem } from "../lib/items";
 import "./style/Items.css";
 
-interface IProps {
-    currentItem: JSX.Element;
-    list: JSX.Element;
-    menu: JSX.Element;
+interface IProps<A extends IItem> {
+    itemComponent: (props) => JSX.Element;
+    currentItem: A | null;
+    doneItems: A[];
+    menuComponent: (props) => JSX.Element;
+    setCurrentItem: (item: A) => void;
+    setItems: (items: A[]) => void;
     signedIn: boolean;
+    todoItems: A[];
 }
 
-class Items extends React.Component<IProps> {
+interface IState {
+    done: boolean;
+}
+
+class Items<A extends IItem> extends React.Component<IProps<A>, IState> {
+    public state: IState = { done: false };
+
     public render() {
-        const { currentItem, list, menu, signedIn } = this.props;
+        const { currentItem, doneItems, todoItems, signedIn } = this.props;
+        const { done } = this.state;
+
+        const Item = this.props.itemComponent;
+        const ItemsMenu = this.props.menuComponent;
 
         if (!signedIn) {
             return <Redirect to="/sign-in" />;
@@ -24,11 +40,18 @@ class Items extends React.Component<IProps> {
         return (
             <div className="Items-container">
                 <div className="Items-menu-blank" />
-                {menu}
+                <ItemsMenu done={done} onItemsStateChange={(done) => this.setState({ done })} />
                 <div className="Items-main">
-                    {list}
+                    <div style={done ? { display: "none" } : {}}>
+                        <ItemList component={Item} done={false} items={todoItems} {...this.props} />
+                    </div>
+                    <div style={done ? {} : { display: "none" }}>
+                        <ItemList component={Item} done={true} items={doneItems} {...this.props} />
+                    </div>
                     <ScrollBar>
-                        <div className="Items-current-item-container">{currentItem || <div />}</div>
+                        <div className="Items-current-item-container">
+                            {currentItem && <Item detailed={true} done={done} {...currentItem} />}
+                        </div>
                     </ScrollBar>
                 </div>
                 <div className="Items-blank" />

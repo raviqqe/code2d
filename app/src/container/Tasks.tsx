@@ -2,7 +2,6 @@ import * as _ from "lodash";
 import * as React from "react";
 import { connect } from "react-redux";
 
-import ItemList from "../component/ItemList";
 import Task from "../component/Task";
 import TasksMenu from "../component/TasksMenu";
 import { ITask } from "../lib/tasks";
@@ -14,18 +13,18 @@ import Timer from "./Timer";
 interface IProps {
     currentTag: string | null;
     currentItem: ITask | null;
-    items: ITask[];
-    done: boolean;
+    doneItems: ITask[];
     notificationOn: boolean | null;
     requestNotificationPermission: () => void;
     setCurrentItem: (task: ITask) => void;
     setItems: (tasks: ITask[]) => void;
     timerOn: boolean;
+    todoItems: ITask[];
 }
 
 class Tasks extends React.Component<IProps> {
     public render() {
-        const { currentItem, currentTag, done, timerOn } = this.props;
+        const { doneItems, todoItems, timerOn } = this.props;
 
         if (timerOn) {
             return <Timer />;
@@ -33,15 +32,11 @@ class Tasks extends React.Component<IProps> {
 
         return (
             <Items
-                currentItem={currentItem && <Task detailed={true} done={done} {...currentItem} />}
-                list={
-                    <ItemList
-                        component={Task}
-                        fixed={currentTag !== null}
-                        {...this.props}
-                        items={this.itemsByTag}
-                    />}
-                menu={<TasksMenu done={done} />}
+                itemComponent={Task}
+                menuComponent={TasksMenu}
+                {...this.props}
+                doneItems={this.getItemsByTag(doneItems)}
+                todoItems={this.getItemsByTag(todoItems)}
             />
         );
     }
@@ -52,8 +47,8 @@ class Tasks extends React.Component<IProps> {
         }
     }
 
-    private get itemsByTag(): ITask[] {
-        const { currentTag, items } = this.props;
+    private getItemsByTag = (items: ITask[]): ITask[] => {
+        const { currentTag } = this.props;
 
         return currentTag === null
             ? items

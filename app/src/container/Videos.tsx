@@ -1,7 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import ItemList from "../component/ItemList";
 import Video from "../component/Video";
 import VideosMenu from "../component/VideosMenu";
 import { IVideo } from "../lib/videos";
@@ -10,29 +9,15 @@ import Items from "./Items";
 
 interface IProps {
     currentItem: IVideo | null;
-    items: IVideo[];
-    done: boolean;
+    doneItems: IVideo[];
     setCurrentItem: (video: IVideo) => void;
     setItems: (videos: IVideo[]) => void;
+    todoItems: IVideo[];
 }
 
 class Videos extends React.Component<IProps> {
     public render() {
-        const { currentItem, done, items } = this.props;
-
-        return (
-            <Items
-                currentItem={currentItem &&
-                    <Video detailed={true} done={done} {...currentItem} />}
-                list={
-                    <ItemList
-                        component={Video}
-                        {...this.props}
-                        items={items}
-                    />}
-                menu={<VideosMenu done={done} />}
-            />
-        );
+        return <Items itemComponent={Video} menuComponent={VideosMenu} {...this.props} />;
     }
 }
 
