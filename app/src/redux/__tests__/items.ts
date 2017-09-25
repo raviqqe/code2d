@@ -18,9 +18,7 @@ jest.mock("../../lib/json", () => ({
     encode: () => undefined,
 }));
 
-jest.mock("../../lib/items", () => ({
-    createId: (item) => Object.assign({}, item, { id: "dummyId" }),
-}));
+jest.mock("nanoid", () => (() => "dummyId"));
 
 interface ITestItem extends IItem {
     data: string;
@@ -67,16 +65,16 @@ it("creates a new item", async () => {
 
     await dispatch(store, actionCreators.createItem({ name: "foo", data: "bar" }));
 
-    expect(getState(store).items).toEqual([{ name: "foo", data: "bar", id: "dummyId" }]);
+    expect(getState(store).todoItems).toEqual([{ name: "foo", data: "bar", id: "dummyId" }]);
 });
 
 for (const done of [false, true]) {
     it(`removes a ${done ? "done" : "todo"} item`, async () => {
-        expect.assertions(4);
+        expect.assertions(5);
 
         const { actionCreators, store } = initialize();
 
-        const itemsState = () => getState(store).items;
+        const itemsState = () => getState(store)[done ? "doneItems" : "todoItems"];
         const check = async (action, length: number) => {
             await dispatch(store, action);
             expect(itemsState().length).toBe(length);
@@ -84,7 +82,8 @@ for (const done of [false, true]) {
 
         expect(itemsState().length).toBe(0);
 
-        await check(done ? actionCreators.toggleItemsState() : actionCreators.getItems(), 1);
+        await check(actionCreators.setItems([{ name: "", data: "", id: "id0" }], done), 1);
+        await check(actionCreators.setItems([{ name: "", data: "", id: "id1" }], done), 1);
         await check(actionCreators.removeItem(itemsState()[0]), 0);
         await check(actionCreators.getItems(), 0);
     });
@@ -101,15 +100,16 @@ it("sets a current item", async () => {
 });
 
 it("toggles an item's state", async () => {
-    expect.assertions(3);
+    expect.assertions(4);
 
     const { actionCreators, store } = initialize();
     const check = async (action, length: number) => {
         await dispatch(store, action);
-        expect(getState(store).items.length).toBe(length);
+        expect(getState(store).todoItems.length).toBe(length);
     };
 
-    await check(actionCreators.getItems(), 1);
-    await check(actionCreators.toggleItemState(getState(store).items[0]), 0);
-    await check(actionCreators.toggleItemsState(), 2);
+    await check(actionCreators.setItems([{ name: "", data: "", id: "id0" }], false), 1);
+    await check(actionCreators.setItems([{ name: "", data: "", id: "id1" }], true), 1);
+    await check(actionCreators.toggleItemState(getState(store).todoItems[0]), 0);
+    expect(getState(store).doneItems.length).toBe(2);
 });

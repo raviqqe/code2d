@@ -20,6 +20,16 @@ jest.mock("../../lib/json", () => ({
     encode: () => undefined,
 }));
 
+const dummyTask: ITask = {
+    createdAt: 42,
+    description: "testDescription",
+    id: "dummyId",
+    name: "testName",
+    spentSeconds: 42,
+    tags: ["javascript"],
+    updatedAt: 42,
+};
+
 function getState(store): IState {
     return store.getState().tasks;
 }
@@ -29,59 +39,6 @@ beforeEach(() => {
     tasksRepository(true).initialize();
 });
 
-it("creates a new task", async () => {
-    expect.assertions(2);
-
-    const store = createStore();
-
-    expect(getState(store).items.length).toBe(0);
-
-    await dispatch(store,
-        actionCreators.createItem({ name: "foo", description: "bar", tags: [] }));
-    expect(getState(store).items.length).toBe(1);
-});
-
-for (const done of [false, true]) {
-    it(`removes a ${done ? "done" : "todo"} task`, async () => {
-        expect.assertions(4);
-
-        const store = createStore();
-
-        const tasksState = () => getState(store).items;
-        const check = async (action, length: number) => {
-            await dispatch(store, action);
-            expect(tasksState().length).toBe(length);
-        };
-
-        expect(tasksState().length).toBe(0);
-
-        await check(done ? actionCreators.toggleItemsState() : actionCreators.getItems(), 1);
-        await check(actionCreators.removeItem(tasksState()[0]), 0);
-        await check(actionCreators.getItems(), 0);
-    });
-}
-
-it("toggles a task's state", async () => {
-    expect.assertions(4);
-
-    const store = createStore();
-    const check = async (action, length: number) => {
-        await dispatch(store, action);
-        expect(getState(store).items.length).toBe(length);
-    };
-
-    await check(actionCreators.getItems(), 1);
-
-    const { items: [{ updatedAt }] } = getState(store);
-
-    await check(actionCreators.toggleItemState(getState(store).items[0]), 0);
-    await check(actionCreators.toggleItemsState(), 2);
-
-    const { items: [task] } = getState(store);
-
-    expect(task.updatedAt).not.toBe(updatedAt);
-});
-
 it("updates a current task", async () => {
     expect.assertions(4);
 
@@ -89,7 +46,8 @@ it("updates a current task", async () => {
 
     expect(getState(store).currentItem).toBe(null);
 
-    await dispatch(store, actionCreators.getItems());
+    await dispatch(store, actionCreators.setItems([dummyTask], false));
+    await dispatch(store, actionCreators.setCurrentItem(dummyTask));
     await dispatch(store, actionCreators.updateCurrentItem({
         ...(getState(store).currentItem),
         name: "foo bar baz",
