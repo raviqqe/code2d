@@ -1,5 +1,4 @@
 import * as React from "react";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { arrayMove } from "react-sortable-hoc";
 import sortable = require("sortablejs");
 
