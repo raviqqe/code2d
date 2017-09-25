@@ -4,10 +4,12 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import Feature from "../component/Feature";
-import { actionCreators } from "../redux/authentication";
+import { actionCreators as authenticationActionCreators } from "../redux/authentication";
+import { actionCreators as messageActionCreators } from "../redux/message";
 import "./style/SignIn.css";
 
 interface IProps {
+    sendMessage: (message: string) => void;
     signingIn: boolean;
     signedIn: boolean;
     signIn: () => void;
@@ -18,7 +20,7 @@ class SignIn extends React.Component<IProps> {
         if (this.props.signedIn) {
             return <Redirect to="/" />;
         } else if (this.props.signingIn) {
-            return <div className="SignIn-container">Signing in...</div>;
+            this.props.sendMessage("Signing in...");
         }
 
         return (
@@ -69,5 +71,5 @@ class SignIn extends React.Component<IProps> {
 
 export default connect(
     ({ authentication }) => authentication,
-    actionCreators,
+    { ...authenticationActionCreators, ...messageActionCreators },
 )(SignIn);
