@@ -27,6 +27,7 @@
     "redux-persist": "^4.9.1",
     "redux-saga": "^0.15.6",
     "seamless-immutable": "^7.1.2",
+    "sortablejs": "^1.4.2",
     "typescript-fsa": "^2.4.0",
     "typescript-fsa-reducers": "^0.4.4",
     "typescript-fsa-redux-saga": "^1.0.2"

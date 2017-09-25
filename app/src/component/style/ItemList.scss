@@ -6,3 +6,9 @@
 .ItemList-item {
 	margin-bottom: 0.5em;
 }
+
+.ItemList-item-placeholder {
+	@extend .ItemList-item;
+
+	visibility: hidden;
+}

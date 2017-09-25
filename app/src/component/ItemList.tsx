@@ -1,6 +1,7 @@
 import * as React from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { arrayMove } from "react-sortable-hoc";
+import sortable = require("sortablejs");
 
 import { equal, IItem } from "../lib/items";
 import "./style/ItemList.css";
@@ -24,48 +25,42 @@ export default class ItemList<A extends IItem> extends React.Component<IProps<A>
         }
 
         return (
-            <DragDropContext
-                onDragEnd={({ destination, source }) => {
-                    if (!destination) {
-                        return;
-                    }
-
-                    setItems(
-                        arrayMove([...this.props.items], source.index, destination.index),
-                        done);
-                }}
-            >
-                <Droppable droppableId={`droppable-${done}`} isDropDisabled={fixed}>
-                    {(provided, snapshot) =>
-                        <div ref={provided.innerRef} className="ItemList-container">
-                            {items.map((item) =>
-                                <Draggable
-                                    key={item.id}
-                                    draggableId={item.id}
-                                    isDragDisabled={fixed}
-                                >
-                                    {(provided, snapshot) =>
-                                        <div>
-                                            <div
-                                                className="ItemList-item"
-                                                ref={provided.innerRef}
-                                                style={provided.draggableStyle}
-                                                {...provided.dragHandleProps}
-                                            >
-                                                <Item
-                                                    done={done}
-                                                    highlighted={
-                                                        currentItem && equal(item, currentItem)}
-                                                    {...item}
-                                                />
-                                            </div>
-                                            {provided.placeholder}
-                                        </div>}
-                                </Draggable>)}
-                            {provided.placeholder}
-                        </div>}
-                </Droppable>
-            </DragDropContext >
+            <div id={this.listId} className="ItemList-container">
+                {items.map((item) =>
+                    <div key={item.id} className="ItemList-item">
+                        <Item
+                            done={done}
+                            highlighted={currentItem && equal(item, currentItem)}
+                            {...item}
+                        />
+                    </div>)}
+            </div>
         );
+    }
+
+    public componentDidMount() {
+        this.componentDidUpdate();
+    }
+
+    public componentDidUpdate() {
+        const { done, fixed, setItems } = this.props;
+
+        const element = document.getElementById(this.listId);
+
+        if (!element) {
+            return;
+        }
+
+        sortable.create(element, {
+            animation: 200,
+            disabled: fixed,
+            ghostClass: "ItemList-item-placeholder",
+            onSort: ({ oldIndex, newIndex }) =>
+                setItems(arrayMove([...this.props.items], oldIndex, newIndex), done),
+        });
+    }
+
+    public get listId(): string {
+        return `item-list-${this.props.done}`;
     }
 }
