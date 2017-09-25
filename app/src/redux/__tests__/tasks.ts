@@ -104,3 +104,19 @@ it("resets a current tag after creating a task", async () => {
         actionCreators.createItem({ name: "foo", description: "bar", tags: [] }));
     expect(getState(store).currentTag).toBe(null);
 });
+
+it("toggles a task's state", async () => {
+    expect.assertions(5);
+
+    const store = createStore();
+    const check = async (action, length: number) => {
+        await dispatch(store, action);
+        expect(getState(store).todoItems.length).toBe(length);
+    };
+
+    await check(actionCreators.setItems([{ ...dummyTask, id: "id0" }], false), 1);
+    await check(actionCreators.setItems([{ ...dummyTask, id: "id1" }], true), 1);
+    await check(actionCreators.toggleItemState(getState(store).todoItems[0]), 0);
+    expect(getState(store).doneItems.length).toBe(2);
+    expect(getState(store).doneItems[0].updatedAt).not.toBe(dummyTask.updatedAt);
+});
