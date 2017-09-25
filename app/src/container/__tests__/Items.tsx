@@ -14,7 +14,16 @@ it("renders a todo tasks page", () => {
                     <Route
                         exact={true}
                         path="/"
-                        render={() => <Items menu={<div>menu</div>}><div>main</div></Items>}
+                        render={() =>
+                            <Items
+                                currentItem={null}
+                                doneItems={[]}
+                                itemComponent={() => <div>item</div>}
+                                menuComponent={() => <div>menu</div>}
+                                setCurrentItem={() => undefined}
+                                setItems={() => undefined}
+                                todoItems={[]}
+                            />}
                     />
                     <Route
                         exact={true}
