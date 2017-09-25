@@ -40,7 +40,7 @@ class Timer extends React.Component<IProps, IState> {
     public componentDidUpdate(_, { seconds }: IState) {
         if (seconds !== 0 && this.state.seconds === 0) {
             this.props.playAlarm();
-            notification.notify("You've earned 1 pomodoro!");
+            notification.notify("Timer finished.");
         }
     }
 
