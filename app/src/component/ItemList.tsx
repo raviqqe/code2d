@@ -1,5 +1,4 @@
 import * as React from "react";
-import { arrayMove } from "react-sortable-hoc";
 import sortable = require("sortablejs");
 
 import { equal, IItem } from "../lib/items";
@@ -54,8 +53,11 @@ export default class ItemList<A extends IItem> extends React.Component<IProps<A>
             animation: 200,
             disabled: fixed,
             ghostClass: "ItemList-item-placeholder",
-            onSort: ({ oldIndex, newIndex }) =>
-                setItems(arrayMove([...this.props.items], oldIndex, newIndex), done),
+            onSort: ({ oldIndex, newIndex }) => {
+                const items = [...this.props.items];
+                items.splice(newIndex, 0, items.splice(oldIndex, 1)[0]);
+                setItems(items, done);
+            },
         });
     }
 
