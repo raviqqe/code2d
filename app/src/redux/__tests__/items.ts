@@ -6,6 +6,7 @@ import { IItem } from "../../lib/items";
 import StatefulItemsRepository from "../../lib/stateful_items_repository";
 import { dispatch } from "../../lib/utils";
 import createItemsDuck, { IState } from "../items";
+import * as message from "../message";
 
 jest.mock("axios", () => ({
     default: {
@@ -13,12 +14,16 @@ jest.mock("axios", () => ({
     },
 }));
 
+jest.mock("nanoid", () => (() => "dummyId"));
+
 jest.mock("../../lib/json", () => ({
     decode: () => [{ name: "foo", data: "bar", id: "dummyId" }],
     encode: () => undefined,
 }));
 
-jest.mock("nanoid", () => (() => "dummyId"));
+jest.mock("../message", () => ({
+    actionCreators: { sendMessage: () => ({ type: "SEND_MESSAGE" }) },
+}));
 
 interface ITestItem extends IItem {
     data: string;
@@ -26,7 +31,13 @@ interface ITestItem extends IItem {
 
 function createTestItemsDuck() {
     const repository = new StatefulItemsRepository<ITestItem>("items");
-    return createItemsDuck("items", repository.state, (item: ITestItem) => item);
+    return createItemsDuck("items", repository.state, (item: ITestItem) => {
+        if (typeof item !== "object") {
+            throw new Error("Failed to create an item.");
+        }
+
+        return item;
+    });
 }
 
 function initialize() {
@@ -66,6 +77,16 @@ it("creates a new item", async () => {
     await dispatch(store, actionCreators.createItem({ name: "foo", data: "bar" }));
 
     expect(getState(store).todoItems).toEqual([{ name: "foo", data: "bar", id: "dummyId" }]);
+});
+
+it("fails to create a new item", async () => {
+    expect.assertions(1);
+
+    const { actionCreators, store } = initialize();
+    const spy = jest.spyOn(message.actionCreators, "sendMessage");
+
+    await dispatch(store, actionCreators.createItem(undefined));
+    expect(spy).toHaveBeenCalled();
 });
 
 for (const done of [false, true]) {
