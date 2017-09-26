@@ -1,5 +1,3 @@
-import "web-audio-test-api";
-
 class LocalStorageMock {
     // https://stackoverflow.com/questions/32911630/how-do-i-deal-with-localstorage-in-jest-tests
 
