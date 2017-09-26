@@ -9,7 +9,6 @@ import { ImmutableObject } from "seamless-immutable";
 import * as firebase from "../lib/firebase";
 import * as articles from "./articles";
 import * as authentication from "./authentication";
-import * as books from "./books";
 import * as message from "./message";
 import * as settings from "./settings";
 import * as tasks from "./tasks";
@@ -22,7 +21,6 @@ export default function() {
         combineReducers({
             articles: articles.reducer,
             authentication: authentication.reducer,
-            books: books.reducer,
             message: message.reducer,
             settings: settings.reducer,
             tasks: tasks.reducer,
@@ -35,7 +33,6 @@ export default function() {
         yield all([
             ...authentication.sagas,
             ...articles.sagas,
-            ...books.sagas,
             ...message.sagas,
             ...settings.sagas,
             ...tasks.sagas,
@@ -50,7 +47,7 @@ export default function() {
             (immutable: ImmutableObject<any>) => immutable.asMutable(),
             (mutable) => Immutable(mutable),
         )],
-        whitelist: ["articles", "books", "settings", "tasks", "videos"],
+        whitelist: ["articles", "settings", "tasks", "videos"],
     });
 
     firebase.onAuthStateChanged(async (user) => {

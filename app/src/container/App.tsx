@@ -4,7 +4,6 @@ import { BrowserRouter, Redirect, Route } from "react-router-dom";
 
 import Message from "../component/Message";
 import Articles from "./Articles";
-import Books from "./Books";
 import SignIn from "./SignIn";
 import Tasks from "./Tasks";
 import Videos from "./Videos";
@@ -18,7 +17,6 @@ class App extends React.Component<{ signedIn: boolean | null }> {
                     <Route exact={true} path="/" render={() => <Redirect to="/tasks" />} />
                     <Route exact={true} path="/tasks" render={() => <Tasks />} />
                     <Route exact={true} path="/articles" render={() => <Articles />} />
-                    <Route exact={true} path="/books" render={() => <Books />} />
                     <Route exact={true} path="/videos" render={() => <Videos />} />
                     <Route exact={true} path="/sign-in" component={SignIn} />
                     <Message />

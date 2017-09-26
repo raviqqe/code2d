@@ -11,7 +11,6 @@ import * as firebase from "../lib/firebase";
 import { tasksRepository } from "../lib/tasks";
 import { videosRepository } from "../lib/videos";
 import * as articles from "./articles";
-import * as books from "./books";
 import * as settings from "./settings";
 import * as tasks from "./tasks";
 import * as utils from "./utils";
