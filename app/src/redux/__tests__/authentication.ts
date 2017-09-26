@@ -1,9 +1,10 @@
+import * as firebaseModule from "firebase";
 import { REHYDRATE } from "redux-persist/constants";
 
 import createStore from "..";
 import * as firebase from "../../lib/firebase";
 import { dispatch } from "../../lib/utils";
-import { actionCreators, initialState, reducer } from "../authentication";
+import { actionCreators, initialState, reducer, signInActions } from "../authentication";
 
 jest.mock("../../lib/items_repository", () => ({
     default: class {
@@ -44,15 +45,21 @@ it("rehydrates redux store", async () => {
     expect(getState(store).rehydrated).toBe(true);
 });
 
-it("signs in", async () => {
-    expect.assertions(1);
+for (const fail of [false, true]) {
+    it(fail ? "fails to sign in" : "signs in", async () => {
+        expect.assertions(2);
 
-    const store = createStore();
-    const spy = jest.spyOn(firebase, "signIn");
+        (firebaseModule as any).signInFail = fail;
 
-    await dispatch(store, actionCreators.signIn());
-    expect(spy).toHaveBeenCalled();
-});
+        const store = createStore();
+        const signInSpy = jest.spyOn(firebase, "signIn");
+        const actionSpy = jest.spyOn(signInActions, fail ? "failed" : "done");
+
+        await dispatch(store, actionCreators.signIn());
+        expect(signInSpy).toHaveBeenCalled();
+        expect(actionSpy).toHaveBeenCalled();
+    });
+}
 
 it("signs out", async () => {
     expect.assertions(1);

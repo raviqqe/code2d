@@ -30,6 +30,8 @@ export const actionCreators = {
     signOut,
 };
 
+export const signInActions = signIn;
+
 export interface IState {
     rehydrated: boolean;
     signedIn: boolean | null;
