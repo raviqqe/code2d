@@ -120,17 +120,22 @@ it("sets a current item", async () => {
     expect(getState(store).currentItem).toEqual({ name: "foo", data: "bar", id: "dummyId" });
 });
 
-it("toggles an item's state", async () => {
-    expect.assertions(4);
+for (const done of [false, true]) {
+    it(`toggles a ${done ? "done" : "todo"}item's state`, async () => {
+        expect.assertions(4);
 
-    const { actionCreators, store } = initialize();
-    const check = async (action, length: number) => {
-        await dispatch(store, action);
-        expect(getState(store).todoItems.length).toBe(length);
-    };
+        const mainItems = done ? "doneItems" : "todoItems";
+        const subItems = done ? "todoItems" : "doneItems";
 
-    await check(actionCreators.setItems([{ name: "", data: "", id: "id0" }], false), 1);
-    await check(actionCreators.setItems([{ name: "", data: "", id: "id1" }], true), 1);
-    await check(actionCreators.toggleItemState(getState(store).todoItems[0]), 0);
-    expect(getState(store).doneItems.length).toBe(2);
-});
+        const { actionCreators, store } = initialize();
+        const check = async (action, length: number) => {
+            await dispatch(store, action);
+            expect(getState(store)[mainItems].length).toBe(length);
+        };
+
+        await check(actionCreators.setItems([{ name: "", data: "", id: "id0" }], done), 1);
+        await check(actionCreators.setItems([{ name: "", data: "", id: "id1" }], !done), 1);
+        await check(actionCreators.toggleItemState(getState(store)[mainItems][0]), 0);
+        expect(getState(store)[subItems].length).toBe(2);
+    });
+}
