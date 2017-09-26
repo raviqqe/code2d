@@ -15,12 +15,16 @@ jest.mock("../../lib/notification", () => ({
     requestPermission: () => true,
 }));
 
+const rehydrateAction = { payload: {}, type: REHYDRATE };
+
 function getState(store): typeof initialState {
     return store.getState().authentication;
 }
 
 for (const signedIn of [true, false]) {
     it(`changes auth state signed ${signedIn ? " in " : "out"}`, async () => {
+        expect.assertions(2);
+
         const store = createStore();
 
         expect(getState(store).signedIn).toBe(null);
@@ -30,9 +34,38 @@ for (const signedIn of [true, false]) {
 }
 
 it("rehydrates redux store", async () => {
+    expect.assertions(2);
+
     const store = createStore();
 
     expect(getState(store).rehydrated).toBe(false);
-    await dispatch(store, { payload: {}, type: REHYDRATE });
+    await dispatch(store, rehydrateAction);
     expect(getState(store).rehydrated).toBe(true);
 });
+
+for (const rehydrateFirst of [true, false]) {
+    it(`initializes redux store on ${rehydrateFirst ? "sign-in" : "rehydration"}`, async () => {
+        expect.assertions(4);
+
+        const store = createStore();
+
+        expect(getState(store).rehydrated).toBe(false);
+        expect(getState(store).signedIn).toBe(null);
+
+        const rehydrate = async () => {
+            await dispatch(store, rehydrateAction);
+            expect(getState(store).rehydrated).toBe(true);
+        };
+
+        if (rehydrateFirst) {
+            await rehydrate();
+        }
+
+        await dispatch(store, actionCreators.setSignInState(true));
+        expect(getState(store).signedIn).toBe(true);
+
+        if (!rehydrateFirst) {
+            await rehydrate();
+        }
+    });
+}
