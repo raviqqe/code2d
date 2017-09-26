@@ -6,6 +6,7 @@ export function auth() {
     return {
         currentUser: { uid: "testUid" },
         onAuthStateChanged: () => undefined,
+        signOut: () => undefined,
     };
 }
 

@@ -1,6 +1,7 @@
 import { REHYDRATE } from "redux-persist/constants";
 
 import createStore from "..";
+import * as firebase from "../../lib/firebase";
 import { dispatch } from "../../lib/utils";
 import { actionCreators, initialState, reducer } from "../authentication";
 
@@ -41,6 +42,16 @@ it("rehydrates redux store", async () => {
     expect(getState(store).rehydrated).toBe(false);
     await dispatch(store, rehydrateAction);
     expect(getState(store).rehydrated).toBe(true);
+});
+
+it("signs out", async () => {
+    expect.assertions(1);
+
+    const store = createStore();
+    const spy = jest.spyOn(firebase, "signOut");
+
+    await dispatch(store, actionCreators.signOut());
+    expect(spy).toHaveBeenCalled();
 });
 
 for (const rehydrateFirst of [true, false]) {
