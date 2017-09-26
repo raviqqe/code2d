@@ -44,6 +44,16 @@ it("rehydrates redux store", async () => {
     expect(getState(store).rehydrated).toBe(true);
 });
 
+it("signs in", async () => {
+    expect.assertions(1);
+
+    const store = createStore();
+    const spy = jest.spyOn(firebase, "signIn");
+
+    await dispatch(store, actionCreators.signIn());
+    expect(spy).toHaveBeenCalled();
+});
+
 it("signs out", async () => {
     expect.assertions(1);
 
