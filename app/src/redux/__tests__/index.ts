@@ -1,4 +1,6 @@
-import createStore from "..";
+import Immutable = require("seamless-immutable");
+
+import createStore, { convertImmutableToMutable, convertMutableToImmutable } from "..";
 import * as firebase from "../../lib/firebase";
 import { sleep } from "../../lib/utils";
 import { initialState } from "../authentication";
@@ -40,4 +42,12 @@ it("calls auth state callback", async () => {
     callback({});
     await sleep(100);
     expect(getSignedInState(store)).toBe(true);
+});
+
+it("converts an immutable object to a mutable one", () => {
+    expect((convertImmutableToMutable(Immutable({})) as any).asMutable).toBeUndefined();
+});
+
+it("converts a mutable object to an immutable one", () => {
+    expect(convertMutableToImmutable({}).asMutable).toBeDefined();
 });

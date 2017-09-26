@@ -15,6 +15,14 @@ import * as tasks from "./tasks";
 import * as timer from "./timer";
 import * as videos from "./videos";
 
+export function convertImmutableToMutable<A>(immutable: ImmutableObject<A>): A {
+    return immutable.asMutable();
+}
+
+export function convertMutableToImmutable<A>(mutable: A): ImmutableObject<A> {
+    return Immutable(mutable);
+}
+
 export default function() {
     const sagaMiddleware = createSagaMiddleware();
     const store = createStore(
@@ -43,10 +51,7 @@ export default function() {
 
     persistStore(store, {
         storage: localForage,
-        transforms: [createTransform(
-            (immutable: ImmutableObject<any>) => immutable.asMutable(),
-            (mutable) => Immutable(mutable),
-        )],
+        transforms: [createTransform(convertImmutableToMutable, convertMutableToImmutable)],
         whitelist: ["articles", "settings", "tasks", "videos"],
     });
 
