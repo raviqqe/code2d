@@ -28,11 +28,18 @@
 }
 
 .SignIn-icon {
+	$SignIn-icon-border-width: 3vh;
+
 	background: white;
-	height: 40vh;
-	padding: 3vh;
-	border-radius: 20vh;
+	height: 40vh - 2 * $SignIn-icon-border-width;
+	border: {
+		color: white;
+		radius: 20vh;
+		style: solid;
+		width: $SignIn-icon-border-width;
+	};
 	margin-bottom: 1em;
+	box-sizing: content-box;
 }
 
 .SignIn-catch-phrase {
