@@ -39,34 +39,36 @@ beforeEach(() => {
     tasksRepository(true).initialize();
 });
 
-it("updates a current task", async () => {
-    expect.assertions(4);
+for (const done of [false, true]) {
+    it("updates a current task", async () => {
+        expect.assertions(4);
 
-    const store = createStore();
+        const store = createStore();
 
-    expect(getState(store).currentItem).toBe(null);
+        expect(getState(store).currentItem).toBe(null);
 
-    await dispatch(store, actionCreators.setItems([dummyTask], false));
-    await dispatch(store, actionCreators.setCurrentItem(dummyTask));
-    await dispatch(store, actionCreators.updateCurrentItem({
-        ...(getState(store).currentItem),
-        name: "foo bar baz",
-    }));
+        await dispatch(store, actionCreators.setItems([dummyTask], done));
+        await dispatch(store, actionCreators.setCurrentItem(dummyTask));
+        await dispatch(store, actionCreators.updateCurrentItem({
+            ...(getState(store).currentItem),
+            name: "foo bar baz",
+        }));
 
-    expect(getState(store).currentItem.name).toBe("foo bar baz");
+        expect(getState(store).currentItem.name).toBe("foo bar baz");
 
-    const updatedAt = getState(store).currentItem.updatedAt;
+        const updatedAt = getState(store).currentItem.updatedAt;
 
-    await dispatch(store, actionCreators.updateCurrentItem({
-        ...(getState(store).currentItem),
-        name: "FOO BAR BAZ",
-    }));
+        await dispatch(store, actionCreators.updateCurrentItem({
+            ...(getState(store).currentItem),
+            name: "FOO BAR BAZ",
+        }));
 
-    const { currentItem } = getState(store);
+        const { currentItem } = getState(store);
 
-    expect(currentItem.name).toBe("FOO BAR BAZ");
-    expect(currentItem.updatedAt).not.toBe(updatedAt);
-});
+        expect(currentItem.name).toBe("FOO BAR BAZ");
+        expect(currentItem.updatedAt).not.toBe(updatedAt);
+    });
+}
 
 it("sets a current tag", async () => {
     expect.assertions(2);
