@@ -10,7 +10,7 @@ import { takeEvery } from "./utils";
 const factory = actionCreatorFactory("MESSAGE");
 
 const clearMessage = factory("CLEAR_MESSAGE");
-const sendMessage = factory<{ error: boolean, message: string, temporary: boolean }>("SET_MESSAGE");
+const sendMessage = factory<{ error: boolean, message: string, temporary: boolean }>("SEND_MESSAGE");
 
 export const actionCreators = {
     clearMessage,
