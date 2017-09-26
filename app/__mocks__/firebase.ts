@@ -4,7 +4,7 @@ export function initializeApp() {
 
 export function auth() {
     return {
-        currentUser: { uid: "testUid" },
+        currentUser: { delete: () => undefined, uid: "testUid" },
         onAuthStateChanged: () => undefined,
         signOut: () => undefined,
     };

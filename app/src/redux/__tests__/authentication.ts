@@ -54,6 +54,16 @@ it("signs out", async () => {
     expect(spy).toHaveBeenCalled();
 });
 
+it("deletes an account", async () => {
+    expect.assertions(1);
+
+    const store = createStore();
+    const spy = jest.spyOn(firebase, "deleteAccount");
+
+    await dispatch(store, actionCreators.deleteAccount());
+    expect(spy).toHaveBeenCalled();
+});
+
 for (const rehydrateFirst of [true, false]) {
     it(`initializes redux store on ${rehydrateFirst ? "sign-in" : "rehydration"}`, async () => {
         expect.assertions(4);
