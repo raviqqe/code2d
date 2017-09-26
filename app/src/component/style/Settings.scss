@@ -1,3 +1,4 @@
+@import "../../style/animation.scss";
 @import "../../style/border.scss";
 @import "../../style/colors.scss";
 
@@ -12,10 +13,23 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	transition: background $long-duration, visibility $long-duration;
 
-	& > * {
+	> * {
 		height: auto;
 		max-height: 90%;
+		transition: transform $long-duration;
+	}
+}
+
+.Settings-container-hidden {
+	@extend .Settings-container;
+
+	visibility: hidden;
+	background: rgba(0, 0, 0, 0);
+
+	> * {
+		transform: translateY(calc(-100vh - 100%));
 	}
 }
 

@@ -1,5 +1,6 @@
 $instant-duration: 0.05s;
 $short-duration: 0.1s;
+$long-duration: 0.2s;
 
 @mixin color-transition {
 	transition: color $instant-duration;

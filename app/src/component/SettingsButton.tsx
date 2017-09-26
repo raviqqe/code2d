@@ -22,9 +22,7 @@ export default class extends React.Component<{}, IState> {
                 >
                     <Gear />
                 </div>
-                <div style={on ? {} : { display: "none" }}>
-                    <Settings onBlur={() => this.setState({ on: false })} />
-                </div>
+                <Settings hidden={!on} onBlur={() => this.setState({ on: false })} />
             </div>
         );
     }

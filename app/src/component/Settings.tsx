@@ -17,6 +17,7 @@ const green = "#9db634";
 interface IProps {
     alarmVolume: number;
     deleteAccount: () => void;
+    hidden: boolean;
     notificationOn: boolean | null;
     onBlur: () => void;
     setAlarmVolume: () => void;
@@ -25,10 +26,11 @@ interface IProps {
 
 class Settings extends React.Component<IProps> {
     public render() {
-        const { alarmVolume, deleteAccount, notificationOn, onBlur, setAlarmVolume, signOut } = this.props;
+        const { alarmVolume, deleteAccount, hidden, notificationOn, onBlur, setAlarmVolume, signOut }
+            = this.props;
 
         return (
-            <div className="Settings-container" onClick={onBlur}>
+            <div className={"Settings-container" + (hidden ? "-hidden" : "")} onClick={onBlur}>
                 <ScrollBar>
                     <div className="Settings-box" onClick={(event) => event.stopPropagation()}>
                         <SettingsItem
