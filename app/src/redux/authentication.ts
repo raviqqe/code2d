@@ -44,6 +44,7 @@ const subReducer = reducerWithInitialState(initialState)
     .case(setSignInState, (state, signedIn) => state.merge({ signedIn }))
     .case(signIn.started, (state) => state.merge({ signingIn: true }))
     .case(signIn.done, (state) => state.merge({ signingIn: false }))
+    // Don't set signedIn property which is set by firebase callback.
     .case(signIn.failed, (state) => state.merge({ signingIn: false }));
 
 export function reducer(state: ImmutableObject<IState> = initialState, action) {
