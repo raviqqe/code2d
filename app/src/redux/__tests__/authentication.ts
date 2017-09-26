@@ -1,19 +1,38 @@
 import { REHYDRATE } from "redux-persist/constants";
 
+import createStore from "..";
+import { dispatch } from "../../lib/utils";
 import { actionCreators, initialState, reducer } from "../authentication";
 
-it("changes auth state signed in", () => {
-    expect(initialState.signedIn).toBe(null);
-    expect(reducer(initialState, actionCreators.setSignInState(true)).signedIn).toBe(true);
-});
+jest.mock("../../lib/items_repository", () => ({
+    default: class {
+        public get = () => [];
+    },
+}));
 
-it("changes auth state signed out", () => {
-    expect(reducer(
-        initialState.merge({ signedIn: true }),
-        actionCreators.setSignInState(false)).signedIn).toBe(false);
-});
+jest.mock("../../lib/notification", () => ({
+    permission: () => true,
+    requestPermission: () => true,
+}));
 
-it("rehydrates redux store", () => {
-    expect(initialState.rehydrated).toBe(false);
-    expect(reducer(initialState, { type: REHYDRATE }).rehydrated).toBe(true);
+function getState(store): typeof initialState {
+    return store.getState().authentication;
+}
+
+for (const signedIn of [true, false]) {
+    it(`changes auth state signed ${signedIn ? " in " : "out"}`, async () => {
+        const store = createStore();
+
+        expect(getState(store).signedIn).toBe(null);
+        await dispatch(store, actionCreators.setSignInState(signedIn));
+        expect(getState(store).signedIn).toBe(signedIn);
+    });
+}
+
+it("rehydrates redux store", async () => {
+    const store = createStore();
+
+    expect(getState(store).rehydrated).toBe(false);
+    await dispatch(store, { payload: {}, type: REHYDRATE });
+    expect(getState(store).rehydrated).toBe(true);
 });
