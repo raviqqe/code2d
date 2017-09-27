@@ -1,3 +1,8 @@
+import * as enzyme from "enzyme";
+import Adapter = require("enzyme-adapter-react-15");
+
+enzyme.configure({ adapter: new Adapter() });
+
 class LocalStorageMock {
     // https://stackoverflow.com/questions/32911630/how-do-i-deal-with-localstorage-in-jest-tests
 

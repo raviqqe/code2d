@@ -1,19 +1,30 @@
+import { mount } from "enzyme";
 import * as React from "react";
-import * as ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { BrowserRouter, Route } from "react-router-dom";
 
+import { dispatch } from "../../lib/utils";
 import createStore from "../../redux";
+import { actionCreators } from "../../redux/tasks";
 import Timer from "../Timer";
 
-it("renders a full-screen timer", () => {
-    ReactDOM.render(
-        <Provider store={createStore()}>
-            <BrowserRouter>
-                <div>
-                    <Route exact={true} path="/" render={() => <Timer />} />
-                </div>
-            </BrowserRouter>
-        </Provider>,
-        document.createElement("div"));
+it("renders a full-screen timer", async () => {
+    expect.assertions(1);
+
+    const store = createStore();
+
+    await dispatch(store, actionCreators.setCurrentItem({
+        createdAt: 42,
+        description: "testDescription",
+        id: "dummyId",
+        name: "testName",
+        spentSeconds: 0,
+        tags: ["javascript"],
+        updatedAt: 42,
+    }));
+
+    const component = mount(<Provider store={store}><Timer /></Provider>);
+    const buttons = component.find(".Timer-button");
+
+    expect(buttons.length).toBe(1);
+    buttons.first().simulate("click");
 });
