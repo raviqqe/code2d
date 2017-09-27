@@ -14,6 +14,8 @@ interface IProps<A extends IItem> {
 }
 
 export default class ItemList<A extends IItem> extends React.Component<IProps<A>> {
+    private sortable;
+
     public render() {
         const { component, currentItem, done, fixed, items, setItems } = this.props;
         const Item = component;
@@ -49,16 +51,19 @@ export default class ItemList<A extends IItem> extends React.Component<IProps<A>
             return;
         }
 
-        sortable.create(element, {
-            animation: 200,
-            disabled: fixed,
-            ghostClass: "ItemList-item-placeholder",
-            onSort: ({ oldIndex, newIndex }) => {
-                const items = [...this.props.items];
-                items.splice(newIndex, 0, items.splice(oldIndex, 1)[0]);
-                setItems(items, done);
-            },
-        });
+        if (!this.sortable) {
+            this.sortable = sortable.create(element, {
+                animation: 200,
+                ghostClass: "ItemList-item-placeholder",
+                onSort: ({ oldIndex, newIndex }) => {
+                    const items = [...this.props.items];
+                    items.splice(newIndex, 0, items.splice(oldIndex, 1)[0]);
+                    setItems(items, done);
+                },
+            });
+        }
+
+        this.sortable.option("disabled", fixed);
     }
 
     public get listId(): string {
