@@ -21,7 +21,6 @@
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.0",
     "react-scripts-ts": "2.6.0",
-    "react-test-renderer": "^16.0.0",
     "redux": "^3.7.2",
     "redux-persist": "^4.10.1",
     "redux-saga": "^0.15.6",
@@ -41,6 +40,7 @@
     "enzyme-adapter-react-16": "^1.0.0",
     "jest": "^20.0.4",
     "node-sass-chokidar": "0.0.3",
+    "react-test-renderer": "^16.0.0",
     "stylelint": "^8.0.0",
     "stylelint-config-recommended-scss": "^2.0.0",
     "stylelint-scss": "^2.1.0"
