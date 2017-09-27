@@ -3,12 +3,21 @@ import * as ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter, Route } from "react-router-dom";
 
+import { dispatch } from "../../lib/utils";
 import createStore from "../../redux";
+import { actionCreators, initialState } from "../../redux/authentication";
 import Items from "../Items";
 
-it("renders a items page", () => {
+jest.mock("axios", () => ({ default: { get: () => ({ data: {} }) } }));
+jest.mock("../../lib/json", () => ({ decode: () => [] }));
+
+function getAuthenticationState(store): typeof initialState {
+    return store.getState().authentication;
+}
+
+function renderItems(store) {
     ReactDOM.render(
-        <Provider store={createStore()}>
+        <Provider store={store}>
             <BrowserRouter>
                 <div>
                     <Route
@@ -34,4 +43,21 @@ it("renders a items page", () => {
             </BrowserRouter>
         </Provider>,
         document.createElement("div"));
+}
+
+it("renders a items page while a user has signed out", () => {
+    const store = createStore();
+
+    expect(getAuthenticationState(store).signedIn).toBeFalsy();
+
+    renderItems(store);
+});
+
+it("renders a items page while a user has signed in", async () => {
+    const store = createStore();
+
+    await dispatch(store, actionCreators.setSignInState(true));
+    expect(getAuthenticationState(store).signedIn).toBe(true);
+
+    renderItems(createStore());
 });

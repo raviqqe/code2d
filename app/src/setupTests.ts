@@ -21,3 +21,11 @@ class LocalStorageMock {
 }
 
 (global as any).localStorage = new LocalStorageMock();
+
+(global as any).Notification = class {
+    public static permission = "granted";
+
+    public static requestPermission() {
+        // Do nothing.
+    }
+};
