@@ -6,7 +6,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import createStore from "../../redux";
 import Items from "../Items";
 
-it("renders a todo tasks page", () => {
+it("renders a items page", () => {
     ReactDOM.render(
         <Provider store={createStore()}>
             <BrowserRouter>
