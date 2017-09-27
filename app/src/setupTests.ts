@@ -1,3 +1,5 @@
+import "raf/polyfill";
+
 import * as enzyme from "enzyme";
 import Adapter = require("enzyme-adapter-react-16");
 
