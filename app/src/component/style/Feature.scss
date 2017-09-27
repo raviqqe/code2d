@@ -9,15 +9,17 @@
 
 .Feature-image {
 	width: 90%;
-	margin-bottom: 1em;
+	margin-bottom: 1.5em;
 }
 
 .Feature-title {
 	font-size: 1.2em;
 	font-weight: bold;
-	margin-bottom: 0.2em;
+	margin-bottom: 0.8em;
 }
 
 .Feature-description {
 	color: $dark-grey;
+	line-height: 1.5em;
+	text-align: justify;
 }

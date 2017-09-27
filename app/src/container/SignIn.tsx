@@ -42,22 +42,23 @@ class SignIn extends React.Component<IProps> {
                         title="Manage everything to do"
                         image={require("../images/tasks.svg")}
                     >
-                        Tasks to do.
-                        Articles and videos to check.
+                        Manage tasks to do,
+                        any web articles to read,
+                        and YouTube videos to watch
+                        in one place.
                     </Feature>
                     <Feature
                         title="Built-in pomodoro timer"
                         image={require("../images/timer.svg")}
                     >
-                        Use pomodoro technique
-                        to be productive.
+                        Use pomodoro technique to be productive
+                        and make your work done faster.
                     </Feature>
                     <Feature
                         title="Focus on engineering"
                         image={require("../images/focus.svg")}
                     >
-                        Keep other things away
-                        and grow yourself.
+                        Keep other things away and grow yourself.
                     </Feature>
                 </div>
                 <div className="SignIn-footer">
