@@ -69,12 +69,16 @@
 	display: flex;
 	justify-content: space-evenly;
 	align-items: flex-start;
+	flex-wrap: wrap;
 	box-shadow: 0.5em 0.5em 2em rgba(0, 0, 0, 0.3);
-	width: 70vw;
-	padding: 10vh 0;
+	width: 80em;
+	max-width: 90%;
+	padding: 5vh;
 
 	& > * {
-		width: 15vw;
+		width: 22%;
+		min-width: 15em;
+		margin: 5vh 2vh;
 	}
 }
 
