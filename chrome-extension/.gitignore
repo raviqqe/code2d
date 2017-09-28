@@ -1,2 +1,3 @@
 *.js
+*.png
 !rollup.config.js
