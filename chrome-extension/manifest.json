@@ -1,6 +1,6 @@
 {
 	"manifest_version": 2,
-	"name": "code2d one-click",
+	"name": "code2d",
 	"description": "This extension allows users to add web articles and YouTube videos to to-do lists of code2d.",
 	"version": "0.1",
 
