@@ -8,26 +8,24 @@ function changeBackgroundColor(color: string) {
     });
 }
 
-function getSavedBackgroundColor(url: string, callback: (color: string) => void) {
+function getSavedBackgroundColor(url: string, callback: (color: string | null) => void) {
     chrome.storage.sync.get(url, (items) => {
         callback(chrome.runtime.lastError ? null : items[url]);
     });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    getCurrentTabUrl((url) => {
-        const dropdown = document.getElementById("dropdown") as HTMLSelectElement;
+document.addEventListener("DOMContentLoaded", () => getCurrentTabUrl((url) => {
+    const dropdown = document.getElementById("dropdown") as HTMLSelectElement;
 
-        getSavedBackgroundColor(url, (color: string | null) => {
-            if (color) {
-                changeBackgroundColor(color);
-                dropdown.value = color;
-            }
-        });
-
-        dropdown.addEventListener("change", () => {
-            changeBackgroundColor(dropdown.value);
-            chrome.storage.sync.set({ url: dropdown.value });
-        });
+    getSavedBackgroundColor(url, (color: string | null) => {
+        if (color) {
+            changeBackgroundColor(color);
+            dropdown.value = color;
+        }
     });
-});
+
+    dropdown.addEventListener("change", () => {
+        changeBackgroundColor(dropdown.value);
+        chrome.storage.sync.set({ url: dropdown.value });
+    });
+}));
