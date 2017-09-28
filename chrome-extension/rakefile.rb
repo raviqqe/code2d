@@ -1,6 +1,6 @@
-directory 'dist' do |dir|
-  rm_rf dir
-  cp_r 'public', dir
+directory 'dist' do |t|
+  rm_rf t.name
+  cp_r 'public', t.name
 end
 
 directory 'dist/images' => 'dist'
