@@ -1,9 +1,9 @@
 import typescript from 'rollup-plugin-typescript'
 
 export default {
-  input: 'src/popup.ts',
+  input: 'src/index.ts',
   output: {
-    file: 'dist/popup.js',
+    file: 'dist/index.js',
     format: 'es'
   },
   plugins: [ typescript({ typescript: require('typescript') }) ]
