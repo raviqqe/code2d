@@ -13,12 +13,10 @@ task :test do
 end
 
 task :build do
-  cd 'app' do
-    sh 'rake build'
-  end
-
-  cd 'functions' do
-    sh 'rake build'
+  %w[app functions chrome-extension].each do |dir|
+    cd dir do
+      sh 'rake build'
+    end
   end
 end
 
