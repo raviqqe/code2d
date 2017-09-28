@@ -2,7 +2,9 @@
 	"name": "code2d-chrome-extension",
 	"version": "0.1.0",
 	"description": "code2d's chrome extension to add articles and videos to todo lists by one click on Chrome",
-	"dependencies": {},
+	"dependencies": {
+		"firebase": "^4.4.0"
+	},
 	"devDependencies": {
 		"@types/chrome": "0.0.49",
 		"rollup": "^0.50.0",
