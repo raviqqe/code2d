@@ -6,5 +6,5 @@ export default {
     file: 'popup.js',
     format: 'es'
   },
-  plugins: [ typescript() ]
+  plugins: [ typescript({ typescript: require('typescript') }) ]
 }
