@@ -8,8 +8,12 @@
 	},
 	"devDependencies": {
 		"@types/chrome": "0.0.49",
+		"node-sass-chokidar": "0.0.3",
 		"rollup": "^0.50.0",
 		"rollup-plugin-typescript": "^0.8.1",
+		"stylelint": "^8.1.1",
+		"stylelint-config-recommended-scss": "^2.0.0",
+		"stylelint-scss": "^2.1.0",
 		"typescript": "^2.5.3"
 	}
 }
