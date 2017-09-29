@@ -7,7 +7,7 @@ import { httpsFunction } from "./utils";
 
 YouTube.authenticate({ key: functions.config().youtube.key, type: "key" });
 
-export async function convertUrlToVideo(url: string) {
+export async function convertUrlIntoVideo(url: string) {
     const { description, publishedAt, title } = await new Promise((resolve, reject) =>
         YouTube.videos.list(
             { id: parseUrl(url, true).query.v, part: "snippet" },
@@ -17,7 +17,7 @@ export async function convertUrlToVideo(url: string) {
 }
 
 export default httpsFunction(async ({ query: { url } }: Request, response: Response) => {
-    const video = await convertUrlToVideo(url);
+    const video = await convertUrlIntoVideo(url);
 
     console.log("Video:", video);
 
