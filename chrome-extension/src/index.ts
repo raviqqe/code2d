@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 protocol: "https",
                 query: {
                     client_id: config.github.oauth.id,
-                    redirect_uri: `https://${config.extensionId}.chromiumapp.org`,
+                    redirect_uri: chrome.identity.getRedirectURL(),
                 },
             }),
         },
