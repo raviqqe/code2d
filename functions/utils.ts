@@ -5,7 +5,8 @@ import * as functions from "firebase-functions";
 const cacheSeconds = 24 * 60 * 60;
 const origins = functions.config().cors.origins.split(",");
 
-export function httpsFunction(handler: (request: Request, response: Response) => void | Promise<void>) {
+export function httpsFunction(
+    handler: (request: Request, response: Response, userId?: string) => void | Promise<void>) {
     return functions.https.onRequest(
         async (request: Request, response: Response) => {
             const origin = request.get("Origin");
@@ -22,14 +23,15 @@ export function httpsFunction(handler: (request: Request, response: Response) =>
                 return;
             }
 
-            await admin.auth().verifyIdToken(request.get("Authorization").split(" ")[1]);
+            const { uid } = await admin.auth().verifyIdToken(
+                request.get("Authorization").split(" ")[1]);
 
             response.set(
                 "Cache-Control",
                 `private, max-age=${cacheSeconds}, s-maxage=${cacheSeconds}`);
 
             try {
-                await handler(request, response);
+                await handler(request, response, uid);
             } catch (error) {
                 console.error(error);
                 response.sendStatus(500);
