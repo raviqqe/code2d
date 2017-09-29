@@ -19,28 +19,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const button = document.getElementById("sign-in-button") as HTMLButtonElement;
     const message = document.getElementById("message");
 
-    button.addEventListener("click", async () => chrome.identity.launchWebAuthFlow(
-        {
-            interactive: true,
-            url: url.format({
-                hostname: "github.com",
-                pathname: "/login/oauth/authorize",
-                protocol: "https",
-                query: {
-                    client_id: config.github.oauth.id,
-                    redirect_uri: chrome.identity.getRedirectURL(),
-                },
-            }),
-        },
-        async (token: string) => {
-            if (chrome.runtime.lastError) {
-                console.error(chrome.runtime.lastError);
-                return;
-            }
-
-            await firebase.auth().signInWithCredential(
-                firebase.auth.GithubAuthProvider.credential(token));
-        }));
+    button.addEventListener("click", async () =>
+        await firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider()));
 
     firebase.auth().onAuthStateChanged((user) => {
         if (user === null) {
