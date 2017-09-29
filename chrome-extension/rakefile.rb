@@ -9,7 +9,7 @@ task :deps do
   sh 'npm install'
 end
 
-task build: %i[deps dist/images] do
+task build: %i[clean deps dist/images] do
   sh 'npx webpack'
   sh 'npx node-sass-chokidar public -o dist'
 
@@ -19,4 +19,8 @@ task build: %i[deps dist/images] do
           --export-png dist/images/icon_#{size}.png
           ../images/icon.svg].join ' '
   end
+end
+
+task :clean do
+  rm_rf 'dist'
 end
