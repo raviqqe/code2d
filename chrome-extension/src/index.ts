@@ -1,31 +1,35 @@
-function getCurrentTabUrl(callback: (url: string) => void) {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => callback(tabs[0].url));
+import * as firebase from "firebase";
+
+const config = require("../config.json");
+
+firebase.initializeApp({
+    apiKey: config.firebase.apiKey,
+    authDomain: `${config.firebase.projectId}.firebaseapp.com`,
+});
+
+async function getCurrentTabUrl(): Promise<string> {
+    return await new Promise((resolve) =>
+        chrome.tabs.query(
+            { active: true, currentWindow: true },
+            (tabs) => resolve(tabs[0].url))) as string;
 }
 
-function changeBackgroundColor(color: string) {
-    chrome.tabs.executeScript({
-        code: `document.body.style.backgroundColor="${color}";`,
-    });
-}
+document.addEventListener("DOMContentLoaded", async () => {
+    const button = document.getElementById("sign-in-button") as HTMLButtonElement;
+    const message = document.getElementById("message");
 
-function getSavedBackgroundColor(url: string, callback: (color: string | null) => void) {
-    chrome.storage.sync.get(url, (items) => {
-        callback(chrome.runtime.lastError ? null : items[url]);
-    });
-}
+    button.addEventListener("click", async () =>
+        await firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider()));
 
-document.addEventListener("DOMContentLoaded", () => getCurrentTabUrl((url) => {
-    const dropdown = document.getElementById("dropdown") as HTMLSelectElement;
-
-    getSavedBackgroundColor(url, (color: string | null) => {
-        if (color) {
-            changeBackgroundColor(color);
-            dropdown.value = color;
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user === null) {
+            button.style.display = "initial";
+            message.style.display = "none";
+        } else {
+            button.style.display = "none";
+            message.style.display = "initial";
+            message.appendChild(document.createTextNode("Signed in!"));
+            setTimeout(() => window.close(), 5000);
         }
     });
-
-    dropdown.addEventListener("change", () => {
-        changeBackgroundColor(dropdown.value);
-        chrome.storage.sync.set({ url: dropdown.value });
-    });
-}));
+});
