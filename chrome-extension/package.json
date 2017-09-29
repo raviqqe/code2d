@@ -3,13 +3,13 @@
 	"version": "0.1.0",
 	"description": "code2d's chrome extension to add articles and videos to todo lists by one click on Chrome",
 	"dependencies": {
-		"dotenv": "^4.0.0",
 		"firebase": "^4.4.0"
 	},
 	"devDependencies": {
 		"@types/chrome": "0.0.49",
 		"node-sass-chokidar": "0.0.3",
 		"rollup": "^0.50.0",
+		"rollup-plugin-json": "^2.3.0",
 		"rollup-plugin-typescript": "^0.8.1",
 		"stylelint": "^8.1.1",
 		"stylelint-config-recommended-scss": "^2.0.0",
