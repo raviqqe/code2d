@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     button.addEventListener("click", async () => chrome.identity.launchWebAuthFlow(
         {
+            interactive: true,
             url: url.format({
                 hostname: "github.com",
                 pathname: "/login/oauth/authorize",
