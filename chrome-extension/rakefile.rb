@@ -19,6 +19,10 @@ task build: %i[clean deps dist/images] do
           --export-png dist/images/icon_#{size}.png
           ../images/icon.svg].join ' '
   end
+
+  cd 'dist' do
+    sh 'zip -r extension.zip *'
+  end
 end
 
 task :clean do
