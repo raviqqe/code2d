@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name": "code2d",
 	"description": "This extension allows users to add web articles and YouTube videos to to-do lists of code2d.",
-	"version": "0.1.5",
+	"version": "0.1.6",
 
 	"browser_action": {
 		"default_icon": "images/icon_19.png",
@@ -14,10 +14,6 @@
 		"48": "images/icon_48.png",
 		"128": "images/icon_128.png"
 	},
-	"permissions": [
-		"activeTab",
-		"identity",
-		"storage"
-	],
+	"permissions": ["activeTab"],
 	"content_security_policy": "script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com https://apis.google.com; object-src 'self'"
 }
