@@ -7,17 +7,19 @@ import { httpsFunction } from "./utils";
 
 YouTube.authenticate({ key: functions.config().youtube.key, type: "key" });
 
-async function getVideoDetails(url: string): Promise<any> {
-    return await new Promise((resolve, reject) =>
+export async function convertUrlToVideo(url: string) {
+    const { description, publishedAt, title } = await new Promise((resolve, reject) =>
         YouTube.videos.list(
             { id: parseUrl(url, true).query.v, part: "snippet" },
-            (error, data) => error ? reject(error) : resolve(data.items[0].snippet)));
+            (error, data) => error ? reject(error) : resolve(data.items[0].snippet))) as any;
+
+    return { name: title, description, publishedAt };
 }
 
 export default httpsFunction(async ({ query: { url } }: Request, response: Response) => {
-    const { description, publishedAt, title } = await getVideoDetails(url);
+    const video = await convertUrlToVideo(url);
 
-    console.log("Video:", { description, publishedAt, title });
+    console.log("Video:", video);
 
-    response.send({ name: title, description, publishedAt });
+    response.send(video);
 });

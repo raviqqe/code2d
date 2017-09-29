@@ -16,7 +16,7 @@ export function convertIntoUrl(urlOrPath: string, baseUrl: string): string {
     return url.format({ host, pathname: urlOrPath, protocol });
 }
 
-export default httpsFunction(async ({ query: { url } }: Request, response: Response) => {
+export async function convertUrlIntoArticle(url: string) {
     const { date, favicon, image, softTitle, text, title }
         = unfluff((await axios.get(url, { headers: { Accept: "text/html" } })).data);
     const name = title || softTitle;
@@ -25,7 +25,7 @@ export default httpsFunction(async ({ query: { url } }: Request, response: Respo
         throw new Error("Failed to extract title.");
     }
 
-    const article = {
+    return {
         date,
         favicon: convertIntoUrl(favicon, url),
         image: convertIntoUrl(image, url),
@@ -33,6 +33,10 @@ export default httpsFunction(async ({ query: { url } }: Request, response: Respo
         text,
         url,
     };
+}
+
+export default httpsFunction(async ({ query: { url } }: Request, response: Response) => {
+    const article = await convertUrlIntoArticle(url);
 
     console.log("Article:", article);
 
