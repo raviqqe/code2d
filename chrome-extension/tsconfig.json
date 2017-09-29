@@ -1,6 +1,7 @@
 {
 	"compilerOptions": {
 		"lib": ["es5", "es6", "es7", "dom"],
+		"rootDir": "src",
 		"target": "es6",
 		"downlevelIteration": true,
 		"experimentalDecorators": true
