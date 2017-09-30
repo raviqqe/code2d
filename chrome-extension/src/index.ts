@@ -19,8 +19,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     const button = document.getElementById("sign-in-button") as HTMLButtonElement;
     const message = document.getElementById("message");
 
-    button.addEventListener("click", async () =>
-        await firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider()));
+    let signingIn = false;
+
+    button.addEventListener("click", async () => {
+        signingIn = true;
+        await firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider());
+    });
 
     firebase.auth().onAuthStateChanged((user) => {
         if (user === null) {
@@ -29,7 +33,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         } else {
             button.style.display = "none";
             message.style.display = "initial";
-            message.appendChild(document.createTextNode("Signed in!"));
+            message.appendChild(document.createTextNode(signingIn ? "Signed in!" : "Item added"));
             setTimeout(() => window.close(), 5000);
         }
     });
