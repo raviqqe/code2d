@@ -2,7 +2,7 @@ import { ITask, tasksRepository } from "../tasks";
 
 jest.mock("axios", () => ({
     default: {
-        get: (): Promise<{ data: any[] }> => Promise.reject(new Error()),
+        get: (): Promise<any> => Promise.reject(new Error()),
     },
 }));
 

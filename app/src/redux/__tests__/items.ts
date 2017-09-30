@@ -10,7 +10,7 @@ import * as message from "../message";
 
 jest.mock("axios", () => ({
     default: {
-        get: () => ({ data: null }),
+        get: (): Promise<{ data: ArrayBuffer }> => Promise.resolve({ data: new ArrayBuffer(0) }),
     },
 }));
 

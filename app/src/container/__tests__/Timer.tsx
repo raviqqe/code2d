@@ -7,7 +7,7 @@ import createStore from "../../redux";
 import { actionCreators } from "../../redux/tasks";
 import Timer from "../Timer";
 
-jest.mock("axios", () => ({ default: { get: () => ({ data: {} }) } }));
+jest.mock("axios", () => ({ default: { get: () => ({ data: new ArrayBuffer(0) }) } }));
 jest.mock("../../lib/json", () => ({ decode: () => [], encode: () => "" }));
 
 it("renders a full-screen timer", async () => {

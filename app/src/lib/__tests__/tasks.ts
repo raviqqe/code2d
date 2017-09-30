@@ -2,7 +2,7 @@ import { extractTagsFromTasks, ITask, tasksRepository } from "../tasks";
 
 jest.mock("axios", () => ({
     default: {
-        get: (): Promise<{ data: any[] }> => Promise.resolve({ data: null }),
+        get: (): Promise<{ data: ArrayBuffer }> => Promise.resolve({ data: new ArrayBuffer(0) }),
     },
 }));
 

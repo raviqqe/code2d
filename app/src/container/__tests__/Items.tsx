@@ -8,7 +8,7 @@ import createStore from "../../redux";
 import { actionCreators, initialState } from "../../redux/authentication";
 import Items from "../Items";
 
-jest.mock("axios", () => ({ default: { get: () => ({ data: {} }) } }));
+jest.mock("axios", () => ({ default: { get: () => ({ data: new ArrayBuffer(0) }) } }));
 jest.mock("../../lib/json", () => ({ decode: () => [] }));
 
 function getAuthenticationState(store): typeof initialState {

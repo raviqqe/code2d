@@ -24,7 +24,7 @@ export function storage() {
     return {
         ref: (path: string) => ({
             getDownloadURL: () => "testUrl",
-            putString: (data: string) => undefined,
+            put: () => undefined,
         }),
     };
 }
