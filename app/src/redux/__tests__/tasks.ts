@@ -88,6 +88,7 @@ it("gets tags", async () => {
 
     expect(getState(store).tags).toEqual([]);
 
+    await dispatch(store, actionCreators.getItems());
     await dispatch(store, actionCreators.getTags());
 
     expect(getState(store).tags).toEqual(["javascript"]);

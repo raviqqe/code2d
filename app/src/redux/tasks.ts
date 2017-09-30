@@ -56,12 +56,11 @@ export const sagas = [
     takeEvery(
         getTags.started,
         function* _(): SagaIterator {
+            const { doneItems, todoItems }: IState = yield duck.selectState();
+
             yield put(getTags.done({
                 params: null,
-                result: extractTagsFromTasks([
-                    ...(yield call(tasksRepository(false).get)),
-                    ...(yield call(tasksRepository(true).get)),
-                ]),
+                result: extractTagsFromTasks([...doneItems, ...todoItems]),
             }));
         }),
     takeEvery(duck.actionCreators.removeItem,
