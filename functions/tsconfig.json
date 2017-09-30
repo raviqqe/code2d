@@ -4,5 +4,6 @@
 		"target": "es5",
 		"downlevelIteration": true,
 		"experimentalDecorators": true
-	}
+	},
+	"exclude": ["node_modules", "__tests__", "__mocks__"]
 }
