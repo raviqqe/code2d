@@ -8,12 +8,19 @@ import { httpsFunction } from "./utils";
 YouTube.authenticate({ key: functions.config().youtube.key, type: "key" });
 
 export async function convertUrlIntoVideo(url: string) {
+    const id = parseUrl(url, true).query.v;
     const { description, publishedAt, title } = await new Promise((resolve, reject) =>
         YouTube.videos.list(
-            { id: parseUrl(url, true).query.v, part: "snippet" },
+            { id, part: "snippet" },
             (error, data) => error ? reject(error) : resolve(data.items[0].snippet))) as any;
 
-    return { name: title, description, publishedAt };
+    return {
+        description,
+        embedUrl: `https://www.youtube.com/embed/${id}`,
+        name: title,
+        publishedAt,
+        url,
+    };
 }
 
 export default httpsFunction(async ({ query: { url } }: Request, response: Response) => {

@@ -16,8 +16,5 @@ const repository = new StatefulItemsRepository<IVideo>("videos");
 export const videosRepository = repository.state;
 
 export async function urlToVideo(url: string): Promise<IVideo> {
-    const video = await functions.call("video", { url });
-    const { v } = parseUrl(url, true).query;
-
-    return { embedUrl: `https://www.youtube.com/embed/${v}`, name, url, ...video };
+    return await functions.call("video", { url });
 }
