@@ -1,6 +1,7 @@
 {
   "name": "functions",
   "description": "Cloud Functions for Firebase",
+  "private": true,
   "dependencies": {
     "apac": "^3.0.2",
     "axios": "^0.16.2",
@@ -13,7 +14,6 @@
     "unfluff": "^1.1.0",
     "youtube-api": "^2.0.9"
   },
-  "private": true,
   "devDependencies": {
     "@types/express": "^4.0.37",
     "@types/jest": "^20.0.8",
