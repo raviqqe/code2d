@@ -16,7 +16,7 @@ class File {
 
     public read = async () => await msgpack.decode((await this.file.download())[0]);
 
-    public write = async (content: any) => await this.file.save(msgpack.decode(content));
+    public write = async (content: any) => await this.file.save(msgpack.encode(content));
 }
 
 export default httpsFunction(
