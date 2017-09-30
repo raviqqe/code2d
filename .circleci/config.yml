@@ -19,3 +19,11 @@ jobs:
       - run:
           name: Test
           command: rake test
+
+      - store_artifacts:
+          path: app/coverage
+          destination: app_coverage
+
+      - store_artifacts:
+          path: functions/coverage
+          destination: functions_coverage
