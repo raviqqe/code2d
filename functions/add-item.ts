@@ -29,7 +29,15 @@ export default httpsFunction(
         console.log("Item:", item);
 
         const file = new File(`/users/${userId}/${isVideo ? "videos" : "articles"}/todo`);
-        await file.write([{ id: nanoid(), ...item }, ...(await file.read())]);
+        let items = [];
+
+        try {
+            items = await file.read();
+        } catch (error) {
+            console.error(error);
+        }
+
+        await file.write([{ id: nanoid(), ...item }, ...items]);
 
         response.sendStatus(200);
     });
