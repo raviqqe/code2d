@@ -6,10 +6,7 @@ import { ImmutableObject } from "seamless-immutable";
 import actionCreatorFactory from "typescript-fsa";
 import { reducerWithInitialState } from "typescript-fsa-reducers";
 
-import { articlesRepository } from "../lib/articles";
 import * as firebase from "../lib/firebase";
-import { tasksRepository } from "../lib/tasks";
-import { videosRepository } from "../lib/videos";
 import * as articles from "./articles";
 import * as settings from "./settings";
 import * as tasks from "./tasks";
