@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import * as admin from "firebase-admin";
 import * as msgpack from "msgpack-lite";
+import nanoid = require("nanoid");
 import { parse } from "url";
 
 import { convertUrlIntoArticle } from "./article";
@@ -28,7 +29,7 @@ export default httpsFunction(
         console.log("Item:", item);
 
         const file = new File(`/users/${userId}/${isVideo ? "videos" : "articles"}/todo`);
-        await file.write([item, ...(await file.read())]);
+        await file.write([{ id: nanoid(), ...item }, ...(await file.read())]);
 
         response.sendStatus(200);
     });
