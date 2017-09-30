@@ -6,7 +6,7 @@ task build: :deps do
   sh 'npx tsc'
 end
 
-task test: :build do
+task test: :deps do
   sh 'npx jest --coverage'
 end
 
