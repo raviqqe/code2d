@@ -4,4 +4,5 @@
 *.tfstate
 .runtimeconfig.json
 .terraform
+coverage
 node_modules

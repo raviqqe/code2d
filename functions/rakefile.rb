@@ -7,7 +7,7 @@ task build: :deps do
 end
 
 task test: :build do
-  sh 'npx jest'
+  sh 'npx jest --coverage'
 end
 
 task :clean do
