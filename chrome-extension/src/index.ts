@@ -31,6 +31,17 @@ async function addItem(): Promise<void> {
         });
 }
 
+function removeChilds(element: HTMLElement) {
+    while (element.firstChild) {
+        element.removeChild(element.firstChild);
+    }
+}
+
+function replaceChild(parent: HTMLElement, child: HTMLElement | Text) {
+    removeChilds(parent);
+    parent.appendChild(child);
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
     const button = document.getElementById("sign-in-button") as HTMLButtonElement;
     const message = document.getElementById("message");
@@ -51,11 +62,11 @@ document.addEventListener("DOMContentLoaded", async () => {
             message.style.display = "initial";
 
             if (signingIn) {
-                message.appendChild(document.createTextNode("Signed in"));
+                replaceChild(message, document.createTextNode("Signed in"));
             } else {
-                message.appendChild(document.createTextNode("Adding item..."));
+                replaceChild(message, document.createTextNode("Adding item..."));
                 await addItem();
-                message.appendChild(document.createTextNode("Item added"));
+                replaceChild(message, document.createTextNode("Item added"));
             }
 
             setTimeout(() => window.close(), 5000);
