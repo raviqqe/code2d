@@ -6,19 +6,12 @@ import { IItem } from "./items";
 import * as json from "./json";
 
 export default class ItemsRepository<A extends IItem> {
-    private items: A[] | null = null;
-
     constructor(private name: string, private done: boolean) { }
 
     public get = async (): Promise<A[]> => {
-        if (_.isArray(this.items)) {
-            return this.items;
-        }
-
         try {
-            this.items = await json.decode(
+            return await json.decode(
                 (await axios.get(await this.reference.getDownloadURL())).data);
-            return this.items;
         } catch (error) {
             console.error(error);
             return [];
@@ -26,12 +19,7 @@ export default class ItemsRepository<A extends IItem> {
     }
 
     public set = async (items: A[]): Promise<void> => {
-        this.items = items;
         await this.reference.putString(json.encode(items));
-    }
-
-    public initialize = () => {
-        this.items = null;
     }
 
     private get reference(): firebase.storage.Reference {

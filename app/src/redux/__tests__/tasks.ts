@@ -34,11 +34,6 @@ function getState(store): IState {
     return store.getState().tasks;
 }
 
-beforeEach(() => {
-    tasksRepository(false).initialize();
-    tasksRepository(true).initialize();
-});
-
 for (const done of [false, true]) {
     it("updates a current task", async () => {
         expect.assertions(4);

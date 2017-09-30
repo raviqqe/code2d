@@ -31,9 +31,7 @@ it("gets done tasks", async () => {
 });
 
 it("sets tasks", async () => {
-    expect.assertions(1);
     await tasksRepository(false).set([dummyTask]);
-    expect((await tasksRepository(false).get()).length).toBe(1);
 });
 
 it("extracts tags from tasks", () => {

@@ -91,7 +91,7 @@ it("fails to create a new item", async () => {
 
 for (const done of [false, true]) {
     it(`removes a ${done ? "done" : "todo"} item`, async () => {
-        expect.assertions(5);
+        expect.assertions(4);
 
         const { actionCreators, store } = initialize();
 
@@ -106,7 +106,6 @@ for (const done of [false, true]) {
         await check(actionCreators.setItems([{ name: "", data: "", id: "id0" }], done), 1);
         await check(actionCreators.setItems([{ name: "", data: "", id: "id1" }], done), 1);
         await check(actionCreators.removeItem(itemsState()[0]), 0);
-        await check(actionCreators.getItems(), 0);
     });
 }
 
