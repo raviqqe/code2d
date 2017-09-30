@@ -10,8 +10,8 @@ export default class ItemsRepository<A extends IItem> {
 
     public get = async (): Promise<A[]> => {
         try {
-            return await json.decode(
-                (await axios.get(await this.reference.getDownloadURL())).data);
+            return json.decode(new Buffer((await axios.get(
+                await this.reference.getDownloadURL(), { responseType: "arraybuffer" })).data));
         } catch (error) {
             console.error(error);
             return [];
@@ -19,7 +19,7 @@ export default class ItemsRepository<A extends IItem> {
     }
 
     public set = async (items: A[]): Promise<void> => {
-        await this.reference.putString(json.encode(items));
+        await this.reference.put(json.encode(items));
     }
 
     private get reference(): firebase.storage.Reference {
