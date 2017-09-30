@@ -11,7 +11,7 @@ export function httpsFunction(
         async (request: Request, response: Response) => {
             const origin = request.get("Origin");
 
-            if (origins.includes(request.get("Origin"))) {
+            if (origins.includes(origin)) {
                 response.set("Access-Control-Allow-Origin", origin);
             }
 
