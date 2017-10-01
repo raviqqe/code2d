@@ -25,7 +25,7 @@ $PagesMenu-icon-size: 2.5em;
 	background: white;
 	align-items: center;
 	position: absolute;
-	bottom: $PagesMenu-icon-size + 1em;
+	top: $PagesMenu-icon-size + 1em;
 	z-index: 200;
 
 	& > * {

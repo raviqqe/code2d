@@ -1,30 +1,33 @@
 import * as React from "react";
-import Article = require("react-icons/lib/fa/file-code-o");
-import Menu = require("react-icons/lib/md/menu");
-import Video = require("react-icons/lib/md/ondemand-video");
-import Task = require("react-icons/lib/md/playlist-add-check");
+import { connect } from "react-redux";
 
+import { actionCreators, Page, pages } from "../redux/pages";
 import PageButton from "./PageButton";
 import "./style/PagesMenu.css";
+
+interface IProps {
+    currentPage: Page;
+    setCurrentPage: (page: Page) => void;
+}
 
 interface IState {
     showMenu: boolean;
 }
 
-export default class extends React.Component<{}, IState> {
+class PagesMenu extends React.Component<IProps, IState> {
     public state: IState = { showMenu: false };
 
     public render() {
+        const { currentPage, setCurrentPage } = this.props;
         const { showMenu } = this.state;
 
         return (
             <div className="PagesMenu-container">
-                <div
-                    className={"PagesMenu-icon" + (showMenu ? "-active" : "")}
-                    onClick={() => this.setState({ showMenu: !showMenu })}
-                >
-                    <Menu />
-                </div>
+                <PageButton
+                    current={true}
+                    page={currentPage}
+                    onClick={() => this.setState({ showMenu: true })}
+                />
                 <div
                     className="PagesMenu-box-background"
                     style={showMenu ? {} : { display: "none" }}
@@ -34,11 +37,16 @@ export default class extends React.Component<{}, IState> {
                     className={"PagesMenu-box" + (showMenu ? "" : "-invisible")}
                     onClick={(event) => event.stopPropagation()}
                 >
-                    <PageButton page="tasks" icon={<Task />}>tasks</PageButton>
-                    <PageButton page="articles" icon={<Article />}>articles</PageButton>
-                    <PageButton page="videos" icon={<Video />}>videos</PageButton>
+                    {pages.map((page) => page !== currentPage &&
+                        <PageButton
+                            key={page}
+                            page={page}
+                            onClick={() => setCurrentPage(page)}
+                        />)}
                 </div>
             </div>
         );
     }
 }
+
+export default connect(({ pages }) => pages, actionCreators)(PagesMenu);

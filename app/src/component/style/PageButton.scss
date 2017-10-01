@@ -5,33 +5,21 @@
 	@include color-transition;
 
 	display: flex;
+	align-items: center;
 	font-size: 1.2em;
 	color: $light-grey;
+	cursor: pointer;
 	margin: 0.2em;
 
 	&:hover {
 		color: $black;
 	}
-
-	& > div {
-		cursor: pointer;
-		display: flex;
-		align-items: center;
-	}
 }
 
-.PageButton-container-highlighted {
+.PageButton-container-current {
 	@extend .PageButton-container;
 
-	color: $red;
-
-	&:hover {
-		color: $red;
-	}
-
-	& > div {
-		cursor: default;
-	}
+	color: $black;
 }
 
 .PageButton-icon {

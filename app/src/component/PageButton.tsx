@@ -1,32 +1,34 @@
 import * as React from "react";
-import { connect } from "react-redux";
+import Article = require("react-icons/lib/fa/file-code-o");
+import Video = require("react-icons/lib/md/ondemand-video");
+import Task = require("react-icons/lib/md/playlist-add-check");
 
-import { actionCreators, Page } from "../redux/pages";
+import { Page } from "../redux/pages";
 import "./style/PageButton.css";
 
+const icons = {
+    articles: <Article />,
+    tasks: <Task />,
+    videos: <Video />,
+};
+
 interface IProps {
-    currentPage: Page;
-    icon: JSX.Element;
+    current?: boolean;
+    onClick: () => void;
     page: Page;
-    setCurrentPage: (page: Page) => void;
 }
 
-class PageButton extends React.Component<IProps> {
+export default class PageButton extends React.Component<IProps> {
     public render() {
-        const { children, currentPage, icon, page, setCurrentPage } = this.props;
+        const { current, onClick, page } = this.props;
 
         return (
             <div
-                className={page === currentPage
-                    ? "PageButton-container-highlighted"
-                    : "PageButton-container"}
+                className={"PageButton-container" + (current ? "-current" : "")}
+                onClick={onClick}
             >
-                <div onClick={() => setCurrentPage(page)}>
-                    <div className="PageButton-icon">{icon}</div> {children}
-                </div>
+                <div className="PageButton-icon">{icons[page]}</div> {page}
             </div>
         );
     }
 }
-
-export default connect(({ pages }) => pages, actionCreators)(PageButton);

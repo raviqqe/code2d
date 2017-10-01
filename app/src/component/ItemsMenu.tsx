@@ -22,6 +22,7 @@ export default class extends React.Component<IProps> {
         return (
             <div className="ItemsMenu-container">
                 <div className="ItemsMenu-main">
+                    <PagesMenu />
                     <div className="ItemsMenu-states">
                         <div
                             className={done ? "ItemsMenu-state" : "ItemsMenu-state-highlighted"}
@@ -40,7 +41,6 @@ export default class extends React.Component<IProps> {
                     {children}
                 </div>
                 <div className="ItemsMenu-buttons">
-                    <PagesMenu />
                     <SettingsButton />
                 </div>
             </div>

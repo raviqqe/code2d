@@ -4,6 +4,8 @@ import { reducerWithInitialState } from "typescript-fsa-reducers";
 
 export type Page = "tasks" | "articles" | "videos";
 
+export const pages: Page[] = ["tasks", "articles", "videos"];
+
 const actionCreator = actionCreatorFactory();
 
 const setCurrentPage = actionCreator<Page>("SET_PAGE");
