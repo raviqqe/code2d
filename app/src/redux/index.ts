@@ -10,6 +10,7 @@ import * as firebase from "../lib/firebase";
 import * as articles from "./articles";
 import * as authentication from "./authentication";
 import * as message from "./message";
+import * as pages from "./pages";
 import * as settings from "./settings";
 import * as tasks from "./tasks";
 import * as timer from "./timer";
@@ -30,6 +31,7 @@ export default function() {
             articles: articles.reducer,
             authentication: authentication.reducer,
             message: message.reducer,
+            pages: pages.reducer,
             settings: settings.reducer,
             tasks: tasks.reducer,
             timer: timer.reducer,
@@ -52,7 +54,7 @@ export default function() {
     persistStore(store, {
         storage: localForage,
         transforms: [createTransform(convertImmutableToMutable, convertMutableToImmutable)],
-        whitelist: ["articles", "settings", "tasks", "videos"],
+        whitelist: ["articles", "pages", "settings", "tasks", "videos"],
     });
 
     firebase.onAuthStateChanged(async (user) => {
