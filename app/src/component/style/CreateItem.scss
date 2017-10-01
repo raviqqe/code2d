@@ -17,7 +17,7 @@
 .CreateItem-form {
 	@extend .Item-container;
 
-	min-width: 80vh;
+	width: 40em;
 	margin: 1em;
 	display: flex;
 	flex-direction: column;
