@@ -10,14 +10,10 @@
 	@include paper-border;
 
 	background: white;
-	padding: 0.5em 1em;
+	padding: 1.5em 2em;
 	position: absolute;
 	top: 100%;
 	z-index: 200;
-
-	& > * {
-		margin: 1em;
-	}
 }
 
 .PagesMenu-box-invisible {
