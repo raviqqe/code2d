@@ -23,7 +23,6 @@ $PagesMenu-icon-size: 2.5em;
 	@include paper-border;
 
 	background: white;
-	align-items: center;
 	position: absolute;
 	top: $PagesMenu-icon-size + 1em;
 	z-index: 200;
