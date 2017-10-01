@@ -19,7 +19,7 @@ export default class extends React.Component {
     public componentWillMount() {
         const script = document.createElement("script");
 
-        script.src = "//platform.twitter.com/widgets.js";
+        script.src = "https://platform.twitter.com/widgets.js";
         script.async = true;
 
         document.body.appendChild(script);
