@@ -87,15 +87,24 @@
 	margin-top: 10vh;
 	background: $black;
 	color: white;
+	height: 5em;
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
 
 	& > * {
-		margin: 1em 2em;
+		margin: 0 1em;
 
 		&:last-child {
-			margin-right: 4em;
+			margin-right: 2em;
 		}
+	}
+}
+
+.SignIn-social-buttons {
+	display: flex;
+
+	& > * {
+		margin: 0 0.7em;
 	}
 }

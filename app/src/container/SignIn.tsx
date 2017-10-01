@@ -64,8 +64,10 @@ class SignIn extends React.Component<IProps> {
                     </Feature>
                 </div>
                 <div className="SignIn-footer">
-                    <FacebookButton />
-                    <TwitterButton />
+                    <div className="SignIn-social-buttons">
+                        <FacebookButton />
+                        <TwitterButton />
+                    </div>
                     <a href={process.env.REACT_APP_FEEDBACK_URL} target="_blank">Feedback</a>
                     <a href={process.env.REACT_APP_REPOSITORY_URL} target="_blank">GitHub</a>
                 </div>
