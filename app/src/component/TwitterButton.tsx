@@ -15,4 +15,13 @@ export default class extends React.Component {
             </a>
         );
     }
+
+    public componentWillMount() {
+        const script = document.createElement("script");
+
+        script.src = "//platform.twitter.com/widgets.js";
+        script.async = true;
+
+        document.body.appendChild(script);
+    }
 }
