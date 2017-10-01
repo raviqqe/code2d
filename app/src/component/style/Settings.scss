@@ -16,6 +16,8 @@
 	transition: background $long-duration, visibility $long-duration;
 
 	> * {
+		width: 60em;
+		max-width: 90%;
 		height: auto;
 		max-height: 90%;
 		transition: transform $long-duration;
@@ -39,7 +41,6 @@
 	font-size: 1.2em;
 	background: white;
 	padding: 10vh 10vw;
-	width: 60em;
 
 	& > * {
 		margin: 2em 0;
@@ -100,6 +101,7 @@
 
 .Settings-volume-slider {
 	width: 15em;
+	max-width: 50%;
 	padding-bottom: 1.5em;
 	padding-right: 0.5em;
 }
