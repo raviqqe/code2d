@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 
 import FacebookButton from "../component/FacebookButton";
 import Feature from "../component/Feature";
+import TwitterButton from "../component/TwitterButton";
 import { actionCreators as authenticationActionCreators } from "../redux/authentication";
 import { actionCreators as messageActionCreators } from "../redux/message";
 import "./style/SignIn.css";
@@ -64,6 +65,7 @@ class SignIn extends React.Component<IProps> {
                 </div>
                 <div className="SignIn-footer">
                     <FacebookButton />
+                    <TwitterButton />
                     <a href={process.env.REACT_APP_FEEDBACK_URL} target="_blank">Feedback</a>
                     <a href={process.env.REACT_APP_REPOSITORY_URL} target="_blank">GitHub</a>
                 </div>
