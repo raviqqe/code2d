@@ -1,7 +1,7 @@
 @import "../../style/animation.scss";
 @import "../../style/colors.scss";
 
-.PagesMenuButton-container {
+.PageButton-container {
 	@include color-transition;
 
 	display: flex;
@@ -20,8 +20,8 @@
 	}
 }
 
-.PagesMenuButton-container-highlighted {
-	@extend .PagesMenuButton-container;
+.PageButton-container-highlighted {
+	@extend .PageButton-container;
 
 	color: $red;
 
@@ -34,7 +34,7 @@
 	}
 }
 
-.PagesMenuButton-icon {
+.PageButton-icon {
 	display: flex;
 	font-size: 1.8em;
 	margin-right: 0.3em;

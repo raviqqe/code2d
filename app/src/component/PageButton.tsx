@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import { actionCreators, Page } from "../redux/pages";
-import "./style/PagesMenuButton.css";
+import "./style/PageButton.css";
 
 interface IProps {
     currentPage: Page;
@@ -11,22 +11,22 @@ interface IProps {
     setCurrentPage: (page: Page) => void;
 }
 
-class PagesMenuButton extends React.Component<IProps> {
+class PageButton extends React.Component<IProps> {
     public render() {
         const { children, currentPage, icon, page, setCurrentPage } = this.props;
 
         return (
             <div
                 className={page === currentPage
-                    ? "PagesMenuButton-container-highlighted"
-                    : "PagesMenuButton-container"}
+                    ? "PageButton-container-highlighted"
+                    : "PageButton-container"}
             >
                 <div onClick={() => setCurrentPage(page)}>
-                    <div className="PagesMenuButton-icon">{icon}</div> {children}
+                    <div className="PageButton-icon">{icon}</div> {children}
                 </div>
             </div>
         );
     }
 }
 
-export default connect(({ pages }) => pages, actionCreators)(PagesMenuButton);
+export default connect(({ pages }) => pages, actionCreators)(PageButton);

@@ -4,7 +4,7 @@ import Menu = require("react-icons/lib/md/menu");
 import Video = require("react-icons/lib/md/ondemand-video");
 import Task = require("react-icons/lib/md/playlist-add-check");
 
-import PagesMenuButton from "./PagesMenuButton";
+import PageButton from "./PageButton";
 import "./style/PagesMenu.css";
 
 interface IState {
@@ -34,9 +34,9 @@ export default class extends React.Component<{}, IState> {
                     className={"PagesMenu-box" + (showMenu ? "" : "-invisible")}
                     onClick={(event) => event.stopPropagation()}
                 >
-                    <PagesMenuButton page="tasks" icon={<Task />}>tasks</PagesMenuButton>
-                    <PagesMenuButton page="articles" icon={<Article />}>articles</PagesMenuButton>
-                    <PagesMenuButton page="videos" icon={<Video />}>videos</PagesMenuButton>
+                    <PageButton page="tasks" icon={<Task />}>tasks</PageButton>
+                    <PageButton page="articles" icon={<Article />}>articles</PageButton>
+                    <PageButton page="videos" icon={<Video />}>videos</PageButton>
                 </div>
             </div>
         );
