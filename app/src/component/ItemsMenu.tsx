@@ -25,13 +25,13 @@ export default class extends React.Component<IProps> {
                     <PagesMenu />
                     <div className="ItemsMenu-states">
                         <div
-                            className={done ? "ItemsMenu-state" : "ItemsMenu-state-highlighted"}
+                            className={"ItemsMenu-state" + (done ? "" : "-highlighted")}
                             onClick={() => onItemsStateChange(false)}
                         >
                             <Todo /> {todoButtonText || "to do"}
                         </div>
                         <div
-                            className={done ? "ItemsMenu-state-highlighted" : "ItemsMenu-state"}
+                            className={"ItemsMenu-state" + (done ? "-highlighted" : "")}
                             onClick={() => onItemsStateChange(true)}
                         >
                             <Done /> {doneButtonText || "done"}
