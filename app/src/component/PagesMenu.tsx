@@ -22,21 +22,13 @@ class PagesMenu extends React.Component<IProps, IState> {
         const { showMenu } = this.state;
 
         return (
-            <div className="PagesMenu-container">
-                <PageButton
-                    current={true}
-                    page={currentPage}
-                    onClick={() => this.setState({ showMenu: true })}
-                />
-                <div
-                    className="PagesMenu-box-background"
-                    style={showMenu ? {} : { display: "none" }}
-                    onClick={() => this.setState({ showMenu: false })}
-                />
-                <div
-                    className={"PagesMenu-box" + (showMenu ? "" : "-invisible")}
-                    onClick={(event) => event.stopPropagation()}
-                >
+            <div
+                className="PagesMenu-container"
+                onMouseOver={() => this.setState({ showMenu: true })}
+                onMouseOut={() => this.setState({ showMenu: false })}
+            >
+                <PageButton current={true} page={currentPage} />
+                <div className={"PagesMenu-box" + (showMenu ? "" : "-invisible")}>
                     {pages.map((page) => page !== currentPage &&
                         <PageButton
                             key={page}

@@ -14,7 +14,7 @@ const icons = {
 
 interface IProps {
     current?: boolean;
-    onClick: () => void;
+    onClick?: () => void;
     page: Page;
 }
 

@@ -1,21 +1,8 @@
-@import "../../style/animation.scss";
 @import "../../style/border.scss";
 @import "../../style/shadow.scss";
 
-$PagesMenu-icon-size: 2.5em;
-
 .PagesMenu-container {
 	position: relative;
-}
-
-.PagesMenu-box-background {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	transition: opacity $short-duration, visibility $short-duration;
-	z-index: 100;
 }
 
 .PagesMenu-box {
@@ -25,7 +12,7 @@ $PagesMenu-icon-size: 2.5em;
 	background: white;
 	padding: 0.5em 1em;
 	position: absolute;
-	top: $PagesMenu-icon-size + 1em;
+	top: 100%;
 	z-index: 200;
 
 	& > * {
@@ -38,21 +25,4 @@ $PagesMenu-icon-size: 2.5em;
 
 	visibility: hidden;
 	opacity: 0;
-}
-
-.PagesMenu-icon {
-	font-size: $PagesMenu-icon-size;
-	cursor: pointer;
-
-	& > svg {
-		transition: transform $short-duration;
-	}
-}
-
-.PagesMenu-icon-active {
-	@extend .PagesMenu-icon;
-
-	& > svg {
-		transform: rotate(90deg);
-	}
 }
