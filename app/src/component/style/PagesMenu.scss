@@ -23,12 +23,13 @@ $PagesMenu-icon-size: 2.5em;
 	@include paper-border;
 
 	background: white;
+	padding: 0.5em 1em;
 	position: absolute;
 	top: $PagesMenu-icon-size + 1em;
 	z-index: 200;
 
 	& > * {
-		margin: 1em 2em;
+		margin: 1em;
 	}
 }
 
