@@ -64,9 +64,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (signingIn) {
                 replaceChild(message, document.createTextNode("Signed in"));
             } else {
-                replaceChild(message, document.createTextNode("Adding item..."));
-                await addItem();
-                replaceChild(message, document.createTextNode("Item added"));
+                try {
+                    replaceChild(message, document.createTextNode("Adding an item..."));
+                    await addItem();
+                    replaceChild(message, document.createTextNode("An item is added."));
+                } catch (error) {
+                    console.error(error);
+                    replaceChild(message, document.createTextNode("Couldn't add an item."));
+                }
             }
 
             setTimeout(() => window.close(), 5000);
