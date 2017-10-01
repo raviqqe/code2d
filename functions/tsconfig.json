@@ -1,9 +1,10 @@
 {
 	"compilerOptions": {
 		"lib": ["es5", "es6", "es7", "esnext"],
+		"outDir": "dist",
 		"target": "es5",
 		"downlevelIteration": true,
 		"experimentalDecorators": true
 	},
-	"exclude": ["node_modules", "__tests__", "__mocks__"]
+	"exclude": ["node_modules", "**/__tests__/*.ts", "**/__mocks__/*.ts"]
 }
