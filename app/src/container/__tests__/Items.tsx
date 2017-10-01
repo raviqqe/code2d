@@ -1,7 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { BrowserRouter, Route } from "react-router-dom";
 
 import { dispatch } from "../../lib/utils";
 import createStore from "../../redux";
@@ -18,29 +17,15 @@ function getAuthenticationState(store): typeof initialState {
 function renderItems(store) {
     ReactDOM.render(
         <Provider store={store}>
-            <BrowserRouter>
-                <div>
-                    <Route
-                        exact={true}
-                        path="/"
-                        render={() =>
-                            <Items
-                                currentItem={null}
-                                doneItems={[]}
-                                itemComponent={() => <div>item</div>}
-                                menuComponent={() => <div>menu</div>}
-                                setCurrentItem={() => undefined}
-                                setItems={() => undefined}
-                                todoItems={[]}
-                            />}
-                    />
-                    <Route
-                        exact={true}
-                        path="/sign-in"
-                        render={() => <div>sign-in page mock</div>}
-                    />
-                </div>
-            </BrowserRouter>
+            <Items
+                currentItem={null}
+                doneItems={[]}
+                itemComponent={() => <div>item</div>}
+                menuComponent={() => <div>menu</div>}
+                setCurrentItem={() => undefined}
+                setItems={() => undefined}
+                todoItems={[]}
+            />
         </Provider>,
         document.createElement("div"));
 }
