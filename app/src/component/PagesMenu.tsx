@@ -34,9 +34,9 @@ export default class extends React.Component<{}, IState> {
                     className={"PagesMenu-box" + (showMenu ? "" : "-invisible")}
                     onClick={(event) => event.stopPropagation()}
                 >
-                    <PagesMenuButton path="/tasks" icon={<Task />}>tasks</PagesMenuButton>
-                    <PagesMenuButton path="/articles" icon={<Article />}>articles</PagesMenuButton>
-                    <PagesMenuButton path="/videos" icon={<Video />}>videos</PagesMenuButton>
+                    <PagesMenuButton page="tasks" icon={<Task />}>tasks</PagesMenuButton>
+                    <PagesMenuButton page="articles" icon={<Article />}>articles</PagesMenuButton>
+                    <PagesMenuButton page="videos" icon={<Video />}>videos</PagesMenuButton>
                 </div>
             </div>
         );

@@ -2,7 +2,6 @@ import * as React from "react";
 import ScrollBar = require("react-perfect-scrollbar");
 import "react-perfect-scrollbar/dist/css/styles.css";
 import { connect } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
 
 import ItemList from "../component/ItemList";
 import { IItem, include } from "../lib/items";
@@ -33,10 +32,6 @@ class Items<A extends IItem> extends React.Component<IProps<A>, IState> {
 
         const Item = this.props.itemComponent;
         const ItemsMenu = this.props.menuComponent;
-
-        if (!signedIn) {
-            return <Redirect to="/sign-in" />;
-        }
 
         return (
             <div className="Items-container">

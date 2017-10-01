@@ -13,13 +13,10 @@
 		color: $black;
 	}
 
-	& > a {
+	& > div {
+		cursor: pointer;
 		display: flex;
 		align-items: center;
-
-		&:hover {
-			text-decoration: none;
-		}
 	}
 }
 
@@ -32,7 +29,7 @@
 		color: $red;
 	}
 
-	& > a {
+	& > div {
 		cursor: default;
 	}
 }

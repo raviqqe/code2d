@@ -1,7 +1,6 @@
 import * as React from "react";
 import GitHub = require("react-icons/lib/go/mark-github");
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
 
 import FacebookButton from "../component/FacebookButton";
 import Feature from "../component/Feature";
@@ -19,9 +18,7 @@ interface IProps {
 
 class SignIn extends React.Component<IProps> {
     public render() {
-        if (this.props.signedIn) {
-            return <Redirect to="/" />;
-        } else if (this.props.signingIn) {
+        if (this.props.signingIn) {
             this.props.sendMessage("Signing in...");
         }
 

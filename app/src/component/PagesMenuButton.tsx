@@ -1,27 +1,32 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
+import { actionCreators, Page } from "../redux/pages";
 import "./style/PagesMenuButton.css";
 
 interface IProps {
+    currentPage: Page;
     icon: JSX.Element;
-    path: string;
+    page: Page;
+    setCurrentPage: (page: Page) => void;
 }
 
-export default class extends React.Component<IProps> {
+class PagesMenuButton extends React.Component<IProps> {
     public render() {
-        const { children, icon, path } = this.props;
+        const { children, currentPage, icon, page, setCurrentPage } = this.props;
 
         return (
             <div
-                className={path === window.location.pathname
+                className={page === currentPage
                     ? "PagesMenuButton-container-highlighted"
                     : "PagesMenuButton-container"}
             >
-                <Link to={path}>
+                <div onClick={() => setCurrentPage(page)}>
                     <div className="PagesMenuButton-icon">{icon}</div> {children}
-                </Link>
+                </div>
             </div>
         );
     }
 }
+
+export default connect(({ pages }) => pages, actionCreators)(PagesMenuButton);
