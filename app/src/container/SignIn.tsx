@@ -3,6 +3,7 @@ import GitHub = require("react-icons/lib/go/mark-github");
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
+import FacebookButton from "../component/FacebookButton";
 import Feature from "../component/Feature";
 import { actionCreators as authenticationActionCreators } from "../redux/authentication";
 import { actionCreators as messageActionCreators } from "../redux/message";
@@ -62,6 +63,7 @@ class SignIn extends React.Component<IProps> {
                     </Feature>
                 </div>
                 <div className="SignIn-footer">
+                    <FacebookButton />
                     <a href={process.env.REACT_APP_FEEDBACK_URL} target="_blank">Feedback</a>
                     <a href={process.env.REACT_APP_REPOSITORY_URL} target="_blank">GitHub</a>
                 </div>
