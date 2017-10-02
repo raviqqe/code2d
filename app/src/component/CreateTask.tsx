@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import { INewTask } from "../lib/tasks";
 import { actionCreators } from "../redux/tasks";
+import Button from "./Button";
 import CreateItem from "./CreateItem";
 import "./style/CreateTask.css";
 
@@ -41,8 +42,8 @@ class CreateTask extends React.Component<IProps, IState> {
                     onChange={({ target: { value } }) => this.setState({ description: value })}
                 />
                 <div className="CreateTask-buttons">
-                    <button className="CreateTask-button" type="submit">Create</button>
-                    <button className="CreateTask-cancel-button" type="reset">Cancel</button>
+                    <Button className="CreateTask-button" type="submit">Create</Button>
+                    <Button className="CreateTask-cancel-button" type="reset">Cancel</Button>
                 </div>
             </CreateItem>
         );

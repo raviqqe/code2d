@@ -1,6 +1,7 @@
 import * as React from "react";
 import Plus = require("react-icons/lib/md/add");
 
+import Button from "./Button";
 import "./style/CreateItem.css";
 
 interface IProps {
@@ -19,12 +20,12 @@ export default class extends React.Component<IProps, IState> {
 
         return (
             <div>
-                <button
+                <Button
                     className="CreateItem-button"
                     onClick={() => this.setState({ creatingItem: true })}
                 >
                     <Plus /><div>new</div>
-                </button>
+                </Button>
                 {this.state.creatingItem &&
                     <div
                         className="CreateItem-form-container"

@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 
 import { actionCreators as authenticationActionCreators } from "../redux/authentication";
 import { actionCreators as settingsActionCreators } from "../redux/settings";
+import Button from "./Button";
 import SettingsItem from "./SettingsItem";
 import "./style/Settings.css";
 import Switch from "./Switch";
@@ -62,10 +63,10 @@ class Settings extends React.Component<IProps> {
                             }
                         />
                         <div className="Settings-buttons">
-                            <button onClick={signOut}>Sign out</button>
-                            <button className="Settings-negative-button" onClick={deleteAccount}>
+                            <Button onClick={signOut}>Sign out</Button>
+                            <Button className="Settings-negative-button" onClick={deleteAccount}>
                                 Delete account
-                        </button>
+                            </Button>
                         </div>
                         <div className="Settings-footer">
                             <a href={process.env.REACT_APP_FEEDBACK_URL} target="_blank">Feedback</a>

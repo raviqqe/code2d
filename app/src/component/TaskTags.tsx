@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 
 import { ITask } from "../lib/tasks";
 import { actionCreators } from "../redux/tasks";
+import Button from "./Button";
 import "./style/TaskTags.css";
 import TaskTag from "./TaskTag";
 
@@ -43,13 +44,13 @@ class TaskTags extends React.Component<IProps, IState> {
                                 });
                             }}
                         />)}
-                    <button
+                    <Button
                         style={taggingTask ? { display: "none" } : {}}
                         className="TaskTags-button"
                         onClick={() => this.setState({ taggingTask: true })}
                     >
                         <Plus />
-                    </button>
+                    </Button>
                 </div>
                 {taggingTask &&
                     <form

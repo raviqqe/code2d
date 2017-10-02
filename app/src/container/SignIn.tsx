@@ -2,6 +2,7 @@ import * as React from "react";
 import GitHub = require("react-icons/lib/go/mark-github");
 import { connect } from "react-redux";
 
+import Button from "../component/Button";
 import FacebookButton from "../component/FacebookButton";
 import Feature from "../component/Feature";
 import Screenshots from "../component/Screenshots";
@@ -33,9 +34,9 @@ class SignIn extends React.Component<IProps> {
                             Productivity tools for software engineers.
                         </div>
                     </div>
-                    <button className="SignIn-button" onClick={this.props.signIn}>
+                    <Button className="SignIn-button" onClick={this.props.signIn}>
                         <GitHub /> Sign in with GitHub
-                    </button>
+                    </Button>
                 </div>
                 <div className="SignIn-features-paper">
                     <Feature

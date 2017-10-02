@@ -3,6 +3,7 @@ import * as React from "react";
 import Square = require("react-icons/lib/md/stop");
 import { connect } from "react-redux";
 
+import Button from "../component/Button";
 import * as notification from "../lib/notification";
 import { ITask } from "../lib/tasks";
 import { actionCreators as tasksActionCreators } from "../redux/tasks";
@@ -57,7 +58,7 @@ class Timer extends React.Component<IProps, IState> {
                         {numeral(seconds % 60).format("00")}
                     </div>
                 </div>
-                <button
+                <Button
                     className="Timer-button"
                     onClick={() => {
                         this.saveSpentTime();
@@ -65,7 +66,7 @@ class Timer extends React.Component<IProps, IState> {
                     }}
                 >
                     <Square />
-                </button>
+                </Button>
             </div>
         );
     }

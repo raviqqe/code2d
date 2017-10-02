@@ -41,22 +41,6 @@ a {
 	}
 }
 
-button {
-	@include button-shadow;
-	@include button-border;
-
-	background: $red;
-	color: white;
-	cursor: pointer;
-	font-size: 1em;
-	padding: {
-		top: 0.4em;
-		bottom: 0.4em;
-		left: 1em;
-		right: 1em;
-	};
-}
-
 input, textarea {
 	@include font;
 
