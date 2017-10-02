@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 import FacebookButton from "../component/FacebookButton";
 import Feature from "../component/Feature";
+import Screenshots from "../component/Screenshots";
 import TwitterButton from "../component/TwitterButton";
 import { actionCreators as authenticationActionCreators } from "../redux/authentication";
 import { actionCreators as messageActionCreators } from "../redux/message";
@@ -60,6 +61,7 @@ class SignIn extends React.Component<IProps> {
                         Keep other things away and grow yourself.
                     </Feature>
                 </div>
+                <Screenshots />
                 <div className="SignIn-footer">
                     <div className="SignIn-social-buttons">
                         <FacebookButton />

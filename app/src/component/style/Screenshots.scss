@@ -1,0 +1,34 @@
+@import "../../style/colors.scss";
+
+.Screenshots-container {
+	background: white;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 5em;
+	padding: {
+		top: 1em;
+		bottom: 3.5em;
+	};
+
+	> * {
+		margin: 0.8em;
+
+		&:nth-child(2) {
+			border: {
+				style: solid;
+				width: 1px;
+				color: $grey;
+			};
+			width: 70em;
+			max-width: 85%;
+		}
+	}
+}
+
+.Screenshots-title {
+	font-size: 2em;
+	font-weight: bold;
+	text-align: center;
+}
