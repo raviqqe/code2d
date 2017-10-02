@@ -3,10 +3,3 @@ $paper-border-radius: 0.2rem;
 @mixin paper-border {
 	border-radius: $paper-border-radius;
 }
-
-@mixin button-border {
-	border: {
-		radius: 0.5rem;
-		width: 0;
-	};
-}

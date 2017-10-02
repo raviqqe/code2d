@@ -1,11 +1,6 @@
 @import "../../style/colors.scss";
-@import "../../style/border.scss";
-@import "../../style/shadow.scss";
 
 .Button-container {
-	@include button-shadow;
-	@include button-border;
-
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -19,4 +14,22 @@
 		left: 1em;
 		right: 1em;
 	};
+	border: {
+		radius: 0.5rem;
+		width: 0;
+	};
+
+	&:hover {
+		position: relative;
+		top: -1px;
+		left: -1px;
+		box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+	}
+
+	&:active {
+		position: relative;
+		top: 0px;
+		left: 0px;
+		box-shadow: none;
+	}
 }

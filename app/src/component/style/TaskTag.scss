@@ -1,45 +1,31 @@
 @import "../../style/colors.scss";
-@import "../../style/shadow.scss";
 
 $TaskTag-size: 1.8em;
 
 @mixin TaskTag-tag-like {
-	@include button-shadow;
-
 	font-size: 0.9em;
-	margin: 0.2em;
 	border-radius: $TaskTag-size / 2;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	height: $TaskTag-size;
+	margin: 0.2em;
 }
 
 .TaskTag-container {
 	@include TaskTag-tag-like;
 
 	background: $light-blue;
-	color: white;
-	height: $TaskTag-size;
-	padding: {
-		bottom: 0.1em;
-		left: 0.8em;
-		right: 0.8em;
-	};
-	cursor: pointer;
+	padding: 0.1em 0.8em;
 }
 
 .TaskTag-container-highlighted {
 	@extend .TaskTag-container;
 
 	background: $red;
-	color: white;
 }
 
 .TaskTag-container-unhighlighted {
 	@extend .TaskTag-container;
 
 	background: $light-grey;
-	color: white;
 }
 
 .TaskTag-remove-button {

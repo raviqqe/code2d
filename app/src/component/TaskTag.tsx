@@ -2,6 +2,7 @@ import * as _ from "lodash";
 import * as React from "react";
 import Remove = require("react-icons/lib/md/close");
 
+import Button from "./Button";
 import "./style/TaskTag.css";
 
 interface IProps {
@@ -23,14 +24,12 @@ export default class extends React.Component<IProps, IState> {
         const showRemoveButton = this.props.showRemoveButton && this.state.mouseOver;
 
         return (
-            <div
+            <Button
                 className={this.containerClassName}
-                onClick={(event) => {
+                onClick={() => {
                     if (onClick) {
                         onClick();
                     }
-
-                    event.stopPropagation();
                 }}
                 onMouseOver={() => this.setState({ mouseOver: true })}
                 onMouseOut={() => this.setState({ mouseOver: false })}
@@ -42,7 +41,7 @@ export default class extends React.Component<IProps, IState> {
                 >
                     <Remove />
                 </div>
-            </div>
+            </Button>
         );
     }
 
