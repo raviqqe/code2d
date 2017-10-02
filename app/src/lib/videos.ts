@@ -2,7 +2,7 @@ import { parse as parseUrl } from "url";
 
 import * as functions from "./functions";
 import { IItem } from "./items";
-import StatefulItemsRepository from "./stateful_items_repository";
+import StatefulItemsRepository from "./stateful-items-repository";
 
 export interface IVideo extends IItem {
     description?: string;

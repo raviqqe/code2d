@@ -3,7 +3,7 @@ import createSagaMiddleware from "redux-saga";
 import { all } from "redux-saga/effects";
 
 import { IItem } from "../../lib/items";
-import StatefulItemsRepository from "../../lib/stateful_items_repository";
+import StatefulItemsRepository from "../../lib/stateful-items-repository";
 import { dispatch } from "../../lib/utils";
 import createItemsDuck, { IState } from "../items";
 import * as message from "../message";

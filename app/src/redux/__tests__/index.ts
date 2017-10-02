@@ -11,7 +11,7 @@ jest.mock("../../lib/firebase", () => ({
     },
 }));
 
-jest.mock("../../lib/items_repository", () => ({
+jest.mock("../../lib/items-repository", () => ({
     default: class {
         public get = () => [];
     },

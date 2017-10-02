@@ -6,7 +6,7 @@ import * as firebase from "../../lib/firebase";
 import { dispatch } from "../../lib/utils";
 import { actionCreators, initialState, reducer, signInActions } from "../authentication";
 
-jest.mock("../../lib/items_repository", () => ({
+jest.mock("../../lib/items-repository", () => ({
     default: class {
         public get = () => [];
     },

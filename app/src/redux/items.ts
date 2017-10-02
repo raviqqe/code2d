@@ -7,7 +7,7 @@ import actionCreatorFactory from "typescript-fsa";
 import { ReducerBuilder, reducerWithInitialState } from "typescript-fsa-reducers";
 
 import { createId, IItem, include } from "../lib/items";
-import ItemsRepository from "../lib/items_repository";
+import ItemsRepository from "../lib/items-repository";
 import * as message from "./message";
 import { takeEvery } from "./utils";
 

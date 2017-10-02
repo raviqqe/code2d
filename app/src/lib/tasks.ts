@@ -1,7 +1,7 @@
 import * as _ from "lodash";
 
 import { IItem } from "./items";
-import StatefulItemsRepository from "./stateful_items_repository";
+import StatefulItemsRepository from "./stateful-items-repository";
 
 export interface INewTask {
     name: string;
