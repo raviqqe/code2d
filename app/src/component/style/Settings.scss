@@ -40,7 +40,7 @@
 
 	font-size: 1.2em;
 	background: white;
-	padding: 10vh 10vw;
+	padding: 4em 6em;
 
 	& > * {
 		margin: 2em 0;
@@ -85,6 +85,7 @@
 }
 
 .Settings-footer {
+	font-size: 0.9em;
 	border-top: {
 		style: solid;
 		width: 1px;
@@ -94,9 +95,10 @@
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
+	flex-wrap: wrap;
 
 	& > * {
-		margin: 0 1em;
+		margin: 0 0.6em;
 	}
 }
 
