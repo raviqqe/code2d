@@ -36,3 +36,5 @@ class LocalStorageMock {
         // Do nothing.
     }
 };
+
+(window as any).matchMedia = () => ({ matches: true });
