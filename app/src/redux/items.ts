@@ -92,13 +92,19 @@ export default function createItemsDuck<A extends IItem, B>(
             takeEvery(
                 getItems.started,
                 function* _(): SagaIterator {
-                    yield put(getItems.done({
-                        params: null,
-                        result: yield all({
-                            doneItems: call(repository(true).get),
-                            todoItems: call(repository(false).get),
-                        }),
-                    }));
+                    try {
+                        yield put(getItems.done({
+                            params: null,
+                            result: yield all({
+                                doneItems: call(repository(true).get),
+                                todoItems: call(repository(false).get),
+                            }),
+                        }));
+                    } catch (error) {
+                        yield put(message.actionCreators.sendMessage(
+                            "Couldn't sync data.",
+                            { error: true }));
+                    }
                 }),
             takeEvery(
                 toggleItemState,

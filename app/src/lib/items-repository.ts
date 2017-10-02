@@ -13,8 +13,12 @@ export default class ItemsRepository<A extends IItem> {
             return json.decode(new Buffer((await axios.get(
                 await this.reference.getDownloadURL(), { responseType: "arraybuffer" })).data));
         } catch (error) {
-            console.error(error);
-            return [];
+            if (error.code === "storage/object-not-found") {
+                console.error(error);
+                return [];
+            } else {
+                throw error;
+            }
         }
     }
 
