@@ -6,7 +6,7 @@ export default class extends React.Component {
             <iframe
                 src={"https://www.facebook.com/plugins/share_button.php" +
                     `?href=https%3A%2F%2F${process.env.REACT_APP_DOMAIN}` +
-                    "&layout=button_count" +
+                    "&layout=button" +
                     "&size=large" +
                     "&mobile_iframe=true" +
                     `&appId=${process.env.REACT_APP_FACEBOOK_APP_ID}` +
