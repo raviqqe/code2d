@@ -81,6 +81,8 @@ class SignIn extends React.Component<IProps> {
                     </div>
                     <a href={process.env.REACT_APP_FEEDBACK_URL} target="_blank">Feedback</a>
                     <a href={process.env.REACT_APP_REPOSITORY_URL} target="_blank">GitHub</a>
+                    <a href="/terms_of_use.pdf" target="_blank">Terms of Use</a>
+                    <a href="/privacy_policy.pdf" target="_blank">Privacy Policy</a>
                 </div>
             </div>
         );
