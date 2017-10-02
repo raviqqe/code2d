@@ -26,7 +26,7 @@ it("renders a full-screen timer", async () => {
     }));
 
     const component = mount(<Provider store={store}><Timer /></Provider>);
-    const buttons = component.find(".Timer-button");
+    const buttons = component.find("button.Timer-button");
 
     expect(buttons.length).toBe(1);
     buttons.first().simulate("click");
