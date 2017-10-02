@@ -30,7 +30,7 @@ class SignIn extends React.Component<IProps> {
                     <div className="SignIn-title-container">
                         <img className="SignIn-icon" src={require("../images/icon.svg")} />
                         <div className="SignIn-title">{process.env.REACT_APP_NAME}</div>
-                        <div className="SignIn-catch-phrase">
+                        <div className="SignIn-short-description">
                             Productivity tools for software engineers.
                         </div>
                     </div>
@@ -38,29 +38,40 @@ class SignIn extends React.Component<IProps> {
                         <GitHub /> Sign in with GitHub
                     </Button>
                 </div>
-                <div className="SignIn-features-paper">
-                    <Feature
-                        title="Manage everything to do"
-                        image={require("../images/tasks.svg")}
-                    >
-                        Manage tasks to do,
-                        any web articles to read,
-                        and YouTube videos to watch
-                        in one place.
-                    </Feature>
-                    <Feature
-                        title="Built-in pomodoro timer"
-                        image={require("../images/timer.svg")}
-                    >
-                        Use pomodoro technique to be productive
-                        and make your work done faster.
-                    </Feature>
-                    <Feature
-                        title="Focus on engineering"
-                        image={require("../images/focus.svg")}
-                    >
-                        Keep other things away and grow yourself.
-                    </Feature>
+                <div className="SignIn-description">
+                    <div className="SignIn-overview">
+                        <div className="SignIn-overview-title">
+                            Code Harder and Better
+                        </div>
+                        <div className="SignIn-overview-text">
+                            code2d is a set of productivity tools which keep
+                            you productive and learning new things everyday.
+                        </div>
+                    </div>
+                    <div className="SignIn-features">
+                        <Feature
+                            title="Manage everything to do"
+                            image={require("../images/tasks.svg")}
+                        >
+                            Manage tasks to do,
+                            articles to read,
+                            and YouTube videos to watch
+                            in one place.
+                        </Feature>
+                        <Feature
+                            title="Built-in pomodoro timer"
+                            image={require("../images/timer.svg")}
+                        >
+                            Use pomodoro technique to be productive
+                            and make your work done faster.
+                        </Feature>
+                        <Feature
+                            title="Focus on engineering"
+                            image={require("../images/focus.svg")}
+                        >
+                            Keep other things away and grow yourself.
+                        </Feature>
+                    </div>
                 </div>
                 <Screenshots />
                 <div className="SignIn-footer">

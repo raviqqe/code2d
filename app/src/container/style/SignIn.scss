@@ -1,5 +1,19 @@
 @import "../../style/colors.scss";
 
+@mixin SignIn-children-margins {
+	> * {
+		margin: 0.5em 0;
+
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
 .SignIn-container {
 	display: flex;
 	flex-direction: column;
@@ -42,12 +56,13 @@
 	box-sizing: content-box;
 }
 
-.SignIn-catch-phrase {
-	font-size: 1.2em;
+.SignIn-short-description {
+	font-size: 1.3em;
 	margin-top: 0.8em;
 }
 
 .SignIn-button {
+	font-size: 1.2em;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -64,16 +79,42 @@
 	}
 }
 
-.SignIn-features-paper {
+.SignIn-description {
+	@include SignIn-children-margins;
+
 	background: white;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	box-shadow: 0.5em 0.5em 2em rgba(0, 0, 0, 0.3);
+	width: 80em;
+	max-width: 90%;
+	padding: 8vh;
+}
+
+.SignIn-overview {
+	@include SignIn-children-margins;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.SignIn-overview-title {
+	font-size: 3em;
+	font-weight: bold;
+}
+
+.SignIn-overview-text {
+	font-size: 1.2em;
+	max-width: 40em;
+}
+
+.SignIn-features {
 	display: flex;
 	justify-content: space-evenly;
 	align-items: flex-start;
 	flex-wrap: wrap;
-	box-shadow: 0.5em 0.5em 2em rgba(0, 0, 0, 0.3);
-	width: 80em;
-	max-width: 90%;
-	padding: 5vh;
 
 	& > * {
 		width: 22%;
