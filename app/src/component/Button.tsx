@@ -19,10 +19,10 @@ export default class extends React.Component<IProps> {
         return (
             <button
                 className={"Button-container " + className}
-                onClick={(event) => {
+                onClick={onClick && ((event) => {
                     onClick();
                     event.stopPropagation();
-                }}
+                })}
                 onMouseOver={onMouseOver}
                 onMouseOut={onMouseOut}
                 style={style}
