@@ -11,7 +11,6 @@ end
 
 task build: %i[clean deps dist/images] do
   sh 'npx webpack'
-  sh 'npx node-sass-chokidar public -o dist'
 
   [16, 19, 48, 128].each do |size|
     sh %W[inkscape
