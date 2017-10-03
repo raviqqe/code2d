@@ -59,12 +59,10 @@ export default class extends React.Component<{}, IState> {
     }
 
     private addItem = async (): Promise<void> => {
-        // TODO: Handle response errors.
-
         await new Promise((resolve, reject) => chrome.runtime.sendMessage(
             chrome.runtime.id,
             { url: window.location.href },
             undefined,
-            resolve));
+            (success: boolean) => success ? resolve() : reject()));
     }
 }
