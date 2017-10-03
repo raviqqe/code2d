@@ -40,4 +40,4 @@ export default httpsFunction(
         await file.write([{ id: nanoid(), ...item }, ...items]);
 
         response.sendStatus(200);
-    });
+    }, { noCache: true });
