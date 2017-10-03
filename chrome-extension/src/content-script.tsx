@@ -26,17 +26,17 @@ async function addItem(): Promise<void> {
         });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    const root = document.createElement("div");
-    root.style.display = "none";
-    root.style.position = "fixed";
-    root.style.top = "1em";
-    root.style.right = "1em";
+const root = document.createElement("div");
+root.style.display = "none";
+root.style.position = "fixed";
+root.style.top = "1em";
+root.style.right = "1em";
 
-    document.body.appendChild(root);
+document.body.appendChild(root);
+console.log("Hello, world!");
 
-    chrome.runtime.onMessage.addListener(() => {
-        root.style.display = "block";
-        ReactDOM.render(<div>Hello, world!</div>, root);
-    });
+chrome.runtime.onMessage.addListener(() => {
+    console.log("Message is received!");
+    root.style.display = "block";
+    ReactDOM.render(<div>Hello, world!</div>, root);
 });

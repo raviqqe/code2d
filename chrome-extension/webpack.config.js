@@ -1,6 +1,6 @@
 module.exports = {
   entry: {
-    popup: './src/popup.ts',
+    background: './src/background.ts',
     'content-script': './src/content-script.tsx'
   },
   output: {
