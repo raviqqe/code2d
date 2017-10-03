@@ -6,7 +6,7 @@
 
 	"browser_action": {
 		"default_icon": "images/icon_19.png",
-		"default_title": "code2d"
+		"default_title": "Add a current page"
 	},
 	"icons": {
 		"16": "images/icon_16.png",
