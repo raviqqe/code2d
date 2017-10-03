@@ -9,8 +9,9 @@ firebase.initializeApp({
     authDomain: `${config.firebase.projectId}.firebaseapp.com`,
 });
 
-function sendNotification(message: string) {
+function sendNotification(message: string, contextMessage?: string) {
     chrome.notifications.create(null, {
+        contextMessage,
         iconUrl: "images/icon_128.png",
         message,
         title: "code2d",
@@ -25,7 +26,7 @@ firebase.auth().onAuthStateChanged(async (user) => signedIn = user !== null);
 chrome.browserAction.onClicked.addListener(async ({ url }) => {
     if (signedIn) {
         try {
-            await axios.get(
+            const { name } = (await axios.get(
                 format({
                     hostname: `us-central1-${config.firebase.projectId}.cloudfunctions.net`,
                     pathname: "/addItem",
@@ -37,9 +38,9 @@ chrome.browserAction.onClicked.addListener(async ({ url }) => {
                     },
                     // HACK: Invalidate caches by setting ineffective date parameters.
                     params: { url, date: Date.now() },
-                });
+                })).data;
 
-            sendNotification("An item is added.");
+            sendNotification("An item is added.", name);
         } catch (error) {
             console.error(error);
             sendNotification("Could not add an item.");
