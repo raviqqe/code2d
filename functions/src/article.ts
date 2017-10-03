@@ -19,9 +19,8 @@ export function convertIntoUrl(urlOrPath: string, baseUrl: string): string {
 export async function convertUrlIntoArticle(url: string) {
     const { date, favicon, image, softTitle, text, title }
         = unfluff((await axios.get(url, { headers: { Accept: "text/html" } })).data);
-    const name = title || softTitle;
 
-    if (!name) {
+    if (!softTitle) {
         throw new Error("Failed to extract title.");
     }
 
@@ -29,7 +28,7 @@ export async function convertUrlIntoArticle(url: string) {
         date,
         favicon: convertIntoUrl(favicon, url),
         image: convertIntoUrl(image, url),
-        name,
+        name: softTitle,
         text,
         url,
     };
