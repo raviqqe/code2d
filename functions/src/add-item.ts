@@ -34,7 +34,11 @@ export default httpsFunction(
         try {
             items = await file.read();
         } catch (error) {
-            console.error(error);
+            if (error.code === 404) {
+                console.log(error);
+            } else {
+                throw error;
+            }
         }
 
         await file.write([{ id: nanoid(), ...item }, ...items]);
