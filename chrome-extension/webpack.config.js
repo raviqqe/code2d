@@ -1,17 +1,14 @@
 module.exports = {
-  entry: {
-    background: './src/background.ts',
-    'content-script': './src/content-script.tsx'
-  },
+  entry: './src/background.ts',
   output: {
-    filename: 'dist/[name].js'
+    filename: 'dist/background.js'
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js']
+    extensions: ['.ts', '.js']
   },
   module: {
     loaders: [
-      { test: /\.tsx?$/, loader: 'ts-loader' }
+      { test: /\.ts$/, loader: 'ts-loader' }
     ]
   }
 }

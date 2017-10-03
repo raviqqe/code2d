@@ -16,12 +16,9 @@
 	"background": {
 		"scripts": ["background.js"]
 	},
-	"content_scripts": [{
-		"matches": ["http://*/*", "https://*/*"],
-		"js": ["content-script.js"]
-	}],
 	"permissions": [
 		"background",
+		"notifications",
 		"tabs",
 		"http://*/*",
 		"https://*/*"

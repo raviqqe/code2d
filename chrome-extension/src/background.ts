@@ -9,18 +9,21 @@ firebase.initializeApp({
     authDomain: `${config.firebase.projectId}.firebaseapp.com`,
 });
 
+function sendNotification(message: string) {
+    chrome.notifications.create(null, {
+        iconUrl: "images/icon_128.png",
+        message,
+        title: "code2d",
+        type: "basic",
+    });
+}
+
 let signedIn = false;
 
-chrome.browserAction.onClicked.addListener(async (tab) => {
-    if (signedIn) {
-        chrome.tabs.sendMessage(tab.id, {});
-    } else {
-        await firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider());
-    }
-});
+firebase.auth().onAuthStateChanged(async (user) => signedIn = user !== null);
 
-chrome.runtime.onMessage.addListener(({ url }, _, sendResponse) => {
-    (async () => {
+chrome.browserAction.onClicked.addListener(async ({ url }) => {
+    if (signedIn) {
         try {
             await axios.get(
                 format({
@@ -32,18 +35,16 @@ chrome.runtime.onMessage.addListener(({ url }, _, sendResponse) => {
                     headers: {
                         Authorization: `Bearer ${await firebase.auth().currentUser.getIdToken()}`,
                     },
-                    // HACK: Invalidate caches by setting date parameters.
+                    // HACK: Invalidate caches by setting ineffective date parameters.
                     params: { url, date: Date.now() },
                 });
 
-            sendResponse(null);
+            sendNotification("An item is added.");
         } catch (error) {
             console.error(error);
-            sendResponse(error);
+            sendNotification("Could not add an item.");
         }
-    })();
-
-    return true; // Keep connections.
+    } else {
+        await firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider());
+    }
 });
-
-firebase.auth().onAuthStateChanged(async (user) => signedIn = user !== null);
