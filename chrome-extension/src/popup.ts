@@ -1,3 +1,2 @@
-document.addEventListener(
-    "DOMContentLoaded",
-    () => chrome.runtime.sendMessage(null, null));
+chrome.runtime.sendMessage(null, {});
+window.close();
