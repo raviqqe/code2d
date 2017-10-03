@@ -10,6 +10,7 @@ const commonStyle = {
     right: "1em",
     top: "1em",
     transition: "visibility 0.1s, transform: 0.1s",
+    zIndex: 2049,
 };
 
 const hiddenStyle = {
