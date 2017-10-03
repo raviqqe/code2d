@@ -14,6 +14,10 @@
 		"48": "images/icon_48.png",
 		"128": "images/icon_128.png"
 	},
+	"content_scripts": [{
+		"matches": ["http://*/*", "https://*/*"],
+		"js": ["content-script.js"]
+	}],
 	"permissions": [
 		"activeTab",
 		"https://us-central1-work2d-162714.cloudfunctions.net/*"
