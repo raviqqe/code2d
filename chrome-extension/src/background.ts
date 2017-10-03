@@ -32,7 +32,8 @@ chrome.runtime.onMessage.addListener(({ url }, _, sendResponse) => {
                     headers: {
                         Authorization: `Bearer ${await firebase.auth().currentUser.getIdToken()}`,
                     },
-                    params: { url },
+                    // HACK: Invalidate caches by setting date parameters.
+                    params: { url, date: Date.now() },
                 });
 
             sendResponse(null);
