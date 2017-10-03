@@ -43,5 +43,5 @@ export default httpsFunction(
 
         await file.write([{ id: nanoid(), ...item }, ...items]);
 
-        response.sendStatus(200);
+        response.send(item);
     }, { noCache: true });
