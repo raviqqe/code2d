@@ -1,7 +1,7 @@
 module.exports = {
   entry: {
     popup: './src/popup.ts',
-    'content-script': './src/content-script.ts'
+    'content-script': './src/content-script.tsx'
   },
   output: {
     filename: 'dist/[name].js'
@@ -11,7 +11,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.ts$/, loader: 'ts-loader' }
+      { test: /\.tsx?$/, loader: 'ts-loader' }
     ]
   }
 }

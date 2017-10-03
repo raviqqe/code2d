@@ -1,5 +1,7 @@
 import axios from "axios";
 import * as firebase from "firebase";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 import * as url from "url";
 
 const config = require("../config.json");
@@ -25,7 +27,16 @@ async function addItem(): Promise<void> {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    const root = document.createElement("div");
+    root.style.display = "none";
+    root.style.position = "fixed";
+    root.style.top = "1em";
+    root.style.right = "1em";
+
+    document.body.appendChild(root);
+
     chrome.runtime.onMessage.addListener(() => {
-        // TODO: Render something..
+        root.style.display = "block";
+        ReactDOM.render(<div>Hello, world!</div>, root);
     });
 });
