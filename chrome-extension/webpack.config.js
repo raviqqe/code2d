@@ -1,6 +1,6 @@
 module.exports = {
   entry: {
-    index: './src/index.ts',
+    popup: './src/popup.ts',
     'content-script': './src/content-script.ts'
   },
   output: {
