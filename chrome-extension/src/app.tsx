@@ -63,6 +63,6 @@ export default class extends React.Component<{}, IState> {
             chrome.runtime.id,
             { url: window.location.href },
             undefined,
-            (success: boolean) => success ? resolve() : reject()));
+            (error: Error) => error ? reject(error) : resolve()));
     }
 }

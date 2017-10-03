@@ -19,26 +19,30 @@ chrome.browserAction.onClicked.addListener(async (tab) => {
     }
 });
 
-chrome.runtime.onMessage.addListener(async ({ url }, _, sendResponse) => {
-    try {
-        await axios.get(
-            format({
-                hostname: `us-central1-${config.firebase.projectId}.cloudfunctions.net`,
-                pathname: "/addItem",
-                protocol: "https",
-            }),
-            {
-                headers: {
-                    Authorization: `Bearer ${await firebase.auth().currentUser.getIdToken()}`,
-                },
-                params: { url },
-            });
+chrome.runtime.onMessage.addListener(({ url }, _, sendResponse) => {
+    (async () => {
+        try {
+            await axios.get(
+                format({
+                    hostname: `us-central1-${config.firebase.projectId}.cloudfunctions.net`,
+                    pathname: "/addItem",
+                    protocol: "https",
+                }),
+                {
+                    headers: {
+                        Authorization: `Bearer ${await firebase.auth().currentUser.getIdToken()}`,
+                    },
+                    params: { url },
+                });
 
-        sendResponse(true);
-    } catch (error) {
-        console.error(error);
-        sendResponse(false);
-    }
+            sendResponse(null);
+        } catch (error) {
+            console.error(error);
+            sendResponse(error);
+        }
+    })();
+
+    return true; // Keep connections.
 });
 
 firebase.auth().onAuthStateChanged(async (user) => signedIn = user !== null);
