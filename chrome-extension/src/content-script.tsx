@@ -27,16 +27,20 @@ async function addItem(): Promise<void> {
 }
 
 const root = document.createElement("div");
-root.style.display = "none";
+root.style.visibility = "hidden";
+root.style.transform = "translateY(-200%)";
+root.style.transition = "visibility 0.1s, transform 0.1s";
+root.style.background = "white";
+root.style["border-radius"] = "0.5em";
+root.style["box-shadow"] = "0.5em 0.5em 1em rgba(0, 0, 0, 0.5)";
 root.style.position = "fixed";
 root.style.top = "1em";
 root.style.right = "1em";
 
 document.body.appendChild(root);
-console.log("Hello, world!");
 
 chrome.runtime.onMessage.addListener(() => {
-    console.log("Message is received!");
-    root.style.display = "block";
+    root.style.visibility = "visible";
+    root.style.transform = "translateY(0)";
     ReactDOM.render(<div>Hello, world!</div>, root);
 });
