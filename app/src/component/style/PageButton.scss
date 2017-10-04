@@ -19,7 +19,11 @@
 .PageButton-container-current {
 	@extend .PageButton-container;
 
-	color: $black;
+	color: inherit;
+
+	&:hover {
+		color: inherit;
+	}
 }
 
 .PageButton-icon {

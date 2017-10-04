@@ -35,24 +35,24 @@ class Items<A extends IItem> extends React.Component<IProps<A>, IState> {
 
         return (
             <div className="Items-container">
-                <div className="Items-menu-blank" />
-                <ItemsMenu done={done} onItemsStateChange={(done) => this.setState({ done })} />
-                <div className="Items-main">
-                    <ScrollBar>
-                        <div style={done ? { display: "none" } : {}}>
-                            <ItemList component={Item} done={false} items={todoItems} {...this.props} />
-                        </div>
-                        <div style={done ? {} : { display: "none" }}>
-                            <ItemList component={Item} done={true} items={doneItems} {...this.props} />
-                        </div>
-                    </ScrollBar>
-                    <ScrollBar>
-                        <div className="Items-current-item-container">
-                            {currentItem && <Item detailed={true} done={done} {...currentItem} />}
-                        </div>
-                    </ScrollBar>
+                <div className="Items-content">
+                    <ItemsMenu done={done} onItemsStateChange={(done) => this.setState({ done })} />
+                    <div className="Items-main">
+                        <ScrollBar>
+                            <div style={done ? { display: "none" } : {}}>
+                                <ItemList component={Item} done={false} items={todoItems} {...this.props} />
+                            </div>
+                            <div style={done ? {} : { display: "none" }}>
+                                <ItemList component={Item} done={true} items={doneItems} {...this.props} />
+                            </div>
+                        </ScrollBar>
+                        <ScrollBar>
+                            <div className="Items-current-item-container">
+                                {currentItem && <Item detailed={true} done={done} {...currentItem} />}
+                            </div>
+                        </ScrollBar>
+                    </div>
                 </div>
-                <div className="Items-blank" />
             </div>
         );
     }

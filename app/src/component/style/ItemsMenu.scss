@@ -1,27 +1,53 @@
 @import "../../style/animation.scss";
+@import "../../style/border.scss";
 @import "../../style/colors.scss";
 
 .ItemsMenu-container {
-	background: white;
 	width: 12em;
 	height: 100%;
-	padding: 1em 0;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 }
 
-.ItemsMenu-main {
+.ItemsMenu-upper-container {
+	color: white;
+	display: flex;
+	justify-content: center;
+	position: relative;
+	margin-bottom: 0.5em;
+
+	> *:nth-child(2) {
+		margin: 1em;
+	}
+}
+
+.ItemsMenu-lower-container {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	position: relative;
+	padding: 1.5em;
+}
+
+.ItemsMenu-lower-main {
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 
-	& > * {
-		margin: 1em;
-	}
+	> * {
+		margin: 1em 0;
 
-	& > .PagesMenu-container {
-		margin: 0.5em;
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
 	}
 }
 
@@ -33,12 +59,10 @@
 .ItemsMenu-state {
 	@include color-transition;
 
-	width: 100%;
 	padding: 0.5em 1em;
 	color: $light-grey;
 	cursor: pointer;
 	display: flex;
-	justify-content: flex-start;
 	align-items: center;
 	white-space: nowrap;
 
@@ -63,13 +87,27 @@
 	}
 }
 
-.ItemsMenu-buttons {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-wrap: wrap;
+@mixin ItemsMenu-background {
+	@include paper-border;
 
-	& > * {
-		margin: 0.5em;
-	}
+	width: 100vw;
+	height: 100vh;
+	position: absolute;
+	z-index: -1;
+}
+
+.ItemsMenu-upper-background {
+	@include ItemsMenu-background;
+
+	background: $red;
+	bottom: 0;
+	right: 0;
+}
+
+.ItemsMenu-lower-background {
+	@include ItemsMenu-background;
+
+	background: white;
+	top: 0;
+	right: 0;
 }
