@@ -27,20 +27,6 @@ body {
 	padding: 0;
 }
 
-a {
-	color: inherit;
-	font-size: inherit;
-	text-decoration: none;
-
-	&:visited {
-		color: inherit;
-	}
-
-	&:hover {
-		text-decoration: underline;
-	}
-}
-
 input, textarea {
 	@include font;
 
