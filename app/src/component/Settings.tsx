@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import { actionCreators as authenticationActionCreators } from "../redux/authentication";
 import { actionCreators as settingsActionCreators } from "../redux/settings";
 import Button from "./Button";
+import Link from "./Link";
 import SettingsItem from "./SettingsItem";
 import "./style/Settings.css";
 import Switch from "./Switch";
@@ -69,10 +70,10 @@ class Settings extends React.Component<IProps> {
                             </Button>
                         </div>
                         <div className="Settings-footer">
-                            <a href={process.env.REACT_APP_FEEDBACK_URL} target="_blank">Feedback</a>
-                            <a href={process.env.REACT_APP_REPOSITORY_URL} target="_blank">GitHub</a>
-                            <a href="/terms_of_use.pdf" target="_blank">Terms of Use</a>
-                            <a href="/privacy_policy.pdf" target="_blank">Privacy Policy</a>
+                            <Link href={process.env.REACT_APP_FEEDBACK_URL}>Feedback</Link>
+                            <Link href={process.env.REACT_APP_REPOSITORY_URL}>GitHub</Link>
+                            <Link href="/terms_of_use.pdf">Terms of Use</Link>
+                            <Link href="/privacy_policy.pdf">Privacy Policy</Link>
                         </div>
                     </div>
                 </ScrollBar>

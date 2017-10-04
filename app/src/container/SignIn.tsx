@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import Button from "../component/Button";
 import FacebookButton from "../component/FacebookButton";
 import Feature from "../component/Feature";
+import Link from "../component/Link";
 import Screenshots from "../component/Screenshots";
 import TwitterButton from "../component/TwitterButton";
 import { actionCreators as authenticationActionCreators } from "../redux/authentication";
@@ -79,10 +80,10 @@ class SignIn extends React.Component<IProps> {
                         <FacebookButton />
                         <TwitterButton />
                     </div>
-                    <a href={process.env.REACT_APP_FEEDBACK_URL} target="_blank">Feedback</a>
-                    <a href={process.env.REACT_APP_REPOSITORY_URL} target="_blank">GitHub</a>
-                    <a href="/terms_of_use.pdf" target="_blank">Terms of Use</a>
-                    <a href="/privacy_policy.pdf" target="_blank">Privacy Policy</a>
+                    <Link href={process.env.REACT_APP_FEEDBACK_URL}>Feedback</Link>
+                    <Link href={process.env.REACT_APP_REPOSITORY_URL}>GitHub</Link>
+                    <Link href="/terms_of_use.pdf">Terms of Use</Link>
+                    <Link href="/privacy_policy.pdf">Privacy Policy</Link>
                 </div>
             </div>
         );

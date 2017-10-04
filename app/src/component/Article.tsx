@@ -6,6 +6,7 @@ import { isDate } from "../lib/utils";
 import { actionCreators } from "../redux/articles";
 import Item from "./Item";
 import LabeledDate from "./LabeledDate";
+import Link from "./Link";
 import "./style/Article.css";
 
 interface IProps extends IArticle {
@@ -26,9 +27,9 @@ class Article extends React.Component<IProps> {
                 {...this.props}
                 details={[
                     image &&
-                    <a key="image" href={url} target="_blank">
+                    <Link key="image" href={url}>
                         <img className="Article-image" src={image} />
-                    </a>,
+                    </Link>,
                     isDate(date) && < LabeledDate key="date" label="Edited on" value={date} />,
                     text && <div key="text">{text}</div>,
                 ]}

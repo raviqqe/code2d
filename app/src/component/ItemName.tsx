@@ -2,6 +2,7 @@ import * as React from "react";
 import Markdown = require("react-markdown");
 
 import InputComponent from "./InputComponent";
+import Link from "./Link";
 import "./style/ItemName.css";
 
 interface IProps {
@@ -36,7 +37,7 @@ export default class extends InputComponent<IProps> {
                 className="ItemName-container"
                 onClick={() => this.setState({ editing: this.props.onEdit !== undefined })}
             >
-                {href ? <a href={href} target="_blank">{text}</a> : text}
+                {href ? <Link href={href}>{text}</Link> : text}
             </div>
         );
     }
