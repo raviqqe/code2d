@@ -45,6 +45,7 @@
     "react-test-renderer": "^16.0.0",
     "stylelint": "^8.0.0",
     "stylelint-config-recommended-scss": "^2.0.0",
-    "stylelint-scss": "^2.1.0"
+    "stylelint-scss": "^2.1.0",
+    "workbox-cli": "^2.0.3"
   }
 }
