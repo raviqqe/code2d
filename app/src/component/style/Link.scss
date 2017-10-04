@@ -1,0 +1,13 @@
+.Link-container {
+	color: inherit;
+	font-size: inherit;
+	text-decoration: none;
+
+	&:visited {
+		color: inherit;
+	}
+
+	&:hover {
+		text-decoration: underline;
+	}
+}
