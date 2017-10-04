@@ -11,7 +11,6 @@ import Button from "./Button";
 import Link from "./Link";
 import SettingsItem from "./SettingsItem";
 import "./style/Settings.css";
-import Switch from "./Switch";
 
 const grey = "#bcc";
 const green = "#9db634";
