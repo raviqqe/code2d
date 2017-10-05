@@ -127,22 +127,20 @@
 	width: 100%;
 	background: $black;
 	color: white;
-	height: 5em;
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
+	flex-wrap: wrap;
+	padding: 0 1em;
 
 	& > * {
-		margin: 0 1em;
-
-		&:last-child {
-			margin-right: 2em;
-		}
+		margin: 1.5em 1em;
 	}
 }
 
 .SignIn-social-buttons {
 	display: flex;
+	flex-wrap: wrap;
 
 	& > * {
 		margin: 0 0.7em;
