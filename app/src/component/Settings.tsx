@@ -3,6 +3,7 @@ import "rc-slider/assets/index.css";
 import * as React from "react";
 import { connect } from "react-redux";
 
+import config from "../config";
 import { actionCreators as authenticationActionCreators } from "../redux/authentication";
 import { actionCreators as settingsActionCreators } from "../redux/settings";
 import Button from "./Button";
@@ -68,8 +69,8 @@ class Settings extends React.Component<IProps> {
                             </Button>
                         </div>
                         <div className="Settings-footer">
-                            <Link href={process.env.REACT_APP_FEEDBACK_URL}>Feedback</Link>
-                            <Link href={process.env.REACT_APP_REPOSITORY_URL}>GitHub</Link>
+                            <Link href={config.feedbackUrl}>Feedback</Link>
+                            <Link href={config.repositoryUrl}>GitHub</Link>
                             <Link href="/terms_of_use.pdf">Terms of Use</Link>
                             <Link href="/privacy_policy.pdf">Privacy Policy</Link>
                         </div>

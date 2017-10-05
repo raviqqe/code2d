@@ -8,6 +8,7 @@ import Feature from "../component/Feature";
 import Link from "../component/Link";
 import Screenshots from "../component/Screenshots";
 import TwitterButton from "../component/TwitterButton";
+import config from "../config";
 import { actionCreators as authenticationActionCreators } from "../redux/authentication";
 import { actionCreators as messageActionCreators } from "../redux/message";
 import "./style/SignIn.css";
@@ -30,7 +31,7 @@ class SignIn extends React.Component<IProps> {
                 <div className="SignIn-main">
                     <div className="SignIn-title-container">
                         <img className="SignIn-icon" src={require("../images/icon.svg")} />
-                        <div className="SignIn-title">{process.env.REACT_APP_NAME}</div>
+                        <div className="SignIn-title">{config.name}</div>
                         <div className="SignIn-short-description">
                             Productivity tools for software engineers.
                         </div>
@@ -80,8 +81,8 @@ class SignIn extends React.Component<IProps> {
                         <FacebookButton />
                         <TwitterButton />
                     </div>
-                    <Link href={process.env.REACT_APP_FEEDBACK_URL}>Feedback</Link>
-                    <Link href={process.env.REACT_APP_REPOSITORY_URL}>GitHub</Link>
+                    <Link href={config.feedbackUrl}>Feedback</Link>
+                    <Link href={config.repositoryUrl}>GitHub</Link>
                     <Link href="/terms_of_use.pdf">Terms of Use</Link>
                     <Link href="/privacy_policy.pdf">Privacy Policy</Link>
                 </div>

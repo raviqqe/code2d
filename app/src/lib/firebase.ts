@@ -1,10 +1,12 @@
 import * as firebase from "firebase";
 
-const projectId = process.env.REACT_APP_FIREBASE_PROJECT_ID;
+import config from "../config";
+
+const { apiKey, projectId } = config.firebase;
 
 export function initialize(): void {
     firebase.initializeApp({
-        apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+        apiKey,
         authDomain: `${projectId}.firebaseapp.com`,
         databaseURL: `https://${projectId}.firebaseio.com`,
         storageBucket: `${projectId}.appspot.com`,
