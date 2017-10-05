@@ -50,3 +50,9 @@ async function addItem(url: string) {
 firebase.auth().onAuthStateChanged(async (user) => signedIn = user !== null);
 
 chrome.browserAction.onClicked.addListener(({ url }) => addItem(url));
+
+chrome.contextMenus.create({
+    contexts: ["link", "page"],
+    onclick: ({ linkUrl, pageUrl }) => addItem(linkUrl || pageUrl),
+    title: "Add an item",
+});
