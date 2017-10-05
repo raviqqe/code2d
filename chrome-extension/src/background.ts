@@ -3,6 +3,7 @@ import * as firebase from "firebase";
 import { format } from "url";
 
 const config = require("../config.json");
+let signedIn = false;
 
 firebase.initializeApp({
     apiKey: config.firebase.apiKey,
@@ -19,11 +20,7 @@ function sendNotification(message: string, contextMessage?: string) {
     });
 }
 
-let signedIn = false;
-
-firebase.auth().onAuthStateChanged(async (user) => signedIn = user !== null);
-
-chrome.browserAction.onClicked.addListener(async ({ url }) => {
+async function addItem(url: string) {
     if (signedIn) {
         try {
             const { name } = (await axios.get(
@@ -48,4 +45,8 @@ chrome.browserAction.onClicked.addListener(async ({ url }) => {
     } else {
         await firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider());
     }
-});
+}
+
+firebase.auth().onAuthStateChanged(async (user) => signedIn = user !== null);
+
+chrome.browserAction.onClicked.addListener(({ url }) => addItem(url));
