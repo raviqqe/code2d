@@ -1,9 +1,8 @@
 import * as React from "react";
-import ScrollBar = require("react-perfect-scrollbar");
-import "react-perfect-scrollbar/dist/css/styles.css";
 import { connect } from "react-redux";
 
 import ItemList from "../component/ItemList";
+import ScrollBar from "../component/ScrollBar";
 import { IItem, include } from "../lib/items";
 import "./style/Items.css";
 

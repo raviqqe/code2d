@@ -1,14 +1,13 @@
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import * as React from "react";
-import ScrollBar = require("react-perfect-scrollbar");
-import "react-perfect-scrollbar/dist/css/styles.css";
 import { connect } from "react-redux";
 
 import { actionCreators as authenticationActionCreators } from "../redux/authentication";
 import { actionCreators as settingsActionCreators } from "../redux/settings";
 import Button from "./Button";
 import Link from "./Link";
+import ScrollBar from "./ScrollBar";
 import SettingsItem from "./SettingsItem";
 import "./style/Settings.css";
 
