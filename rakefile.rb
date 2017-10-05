@@ -1,8 +1,9 @@
-PROJECT_ID = 'work2d-162714'.freeze
-DOMAIN = 'code2d.net'.freeze
-REGION = 'us-east-1'.freeze
+require 'json'
 
-TERRAFORM_VARS = "-var domain=#{DOMAIN} -var region=#{REGION}".freeze
+config = JSON.parse File.read('config.json')
+
+TERRAFORM_VARS = %W[-var domain=#{config['domain']}
+                    -var region=#{config['aws']['region']}].join ' '
 
 task :test do
   %w[app functions].each do |dir|
@@ -26,7 +27,9 @@ task deploy: :build do
   sh "terraform apply #{TERRAFORM_VARS}"
 
   sh 'firebase deploy'
-  sh "gsutil cors set storage_cors.json gs://#{PROJECT_ID}.appspot.com"
+  sh %W[gsutil cors set
+        storage_cors.json
+        gs://#{config['firebase']['projectId']}.appspot.com].join ' '
 
   name_servers = `terraform output name_servers`
                  .split(/[,\s]+/)
@@ -35,7 +38,7 @@ task deploy: :build do
 
   sh %W[
     aws route53domains update-domain-nameservers
-    --domain #{DOMAIN}
+    --domain #{config['domain']}
     --nameservers #{name_servers}
   ].join ' '
 end
