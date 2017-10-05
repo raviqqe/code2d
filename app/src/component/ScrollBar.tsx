@@ -1,6 +1,7 @@
 import * as perfectScrollBar from "perfect-scrollbar";
-import "perfect-scrollbar/dist/css/perfect-scrollbar.css";
 import * as React from "react";
+
+import "./style/ScrollBar.css";
 
 export default class extends React.Component {
     private container: HTMLElement;
