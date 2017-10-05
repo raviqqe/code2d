@@ -1,3 +1,4 @@
+@import "../../style/animation.scss";
 @import "../../style/border.scss";
 @import "../../style/shadow.scss";
 
@@ -14,11 +15,12 @@
 	position: absolute;
 	top: 100%;
 	z-index: 200;
+	transition: opacity $instant-duration, visibility $instant-duration;
 }
 
 .PagesMenu-box-invisible {
 	@extend .PagesMenu-box;
 
-	visibility: hidden;
 	opacity: 0;
+	visibility: hidden;
 }
