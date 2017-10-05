@@ -1,0 +1,21 @@
+{
+	"aws": {
+		"region": "us-east-1"
+	},
+	"domain": "code2d.net",
+	"feedbackUrl": "https://github.com/raviqqe/code2d/issues",
+	"facebook": {
+		"appId": "678710785661242"
+	},
+	"firebase": {
+		"apiKey": "AIzaSyAPEPpecVA9SGD7WICloS5og_18V45G2VQ",
+		"projectId": "work2d-162714"
+	},
+	"github": {
+		"oauth": {
+			"id": "f4e57e60ec31fcaa2f6d"
+		}
+	},
+	"name": "code2d",
+	"repositoryUrl": "https://github.com/raviqqe/code2d"
+}
