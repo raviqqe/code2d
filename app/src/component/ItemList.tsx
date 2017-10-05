@@ -15,6 +15,7 @@ interface IProps<A extends IItem> {
 
 export default class ItemList<A extends IItem> extends React.Component<IProps<A>> {
     private sortable;
+    private container: HTMLElement;
 
     public render() {
         const { component, currentItem, done, fixed, items, setItems } = this.props;
@@ -25,7 +26,7 @@ export default class ItemList<A extends IItem> extends React.Component<IProps<A>
         }
 
         return (
-            <div id={this.listId} className="ItemList-container">
+            <div ref={(container) => this.container = container} className="ItemList-container">
                 {items.map((item) =>
                     <div key={item.id} className="ItemList-item">
                         <Item
@@ -45,7 +46,7 @@ export default class ItemList<A extends IItem> extends React.Component<IProps<A>
     public componentDidUpdate() {
         const { done, fixed, setItems } = this.props;
 
-        const element = document.getElementById(this.listId);
+        const element = this.container;
 
         if (!element) {
             return;
@@ -64,9 +65,5 @@ export default class ItemList<A extends IItem> extends React.Component<IProps<A>
         }
 
         this.sortable.option("disabled", fixed);
-    }
-
-    public get listId(): string {
-        return `item-list-${this.props.done}`;
     }
 }
