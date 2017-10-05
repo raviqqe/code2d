@@ -3,7 +3,6 @@ import * as firebase from "firebase";
 import { format } from "url";
 
 const config = require("../config.json");
-let signedIn = false;
 
 firebase.initializeApp({
     apiKey: config.firebase.apiKey,
@@ -21,33 +20,36 @@ function sendNotification(message: string, contextMessage?: string) {
 }
 
 async function addItem(url: string) {
-    if (signedIn) {
+    if (!firebase.auth().currentUser) {
         try {
-            const { name } = (await axios.get(
-                format({
-                    hostname: `us-central1-${config.firebase.projectId}.cloudfunctions.net`,
-                    pathname: "/addItem",
-                    protocol: "https",
-                }),
-                {
-                    headers: {
-                        Authorization: `Bearer ${await firebase.auth().currentUser.getIdToken()}`,
-                    },
-                    // HACK: Invalidate caches by setting ineffective date parameters.
-                    params: { url, date: Date.now() },
-                })).data;
-
-            sendNotification("An item is added.", name);
+            await firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider());
         } catch (error) {
             console.error(error);
-            sendNotification("Could not add an item.");
+            return;
         }
-    } else {
-        await firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider());
+    }
+
+    try {
+        const { name } = (await axios.get(
+            format({
+                hostname: `us-central1-${config.firebase.projectId}.cloudfunctions.net`,
+                pathname: "/addItem",
+                protocol: "https",
+            }),
+            {
+                headers: {
+                    Authorization: `Bearer ${await firebase.auth().currentUser.getIdToken()}`,
+                },
+                // HACK: Invalidate caches by setting ineffective date parameters.
+                params: { url, date: Date.now() },
+            })).data;
+
+        sendNotification("An item is added.", name);
+    } catch (error) {
+        console.error(error);
+        sendNotification("Could not add an item.");
     }
 }
-
-firebase.auth().onAuthStateChanged(async (user) => signedIn = user !== null);
 
 chrome.browserAction.onClicked.addListener(({ url }) => addItem(url));
 
