@@ -1,5 +1,10 @@
 variable "domain" {}
 variable "region" {}
+variable "google_site_verification" {}
+
+variable "addresses" {
+  type = "list"
+}
 
 provider "aws" {
   region = "${var.region}"
@@ -14,7 +19,7 @@ resource "aws_route53_record" "txt" {
   name    = "${var.domain}"
   ttl     = 5
   type    = "TXT"
-  records = ["google-site-verification=-pUVh2OF_SLYQTlifb-0WOG_Bzgh19ZVQwwxyRiLMVg"]
+  records = ["google-site-verification=${var.google_site_verification}"]
 }
 
 resource "aws_route53_record" "r" {
@@ -22,7 +27,7 @@ resource "aws_route53_record" "r" {
   name    = "${var.domain}"
   ttl     = 5
   type    = "A"
-  records = ["151.101.1.195", "151.101.65.195"]
+  records = "${var.addresses}"
 }
 
 output "name_servers" {

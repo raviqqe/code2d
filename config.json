@@ -9,7 +9,11 @@
 	},
 	"firebase": {
 		"apiKey": "AIzaSyAPEPpecVA9SGD7WICloS5og_18V45G2VQ",
-		"projectId": "work2d-162714"
+		"projectId": "work2d-162714",
+		"hosting": {
+			"addresses": ["151.101.1.195", "151.101.65.195"],
+			"googleSiteVerification": "-pUVh2OF_SLYQTlifb-0WOG_Bzgh19ZVQwwxyRiLMVg"
+		}
 	},
 	"github": {
 		"oauth": {

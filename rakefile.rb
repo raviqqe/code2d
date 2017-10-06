@@ -1,9 +1,14 @@
 require 'json'
 
-config = JSON.parse File.read('config.json')
+CONFIG = JSON.parse File.read('config.json')
+HOSTING = CONFIG['firebase']['hosting']
 
-TERRAFORM_VARS = %W[-var domain=#{config['domain']}
-                    -var region=#{config['aws']['region']}].join ' '
+TERRAFORM_VARS = %W[
+  -var domain=#{CONFIG['domain']}
+  -var region=#{CONFIG['aws']['region']}
+  -var google_site_verification=#{HOSTING['googleSiteVerification']}
+  -var addresses='#{HOSTING['addresses']}'
+].join ' '
 
 task :test do
   %w[app functions].each do |dir|
@@ -29,7 +34,7 @@ task deploy: :build do
   sh 'firebase deploy'
   sh %W[gsutil cors set
         storage_cors.json
-        gs://#{config['firebase']['projectId']}.appspot.com].join ' '
+        gs://#{CONFIG['firebase']['projectId']}.appspot.com].join ' '
 
   name_servers = `terraform output name_servers`
                  .split(/[,\s]+/)
@@ -38,7 +43,7 @@ task deploy: :build do
 
   sh %W[
     aws route53domains update-domain-nameservers
-    --domain #{config['domain']}
+    --domain #{CONFIG['domain']}
     --nameservers #{name_servers}
   ].join ' '
 end
