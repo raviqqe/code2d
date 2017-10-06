@@ -1,5 +1,4 @@
 @import "../../style/animation.scss";
-@import "../../style/border.scss";
 @import "../../style/colors.scss";
 
 .ItemsMenu-container {
@@ -15,7 +14,6 @@
 	display: flex;
 	justify-content: center;
 	position: relative;
-	margin-bottom: 0.5em;
 
 	> *:nth-child(2) {
 		margin: 1em;
@@ -88,8 +86,6 @@
 }
 
 @mixin ItemsMenu-background {
-	@include paper-border;
-
 	width: 100vw;
 	height: 100vh;
 	position: absolute;
