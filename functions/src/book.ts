@@ -22,7 +22,7 @@ function extractIsbn(html: string): string {
     return cheerio.load(html)("meta[property=\"books:isbn\"]").attr("content");
 }
 
-async function convertUrlIntoBook(url: string): Promise<any> {
+export async function convertUrlIntoBook(url: string): Promise<any> {
     const { Items: [{ affiliateUrl, author, largeImageUrl, publisherName, title }] }
         = await callApi({ isbn: extractIsbn((await axios.get(url)).data) });
 

@@ -10,6 +10,12 @@ export function config() {
         cors: {
             origins: "http://localhost,https://foo.com",
         },
+        rakuten: {
+            affiliate: {
+                id: "1612f82a.a5051d07.1612f82b.6030f61b",
+            },
+            id: "1039965413641166178",
+        },
         youtube: {
             key: "serverKey",
         },
