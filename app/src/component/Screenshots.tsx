@@ -10,7 +10,7 @@ export default class extends React.Component {
         return (
             <div className="Screenshots-container">
                 <div className="Screenshots-title">Screenshots</div>
-                <Slider dots={true} arrows={false} autoplay={true}>
+                <Slider dots={true} adaptiveHeight={true} arrows={false} autoplay={true}>
                     <img src={require("../images/screenshots/tasks.png")} />
                     <img src={require("../images/screenshots/articles.png")} />
                     <img src={require("../images/screenshots/videos.png")} />
