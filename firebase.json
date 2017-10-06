@@ -16,8 +16,8 @@
 			"source": "/functions/article",
 			"function": "article"
 		}, {
-			"source": "/functions/books",
-			"function": "books"
+			"source": "/functions/book",
+			"function": "book"
 		}, {
 			"source": "/functions/video",
 			"function": "video"
