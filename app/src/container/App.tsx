@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Message from "../component/Message";
 import { Page } from "../redux/pages";
 import Articles from "./Articles";
+import Books from "./Books";
 import SignIn from "./SignIn";
 import Tasks from "./Tasks";
 import Videos from "./Videos";
@@ -22,7 +23,7 @@ class App extends React.Component<IProps> {
         }
 
         const Page = signedIn
-            ? { articles: Articles, tasks: Tasks, videos: Videos }[currentPage]
+            ? { articles: Articles, books: Books, tasks: Tasks, videos: Videos }[currentPage]
             : SignIn;
 
         return <div><Page /><Message /></div>;

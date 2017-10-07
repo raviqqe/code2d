@@ -1,0 +1,24 @@
+import * as React from "react";
+import { connect } from "react-redux";
+
+import Book from "../component/Book";
+import BooksMenu from "../component/BooksMenu";
+import { IBook } from "../lib/books";
+import { actionCreators } from "../redux/books";
+import Items from "./Items";
+
+interface IProps {
+    currentItem: IBook | null;
+    doneItems: IBook[];
+    setCurrentItem: (book: IBook) => void;
+    setItems: (items: IBook[], done: boolean) => void;
+    todoItems: IBook[];
+}
+
+class Books extends React.Component<IProps> {
+    public render() {
+        return <Items itemComponent={Book} menuComponent={BooksMenu} {...this.props} />;
+    }
+}
+
+export default connect(({ books }) => books, actionCreators)(Books);

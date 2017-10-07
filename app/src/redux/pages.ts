@@ -2,9 +2,9 @@ import Immutable = require("seamless-immutable");
 import actionCreatorFactory from "typescript-fsa";
 import { reducerWithInitialState } from "typescript-fsa-reducers";
 
-export type Page = "tasks" | "articles" | "videos";
+export type Page = "tasks" | "articles" | "videos" | "books";
 
-export const pages: Page[] = ["tasks", "articles", "videos"];
+export const pages: Page[] = ["tasks", "articles", "videos", "books"];
 
 const actionCreator = actionCreatorFactory();
 

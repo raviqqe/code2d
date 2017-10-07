@@ -1,5 +1,6 @@
 import * as React from "react";
 import Article = require("react-icons/lib/fa/file-code-o");
+import Book = require("react-icons/lib/md/book");
 import Video = require("react-icons/lib/md/ondemand-video");
 import Task = require("react-icons/lib/md/playlist-add-check");
 
@@ -8,6 +9,7 @@ import "./style/PageButton.css";
 
 const icons = {
     articles: <Article />,
+    books: <Book />,
     tasks: <Task />,
     videos: <Video />,
 };
