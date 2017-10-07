@@ -1,0 +1,16 @@
+box: node
+build:
+  steps:
+    - script:
+        name: os setup
+        code: |
+          apt -y update --fix-missing
+          apt -y install inkscape rake
+
+    - script:
+        name: build
+        code: rake build
+
+    - script:
+        name: test
+        code: rake test
