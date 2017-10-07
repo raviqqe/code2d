@@ -1,0 +1,47 @@
+@import "../../style/animation.scss";
+@import "../../style/border.scss";
+
+.Modal-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 100;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: rgba(0, 0, 0, 0.5);
+	transition: background $long-duration, visibility $long-duration;
+
+	> * {
+		max-width: 100%;
+		max-height: 100%;
+		transition: transform $long-duration;
+	}
+}
+
+.Modal-container-hidden {
+	@extend .Modal-container;
+
+	visibility: hidden;
+	background: transparent;
+
+	> * {
+		transform: translateY(calc(-100vh - 100%));
+	}
+}
+
+.Modal-window-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.Modal-window {
+	@include paper-border;
+
+	background: white;
+	margin: 1em;
+	max-width: calc(100vw - 2em);
+}
