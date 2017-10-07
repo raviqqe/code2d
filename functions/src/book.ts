@@ -28,10 +28,10 @@ export async function convertUrlIntoBook(url: string): Promise<any> {
 
     return {
         author,
-        imageUrl: largeImageUrl,
+        image: largeImageUrl,
         name: title,
-        pageUrl: affiliateUrl,
         publisher: publisherName,
+        url: affiliateUrl,
     };
 }
 

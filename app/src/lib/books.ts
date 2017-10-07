@@ -1,12 +1,10 @@
-import { parse as parseUrl } from "url";
-
 import * as functions from "./functions";
 import { IItem } from "./items";
 import StatefulItemsRepository from "./stateful-items-repository";
 
 export interface IBook extends IItem {
     author?: string;
-    imageUrl?: string;
+    image?: string;
     url?: string;
     publisher?: string;
 }
