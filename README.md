@@ -1,6 +1,6 @@
 # [code2d](http://code2d.net)
 
-[![Wercker](https://img.shields.io/wercker/ci/wercker/docs.svg?style=flat-square)](https://app.wercker.com/raviqqe/code2d)
+[![wercker status](https://app.wercker.com/status/aa4ef4ba73e65111e51e0d90049cdf88/s/master "wercker status")](https://app.wercker.com/project/byKey/aa4ef4ba73e65111e51e0d90049cdf88)
 
 Productivity tool for software engineers.
 
