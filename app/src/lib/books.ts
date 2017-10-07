@@ -4,9 +4,12 @@ import StatefulItemsRepository from "./stateful-items-repository";
 
 export interface IBook extends IItem {
     author?: string;
+    description?: string;
     image?: string;
-    url?: string;
+    price?: number;
     publisher?: string;
+    salesDate?: string;
+    url?: string;
 }
 
 const repository = new StatefulItemsRepository<IBook>("books");

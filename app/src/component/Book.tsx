@@ -20,7 +20,7 @@ interface IProps extends IBook {
 
 class Book extends React.Component<IProps> {
     public render() {
-        const { author, image, name, publisher, url } = this.book;
+        const { author, description, image, name, price, publisher, salesDate, url } = this.book;
 
         return (
             <Item
@@ -30,9 +30,13 @@ class Book extends React.Component<IProps> {
                     <Link key="image" href={url}>
                         <img className="Book-image" src={image} />
                     </Link>,
+                    description && <div key="description">{description}</div>,
                     author && <SubInformation key="author">Author: {author}</SubInformation>,
                     publisher &&
                     <SubInformation key="publisher">Publisher: {publisher}</SubInformation>,
+                    salesDate &&
+                    <SubInformation key="salesDate">Sales date: {salesDate}</SubInformation>,
+                    price && <SubInformation key="price">Price: {price}</SubInformation>,
                 ]}
                 href={url}
                 item={this.book}
@@ -41,8 +45,9 @@ class Book extends React.Component<IProps> {
     }
 
     private get book(): IBook {
-        const { author, id, image, name, publisher, url } = this.props;
-        return { author, id, image, name, publisher, url };
+        const { author, description, id, image, name, price, publisher, salesDate, url }
+            = this.props;
+        return { author, description, id, image, name, price, publisher, salesDate, url };
     }
 }
 
