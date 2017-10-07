@@ -1,6 +1,6 @@
 # [code2d](http://code2d.net)
 
-[![CircleCI](https://circleci.com/gh/raviqqe/code2d.svg?style=svg)](https://circleci.com/gh/raviqqe/code2d)
+[![Wercker](https://img.shields.io/wercker/ci/wercker/docs.svg?style=flat-square)](https://app.wercker.com/raviqqe/code2d)
 
 Productivity tool for software engineers.
 
