@@ -57,7 +57,8 @@ class SignIn extends React.Component<IProps> {
                         >
                             Manage tasks to do,
                             articles to read,
-                            and YouTube videos to watch
+                            videos to watch,
+                            and books to read
                             in one place.
                         </Feature>
                         <Feature
