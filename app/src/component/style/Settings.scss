@@ -1,46 +1,28 @@
 @import "../../style/animation.scss";
-@import "../../style/border.scss";
 @import "../../style/colors.scss";
 
+.Settings-icon {
+	font-size: 2em;
+	cursor: pointer;
+
+	& > svg {
+		transition: transform $short-duration;
+	}
+}
+
+.Settings-icon-active {
+	@extend .Settings-icon;
+
+	& > svg {
+		transform: rotate(90deg);
+	}
+}
+
 .Settings-container {
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: 100;
-	width: 100vw;
-	height: 100vh;
-	background: rgba(0, 0, 0, 0.5);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	transition: background $long-duration, visibility $long-duration;
-
-	> * {
-		width: 60em;
-		max-width: 90%;
-		height: auto;
-		max-height: 90%;
-		transition: transform $long-duration;
-	}
-}
-
-.Settings-container-hidden {
-	@extend .Settings-container;
-
-	visibility: hidden;
-	background: rgba(0, 0, 0, 0);
-
-	> * {
-		transform: translateY(calc(-100vh - 100%));
-	}
-}
-
-.Settings-box {
-	@include paper-border;
-
 	font-size: 1.2em;
-	background: white;
-	padding: 4em 6em;
+	width: 50em;
+	max-width: 100%;
+	padding: 8vh 8vw;
 
 	& > * {
 		margin: 2em 0;

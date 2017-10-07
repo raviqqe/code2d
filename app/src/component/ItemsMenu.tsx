@@ -3,7 +3,7 @@ import Done = require("react-icons/lib/md/check-box");
 import Todo = require("react-icons/lib/md/check-box-outline-blank");
 
 import PagesMenu from "./PagesMenu";
-import SettingsButton from "./SettingsButton";
+import Settings from "./Settings";
 import "./style/ItemsMenu.css";
 
 interface IProps {
@@ -45,7 +45,7 @@ export default class extends React.Component<IProps> {
                         {!done && createItem}
                         {children}
                     </div>
-                    <SettingsButton />
+                    <Settings />
                 </div>
             </div>
         );
