@@ -23,14 +23,21 @@ function extractIsbn(html: string): string {
 }
 
 export async function convertUrlIntoBook(url: string): Promise<any> {
-    const { Items: [{ affiliateUrl, author, largeImageUrl, publisherName, title }] }
-        = await callApi({ isbn: extractIsbn((await axios.get(url)).data) });
+    const { Items: [
+        {
+            affiliateUrl, author, itemCaption, itemPrice, largeImageUrl,
+            publisherName, salesDate, title,
+        },
+    ] } = await callApi({ isbn: extractIsbn((await axios.get(url)).data) });
 
     return {
         author,
+        description: itemCaption,
         image: largeImageUrl,
         name: title,
+        price: itemPrice,
         publisher: publisherName,
+        salesDate,
         url: affiliateUrl,
     };
 }
