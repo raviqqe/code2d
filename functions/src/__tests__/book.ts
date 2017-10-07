@@ -11,6 +11,6 @@ test("Convert a URL into a book object", async () => {
     expect(book.title).toBeUndefined();
     expect(typeof book.author).toBe("string");
     expect(typeof book.publisher).toBe("string");
-    expect(is.url(book.imageUrl)).toBe(true);
-    expect(is.url(book.pageUrl)).toBe(true);
+    expect(is.url(book.image)).toBe(true);
+    expect(is.url(book.url)).toBe(true);
 });
