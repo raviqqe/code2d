@@ -1,22 +1,9 @@
 import axios from "axios";
 import cheerio = require("cheerio");
 import { Request, Response } from "express";
-import * as functions from "firebase-functions";
 
+import { callApi } from "./rakuten";
 import { httpsFunction } from "./utils";
-
-async function callApi(query: object): Promise<any> {
-    return (await axios.get(
-        "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404",
-        {
-            params: {
-                affiliateId: functions.config().rakuten.affiliate.id,
-                applicationId: functions.config().rakuten.id,
-                formatVersion: 2,
-                ...query,
-            },
-        })).data;
-}
 
 function extractIsbn(html: string): string {
     return cheerio.load(html)("meta[property=\"books:isbn\"]").attr("content");
