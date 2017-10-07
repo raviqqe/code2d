@@ -19,3 +19,7 @@ export const booksRepository = repository.state;
 export async function urlToBook(url: string): Promise<IBook> {
     return await functions.call("book", { url });
 }
+
+export async function getTopSalesBooks(): Promise<IBook> {
+    return await functions.call("topSalesBooks");
+}
