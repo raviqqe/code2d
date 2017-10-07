@@ -1,8 +1,24 @@
 import axios from "axios";
 import * as functions from "firebase-functions";
 
+function convertItemIntoBook({
+    affiliateUrl, author, itemCaption, itemPrice, largeImageUrl,
+    publisherName, salesDate, title,
+    }) {
+    return {
+        author,
+        description: itemCaption,
+        image: largeImageUrl,
+        name: title,
+        price: itemPrice,
+        publisher: publisherName,
+        salesDate,
+        url: affiliateUrl,
+    };
+}
+
 export async function callApi(query: object): Promise<any> {
-    return (await axios.get(
+    const { data: { Items } } = await axios.get(
         "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404",
         {
             params: {
@@ -11,5 +27,7 @@ export async function callApi(query: object): Promise<any> {
                 formatVersion: 2,
                 ...query,
             },
-        })).data;
+        });
+
+    return Items.map(convertItemIntoBook);
 }
