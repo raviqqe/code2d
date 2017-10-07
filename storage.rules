@@ -21,6 +21,16 @@ service firebase.storage {
           allow write: if request.auth.uid == userId && request.resource.size < 256 * 1024;
         }
       }
+      match /books {
+        match /todo {
+          allow read: if request.auth.uid == userId;
+          allow write: if request.auth.uid == userId && request.resource.size < 256 * 1024;
+        }
+        match /done {
+          allow read: if request.auth.uid == userId;
+          allow write: if request.auth.uid == userId && request.resource.size < 256 * 1024;
+        }
+      }
       match /videos {
         match /todo {
           allow read: if request.auth.uid == userId;

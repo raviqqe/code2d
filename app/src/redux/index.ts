@@ -9,6 +9,7 @@ import { ImmutableObject } from "seamless-immutable";
 import * as firebase from "../lib/firebase";
 import * as articles from "./articles";
 import * as authentication from "./authentication";
+import * as books from "./books";
 import * as message from "./message";
 import * as pages from "./pages";
 import * as settings from "./settings";
@@ -30,6 +31,7 @@ export default function() {
         combineReducers({
             articles: articles.reducer,
             authentication: authentication.reducer,
+            books: books.reducer,
             message: message.reducer,
             pages: pages.reducer,
             settings: settings.reducer,
@@ -41,8 +43,9 @@ export default function() {
 
     sagaMiddleware.run(function* _() {
         yield all([
-            ...authentication.sagas,
             ...articles.sagas,
+            ...authentication.sagas,
+            ...books.sagas,
             ...message.sagas,
             ...settings.sagas,
             ...tasks.sagas,
@@ -54,7 +57,7 @@ export default function() {
     persistStore(store, {
         storage: localForage,
         transforms: [createTransform(convertImmutableToMutable, convertMutableToImmutable)],
-        whitelist: ["articles", "pages", "settings", "tasks", "videos"],
+        whitelist: ["articles", "books", "pages", "settings", "tasks", "videos"],
     });
 
     firebase.onAuthStateChanged(async (user) => {

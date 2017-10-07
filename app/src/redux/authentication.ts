@@ -8,6 +8,7 @@ import { reducerWithInitialState } from "typescript-fsa-reducers";
 
 import * as firebase from "../lib/firebase";
 import * as articles from "./articles";
+import * as books from "./books";
 import * as settings from "./settings";
 import * as tasks from "./tasks";
 import * as utils from "./utils";
@@ -59,6 +60,7 @@ function* initialize(): SagaIterator {
     if (rehydrated && signedIn) {
         yield all([
             put(articles.actionCreators.getItems()),
+            put(books.actionCreators.getItems()),
             put(tasks.actionCreators.getItems()),
             put(tasks.actionCreators.getTags()),
             put(videos.actionCreators.getItems()),
