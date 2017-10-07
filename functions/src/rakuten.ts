@@ -10,7 +10,7 @@ function convertItemIntoBook({
         description: itemCaption,
         image: largeImageUrl,
         name: title,
-        price: itemPrice,
+        price: `¥${itemPrice}`,
         publisher: publisherName,
         salesDate,
         url: affiliateUrl,

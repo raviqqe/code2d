@@ -6,7 +6,7 @@ export interface IBook extends IItem {
     author?: string;
     description?: string;
     image?: string;
-    price?: number;
+    price?: string;
     publisher?: string;
     salesDate?: string;
     url?: string;
