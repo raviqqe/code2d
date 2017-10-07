@@ -17,7 +17,7 @@ function convertItemIntoBook({
     };
 }
 
-export async function callApi(query: object): Promise<any> {
+export async function callApi(query: object): Promise<any[]> {
     const { data: { Items } } = await axios.get(
         "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404",
         {
