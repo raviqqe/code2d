@@ -5,6 +5,7 @@ import nanoid = require("nanoid");
 import { parse } from "url";
 
 import { convertUrlIntoArticle } from "./article";
+import { convertUrlIntoBook } from "./book";
 import { httpsFunction } from "./utils";
 import { convertUrlIntoVideo } from "./video";
 
@@ -22,13 +23,24 @@ class File {
 
 export default httpsFunction(
     async ({ query: { url } }: Request, response: Response, userId: string) => {
-        const isVideo = parse(url).hostname === "www.youtube.com";
+        let convert: (url: string) => any = convertUrlIntoArticle;
+        let directory = "articles";
 
-        const item = await (isVideo ? convertUrlIntoVideo : convertUrlIntoArticle)(url);
+        switch (parse(url).hostname) {
+            case "www.youtube.com":
+                convert = convertUrlIntoVideo;
+                directory = "videos";
+                break;
+            case "books.rakuten.co.jp":
+                convert = convertUrlIntoBook;
+                directory = "books";
+        }
+
+        const item = await convert(url);
 
         console.log("Item:", item);
 
-        const file = new File(`/users/${userId}/${isVideo ? "videos" : "articles"}/todo`);
+        const file = new File(`/users/${userId}/${directory}/todo`);
         let items = [];
 
         try {
