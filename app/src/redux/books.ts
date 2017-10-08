@@ -33,6 +33,9 @@ export const sagas = [
     takeEvery(
         getTopSalesBooks.started,
         function* _(): SagaIterator {
-            yield put(getTopSalesBooks.done(yield call(lib.getTopSalesBooks)));
+            yield put(getTopSalesBooks.done({
+                params: null,
+                result: yield call(lib.getTopSalesBooks),
+            }));
         }),
 ];
