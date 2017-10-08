@@ -6,10 +6,14 @@ import { parse } from "url";
 import { callApi } from "./rakuten";
 import { httpsFunction } from "./utils";
 
+export function isAmazonUrl(url: string): boolean {
+    return !!parse(url).hostname.match(/amazon/);
+}
+
 async function convertUrlIntoIsbn(url: string): Promise<string> {
     const { data } = await axios.get(url);
 
-    if (parse(url).hostname.match(/amazon/)) {
+    if (isAmazonUrl(url)) {
         return data.match(/<li><b>ISBN-10:<\/b> *([0-9X]+) *<\/li>/i)[1];
     }
 
