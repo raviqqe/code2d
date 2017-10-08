@@ -8,15 +8,15 @@
 	z-index: 100;
 	width: 100vw;
 	height: 100vh;
+	overflow-y: auto;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	background: rgba(0, 0, 0, 0.5);
 	transition: background $long-duration, visibility $long-duration;
+	padding: 1em;
 
 	> * {
-		max-width: 100%;
-		max-height: 100%;
 		transition: transform $long-duration;
 	}
 }
@@ -32,25 +32,19 @@
 	}
 }
 
-.Modal-window-container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
 .Modal-window {
 	@include paper-border;
 
 	background: white;
-	margin: 1em;
-	max-width: calc(100vw - 2em);
+	max-width: 100%;
+	margin: auto;
 }
 
 .Modal-close-button-container {
-	position: absolute;
+	position: fixed;
 	top: 1.5em;
 	right: 1.5em;
-	z-index: 10000;
+	z-index: 200;
 }
 
 .Modal-close-button {

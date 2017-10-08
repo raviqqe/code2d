@@ -2,7 +2,6 @@ import * as React from "react";
 import Close = require("react-icons/lib/md/close");
 
 import Button from "./Button";
-import ScrollBar from "./ScrollBar";
 import "./style/Modal.css";
 
 interface IProps {
@@ -38,16 +37,12 @@ export default class extends React.Component<IProps, IState> {
                                 <Close />
                             </Button>
                         </div>}
-                    <ScrollBar>
-                        <div className="Modal-window-container">
-                            <div
-                                className="Modal-window"
-                                onClick={(event) => event.stopPropagation()}
-                            >
-                                {children}
-                            </div>
-                        </div>
-                    </ScrollBar>
+                    <div
+                        className="Modal-window"
+                        onClick={(event) => event.stopPropagation()}
+                    >
+                        {children}
+                    </div>
                 </div>
             </div>
         );
