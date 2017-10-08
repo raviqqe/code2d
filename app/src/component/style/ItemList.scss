@@ -1,14 +1,13 @@
 .ItemList-container {
-	// HACK
-	margin-bottom: -0.5em;
+	overflow-y: auto;
+	height: 100%;
+	padding: 0.5em 0;
+
+	> * {
+		margin: 0.5em;
+	}
 }
 
-.ItemList-item {
-	margin-bottom: 0.5em;
-}
-
-.ItemList-item-placeholder {
-	@extend .ItemList-item;
-
+.ItemList-placeholder {
 	visibility: hidden;
 }

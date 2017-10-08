@@ -2,7 +2,6 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import ItemList from "../component/ItemList";
-import ScrollBar from "../component/ScrollBar";
 import { IItem, include } from "../lib/items";
 import "./style/Items.css";
 
@@ -37,19 +36,25 @@ class Items<A extends IItem> extends React.Component<IProps<A>, IState> {
                 <div className="Items-content">
                     <ItemsMenu done={done} onItemsStateChange={(done) => this.setState({ done })} />
                     <div className="Items-main">
-                        <ScrollBar>
-                            <div style={done ? { display: "none" } : {}}>
-                                <ItemList component={Item} done={false} items={todoItems} {...this.props} />
-                            </div>
-                            <div style={done ? {} : { display: "none" }}>
-                                <ItemList component={Item} done={true} items={doneItems} {...this.props} />
-                            </div>
-                        </ScrollBar>
-                        <ScrollBar>
-                            <div className="Items-current-item-container">
-                                {currentItem && <Item detailed={true} done={done} {...currentItem} />}
-                            </div>
-                        </ScrollBar>
+                        <div>
+                            <ItemList
+                                style={done ? { display: "none" } : {}}
+                                component={Item}
+                                done={false}
+                                items={todoItems}
+                                {...this.props}
+                            />
+                            <ItemList
+                                style={done ? {} : { display: "none" }}
+                                component={Item}
+                                done={true}
+                                items={doneItems}
+                                {...this.props}
+                            />
+                        </div>
+                        <div className="Items-current-item-container">
+                            {currentItem && <Item detailed={true} done={done} {...currentItem} />}
+                        </div>
                     </div>
                 </div>
             </div>

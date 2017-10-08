@@ -22,11 +22,10 @@
 
 	> * {
 		flex: 1;
-		padding: 1em 0.5em;
 	}
 }
 
 .Items-current-item-container {
-	display: flex;
-	flex-direction: column;
+	overflow-y: auto;
+	padding: 1em 0.5em;
 }

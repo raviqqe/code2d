@@ -11,6 +11,7 @@ interface IProps<A extends IItem> {
     fixed?: boolean;
     items: A[];
     setItems: (items: A[], done: boolean) => void;
+    style?: { [key: string]: any };
 }
 
 export default class ItemList<A extends IItem> extends React.Component<IProps<A>> {
@@ -18,23 +19,26 @@ export default class ItemList<A extends IItem> extends React.Component<IProps<A>
     private container: HTMLElement;
 
     public render() {
-        const { component, currentItem, done, fixed, items, setItems } = this.props;
+        const { component, currentItem, done, fixed, items, setItems, style } = this.props;
         const Item = component;
 
         if (items.length === 0) {
-            return <div className="ItemList-container">There is no item.</div>;
+            return <div className="ItemList-container" style={style}>There is no item.</div>;
         }
 
         return (
-            <div ref={(container) => this.container = container} className="ItemList-container">
+            <div
+                ref={(container) => this.container = container}
+                className="ItemList-container"
+                style={style}
+            >
                 {items.map((item) =>
-                    <div key={item.id} className="ItemList-item">
-                        <Item
-                            done={done}
-                            highlighted={currentItem && equal(item, currentItem)}
-                            {...item}
-                        />
-                    </div>)}
+                    <Item
+                        key={item.id}
+                        done={done}
+                        highlighted={currentItem && equal(item, currentItem)}
+                        {...item}
+                    />)}
             </div>
         );
     }
@@ -55,12 +59,13 @@ export default class ItemList<A extends IItem> extends React.Component<IProps<A>
         if (!this.sortable) {
             this.sortable = sortable.create(element, {
                 animation: 200,
-                ghostClass: "ItemList-item-placeholder",
+                ghostClass: "ItemList-placeholder",
                 onSort: ({ oldIndex, newIndex }) => {
                     const items = [...this.props.items];
                     items.splice(newIndex, 0, items.splice(oldIndex, 1)[0]);
                     setItems(items, done);
                 },
+                scroll: true,
             });
         }
 
