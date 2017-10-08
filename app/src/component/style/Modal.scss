@@ -45,3 +45,20 @@
 	margin: 1em;
 	max-width: calc(100vw - 2em);
 }
+
+.Modal-close-button-container {
+	position: absolute;
+	top: 1.5em;
+	right: 1.5em;
+	z-index: 10000;
+}
+
+.Modal-close-button {
+	$Modal-close-button-size: 2em;
+
+	font-size: 1.5em;
+	width: $Modal-close-button-size;
+	height: $Modal-close-button-size;
+	border-radius: $Modal-close-button-size;
+	padding: 0;
+}

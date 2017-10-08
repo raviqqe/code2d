@@ -22,6 +22,7 @@ class TopSalesBooks extends React.Component<IProps> {
                         <div className="TopSalesBooks-button" onClick={showWindow}>
                             Top Sales
                         </div>}
+                showCloseButton={true}
             >
                 <div className="TopSalesBooks-container">
                     {topSalesBooks.map((book: IBook, index) =>
