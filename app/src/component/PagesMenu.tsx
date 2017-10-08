@@ -24,7 +24,7 @@ class PagesMenu extends React.Component<IProps, IState> {
         return (
             <div className="PagesMenu-container">
                 <PageButton
-                    current={true}
+                    className="PagesMenu-current-button"
                     page={currentPage}
                     onClick={() => this.setState({ showMenu: !showMenu })}
                 />
@@ -33,9 +33,10 @@ class PagesMenu extends React.Component<IProps, IState> {
                     onClick={() => this.setState({ showMenu: false })}
                 />
                 <div className={"PagesMenu-box" + (showMenu ? "" : "-hidden")}>
-                    {pages.map((page) => page !== currentPage &&
+                    {pages.map((page) =>
                         <PageButton
                             key={page}
+                            className={page === currentPage && "PagesMenu-disabled-button"}
                             page={page}
                             onClick={() => {
                                 setCurrentPage(page);

@@ -1,5 +1,6 @@
 @import "../../style/animation.scss";
 @import "../../style/border.scss";
+@import "../../style/colors.scss";
 @import "../../style/shadow.scss";
 
 .PagesMenu-container {
@@ -36,4 +37,20 @@
 
 .PagesMenu-background-hidden {
 	display: none;
+}
+
+.PagesMenu-current-button {
+	color: inherit;
+
+	&:hover {
+		color: inherit;
+	}
+}
+
+.PagesMenu-disabled-button {
+	color: $red;
+
+	&:hover {
+		color: $red;
+	}
 }

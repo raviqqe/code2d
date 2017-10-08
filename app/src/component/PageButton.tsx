@@ -15,18 +15,18 @@ const icons = {
 };
 
 interface IProps {
-    current?: boolean;
+    className?: string;
     onClick?: () => void;
     page: Page;
 }
 
 export default class PageButton extends React.Component<IProps> {
     public render() {
-        const { current, onClick, page } = this.props;
+        const { className, onClick, page } = this.props;
 
         return (
             <div
-                className={"PageButton-container" + (current ? "-current" : "")}
+                className={"PageButton-container" + (className ? " " + className : "")}
                 onClick={onClick}
                 style={onClick ? { cursor: "pointer" } : {}}
             >

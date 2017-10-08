@@ -15,16 +15,6 @@
 	}
 }
 
-.PageButton-container-current {
-	@extend .PageButton-container;
-
-	color: inherit;
-
-	&:hover {
-		color: inherit;
-	}
-}
-
 .PageButton-icon {
 	display: flex;
 	font-size: 1.8em;
