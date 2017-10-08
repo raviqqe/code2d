@@ -21,6 +21,9 @@
 		}, {
 			"source": "/functions/video",
 			"function": "video"
+		}, {
+			"source": "/functions/topSalesBooks",
+			"function": "topSalesBooks"
 		}]
 	}
 }
