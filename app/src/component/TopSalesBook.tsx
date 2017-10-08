@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { IBook } from "../lib/books";
+import { extractBook, IBook } from "../lib/books";
 import { actionCreators } from "../redux/books";
 import Button from "./Button";
 import Image from "./Image";
@@ -10,9 +10,13 @@ import ItemName from "./ItemName";
 import Link from "./Link";
 import "./style/TopSalesBook.css";
 
-class TopSalesBook extends React.Component<IBook> {
+interface IProps extends IBook {
+    addToTodoList: (book: IBook) => void;
+}
+
+class TopSalesBook extends React.Component<IProps> {
     public render() {
-        const { author, image, name, publisher, url } = this.props;
+        const { addToTodoList, author, image, name, publisher, url } = this.props;
 
         return (
             <ItemLike className="TopSalesBook-container">
@@ -20,7 +24,9 @@ class TopSalesBook extends React.Component<IBook> {
                 {author && <div>Author: {author}</div>}
                 {publisher && <div>Publisher: {publisher}</div>}
                 {image && <Image href={url} src={image} />}
-                <Button onClick={() => undefined}>Add to list</Button>
+                <Button onClick={() => addToTodoList(extractBook(this.props))}>
+                    Add to list
+                </Button>
             </ItemLike>
         );
     }

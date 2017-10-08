@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { IBook } from "../lib/books";
+import { extractBook, IBook } from "../lib/books";
 import { isDate } from "../lib/utils";
 import { actionCreators } from "../redux/books";
 import Image from "./Image";
@@ -21,7 +21,7 @@ interface IProps extends IBook {
 
 class Book extends React.Component<IProps> {
     public render() {
-        const { author, description, image, name, price, publisher, salesDate, url } = this.book;
+        const { author, description, image, name, price, publisher, salesDate, url } = this.props;
 
         return (
             <Item
@@ -38,15 +38,9 @@ class Book extends React.Component<IProps> {
                     price && <SubInformation key="price">Price: {price}</SubInformation>,
                 ]}
                 href={url}
-                item={this.book}
+                item={extractBook(this.props)}
             />
         );
-    }
-
-    private get book(): IBook {
-        const { author, description, id, image, name, price, publisher, salesDate, url }
-            = this.props;
-        return { author, description, id, image, name, price, publisher, salesDate, url };
     }
 }
 
