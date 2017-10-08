@@ -26,7 +26,7 @@ class TopSalesBook extends React.Component<IProps> {
                 {price && <div>Price: {price}</div>}
                 {image && <Image href={url} src={image} />}
                 <Button onClick={() => addToTodoList(extractBook(this.props))}>
-                    Add to list
+                    Add to to-do list
                 </Button>
             </ItemLike>
         );
