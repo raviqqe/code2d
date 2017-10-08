@@ -28,6 +28,7 @@ export default class PageButton extends React.Component<IProps> {
             <div
                 className={"PageButton-container" + (current ? "-current" : "")}
                 onClick={onClick}
+                style={onClick ? { cursor: "pointer" } : {}}
             >
                 <div className="PageButton-icon">{icons[page]}</div> {page}
             </div>
