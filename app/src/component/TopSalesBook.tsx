@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { IBook } from "../lib/books";
 import { actionCreators } from "../redux/books";
 import Button from "./Button";
+import Image from "./Image";
 import ItemLike from "./ItemLike";
 import ItemName from "./ItemName";
 import Link from "./Link";
@@ -18,7 +19,7 @@ class TopSalesBook extends React.Component<IBook> {
                 <ItemName href={url} text={name} />
                 {author && <div>Author: {author}</div>}
                 {publisher && <div>Publisher: {publisher}</div>}
-                {image && <Link href={url}><img src={image} /></Link>}
+                {image && <Image href={url} src={image} />}
                 <Button onClick={() => undefined}>Add to list</Button>
             </ItemLike>
         );

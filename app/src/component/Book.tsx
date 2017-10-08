@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { IBook } from "../lib/books";
 import { isDate } from "../lib/utils";
 import { actionCreators } from "../redux/books";
+import Image from "./Image";
 import Item from "./Item";
 import LabeledDate from "./LabeledDate";
 import Link from "./Link";
@@ -27,9 +28,7 @@ class Book extends React.Component<IProps> {
                 {...this.props}
                 details={[
                     image &&
-                    <Link key="image" href={url}>
-                        <img className="Book-image" src={image} />
-                    </Link>,
+                    <Image key="image" href={url} src={image} />,
                     description && <div key="description">{description}</div>,
                     author && <SubInformation key="author">Author: {author}</SubInformation>,
                     publisher &&
