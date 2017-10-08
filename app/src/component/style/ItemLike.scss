@@ -1,0 +1,20 @@
+@import "../../style/border.scss";
+
+.ItemLike-container {
+	@include paper-border;
+
+	background: white;
+	padding: 0.5em 0.7em;
+
+	& > * {
+		margin: 0.3em 0;
+
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}

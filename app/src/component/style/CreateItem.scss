@@ -1,5 +1,5 @@
 @import "../../style/border.scss";
-@import "./Item.scss";
+@import "./ItemLike.scss";
 
 .CreateItem-form-container {
 	background: rgba(0, 0, 0, 0.5);
@@ -15,7 +15,7 @@
 }
 
 .CreateItem-form {
-	@extend .Item-container;
+	@extend .ItemLike-container;
 
 	width: 40em;
 	max-width: 90%;

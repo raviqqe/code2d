@@ -4,6 +4,7 @@ import Trash = require("react-icons/lib/md/delete");
 import Repeat = require("react-icons/lib/md/replay");
 
 import { equal, IItem } from "../lib/items";
+import ItemLike from "./ItemLike";
 import ItemName from "./ItemName";
 import "./style/Item.css";
 
@@ -33,8 +34,7 @@ export default class Item<A extends IItem> extends React.Component<IProps<A>, IS
             = this.props;
 
         return (
-            <div
-                className="Item-container"
+            <ItemLike
                 onClick={detailed ? undefined : () => setCurrentItem(item)}
                 onMouseOver={() => this.setState({ showButtons: true })}
                 onMouseOut={() => this.setState({ showButtons: false })}
@@ -49,7 +49,7 @@ export default class Item<A extends IItem> extends React.Component<IProps<A>, IS
                     {this.buttons}
                 </div>
                 {detailed && details}
-            </div>
+            </ItemLike>
         );
     }
 
