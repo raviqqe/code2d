@@ -16,13 +16,14 @@ interface IProps extends IBook {
 
 class TopSalesBook extends React.Component<IProps> {
     public render() {
-        const { addToTodoList, author, image, name, publisher, url } = this.props;
+        const { addToTodoList, author, image, name, price, publisher, url } = this.props;
 
         return (
             <ItemLike className="TopSalesBook-container">
                 <ItemName href={url} text={name} />
                 {author && <div>Author: {author}</div>}
                 {publisher && <div>Publisher: {publisher}</div>}
+                {price && <div>Price: {price}</div>}
                 {image && <Image href={url} src={image} />}
                 <Button onClick={() => addToTodoList(extractBook(this.props))}>
                     Add to list
