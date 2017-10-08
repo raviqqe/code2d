@@ -16,7 +16,7 @@ const icons = {
 
 interface IProps {
     className?: string;
-    onClick?: () => void;
+    onClick: () => void;
     page: Page;
 }
 
@@ -28,7 +28,6 @@ export default class PageButton extends React.Component<IProps> {
             <div
                 className={"PageButton-container" + (className ? " " + className : "")}
                 onClick={onClick}
-                style={onClick ? { cursor: "pointer" } : {}}
             >
                 <div className="PageButton-icon">{icons[page]}</div> {page}
             </div>
