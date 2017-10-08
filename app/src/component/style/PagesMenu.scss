@@ -18,7 +18,7 @@
 	transition: opacity $instant-duration, visibility $instant-duration;
 }
 
-.PagesMenu-box-invisible {
+.PagesMenu-box-hidden {
 	@extend .PagesMenu-box;
 
 	opacity: 0;
