@@ -34,13 +34,14 @@ export default class Item<A extends IItem> extends React.Component<IProps<A>, IS
 
         return (
             <div
-                className={highlighted ? "Item-container-highlighted" : "Item-container"}
+                className="Item-container"
                 onClick={detailed ? undefined : () => setCurrentItem(item)}
                 onMouseOver={() => this.setState({ showButtons: true })}
                 onMouseOut={() => this.setState({ showButtons: false })}
             >
                 <div className="Item-header">
                     <ItemName
+                        highlighted={highlighted}
                         href={href}
                         onEdit={onEditName}
                         text={item.name}

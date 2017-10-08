@@ -21,12 +21,6 @@
 	}
 }
 
-.Item-container-highlighted {
-	@extend .Item-container;
-
-	color: $red;
-}
-
 .Item-header {
 	display: flex;
 	justify-content: space-between;

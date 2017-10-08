@@ -6,6 +6,7 @@ import Link from "./Link";
 import "./style/ItemName.css";
 
 interface IProps {
+    highlighted?: boolean;
     href?: string;
     onEdit?: (text: string) => void;
     text: string;
@@ -13,7 +14,7 @@ interface IProps {
 
 export default class extends InputComponent<IProps> {
     public render() {
-        const { href, onEdit, text } = this.props;
+        const { highlighted, href, onEdit, text } = this.props;
 
         if (this.state.editing) {
             return (
@@ -34,7 +35,7 @@ export default class extends InputComponent<IProps> {
 
         return (
             <div
-                className="ItemName-container"
+                className={"ItemName-container" + (highlighted ? "-highlighted" : "")}
                 onClick={() => this.setState({ editing: this.props.onEdit !== undefined })}
             >
                 {href ? <Link href={href}>{text}</Link> : text}
