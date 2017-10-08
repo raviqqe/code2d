@@ -44,6 +44,10 @@ export default httpsFunction(
 
         const item = await convert(url);
 
+        if (!item.name) {
+            throw new Error(`Invalid item is detected: ${item}`);
+        }
+
         console.log("Item:", item);
 
         const file = new File(`/users/${userId}/${directory}/todo`);

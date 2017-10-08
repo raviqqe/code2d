@@ -76,6 +76,10 @@ export default function createItemsDuck<A extends IItem, B>(
 
                         const item: A = createId(yield call(initialize, itemSource));
 
+                        if (!item.name) {
+                            throw new Error(`Invalid item is detected: ${item.name}`);
+                        }
+
                         yield put(setItems({
                             done: false,
                             items: [item, ...(yield selectState()).todoItems],
