@@ -51,9 +51,14 @@ class Tasks extends React.Component<IProps> {
     private getItemsByTag = (items: ITask[]): ITask[] => {
         const { currentTag } = this.props;
 
-        return currentTag === null
-            ? items
-            : _.filter(items, ({ tags }) => tags.includes(currentTag));
+        switch (currentTag) {
+            case null:
+                return items;
+            case "":
+                return _.filter(items, ({ tags }) => tags.length === 0);
+        }
+
+        return _.filter(items, ({ tags }) => tags.includes(currentTag));
     }
 }
 

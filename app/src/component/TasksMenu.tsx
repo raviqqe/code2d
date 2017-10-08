@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import { ITask } from "../lib/tasks";
 import { actionCreators } from "../redux/tasks";
+import Button from "./Button";
 import CreateTask from "./CreateTask";
 import ItemsMenu from "./ItemsMenu";
 import "./style/TasksMenu.css";
@@ -29,9 +30,17 @@ class TasksMenu extends React.Component<IProps> {
                             <TaskTag
                                 key={index}
                                 tag={tag}
-                                highlight={currentTag && tag === currentTag}
+                                highlight={currentTag === null ? null : tag === currentTag}
                                 onClick={() => setCurrentTag(tag === currentTag ? null : tag)}
                             />)}
+                        <Button
+                            className={
+                                "TasksMenu-no-tag-button" +
+                                (currentTag === "" ? "-highlighted" : "")}
+                            onClick={() => setCurrentTag(currentTag === "" ? null : "")}
+                        >
+                            none
+                        </Button>
                     </div>}
             </ItemsMenu>
         );

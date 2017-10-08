@@ -8,6 +8,8 @@ import createItemsDuck, { IState as IItemsState, Reducer } from "./items";
 import { takeEvery } from "./utils";
 
 export interface IState extends IItemsState<ITask> {
+    // Empty string "" means selecting tasks with no tag.
+    // But, null means selecting all tasks.
     currentTag: string | null;
     tags: string[];
 }

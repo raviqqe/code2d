@@ -6,6 +6,7 @@ $TaskTag-size: 1.8em;
 	font-size: 0.9em;
 	border-radius: $TaskTag-size / 2;
 	height: $TaskTag-size;
+	padding: 0.1em 0.8em;
 	margin: 0.2em;
 }
 
@@ -13,7 +14,6 @@ $TaskTag-size: 1.8em;
 	@include TaskTag-tag-like;
 
 	background: $light-blue;
-	padding: 0.1em 0.8em;
 }
 
 .TaskTag-container-highlighted {

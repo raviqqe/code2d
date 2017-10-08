@@ -1,4 +1,5 @@
 @import "../../style/colors.scss";
+@import "./TaskTag.scss";
 
 .TasksMenu-tags {
 	display: flex;
@@ -10,4 +11,16 @@
 	color: $grey;
 	width: 100%;
 	padding-bottom: 0.5em;
+}
+
+.TasksMenu-no-tag-button {
+	@include TaskTag-tag-like;
+
+	background: $light-grey;
+}
+
+.TasksMenu-no-tag-button-highlighted {
+	@extend .TasksMenu-no-tag-button;
+
+	background: $red;
 }
