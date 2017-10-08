@@ -1,0 +1,9 @@
+@import "../../style/colors.scss";
+
+.Image-container {
+	border: {
+		style: solid;
+		width: 1px;
+		color: $grey;
+	};
+}
