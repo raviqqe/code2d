@@ -31,6 +31,7 @@ export default function createItemsDuck<A extends IItem, B>(
 
     const factory = actionCreatorFactory(reducerName.toUpperCase());
 
+    const addToTodoList = factory<A>("ADD_TO_TODO_LIST");
     const createItem = factory<B>("CREATE_ITEM");
     const getItems = factory.async<void, { todoItems: A[], doneItems: A[] }>("GET_ITEMS");
     const removeItem = factory<A>("REMOVE_ITEM");
@@ -52,6 +53,7 @@ export default function createItemsDuck<A extends IItem, B>(
     return {
         actionCreatorFactory: factory,
         actionCreators: {
+            addToTodoList,
             createItem,
             getItems: () => getItems.started(null),
             removeItem,
@@ -67,6 +69,17 @@ export default function createItemsDuck<A extends IItem, B>(
                 state.merge(done ? { doneItems: items } : { todoItems: items })),
         sagas: [
             takeEvery(
+                addToTodoList,
+                function* _(item: A): SagaIterator {
+                    item = createId(item);
+
+                    yield put(setItems({
+                        done: false,
+                        items: [item, ...(yield selectState()).todoItems],
+                    }));
+                    yield put(setCurrentItem(item));
+                }),
+            takeEvery(
                 createItem,
                 function* _(itemSource: B): SagaIterator {
                     try {
@@ -74,17 +87,13 @@ export default function createItemsDuck<A extends IItem, B>(
                             "Creating an item...",
                             { temporary: false }));
 
-                        const item: A = createId(yield call(initialize, itemSource));
+                        const item: A = yield call(initialize, itemSource);
 
                         if (!item.name) {
                             throw new Error(`Invalid item is detected: ${item.name}`);
                         }
 
-                        yield put(setItems({
-                            done: false,
-                            items: [item, ...(yield selectState()).todoItems],
-                        }));
-                        yield put(setCurrentItem(item));
+                        yield put(addToTodoList(item));
 
                         yield put(message.actionCreators.clearMessage());
                     } catch (error) {
