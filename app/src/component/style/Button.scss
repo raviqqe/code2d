@@ -1,3 +1,4 @@
+@import "../../style/animation.scss";
 @import "../../style/colors.scss";
 
 .Button-container {
@@ -18,18 +19,18 @@
 		radius: 0.5rem;
 		width: 0;
 	};
+	transform: translate(0, 0);
+	transition: transform $instant-duration;
 
 	&:hover {
-		position: relative;
-		top: -1px;
-		left: -1px;
-		box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+		$Button-shadow-size: 0.1rem;
+
+		transform: translate(-$Button-shadow-size, -$Button-shadow-size);
+		box-shadow: $Button-shadow-size $Button-shadow-size $Button-shadow-size rgba(0, 0, 0, 0.3);
 	}
 
 	&:active {
-		position: relative;
-		top: 0px;
-		left: 0px;
+		transform: translate(0, 0);
 		box-shadow: none;
 	}
 }
