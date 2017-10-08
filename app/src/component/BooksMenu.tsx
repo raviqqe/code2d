@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { actionCreators } from "../redux/books";
 import CreateBook from "./CreateBook";
 import ItemsMenu from "./ItemsMenu";
+import TopSalesBooks from "./TopSalesBooks";
 
 interface IProps {
     done: boolean;
@@ -18,7 +19,9 @@ class BooksMenu extends React.Component<IProps> {
                 createItem={<CreateBook />}
                 doneButtonText="read"
                 todoButtonText="to read"
-            />
+            >
+                <TopSalesBooks />
+            </ItemsMenu>
         );
     }
 }
