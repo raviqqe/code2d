@@ -10,6 +10,11 @@ export function config() {
         cors: {
             origins: "http://localhost,https://foo.com",
         },
+        google: {
+            analytics: {
+                trackingid: "UA-46057780-3",
+            },
+        },
         rakuten: {
             affiliate: {
                 id: "1612f82a.a5051d07.1612f82b.6030f61b",

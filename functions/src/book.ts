@@ -4,7 +4,7 @@ import { Request, Response } from "express";
 import { parse } from "url";
 
 import { callApi } from "./rakuten";
-import { httpsFunction } from "./utils";
+import { httpsFunction, urlToItemConverter } from "./utils";
 
 export function isAmazonUrl(url: string): boolean {
     return !!parse(url).hostname.match(/amazon/);
@@ -20,9 +20,9 @@ async function convertUrlIntoIsbn(url: string): Promise<string> {
     return cheerio.load(data)("meta[property=\"books:isbn\"]").attr("content");
 }
 
-export async function convertUrlIntoBook(url: string): Promise<any> {
+export const convertUrlIntoBook = urlToItemConverter(async (url: string): Promise<any> => {
     return (await callApi({ isbn: await convertUrlIntoIsbn(url) }))[0];
-}
+}, "AddBook");
 
 export default httpsFunction(async ({ query: { url } }: Request, response: Response) => {
     response.send(await convertUrlIntoBook(url));

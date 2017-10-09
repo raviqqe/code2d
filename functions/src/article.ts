@@ -4,7 +4,7 @@ import is = require("is_js");
 import unfluff = require("unfluff");
 import * as url from "url";
 
-import { httpsFunction } from "./utils";
+import { httpsFunction, urlToItemConverter } from "./utils";
 
 export function convertIntoUrl(urlOrPath: string, baseUrl: string): string {
     if (!urlOrPath || is.url(urlOrPath)) {
@@ -16,7 +16,7 @@ export function convertIntoUrl(urlOrPath: string, baseUrl: string): string {
     return url.format({ host, pathname: urlOrPath, protocol });
 }
 
-export async function convertUrlIntoArticle(url: string) {
+export const convertUrlIntoArticle = urlToItemConverter(async (url: string) => {
     const { date, favicon, image, softTitle, text, title }
         = unfluff((await axios.get(url, { headers: { Accept: "text/html" } })).data);
 
@@ -32,7 +32,7 @@ export async function convertUrlIntoArticle(url: string) {
         text,
         url,
     };
-}
+}, "AddArticle");
 
 export default httpsFunction(async ({ query: { url } }: Request, response: Response) => {
     const article = await convertUrlIntoArticle(url);
