@@ -23,10 +23,10 @@
 	transition: transform $instant-duration;
 
 	&:hover {
-		$Button-shadow-size: 0.1rem;
+		$Button-shadow-size: 0.15rem;
 
-		transform: translate(-$Button-shadow-size, -$Button-shadow-size);
-		box-shadow: $Button-shadow-size $Button-shadow-size $Button-shadow-size rgba(0, 0, 0, 0.3);
+		transform: translateY(-$Button-shadow-size);
+		box-shadow: 0 $Button-shadow-size $Button-shadow-size rgba(0, 0, 0, 0.4);
 	}
 
 	&:active {
