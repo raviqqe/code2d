@@ -60,9 +60,13 @@ class Settings extends React.Component<IProps> {
                                     marks={{ 0: "0", 0.5: "0.5", 1: "1" }}
                                     railStyle={{ backgroundColor: grey }}
                                     trackStyle={{ backgroundColor: green }}
-                                    dotStyle={{ borderColor: grey }}
-                                    activeDotStyle={{ borderColor: green }}
-                                    handleStyle={{ borderColor: green, boxShadow: "none" }}
+                                    dotStyle={{ background: grey, borderColor: grey }}
+                                    activeDotStyle={{ background: green, borderColor: green }}
+                                    handleStyle={{
+                                        background: green,
+                                        borderColor: green,
+                                        boxShadow: "none",
+                                    }}
                                     onChange={setAlarmVolume}
                                 />
                             </div>
