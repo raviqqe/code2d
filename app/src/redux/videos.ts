@@ -1,7 +1,15 @@
-import { urlToVideo, videosRepository } from "../lib/videos";
+import * as analytics from "../lib/analytics";
+import { IVideo, urlToVideo, videosRepository } from "../lib/videos";
 import createItemsDuck from "./items";
 
-const duck = createItemsDuck("videos", videosRepository, urlToVideo);
+const duck = createItemsDuck(
+    "videos",
+    videosRepository,
+    async (url: string): Promise<IVideo> => {
+        analytics.logUserEvent("AddVideo", url);
+        return await urlToVideo(url);
+    },
+);
 
 export const actionCreators = duck.actionCreators;
 

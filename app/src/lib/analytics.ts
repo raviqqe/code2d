@@ -11,3 +11,7 @@ export function initialize(): void {
 export function setUserId(userId: string): void {
     reactGa.set({ userId });
 }
+
+export function logUserEvent(action: string, label: string): void {
+    reactGa.event({ action, category: "User", label });
+}
