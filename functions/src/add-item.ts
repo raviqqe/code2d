@@ -21,6 +21,7 @@ class File {
     public write = async (content: any) => await this.file.save(msgpack.encode(content));
 }
 
+// This function is used exclusively by browser extensions.
 export default httpsFunction(
     async ({ query: { url } }: Request, response: Response, userId: string) => {
         let convert: (url: string) => any = convertUrlIntoArticle;
