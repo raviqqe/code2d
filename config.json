@@ -20,6 +20,11 @@
 			"id": "f4e57e60ec31fcaa2f6d"
 		}
 	},
+	"google": {
+		"analytics": {
+			"trackingId": "UA-46057780-3"
+		}
+	},
 	"name": "code2d",
 	"repositoryUrl": "https://github.com/raviqqe/code2d"
 }
