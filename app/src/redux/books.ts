@@ -1,7 +1,6 @@
 import { SagaIterator } from "redux-saga";
 import { call, put } from "redux-saga/effects";
 
-import * as analytics from "../lib/analytics";
 import * as lib from "../lib/books";
 import { booksRepository, IBook, urlToBook } from "../lib/books";
 import createItemsDuck, { IState as IItemsState, Reducer } from "./items";
@@ -14,10 +13,7 @@ interface IState extends IItemsState<IBook> {
 const duck = createItemsDuck(
     "books",
     booksRepository,
-    async (url: string): Promise<IBook> => {
-        analytics.logUserEvent("AddBook", url);
-        return await urlToBook(url);
-    },
+    urlToBook,
     { partialInitialState: { topSalesBooks: [] } });
 
 const getTopSalesBooks = duck.actionCreatorFactory.async<void, IBook[]>("GET_TOP_SALES_BOOKS");

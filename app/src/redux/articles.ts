@@ -1,15 +1,7 @@
-import * as analytics from "../lib/analytics";
-import { articlesRepository, IArticle, urlToArticle } from "../lib/articles";
+import { articlesRepository, urlToArticle } from "../lib/articles";
 import createItemsDuck from "./items";
 
-const duck = createItemsDuck(
-    "articles",
-    articlesRepository,
-    async (url: string): Promise<IArticle> => {
-        analytics.logUserEvent("AddArticle", url);
-        return await urlToArticle(url);
-    },
-);
+const duck = createItemsDuck("articles", articlesRepository, urlToArticle);
 
 export const actionCreators = duck.actionCreators;
 
