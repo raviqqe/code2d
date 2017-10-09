@@ -6,7 +6,7 @@ export function initializeApp() {
 
 export function auth() {
     return {
-        currentUser: { delete: () => undefined, uid: "testUid" },
+        currentUser: { delete: () => undefined, getIdToken: () => "testJwt", uid: "testUid" },
         getRedirectResult: () => {
             if (signInFail) {
                 throw new Error("Failed to sign in.");
