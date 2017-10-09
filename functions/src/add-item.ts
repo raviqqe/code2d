@@ -31,6 +31,7 @@ export default httpsFunction(
                 convert = convertUrlIntoVideo;
                 directory = "videos";
                 break;
+            case "hb.afl.rakuten.co.jp":
             case "books.rakuten.co.jp":
                 convert = convertUrlIntoBook;
                 directory = "books";
