@@ -6,6 +6,7 @@ import { all } from "redux-saga/effects";
 import Immutable = require("seamless-immutable");
 import { ImmutableObject } from "seamless-immutable";
 
+import * as analytics from "../lib/analytics";
 import * as firebase from "../lib/firebase";
 import * as articles from "./articles";
 import * as authentication from "./authentication";
@@ -64,6 +65,7 @@ export default function() {
         if (user === null) {
             store.dispatch(authentication.actionCreators.setSignInState(false));
         } else {
+            analytics.setUserId(user.uid);
             store.dispatch(authentication.actionCreators.setSignInState(true));
         }
     });
