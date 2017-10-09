@@ -11,7 +11,7 @@ interface IProps {
 
 export default class extends React.Component<IProps> {
     public render() {
-        const { className, onClick, onMouseOut, onMouseOver } = this.props;
+        const { children, className, onClick, onMouseOut, onMouseOver } = this.props;
 
         return (
             <div
@@ -20,7 +20,7 @@ export default class extends React.Component<IProps> {
                 onMouseOut={onMouseOut}
                 onMouseOver={onMouseOver}
             >
-                {this.props.children}
+                {children}
             </div>
         );
     }
