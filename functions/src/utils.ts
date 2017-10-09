@@ -51,12 +51,6 @@ export function urlToItemConverter<A extends { name: string }>(
         }
 
         await axios.get("https://www.google-analytics.com/collect", {
-            headers: {
-                "User-Agent": (
-                    "Mozilla/5.0 (X11; CrOS armv7l 9592.96.0) " +
-                    "AppleWebKit/537.36 (KHTML, like Gecko) " +
-                    "Chrome/60.0.3112.114 Safari/537.36"),
-            },
             params: {
                 cid: "backend", // Should be UUID v4.
                 ea: action,
