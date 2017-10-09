@@ -23,7 +23,7 @@ export default class ItemList<A extends IItem> extends React.Component<IProps<A>
         const Item = component;
 
         if (items.length === 0) {
-            return <div className="ItemList-container" style={style}>There is no item.</div>;
+            return <div className="ItemList-message" style={style}>There is no item.</div>;
         }
 
         return (
