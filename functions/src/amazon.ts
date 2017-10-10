@@ -6,5 +6,5 @@ export async function convertUrlIntoIsbn(url: string): Promise<string> {
 }
 
 export function isValidUrl(url: string): boolean {
-    return !!parse(url).hostname.match(/\.amazon\./);
+    return !!parse(url).hostname.match(/^www\.amazon\./);
 }

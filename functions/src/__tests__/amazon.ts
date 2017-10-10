@@ -21,7 +21,11 @@ test("Validate URLs", () => {
         expect(isValidUrl(url)).toBe(true);
     }
 
-    for (const url of ["https://amazoon.co.jp", "http://amazonco.jp"]) {
+    for (const url of [
+        "https://amazoon.co.jp",
+        "http://amazonco.jp",
+        "https://aws.amazon.com/blogs",
+    ]) {
         expect(isValidUrl(url)).toBe(false);
     }
 });
