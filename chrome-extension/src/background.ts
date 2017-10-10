@@ -54,7 +54,13 @@ async function addItem(url: string) {
 chrome.browserAction.onClicked.addListener(({ url }) => addItem(url));
 
 chrome.contextMenus.create({
-    contexts: ["link", "page"],
-    onclick: ({ linkUrl, pageUrl }) => addItem(linkUrl || pageUrl),
-    title: "Add an item",
+    contexts: ["page"],
+    onclick: ({ pageUrl }) => addItem(pageUrl),
+    title: "Add an item of the page",
+});
+
+chrome.contextMenus.create({
+    contexts: ["link"],
+    onclick: ({ linkUrl }) => addItem(linkUrl),
+    title: "Add an item of the link",
 });
