@@ -2,6 +2,8 @@ import is = require("is_js");
 
 import { convertIntoUrl, convertUrlIntoArticle } from "../article";
 
+jest.setTimeout(20000);
+
 const baseUrl = "https://foo.com";
 
 test("Convert URL-like strings into complete URLs", () => {
