@@ -41,10 +41,10 @@ export function httpsFunction(
 }
 
 export function urlToItemConverter<A extends { name: string }>(
-    converter: (url: string) => Promise<A>,
-    action: string): (url: string) => Promise<A> {
-    return async (url: string): Promise<any> => {
-        const item = await converter(url);
+    converter: (url: string, options?: object) => Promise<A>,
+    action: string): (url: string, options?: object) => Promise<A> {
+    return async (url: string, options: object = {}): Promise<any> => {
+        const item = await converter(url, options);
 
         if (!item.name) {
             throw new Error(`Invalid item is detected: ${item}`);
@@ -64,4 +64,8 @@ export function urlToItemConverter<A extends { name: string }>(
 
         return item;
     };
+}
+
+export function isIsbn(isbn: string): boolean {
+    return typeof isbn === "string" && (isbn.length === 10 || isbn.length === 13);
 }

@@ -1,11 +1,11 @@
-import { convertIsbnIntoBook, convertUrlIntoIsbn, isValidUrl } from "../better-world-books";
+import { convertIsbnIntoBook, convertUrlIntoIsbn, isValidUrl } from "../rakuten";
 import { isIsbn } from "../utils";
 
 jest.setTimeout(20000);
 
 const urls = [
-    "https://www.betterworldbooks.com/it-id-1501142976.aspx",
-    "https://www.betterworldbooks.com/The-Power-of-Now-id-1577314808.aspx",
+    "https://books.rakuten.co.jp/rb/14920954/",
+    "https://books.rakuten.co.jp/rb/15078428/",
 ];
 
 test("Convert URLs into ISBNs", async () => {
@@ -19,7 +19,7 @@ test("Convert URLs into ISBNs", async () => {
 test("Convert ISBNs into book objects", async () => {
     expect.assertions(2);
 
-    for (const isbn of ["1501142976", "1577314808"]) {
+    for (const isbn of ["9784873117911", "9784774189673"]) {
         expect(typeof (await convertIsbnIntoBook(isbn))).toBe("object");
     }
 });
@@ -31,7 +31,7 @@ test("Validate URLs", () => {
 
     for (const url of [
         "https://amazon.co.jp",
-        "https://wwww.betterworldbooks.com/it-id-1501142976.aspx",
+        "https://www.betterworldbooks.com/it-id-1501142976.aspx",
     ]) {
         expect(isValidUrl(url)).toBe(false);
     }

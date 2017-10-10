@@ -1,5 +1,7 @@
 import axios from "axios";
+import cheerio = require("cheerio");
 import * as functions from "firebase-functions";
+import { parse as parseUrl } from "url";
 
 function convertItemIntoBook({
     affiliateUrl, author, itemCaption, itemPrice, largeImageUrl,
@@ -30,4 +32,17 @@ export async function callApi(query: object): Promise<any[]> {
         });
 
     return Items.map(convertItemIntoBook);
+}
+
+export async function convertUrlIntoIsbn(url: string): Promise<string> {
+    return cheerio.load((await axios.get(url)).data)("meta[property=\"books:isbn\"]")
+        .attr("content");
+}
+
+export async function convertIsbnIntoBook(isbn: string): Promise<any> {
+    return (await callApi({ isbn }))[0];
+}
+
+export function isValidUrl(url: string): boolean {
+    return parseUrl(url).hostname === "books.rakuten.co.jp";
 }

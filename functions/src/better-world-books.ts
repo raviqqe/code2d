@@ -1,5 +1,6 @@
 import axios from "axios";
 import cheerio = require("cheerio");
+import { parse as parseUrl } from "url";
 import { parseString } from "xml2js";
 
 export async function parseXml(xml: string): Promise<any> {
@@ -31,4 +32,12 @@ export async function convertIsbnIntoBook(isbn: string) {
         salesDate: datePublished,
         url,
     };
+}
+
+export function convertUrlIntoIsbn(url: string): string {
+    return url.match(/id-([0-9]+)\./)[1];
+}
+
+export function isValidUrl(url: string): boolean {
+    return parseUrl(url).hostname === "www.betterworldbooks.com";
 }
