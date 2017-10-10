@@ -1,6 +1,7 @@
 import axios from "axios";
 import cheerio = require("cheerio");
 import { Request, Response } from "express";
+import * as geoip from "geoip-lite";
 import { parse } from "url";
 
 import { callApi } from "./rakuten";
@@ -24,6 +25,7 @@ export const convertUrlIntoBook = urlToItemConverter(async (url: string): Promis
     return (await callApi({ isbn: await convertUrlIntoIsbn(url) }))[0];
 }, "AddBook");
 
-export default httpsFunction(async ({ query: { url } }: Request, response: Response) => {
+export default httpsFunction(async ({ ip, query: { url } }: Request, response: Response) => {
+    console.log("Country:", geoip.lookup(ip).country);
     response.send(await convertUrlIntoBook(url));
 });
