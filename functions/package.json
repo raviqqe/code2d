@@ -14,12 +14,13 @@
     "msgpack-lite": "^0.1.26",
     "nanoid": "^0.2.1",
     "unfluff": "^1.1.0",
+    "xml2js": "^0.4.19",
     "youtube-api": "^2.0.9"
   },
   "devDependencies": {
     "@types/express": "^4.0.37",
     "@types/jest": "^20.0.8",
-    "jest": "^20.0.4",
+    "jest": "^21.2.1",
     "ts-jest": "^21.0.1",
     "typescript": "^2.5.3"
   },
