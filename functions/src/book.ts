@@ -35,6 +35,7 @@ async function convertUrlIntoIsbn(url: string): Promise<string> {
 
 export const convertUrlIntoBook = urlToItemConverter(
     async (url: string, { country }: { country: string }): Promise<any> => {
+        console.log("Country:", country);
         return await (country === "JP" ? rakuten : betterWorldBooks).convertIsbnIntoBook(
             await convertUrlIntoIsbn(url));
     }, "AddBook");
