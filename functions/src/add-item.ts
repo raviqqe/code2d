@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import * as admin from "firebase-admin";
+import * as geoip from "geoip-lite";
 import * as msgpack from "msgpack-lite";
 import nanoid = require("nanoid");
 import { parse } from "url";
@@ -23,8 +24,9 @@ class File {
 
 // This function is used exclusively by browser extensions.
 export default httpsFunction(
-    async ({ query: { url } }: Request, response: Response, userId: string) => {
-        let convert: (url: string) => Promise<any> = article.convertUrlIntoArticle;
+    async ({ ip, query: { url } }: Request, response: Response, userId: string) => {
+        let convert: (url: string, options?: object) => Promise<any>
+            = article.convertUrlIntoArticle;
         let directory: "articles" | "videos" | "books" = "articles";
 
         if (video.isValidUrl(url)) {
@@ -35,7 +37,7 @@ export default httpsFunction(
             directory = "books";
         }
 
-        const item = await convert(url);
+        const item = await convert(url, { country: geoip.lookup(ip).country });
 
         if (!item.name) {
             throw new Error(`Invalid item is detected: ${item}`);
