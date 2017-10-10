@@ -24,7 +24,7 @@ class File {
 // This function is used exclusively by browser extensions.
 export default httpsFunction(
     async ({ query: { url } }: Request, response: Response, userId: string) => {
-        let convert: (url: string, userId: string) => Promise<any> = convertUrlIntoArticle;
+        let convert: (url: string) => Promise<any> = convertUrlIntoArticle;
         let directory: "articles" | "videos" | "books" = "articles";
 
         switch (parse(url).hostname) {
@@ -44,7 +44,7 @@ export default httpsFunction(
                 }
         }
 
-        const item = await convert(url, userId);
+        const item = await convert(url);
 
         if (!item.name) {
             throw new Error(`Invalid item is detected: ${item}`);
