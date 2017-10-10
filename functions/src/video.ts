@@ -7,6 +7,10 @@ import { httpsFunction, urlToItemConverter } from "./utils";
 
 YouTube.authenticate({ key: functions.config().youtube.key, type: "key" });
 
+export function isValidUrl(url: string): boolean {
+    return parseUrl(url).hostname === "www.youtube.com";
+}
+
 export const convertUrlIntoVideo = urlToItemConverter(async (url: string) => {
     const id = parseUrl(url, true).query.v;
     const { description, publishedAt, title } = await new Promise((resolve, reject) =>

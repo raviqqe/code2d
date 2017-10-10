@@ -4,10 +4,10 @@ import * as msgpack from "msgpack-lite";
 import nanoid = require("nanoid");
 import { parse } from "url";
 
-import { convertUrlIntoArticle } from "./article";
-import { convertUrlIntoBook, isAmazonUrl } from "./book";
+import * as article from "./article";
+import * as book from "./book";
 import { httpsFunction } from "./utils";
-import { convertUrlIntoVideo } from "./video";
+import * as video from "./video";
 
 class File {
     private file;
@@ -24,24 +24,15 @@ class File {
 // This function is used exclusively by browser extensions.
 export default httpsFunction(
     async ({ query: { url } }: Request, response: Response, userId: string) => {
-        let convert: (url: string) => Promise<any> = convertUrlIntoArticle;
+        let convert: (url: string) => Promise<any> = article.convertUrlIntoArticle;
         let directory: "articles" | "videos" | "books" = "articles";
 
-        switch (parse(url).hostname) {
-            case "www.youtube.com":
-                convert = convertUrlIntoVideo;
-                directory = "videos";
-                break;
-            case "hb.afl.rakuten.co.jp":
-            case "books.rakuten.co.jp":
-                convert = convertUrlIntoBook;
-                directory = "books";
-                break;
-            default:
-                if (isAmazonUrl(url)) {
-                    convert = convertUrlIntoBook;
-                    directory = "books";
-                }
+        if (video.isValidUrl(url)) {
+            convert = video.convertUrlIntoVideo;
+            directory = "videos";
+        } else if (book.isValidUrl(url)) {
+            convert = book.convertUrlIntoBook;
+            directory = "books";
         }
 
         const item = await convert(url);

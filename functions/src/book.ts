@@ -6,6 +6,16 @@ import * as betterWorldBooks from "./better-world-books";
 import * as rakuten from "./rakuten";
 import { httpsFunction, urlToItemConverter } from "./utils";
 
+export function isValidUrl(url: string): boolean {
+    for (const provider of [amazon, betterWorldBooks, rakuten]) {
+        if (provider.isValidUrl(url)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 async function convertUrlIntoIsbn(url: string): Promise<string> {
     let convert = null;
 
