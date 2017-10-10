@@ -48,6 +48,7 @@ export default function() {
             ...authentication.sagas,
             ...books.sagas,
             ...message.sagas,
+            ...pages.sagas,
             ...settings.sagas,
             ...tasks.sagas,
             ...timer.sagas,

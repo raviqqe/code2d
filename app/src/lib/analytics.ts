@@ -11,3 +11,7 @@ export function initialize(): void {
 export function setUserId(userId: string): void {
     reactGa.set({ userId });
 }
+
+export function logPageView(page: string): void {
+    reactGa.pageview(page);
+}
