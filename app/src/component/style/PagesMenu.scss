@@ -16,12 +16,14 @@
 	position: absolute;
 	top: 100%;
 	z-index: 200;
-	transition: opacity $instant-duration, visibility $instant-duration;
+	transform-origin: 0 0;
+	transition: transform $short-duration, opacity $instant-duration, visibility $instant-duration;
 }
 
 .PagesMenu-box-hidden {
 	@extend .PagesMenu-box;
 
+	transform: scale(0, 0);
 	opacity: 0;
 	visibility: hidden;
 }
