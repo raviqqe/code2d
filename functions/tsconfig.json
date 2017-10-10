@@ -3,6 +3,7 @@
 		"lib": ["es5", "es6", "es7", "esnext"],
 		"outDir": "dist",
 		"target": "es5",
+		"sourceMap": true,
 		"downlevelIteration": true,
 		"experimentalDecorators": true
 	},
