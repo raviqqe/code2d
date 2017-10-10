@@ -44,5 +44,5 @@ export async function convertIsbnIntoBook(isbn: string): Promise<any> {
 }
 
 export function isValidUrl(url: string): boolean {
-    return parseUrl(url).hostname === "books.rakuten.co.jp";
+    return ["books.rakuten.co.jp", "hb.afl.rakuten.co.jp"].includes(parseUrl(url).hostname);
 }
