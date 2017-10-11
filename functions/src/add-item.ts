@@ -3,7 +3,6 @@ import * as admin from "firebase-admin";
 import * as geoip from "geoip-lite";
 import * as msgpack from "msgpack-lite";
 import nanoid = require("nanoid");
-import { parse } from "url";
 
 import * as article from "./article";
 import * as book from "./book";
