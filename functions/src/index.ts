@@ -7,4 +7,5 @@ export { default as article } from "./article";
 export { default as addItem } from "./add-item";
 export { default as book } from "./book";
 export { default as topSalesBooks } from "./top-sales-books";
+export { default as trendingItems } from "./trending-items";
 export { default as video } from "./video";
