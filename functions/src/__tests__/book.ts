@@ -13,23 +13,25 @@ function validateBook({ author, image, name, publisher, title, url }): void {
     expect(is.url(url)).toBe(true);
 }
 
-test("Convert URLs of English books into book objects", async () => {
+test("Convert URLs of books into book objects in US", async () => {
     expect.assertions(12);
 
     for (const bookUrl of [
         "https://www.betterworldbooks.com/it-id-1501142976.aspx",
         "https://www.betterworldbooks.com/The-Power-of-Now-id-1577314808.aspx",
     ]) {
-        validateBook(await convertUrlIntoBook(bookUrl));
+        validateBook(await convertUrlIntoBook(bookUrl, { country: "US" }));
     }
 });
 
-test("Convert URLs of Japanese books into book objects", async () => {
-    expect.assertions(12);
+test("Convert URLs of books into book objects in Japan", async () => {
+    expect.assertions(18);
 
     for (const bookUrl of [
         "https://books.rakuten.co.jp/rb/14920954/",
         "https://books.rakuten.co.jp/rb/15078428/",
+        "https://www.betterworldbooks.com/Soft-Skills" +
+        "--The-software-developer-s-life-manual-id-9781617292392.aspx",
     ]) {
         validateBook(await convertUrlIntoBook(bookUrl, { country: "JP" }));
     }
