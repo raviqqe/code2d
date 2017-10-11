@@ -1,6 +1,7 @@
 *.backup
 *.info
 *.log
+*.png
 *.tfstate
 .runtimeconfig.json
 .terraform

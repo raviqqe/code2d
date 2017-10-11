@@ -10,6 +10,18 @@ TERRAFORM_VARS = %W[
   -var addresses='#{HOSTING['addresses']}'
 ].join ' '
 
+SCREENSHOTS = %w[tasks articles videos].map do |name|
+  "images/screenshots/#{name}.png"
+end
+
+def original_png_path(path)
+  File.join File.dirname(path), 'original', File.basename(path)
+end
+
+rule %r{images/screenshots/[^/]+\.png} => method(:original_png_path) do |t|
+  sh "pngquant -o #{t.name} #{t.source}"
+end
+
 task :test do
   %w[app functions].each do |dir|
     cd dir do
@@ -18,7 +30,7 @@ task :test do
   end
 end
 
-task :build do
+task build: SCREENSHOTS do
   %w[app functions chrome-extension].each do |dir|
     cd dir do
       sh 'rake build'
