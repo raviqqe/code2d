@@ -5,7 +5,7 @@ build:
         name: os setup
         code: |
           apt -y update --fix-missing
-          apt -y install inkscape rake
+          apt -y install inkscape pngquant rake
 
     - script:
         name: build
