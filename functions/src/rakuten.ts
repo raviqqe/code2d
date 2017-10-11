@@ -19,9 +19,9 @@ function convertItemIntoBook({
     };
 }
 
-export async function callApi(query: object): Promise<any[]> {
+export async function callApi(kind: "Total" | "Book", query: object): Promise<any[]> {
     const { data: { Items } } = await axios.get(
-        "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404",
+        `https://app.rakuten.co.jp/services/api/Books${kind}/Search/20170404`,
         {
             params: {
                 affiliateId: functions.config().rakuten.affiliate.id,
@@ -40,7 +40,7 @@ export async function convertUrlIntoIsbn(url: string): Promise<string> {
 }
 
 export async function convertIsbnIntoBook(isbn: string): Promise<any> {
-    return (await callApi({ isbn }))[0];
+    return (await callApi("Total", { isbnjan: isbn }))[0];
 }
 
 export function isValidUrl(url: string): boolean {
