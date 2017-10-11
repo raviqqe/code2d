@@ -67,5 +67,5 @@ export function urlToItemConverter<A extends { name: string }>(
 }
 
 export function isIsbn(isbn: string): boolean {
-    return typeof isbn === "string" && (isbn.length === 10 || isbn.length === 13);
+    return typeof isbn === "string" && [10, 13].includes(isbn.length);
 }
