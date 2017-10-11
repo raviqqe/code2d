@@ -2,7 +2,13 @@ import axios from "axios";
 import cheerio = require("cheerio");
 import * as functions from "firebase-functions";
 import { ISBN } from "isbn";
+import moji = require("moji");
 import { parse as parseUrl } from "url";
+
+
+function normalizeString(text: string): string {
+    return moji(text).convert("ZEtoHE").convert("ZStoHS").toString();
+}
 
 function convertItemIntoBook({
     affiliateUrl, author, itemCaption, itemPrice, largeImageUrl,
@@ -10,9 +16,9 @@ function convertItemIntoBook({
     }) {
     return {
         author,
-        description: itemCaption,
+        description: normalizeString(itemCaption),
         image: largeImageUrl,
-        name: title,
+        name: normalizeString(title),
         price: `¥${itemPrice}`,
         publisher: publisherName,
         salesDate,
