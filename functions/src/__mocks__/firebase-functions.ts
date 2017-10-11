@@ -2,13 +2,8 @@ import { Request, Response } from "express";
 
 export function config() {
     return {
-        aws: {
-            id: "accessKeyId",
-            secret: "accessKeySecret",
-            tag: "associateId",
-        },
         cors: {
-            origins: "http://localhost,https://foo.com",
+            origins: "https://foo.com,http://bar.com",
         },
         google: {
             analytics: {
