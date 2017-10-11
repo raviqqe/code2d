@@ -1,6 +1,7 @@
 import axios from "axios";
 import cheerio = require("cheerio");
 import * as functions from "firebase-functions";
+import { ISBN } from "isbn";
 import { parse as parseUrl } from "url";
 
 function convertItemIntoBook({
@@ -40,7 +41,7 @@ export async function convertUrlIntoIsbn(url: string): Promise<string> {
 }
 
 export async function convertIsbnIntoBook(isbn: string): Promise<any> {
-    return (await callApi("Total", { isbnjan: isbn }))[0];
+    return (await callApi("Total", { isbnjan: ISBN.parse(isbn).asIsbn13() }))[0];
 }
 
 export function isValidUrl(url: string): boolean {

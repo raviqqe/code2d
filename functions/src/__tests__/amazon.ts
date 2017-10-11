@@ -5,11 +5,12 @@ jest.setTimeout(20000);
 
 const urls = [
     "https://www.amazon.co.jp/gp/product/4873114284",
+    "https://www.amazon.co.jp/gp/product/4861009782",
     "https://www.amazon.co.jp/Pragmatic-Programmer-Journeyman-Master/dp/020161622X",
 ];
 
 test("Convert URLs into ISBNs", async () => {
-    expect.assertions(2);
+    expect.assertions(3);
 
     for (const url of urls) {
         expect(isIsbn(await convertUrlIntoIsbn(url))).toBe(true);
