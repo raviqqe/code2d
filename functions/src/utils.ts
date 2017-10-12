@@ -5,6 +5,12 @@ import * as functions from "firebase-functions";
 
 const cacheSeconds = 24 * 60 * 60;
 const origins = functions.config().cors.origins.split(",");
+type Action = "AddArticle" | "AddVideo" | "AddBook";
+const dimensions: { [action: string]: number } = {
+    AddArticle: 1,
+    AddBook: 3,
+    AddVideo: 2,
+};
 
 export function httpsFunction(
     handler: (request: Request, response: Response, userId?: string) => void | Promise<void>,
@@ -40,9 +46,26 @@ export function httpsFunction(
         });
 }
 
+async function logItemAddition(action: Action, value: string): Promise<void> {
+    const params = {
+        cid: "backend", // Should be UUID v4.
+        ea: action,
+        ec: "User",
+        t: "event",
+        tid: functions.config().google.analytics.trackingid,
+        v: 1,
+    };
+
+    params[`cd${dimensions[action]}`] = value;
+
+    await axios.get("https://www.google-analytics.com/collect", { params });
+}
+
 export function urlToItemConverter<A extends { name: string }>(
     converter: (url: string, options?: object) => Promise<A>,
-    action: string): (url: string, options?: object) => Promise<A> {
+    action: Action,
+    itemToId: (item) => string = ({ url }) => url,
+): (url: string, options?: object) => Promise<A> {
     return async (url: string, options: object = {}): Promise<any> => {
         const item = await converter(url, options);
 
@@ -50,17 +73,7 @@ export function urlToItemConverter<A extends { name: string }>(
             throw new Error(`Invalid item is detected: ${item}`);
         }
 
-        await axios.get("https://www.google-analytics.com/collect", {
-            params: {
-                cid: "backend", // Should be UUID v4.
-                ea: action,
-                ec: "User",
-                el: url,
-                t: "event",
-                tid: functions.config().google.analytics.trackingid,
-                v: 1,
-            },
-        });
+        await logItemAddition(action, itemToId(item));
 
         return item;
     };
