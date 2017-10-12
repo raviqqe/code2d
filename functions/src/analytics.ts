@@ -50,6 +50,10 @@ export async function getTrendingItems(dimension: number) {
                         }],
                         dimensions: [{ name: `ga:dimension${dimension}` }],
                         metrics: [{ expression: "ga:hits" }],
+                        orderBys: [{
+                            fieldName: "ga:hits",
+                            sortOrder: "DESCENDING"
+                        }],
                         viewId: config.viewid,
                     }],
                 },
