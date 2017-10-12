@@ -3,9 +3,15 @@ import * as functions from "firebase-functions";
 import { parse as parseUrl } from "url";
 import YouTube = require("youtube-api");
 
+import { getTrendingItems, IAnalyticsAttributes } from "./analytics";
 import { httpsFunction, urlToItemConverter } from "./utils";
 
 YouTube.authenticate({ key: functions.config().youtube.key, type: "key" });
+
+const analyticsAttributes: IAnalyticsAttributes = {
+    action: "AddVideo",
+    dimension: 2,
+};
 
 export function isValidUrl(url: string): boolean {
     return parseUrl(url).hostname === "www.youtube.com";
@@ -25,12 +31,16 @@ export const convertUrlIntoVideo = urlToItemConverter(async (url: string) => {
         publishedAt,
         url,
     };
-}, "AddVideo");
+}, analyticsAttributes);
 
-export default httpsFunction(async ({ query: { url } }: Request, response: Response) => {
+export const video = httpsFunction(async ({ query: { url } }: Request, response: Response) => {
     const video = await convertUrlIntoVideo(url);
 
     console.log("Video:", video);
 
     response.send(video);
+});
+
+export const trendingVideos = httpsFunction(async (_, response: Response) => {
+    response.send(await getTrendingItems(analyticsAttributes.dimension));
 });

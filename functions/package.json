@@ -32,6 +32,7 @@
     "transform": {
       "^.+\\.ts$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
+    "transformIgnorePatterns": [],
     "testEnvironment": "node",
     "testRegex": "/__tests__/.+\\.ts$",
     "moduleFileExtensions": [

@@ -4,7 +4,13 @@ import is = require("is_js");
 import unfluff = require("unfluff");
 import * as url from "url";
 
+import { getTrendingItems, IAnalyticsAttributes } from "./analytics";
 import { httpsFunction, urlToItemConverter } from "./utils";
+
+const analyticsAttributes: IAnalyticsAttributes = {
+    action: "AddArticle",
+    dimension: 1,
+};
 
 export function convertIntoUrl(urlOrPath: string, baseUrl: string): string {
     if (!urlOrPath || is.url(urlOrPath)) {
@@ -32,12 +38,16 @@ export const convertUrlIntoArticle = urlToItemConverter(async (url: string) => {
         text,
         url,
     };
-}, "AddArticle");
+}, analyticsAttributes);
 
-export default httpsFunction(async ({ query: { url } }: Request, response: Response) => {
+export const article = httpsFunction(async ({ query: { url } }: Request, response: Response) => {
     const article = await convertUrlIntoArticle(url);
 
     console.log("Article:", article);
 
     response.send(article);
+});
+
+export const trendingArticles = httpsFunction(async (_, response: Response) => {
+    response.send(await getTrendingItems(analyticsAttributes.dimension));
 });

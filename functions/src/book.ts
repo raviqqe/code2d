@@ -2,9 +2,15 @@ import { Request, Response } from "express";
 import * as geoip from "geoip-lite";
 
 import * as amazon from "./amazon";
+import { getTrendingItems, IAnalyticsAttributes } from "./analytics";
 import * as betterWorldBooks from "./better-world-books";
 import * as rakuten from "./rakuten";
 import { httpsFunction, urlToItemConverter } from "./utils";
+
+const analyticsAttributes: IAnalyticsAttributes = {
+    action: "AddBook",
+    dimension: 3,
+};
 
 export function isValidUrl(url: string): boolean {
     for (const provider of [amazon, betterWorldBooks, rakuten]) {
@@ -43,8 +49,12 @@ export const convertUrlIntoBook = urlToItemConverter(
             ...(await (country === "JP" ? rakuten : betterWorldBooks).convertIsbnIntoBook(isbn)),
             isbn,
         };
-    }, "AddBook", ({ isbn }) => isbn);
+    }, analyticsAttributes, ({ isbn }) => isbn);
 
-export default httpsFunction(async ({ ip, query: { url } }: Request, response: Response) => {
+export const book = httpsFunction(async ({ ip, query: { url } }: Request, response: Response) => {
     response.send(await convertUrlIntoBook(url, { country: geoip.lookup(ip).country }));
+});
+
+export const trendingBooks = httpsFunction(async (_, response: Response) => {
+    response.send(await getTrendingItems(analyticsAttributes.dimension));
 });

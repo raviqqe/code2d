@@ -1,26 +1,40 @@
+import axios from "axios";
 import * as functions from "firebase-functions";
 import googleApis = require("googleapis");
+import * as _ from "lodash";
 
 const config = functions.config().google.analytics;
 
-const jwtClient = new googleApis.auth.JWT(
-    config.serviceaccount.email,
-    null,
-    config.serviceaccount.key,
-    ["https://www.googleapis.com/auth/analytics.readonly"],
-    null,
-);
+export interface IAnalyticsAttributes {
+    action: "AddArticle" | "AddVideo" | "AddBook";
+    dimension: 1 | 2 | 3;
+}
 
-jwtClient.authorize((error) => {
-    if (error) {
-        throw error;
-    }
+export function initialize(): void {
+    const jwtClient = new googleApis.auth.JWT(
+        config.serviceaccount.email,
+        null,
+        config.serviceaccount.key,
+        ["https://www.googleapis.com/auth/analytics.readonly"],
+        null,
+    );
 
-    googleApis.options({ auth: jwtClient });
-});
+    jwtClient.authorize((error) => {
+        if (error) {
+            throw error;
+        }
+
+        googleApis.options({ auth: jwtClient });
+    });
+}
 
 function getDate(date: Date): string {
-    return date.getUTCFullYear() + "-" + date.getUTCMonth + "-" + date.getUTCDate();
+    const format = (n: number) => _.padStart(n.toString(), 2, "0");
+
+    return (
+        date.getUTCFullYear() + "-" +
+        format(date.getUTCMonth() + 1) + "-" +
+        format(date.getUTCDate()));
 }
 
 export async function getTrendingItems(dimension: number) {
@@ -42,4 +56,19 @@ export async function getTrendingItems(dimension: number) {
             },
             (error, result) => error ? reject(error) : resolve(result),
         ));
+}
+
+export async function logItemAddition(value: string, { action, dimension }: IAnalyticsAttributes): Promise<void> {
+    const params = {
+        cid: "backend", // Should be UUID v4.
+        ea: action,
+        ec: "User",
+        t: "event",
+        tid: functions.config().google.analytics.trackingid,
+        v: 1,
+    };
+
+    params[`cd${dimension}`] = value;
+
+    await axios.get("https://www.google-analytics.com/collect", { params });
 }

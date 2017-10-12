@@ -1,11 +1,13 @@
 import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
 
-admin.initializeApp(functions.config().firebase);
+import * as analytics from "./analytics";
 
-export { default as article } from "./article";
+admin.initializeApp(functions.config().firebase);
+analytics.initialize();
+
+export { article, trendingArticles } from "./article";
 export { default as addItem } from "./add-item";
-export { default as book } from "./book";
+export { book, trendingBooks } from "./book";
 export { default as topSalesBooks } from "./top-sales-books";
-export { default as trendingItems } from "./trending-items";
-export { default as video } from "./video";
+export { trendingVideos, video } from "./video";
