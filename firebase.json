@@ -24,6 +24,15 @@
 		}, {
 			"source": "/functions/topSalesBooks",
 			"function": "topSalesBooks"
+		}, {
+			"source": "/functions/trendingArticles",
+			"function": "trendingArticles"
+		}, {
+			"source": "/functions/trendingVideos",
+			"function": "trendingVideos"
+		}, {
+			"source": "/functions/trendingBooks",
+			"function": "trendingBooks"
 		}]
 	}
 }
