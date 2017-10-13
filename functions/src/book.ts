@@ -66,5 +66,6 @@ export const book = httpsFunction(async ({ ip, query: { url } }: Request, respon
 export const trendingBooks = httpsFunction(async ({ ip }: Request, response: Response) => {
     response.send(await getTrendingItems(
         analyticsAttributes.dimension,
-        async (isbn: string) => await convertIsbnIntoBook(isbn, convertIpIntoCountry(ip))));
+        async (isbn: string) => await convertIsbnIntoBook(isbn, convertIpIntoCountry(ip)),
+        { sequential: true }));
 });

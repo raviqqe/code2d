@@ -40,8 +40,9 @@ function getDate(date: Date): string {
 export async function getTrendingItems(
     dimension: number,
     idToItem: (id: string) => Promise<object>,
+    options: { sequential?: boolean } = {},
 ): Promise<object[]> {
-    const { reports: [{ data: { rows } }] } = await new Promise((resolve, reject) =>
+    let { reports: [{ data: { rows } }] } = await new Promise((resolve, reject) =>
         googleApis.analyticsreporting("v4").reports.batchGet(
             {
                 headers: { "Content-Type": "application/json" },
@@ -64,15 +65,27 @@ export async function getTrendingItems(
             (error, result) => error ? reject(error) : resolve(result),
         )) as any;
 
-    return (await Promise.all(rows.slice(0, 25).map(
-        async ({ dimensions: [id] }): Promise<object | null> => {
-            try {
-                return await idToItem(id);
-            } catch (error) {
-                console.error(error);
-                return null;
-            }
-        }))).filter((item) => !!item);
+    const rowToItem = async ({ dimensions: [id] }): Promise<object | null> => {
+        try {
+            return await idToItem(id);
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
+    };
+
+    rows = rows.slice(0, 25);
+    let items = [];
+
+    if (options.sequential) {
+        for (const row of rows) {
+            items.push(await rowToItem(row));
+        }
+    } else {
+        items = await Promise.all(rows.map(rowToItem));
+    }
+
+    return items.filter((item) => !!item);
 }
 
 export async function logItemAddition(value: string, { action, dimension }: IAnalyticsAttributes): Promise<void> {
