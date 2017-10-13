@@ -2,7 +2,6 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import { extractBook, IBook } from "../lib/books";
-import { isDate } from "../lib/utils";
 import { actionCreators } from "../redux/books";
 import Image from "./Image";
 import Item from "./Item";
@@ -33,8 +32,7 @@ class Book extends React.Component<IProps> {
                     author && <SubInformation key="author">Author: {author}</SubInformation>,
                     publisher &&
                     <SubInformation key="publisher">Publisher: {publisher}</SubInformation>,
-                    salesDate &&
-                    <SubInformation key="salesDate">Sales date: {salesDate}</SubInformation>,
+                    <LabeledDate key="salesDate" label="Sales date" value={salesDate} />,
                     price && <SubInformation key="price">Price: {price}</SubInformation>,
                 ]}
                 href={url}

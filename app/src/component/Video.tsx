@@ -34,7 +34,6 @@ class Video extends React.Component<IProps> {
                     </div>,
                     description &&
                     <div key="description" className="Video-description">{description}</div>,
-                    publishedAt &&
                     <LabeledDate key="publishedOn" label="Published on" value={publishedAt} />,
                 ]}
                 href={url}
