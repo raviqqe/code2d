@@ -18,3 +18,7 @@ export const videosRepository = repository.state;
 export async function urlToVideo(url: string): Promise<IVideo> {
     return await functions.call("video", { url });
 }
+
+export async function getTrendingVideos(): Promise<IVideo[]> {
+    return await functions.call("trendingVideos");
+}

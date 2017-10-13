@@ -1,7 +1,11 @@
-import { urlToVideo, videosRepository } from "../lib/videos";
+import { getTrendingVideos, urlToVideo, videosRepository } from "../lib/videos";
 import createItemsDuck from "./items";
 
-const duck = createItemsDuck("videos", videosRepository, urlToVideo);
+const duck = createItemsDuck(
+    "videos",
+    videosRepository,
+    urlToVideo,
+    { getTrendingItems: getTrendingVideos });
 
 export const actionCreators = duck.actionCreators;
 

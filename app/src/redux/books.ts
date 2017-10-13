@@ -2,7 +2,7 @@ import { SagaIterator } from "redux-saga";
 import { call, put } from "redux-saga/effects";
 
 import * as lib from "../lib/books";
-import { booksRepository, IBook, urlToBook } from "../lib/books";
+import { booksRepository, getTrendingBooks, IBook, urlToBook } from "../lib/books";
 import createItemsDuck, { IState as IItemsState, Reducer } from "./items";
 import { takeEvery } from "./utils";
 
@@ -14,7 +14,10 @@ const duck = createItemsDuck(
     "books",
     booksRepository,
     urlToBook,
-    { partialInitialState: { topSalesBooks: [] } });
+    {
+        getTrendingItems: getTrendingBooks,
+        partialInitialState: { topSalesBooks: [] },
+    });
 
 const getTopSalesBooks = duck.actionCreatorFactory.async<void, IBook[]>("GET_TOP_SALES_BOOKS");
 

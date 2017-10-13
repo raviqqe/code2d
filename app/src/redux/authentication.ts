@@ -60,11 +60,14 @@ function* initialize(): SagaIterator {
     if (rehydrated && signedIn) {
         yield all([
             put(articles.actionCreators.getItems()),
+            put(articles.actionCreators.getTrendingItems()),
             put(books.actionCreators.getItems()),
+            put(books.actionCreators.getTrendingItems()),
             put(books.actionCreators.getTopSalesBooks()),
             put(tasks.actionCreators.getItems()),
             put(tasks.actionCreators.getTags()),
             put(videos.actionCreators.getItems()),
+            put(videos.actionCreators.getTrendingItems()),
             put(settings.actionCreators.checkNotificationPermission()),
         ]);
     }

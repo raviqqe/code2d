@@ -17,3 +17,7 @@ export const articlesRepository = repository.state;
 export async function urlToArticle(url: string): Promise<IArticle> {
     return await functions.call("article", { url });
 }
+
+export async function getTrendingArticles(): Promise<IArticle[]> {
+    return await functions.call("trendingArticles");
+}

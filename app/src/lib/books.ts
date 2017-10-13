@@ -29,3 +29,7 @@ export function extractBook<A extends IBook>({
     }: A): IBook {
     return { author, description, id, image, name, price, publisher, salesDate, url };
 }
+
+export async function getTrendingBooks(): Promise<IBook[]> {
+    return await functions.call("trendingBooks");
+}
