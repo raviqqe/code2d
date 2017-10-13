@@ -2,6 +2,9 @@
 	"aws": {
 		"region": "us-east-1"
 	},
+	"commissionJunction": {
+		"scriptSrc": "//www.anrdoezrs.net/am/8455674/include/allCj/am.js"
+	},
 	"domain": "code2d.net",
 	"feedbackUrl": "https://github.com/raviqqe/code2d/issues",
 	"facebook": {
