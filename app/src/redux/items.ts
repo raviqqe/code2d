@@ -15,18 +15,28 @@ export interface IState<A> {
     currentItem: A | null;
     doneItems: A[];
     todoItems: A[];
+    trendingItems?: A[];
 }
 
 export type Reducer<A, S extends IState<A>>
     = ReducerBuilder<ImmutableObject<S>, ImmutableObject<S>>;
 
+interface IOptions<A> {
+    getTrendingItems?: () => Promise<A[]>;
+    onToggleTaskState?: (item: A) => A;
+    partialInitialState?: {};
+}
+
 export default function createItemsDuck<A extends IItem, B>(
     reducerName: string,
     repository: (done: boolean) => ItemsRepository<A>,
     initialize: (itemSource: B) => A | Promise<A>,
-    options: { partialInitialState?: {}, onToggleTaskState?: (item: A) => A } = {}) {
+    options: IOptions<A> = {}) {
     options = Object.assign(
-        { partialInitialState: {}, onToggleTaskState: (item: A): A => item },
+        {
+            onToggleTaskState: (item: A): A => item,
+            partialInitialState: {},
+        },
         options);
 
     const factory = actionCreatorFactory(reducerName.toUpperCase());
@@ -34,6 +44,7 @@ export default function createItemsDuck<A extends IItem, B>(
     const addToTodoList = factory<A>("ADD_TO_TODO_LIST");
     const createItem = factory<B>("CREATE_ITEM");
     const getItems = factory.async<void, { todoItems: A[], doneItems: A[] }>("GET_ITEMS");
+    const getTrendingItems = factory.async<void, A[]>("GET_TRENDING_ITEMS");
     const removeItem = factory<A>("REMOVE_ITEM");
     const setCurrentItem = factory<A | null>("SET_CURRENT_ITEM");
     const setItems = factory<{ done: boolean, items: A[] }>("SET_ITEMS");
@@ -56,6 +67,7 @@ export default function createItemsDuck<A extends IItem, B>(
             addToTodoList,
             createItem,
             getItems: () => getItems.started(null),
+            getTrendingItems: () => getTrendingItems.started(null),
             removeItem,
             setCurrentItem,
             setItems: (items: A[], done: boolean) => setItems({ done, items }),
@@ -64,6 +76,8 @@ export default function createItemsDuck<A extends IItem, B>(
         initialState,
         reducer: reducerWithInitialState(initialState)
             .case(getItems.done, (state, { result }) => state.merge(result))
+            .case(getTrendingItems.done, (state, { result }) =>
+                state.merge({ trendingItems: result }))
             .case(setCurrentItem, (state, currentItem) => state.merge({ currentItem }))
             .case(setItems, (state, { done, items }) =>
                 state.merge(done ? { doneItems: items } : { todoItems: items })),
@@ -116,6 +130,20 @@ export default function createItemsDuck<A extends IItem, B>(
                     } catch (error) {
                         yield put(message.actionCreators.sendMessage(
                             "Couldn't sync data.",
+                            { error: true }));
+                    }
+                }),
+            takeEvery(
+                getTrendingItems.started,
+                function* _(): SagaIterator {
+                    try {
+                        yield put(getTrendingItems.done({
+                            params: null,
+                            result: yield call(options.getTrendingItems),
+                        }));
+                    } catch (error) {
+                        yield put(message.actionCreators.sendMessage(
+                            "Couldn't get trending items.",
                             { error: true }));
                     }
                 }),
