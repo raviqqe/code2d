@@ -42,5 +42,5 @@ export const video = httpsFunction(async ({ query: { url } }: Request, response:
 });
 
 export const trendingVideos = httpsFunction(async (_, response: Response) => {
-    response.send(await getTrendingItems(analyticsAttributes.dimension));
+    response.send(await getTrendingItems(analyticsAttributes.dimension, convertUrlIntoVideo));
 });

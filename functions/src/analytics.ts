@@ -37,7 +37,10 @@ function getDate(date: Date): string {
         format(date.getUTCDate()));
 }
 
-export async function getTrendingItems(dimension: number) {
+export async function getTrendingItems(
+    dimension: number,
+    idToItem: (id: string) => Promise<object>,
+): Promise<object[]> {
     const { reports: [{ data: { rows } }] } = await new Promise((resolve, reject) =>
         googleApis.analyticsreporting("v4").reports.batchGet(
             {
@@ -61,7 +64,14 @@ export async function getTrendingItems(dimension: number) {
             (error, result) => error ? reject(error) : resolve(result),
         )) as any;
 
-    return rows.map((row) => row.dimensions[0]);
+    return (await Promise.all(rows.map(async ({ dimensions: [id] }): Promise<object | null> => {
+        try {
+            return await idToItem(id);
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
+    }))).filter((item) => !!item);
 }
 
 export async function logItemAddition(value: string, { action, dimension }: IAnalyticsAttributes): Promise<void> {

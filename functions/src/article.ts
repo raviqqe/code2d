@@ -49,5 +49,5 @@ export const article = httpsFunction(async ({ query: { url } }: Request, respons
 });
 
 export const trendingArticles = httpsFunction(async (_, response: Response) => {
-    response.send(await getTrendingItems(analyticsAttributes.dimension));
+    response.send(await getTrendingItems(analyticsAttributes.dimension, convertUrlIntoArticle));
 });
