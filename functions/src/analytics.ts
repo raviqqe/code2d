@@ -64,14 +64,15 @@ export async function getTrendingItems(
             (error, result) => error ? reject(error) : resolve(result),
         )) as any;
 
-    return (await Promise.all(rows.map(async ({ dimensions: [id] }): Promise<object | null> => {
-        try {
-            return await idToItem(id);
-        } catch (error) {
-            console.error(error);
-            return null;
-        }
-    }))).filter((item) => !!item);
+    return (await Promise.all(rows.slice(0, 25).map(
+        async ({ dimensions: [id] }): Promise<object | null> => {
+            try {
+                return await idToItem(id);
+            } catch (error) {
+                console.error(error);
+                return null;
+            }
+        }))).filter((item) => !!item);
 }
 
 export async function logItemAddition(value: string, { action, dimension }: IAnalyticsAttributes): Promise<void> {
