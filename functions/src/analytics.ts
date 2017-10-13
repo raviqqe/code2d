@@ -52,7 +52,7 @@ export async function getTrendingItems(dimension: number) {
                         metrics: [{ expression: "ga:hits" }],
                         orderBys: [{
                             fieldName: "ga:hits",
-                            sortOrder: "DESCENDING"
+                            sortOrder: "DESCENDING",
                         }],
                         viewId: config.viewid,
                     }],
