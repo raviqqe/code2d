@@ -8,7 +8,6 @@ import LabeledDate from "./LabeledDate";
 import "./style/Video.css";
 
 interface IProps extends IVideo {
-    currentItem: IVideo | null;
     detailed: boolean;
     done: boolean;
     highlighted?: boolean;
