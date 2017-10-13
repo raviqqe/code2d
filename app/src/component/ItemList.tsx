@@ -5,7 +5,7 @@ import { equal, IItem } from "../lib/items";
 import "./style/ItemList.css";
 
 interface IProps<A extends IItem> {
-    component: (props) => JSX.Element;
+    itemComponent: (props) => JSX.Element;
     currentItem: A | null;
     done: boolean;
     fixed?: boolean;
@@ -19,8 +19,8 @@ export default class ItemList<A extends IItem> extends React.Component<IProps<A>
     private container: HTMLElement;
 
     public render() {
-        const { component, currentItem, done, fixed, items, setItems, style } = this.props;
-        const Item = component;
+        const { itemComponent, currentItem, done, fixed, items, setItems, style } = this.props;
+        const Item = itemComponent;
 
         if (items.length === 0) {
             return <div className="ItemList-message" style={style}>There is no item.</div>;

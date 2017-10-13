@@ -39,14 +39,14 @@ class Items<A extends IItem> extends React.Component<IProps<A>, IState> {
                         <div>
                             <ItemList
                                 style={done ? { display: "none" } : {}}
-                                component={Item}
+                                itemComponent={Item}
                                 done={false}
                                 items={todoItems}
                                 {...this.props}
                             />
                             <ItemList
                                 style={done ? {} : { display: "none" }}
-                                component={Item}
+                                itemComponent={Item}
                                 done={true}
                                 items={doneItems}
                                 {...this.props}
