@@ -7,7 +7,7 @@ export function config() {
         },
         google: {
             analytics: {
-                trackingid: "UA-46057780-3",
+                trackingid: "UA-46057780-4",
             },
         },
         rakuten: {
