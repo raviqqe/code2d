@@ -1,7 +1,5 @@
 import * as React from "react";
-import { connect } from "react-redux";
 
-import { actionCreators } from "../redux/articles";
 import CreateArticle from "./CreateArticle";
 import ItemsMenu from "./ItemsMenu";
 
@@ -10,7 +8,7 @@ interface IProps {
     onItemsStateChange: (done: boolean) => void;
 }
 
-class ArticlesMenu extends React.Component<IProps> {
+export default class extends React.Component<IProps> {
     public render() {
         return (
             <ItemsMenu
@@ -22,5 +20,3 @@ class ArticlesMenu extends React.Component<IProps> {
         );
     }
 }
-
-export default connect(null, actionCreators)(ArticlesMenu);

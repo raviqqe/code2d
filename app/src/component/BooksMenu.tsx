@@ -1,7 +1,5 @@
 import * as React from "react";
-import { connect } from "react-redux";
 
-import { actionCreators } from "../redux/books";
 import CreateBook from "./CreateBook";
 import ItemsMenu from "./ItemsMenu";
 import TopSalesBooks from "./TopSalesBooks";
@@ -11,7 +9,7 @@ interface IProps {
     onItemsStateChange: (done: boolean) => void;
 }
 
-class BooksMenu extends React.Component<IProps> {
+export default class extends React.Component<IProps> {
     public render() {
         return (
             <ItemsMenu
@@ -25,5 +23,3 @@ class BooksMenu extends React.Component<IProps> {
         );
     }
 }
-
-export default connect(null, actionCreators)(BooksMenu);

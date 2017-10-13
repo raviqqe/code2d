@@ -1,7 +1,5 @@
 import * as React from "react";
-import { connect } from "react-redux";
 
-import { actionCreators } from "../redux/videos";
 import CreateVideo from "./CreateVideo";
 import ItemsMenu from "./ItemsMenu";
 
@@ -10,7 +8,7 @@ interface IProps {
     onItemsStateChange: (done: boolean) => void;
 }
 
-class VideosMenu extends React.Component<IProps> {
+export default class extends React.Component<IProps> {
     public render() {
         return (
             <ItemsMenu
@@ -22,5 +20,3 @@ class VideosMenu extends React.Component<IProps> {
         );
     }
 }
-
-export default connect(null, actionCreators)(VideosMenu);
