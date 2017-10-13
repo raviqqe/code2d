@@ -38,7 +38,7 @@ function getDate(date: Date): string {
 }
 
 export async function getTrendingItems(dimension: number) {
-    return await new Promise((resolve, reject) =>
+    const { reports: [{ data: { rows } }] } = await new Promise((resolve, reject) =>
         googleApis.analyticsreporting("v4").reports.batchGet(
             {
                 headers: { "Content-Type": "application/json" },
@@ -59,7 +59,9 @@ export async function getTrendingItems(dimension: number) {
                 },
             },
             (error, result) => error ? reject(error) : resolve(result),
-        ));
+        )) as any;
+
+    return rows.map((row) => row.dimensions[0]);
 }
 
 export async function logItemAddition(value: string, { action, dimension }: IAnalyticsAttributes): Promise<void> {
