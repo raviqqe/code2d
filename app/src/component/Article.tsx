@@ -30,7 +30,7 @@ class Article extends React.Component<IProps> {
                         <img className="Article-image" src={image} />
                     </Link>,
                     <LabeledDate key="date" label="Edited on" value={date} />,
-                    text && <div key="text">{text}</div>,
+                    text && <div key="text" className="Article-text">{text}</div>,
                 ]}
                 href={url}
                 item={this.article}
