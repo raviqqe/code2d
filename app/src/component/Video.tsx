@@ -33,7 +33,8 @@ class Video extends React.Component<IProps> {
                             allowFullScreen={true}
                         />
                     </div>,
-                    description && <div key="description">{description}</div>,
+                    description &&
+                    <div key="description" className="Video-description">{description}</div>,
                     publishedAt &&
                     <LabeledDate key="publishedOn" label="Published on" value={publishedAt} />,
                 ]}
