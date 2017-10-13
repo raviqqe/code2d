@@ -5,7 +5,6 @@ import { ISBN } from "isbn";
 import moji = require("moji");
 import { parse as parseUrl } from "url";
 
-
 function normalizeString(text: string): string {
     return moji(text).convert("ZEtoHE").convert("ZStoHS").toString();
 }
