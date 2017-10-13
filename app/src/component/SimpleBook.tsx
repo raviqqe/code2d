@@ -9,19 +9,19 @@ import Image from "./Image";
 import ItemLike from "./ItemLike";
 import ItemName from "./ItemName";
 import Link from "./Link";
-import "./style/TopSalesBook.css";
+import "./style/SimpleBook.css";
 
 interface IProps extends IBook {
     addToTodoList: (book: IBook) => void;
 }
 
-class TopSalesBook extends React.Component<IProps> {
+class SimpleBook extends React.Component<IProps> {
     public render() {
         const { addToTodoList, author, image, name, price, publisher, url } = this.props;
         const book = extractBook(this.props);
 
         return (
-            <ItemLike className="TopSalesBook-container">
+            <ItemLike className="SimpleBook-container">
                 <ItemName href={url} text={name} />
                 <BookDetails detailed={false} {...book} />
                 <Button onClick={() => addToTodoList(book)}>
@@ -32,4 +32,4 @@ class TopSalesBook extends React.Component<IProps> {
     }
 }
 
-export default connect(null, actionCreators)(TopSalesBook);
+export default connect(null, actionCreators)(SimpleBook);

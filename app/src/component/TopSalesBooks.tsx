@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 import { IBook } from "../lib/books";
 import { actionCreators } from "../redux/books";
 import Modal from "./Modal";
+import SimpleBook from "./SimpleBook";
 import "./style/TopSalesBooks.css";
-import TopSalesBook from "./TopSalesBook";
 
 interface IProps {
     topSalesBooks: IBook[];
@@ -26,7 +26,7 @@ class TopSalesBooks extends React.Component<IProps> {
             >
                 <div className="TopSalesBooks-container">
                     {topSalesBooks.map((book: IBook, index) =>
-                        <TopSalesBook key={index} {...book} />)}
+                        <SimpleBook key={index} {...book} />)}
                 </div>
             </Modal>
         );
