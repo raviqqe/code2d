@@ -1,0 +1,25 @@
+@import "../../style/border.scss";
+@import "../../style/colors.scss";
+
+.TrendingItems-button {
+	color: $grey;
+	cursor: pointer;
+
+	&:hover {
+		color: $black;
+	}
+}
+
+.TrendingItems-container {
+	@include paper-border;
+
+	background: white;
+	padding: 1em;
+	display: flex;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
+
+	> * {
+		margin: 0.5em;
+	}
+}
