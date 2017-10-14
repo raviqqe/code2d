@@ -1,6 +1,6 @@
 import is = require("is_js");
 
-import { convertUrlIntoBook } from "../book";
+import { convertUrlIntoItem } from "../book";
 
 jest.setTimeout(20000);
 
@@ -20,7 +20,7 @@ test("Convert URLs of books into book objects in US", async () => {
         "https://www.betterworldbooks.com/it-id-1501142976.aspx",
         "https://www.betterworldbooks.com/The-Power-of-Now-id-1577314808.aspx",
     ]) {
-        validateBook(await convertUrlIntoBook(bookUrl, { country: "US" }));
+        validateBook(await convertUrlIntoItem(bookUrl, { country: "US" }));
     }
 });
 
@@ -34,6 +34,6 @@ test("Convert URLs of books into book objects in Japan", async () => {
         "--The-software-developer-s-life-manual-id-9781617292392.aspx",
         "https://www.amazon.co.jp/gp/product/4861009782",
     ]) {
-        validateBook(await convertUrlIntoBook(bookUrl, { country: "JP" }));
+        validateBook(await convertUrlIntoItem(bookUrl, { country: "JP" }));
     }
 });

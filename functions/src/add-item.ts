@@ -24,19 +24,20 @@ class File {
 // This function is used exclusively by browser extensions.
 export default httpsFunction(
     async ({ ip, query: { url } }: Request, response: Response, userId: string) => {
-        let convert: (url: string, options?: object) => Promise<any>
-            = article.convertUrlIntoArticle;
-        let directory: "articles" | "videos" | "books" = "articles";
+        let itemModule: {
+            convertUrlIntoItem: (url: string, options?: object) => Promise<any>,
+            storageDirectory: string,
+        } = article;
 
         if (video.isValidUrl(url)) {
-            convert = video.convertUrlIntoVideo;
-            directory = "videos";
+            itemModule = video;
         } else if (book.isValidUrl(url)) {
-            convert = book.convertUrlIntoBook;
-            directory = "books";
+            itemModule = book;
         }
 
-        const item = await convert(url, { country: geoip.lookup(ip).country });
+        const item = await itemModule.convertUrlIntoItem(
+            url,
+            { country: geoip.lookup(ip).country });
 
         if (!item.name) {
             throw new Error(`Invalid item is detected: ${item}`);
@@ -44,7 +45,7 @@ export default httpsFunction(
 
         console.log("Item:", item);
 
-        const file = new File(`/users/${userId}/${directory}/todo`);
+        const file = new File(`/users/${userId}/${itemModule.storageDirectory}/todo`);
         let items = [];
 
         try {

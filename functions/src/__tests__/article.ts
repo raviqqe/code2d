@@ -1,6 +1,6 @@
 import is = require("is_js");
 
-import { convertIntoUrl, convertUrlIntoArticle } from "../article";
+import { convertIntoUrl, convertUrlIntoItem } from "../article";
 
 jest.setTimeout(20000);
 
@@ -24,7 +24,7 @@ test("Convert a URL into an article object", async () => {
         "https://charlieharvey.org.uk/page/javascript_the_weird_parts",
     ]) {
         const { date, favicon, image, name, text, url }
-            = await convertUrlIntoArticle(articleUrl);
+            = await convertUrlIntoItem(articleUrl);
 
         expect(is.url(image)).toBe(true);
         expect(typeof name).toBe("string");

@@ -13,11 +13,13 @@ const analyticsAttributes: IAnalyticsAttributes = {
     dimension: 2,
 };
 
+export const storageDirectory = "videos";
+
 export function isValidUrl(url: string): boolean {
     return parseUrl(url).hostname === "www.youtube.com";
 }
 
-export const convertUrlIntoVideo = urlToItemConverter(async (url: string) => {
+export const convertUrlIntoItem = urlToItemConverter(async (url: string) => {
     const id = parseUrl(url, true).query.v;
     const { description, publishedAt, title } = await new Promise((resolve, reject) =>
         YouTube.videos.list(
@@ -34,7 +36,7 @@ export const convertUrlIntoVideo = urlToItemConverter(async (url: string) => {
 }, analyticsAttributes);
 
 export const video = httpsFunction(async ({ query: { url } }: Request, response: Response) => {
-    const video = await convertUrlIntoVideo(url);
+    const video = await convertUrlIntoItem(url);
 
     console.log("Video:", video);
 
@@ -42,5 +44,5 @@ export const video = httpsFunction(async ({ query: { url } }: Request, response:
 });
 
 export const trendingVideos = httpsFunction(async (_, response: Response) => {
-    response.send(await getTrendingItems(analyticsAttributes.dimension, convertUrlIntoVideo));
+    response.send(await getTrendingItems(analyticsAttributes.dimension, convertUrlIntoItem));
 });

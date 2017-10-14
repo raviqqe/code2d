@@ -12,6 +12,8 @@ const analyticsAttributes: IAnalyticsAttributes = {
     dimension: 3,
 };
 
+export const storageDirectory = "books";
+
 export function isValidUrl(url: string): boolean {
     for (const provider of [amazon, betterWorldBooks, rakuten]) {
         if (provider.isValidUrl(url)) {
@@ -50,7 +52,7 @@ function convertIpIntoCountry(ip: string): string {
     return geoip.lookup(ip).country;
 }
 
-export const convertUrlIntoBook = urlToItemConverter(
+export const convertUrlIntoItem = urlToItemConverter(
     async (url: string, { country }: { country: string }): Promise<any> => {
         console.log("Country:", country);
 
@@ -60,7 +62,7 @@ export const convertUrlIntoBook = urlToItemConverter(
     }, analyticsAttributes, ({ isbn }) => isbn);
 
 export const book = httpsFunction(async ({ ip, query: { url } }: Request, response: Response) => {
-    response.send(await convertUrlIntoBook(url, { country: convertIpIntoCountry(ip) }));
+    response.send(await convertUrlIntoItem(url, { country: convertIpIntoCountry(ip) }));
 });
 
 export const trendingBooks = httpsFunction(async ({ ip }: Request, response: Response) => {
