@@ -1,6 +1,7 @@
 @import "../../style/colors.scss";
 
 .Image-container {
+	max-width: 100%;
 	border: {
 		style: solid;
 		width: 1px;

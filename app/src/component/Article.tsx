@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import { IArticle } from "../lib/articles";
 import { actionCreators } from "../redux/articles";
+import ArticleDetails from "./ArticleDetails";
 import Item from "./Item";
 import LabeledDate from "./LabeledDate";
 import Link from "./Link";
@@ -19,19 +20,12 @@ interface IProps extends IArticle {
 
 class Article extends React.Component<IProps> {
     public render() {
-        const { date, favicon, image, name, text, url } = this.article;
+        const { name, url } = this.article;
 
         return (
             <Item
                 {...this.props}
-                details={[
-                    image &&
-                    <Link key="image" href={url}>
-                        <img className="Article-image" src={image} />
-                    </Link>,
-                    <LabeledDate key="date" label="Edited on" value={date} />,
-                    text && <div key="text" className="Article-text">{text}</div>,
-                ]}
+                details={<ArticleDetails detailed={true} {...this.article} />}
                 href={url}
                 item={this.article}
             />
