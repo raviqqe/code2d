@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name": "code2d",
 	"description": "This extension helps users to add articles, YouTube videos, and books sold in Rakuten Books (https://books.rakuten.co.jp/) or Better World Books (https://www.betterworldbooks.com/) to to-do lists of code2d easily.",
-	"version": "0.3.3",
+	"version": "0.3.4",
 
 	"browser_action": {
 		"default_icon": "images/icon_19.png",
@@ -21,8 +21,7 @@
 		"contextMenus",
 		"notifications",
 		"tabs",
-		"http://*/*",
-		"https://*/*"
+		"https://us-central1-work2d-162714.cloudfunctions.net/*"
 	],
 	"content_security_policy": "script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com https://apis.google.com; object-src 'self'"
 }
