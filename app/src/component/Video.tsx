@@ -1,11 +1,10 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { IVideo } from "../lib/videos";
+import { extractVideo, IVideo } from "../lib/videos";
 import { actionCreators } from "../redux/videos";
 import Item from "./Item";
-import LabeledDate from "./LabeledDate";
-import "./style/Video.css";
+import VideoDetails from "./VideoDetails";
 
 interface IProps extends IVideo {
     detailed: boolean;
@@ -18,33 +17,16 @@ interface IProps extends IVideo {
 
 class Video extends React.Component<IProps> {
     public render() {
-        const { description, embedUrl, name, publishedAt, url } = this.video;
+        const video = extractVideo(this.props);
 
         return (
             <Item
                 {...this.props}
-                details={[
-                    <div key="video" className="Video-wrapper">
-                        <iframe
-                            id="ytplayer"
-                            src={embedUrl}
-                            frameBorder="0"
-                            allowFullScreen={true}
-                        />
-                    </div>,
-                    description &&
-                    <div key="description" className="Video-description">{description}</div>,
-                    <LabeledDate key="publishedOn" label="Published on" value={publishedAt} />,
-                ]}
-                href={url}
-                item={this.video}
+                details={<VideoDetails detailed={true} {...video} />}
+                href={video.url}
+                item={video}
             />
         );
-    }
-
-    private get video(): IVideo {
-        const { id, description, embedUrl, name, publishedAt, url } = this.props;
-        return { id, description, embedUrl, name, publishedAt, url };
     }
 }
 

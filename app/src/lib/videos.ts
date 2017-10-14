@@ -22,3 +22,7 @@ export async function urlToVideo(url: string): Promise<IVideo> {
 export async function getTrendingVideos(): Promise<IVideo[]> {
     return await functions.call("trendingVideos");
 }
+
+export function extractVideo({ description, embedUrl, id, name, publishedAt, url }: IVideo): IVideo {
+    return { description, embedUrl, id, name, publishedAt, url };
+}
