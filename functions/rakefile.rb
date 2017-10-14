@@ -7,7 +7,8 @@ task build: :deps do
 end
 
 task test: :deps do
-  sh 'npx jest --coverage'
+  # Prevent burst requests to Rakuten Web Service.
+  sh 'npx jest --coverage --maxWorkers 1'
 end
 
 task :clean do
