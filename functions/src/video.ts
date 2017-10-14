@@ -4,7 +4,7 @@ import { parse as parseUrl } from "url";
 import YouTube = require("youtube-api");
 
 import { getTrendingItems, IAnalyticsAttributes } from "./analytics";
-import { httpsFunction, urlToItemConverter } from "./utils";
+import { httpsFunction, urlToItemConverter, urlToItemFunction } from "./utils";
 
 YouTube.authenticate({ key: functions.config().youtube.key, type: "key" });
 
@@ -39,13 +39,7 @@ export const convertUrlIntoItem = urlToItemConverter(async (url: string) => {
     };
 });
 
-export const video = httpsFunction(async ({ query: { url } }: Request, response: Response) => {
-    const video = await convertUrlIntoItem(url);
-
-    console.log("Video:", video);
-
-    response.send(video);
-});
+export const video = urlToItemFunction(convertUrlIntoItem);
 
 export const trendingVideos = httpsFunction(async (_, response: Response) => {
     response.send(await getTrendingItems(analyticsAttributes.dimension, convertUrlIntoItem));

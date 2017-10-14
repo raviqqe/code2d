@@ -1,11 +1,10 @@
 import { Request, Response } from "express";
-import * as geoip from "geoip-lite";
 
 import * as amazon from "./amazon";
 import { getTrendingItems, IAnalyticsAttributes } from "./analytics";
 import * as betterWorldBooks from "./better-world-books";
 import * as rakuten from "./rakuten";
-import { httpsFunction, urlToItemConverter } from "./utils";
+import { convertIpIntoCountry, httpsFunction, urlToItemConverter, urlToItemFunction } from "./utils";
 
 export const analyticsAttributes: IAnalyticsAttributes = {
     action: "AddBook",
@@ -52,10 +51,6 @@ export async function convertIsbnIntoBook(isbn: string, country: string): Promis
     };
 }
 
-function convertIpIntoCountry(ip: string): string {
-    return geoip.lookup(ip).country;
-}
-
 export const convertUrlIntoItem = urlToItemConverter(
     async (url: string, { country }: { country: string }): Promise<any> => {
         console.log("Country:", country);
@@ -65,9 +60,7 @@ export const convertUrlIntoItem = urlToItemConverter(
         return await convertIsbnIntoBook(isbn, country);
     });
 
-export const book = httpsFunction(async ({ ip, query: { url } }: Request, response: Response) => {
-    response.send(await convertUrlIntoItem(url, { country: convertIpIntoCountry(ip) }));
-});
+export const book = urlToItemFunction(convertUrlIntoItem);
 
 export const trendingBooks = httpsFunction(async ({ ip }: Request, response: Response) => {
     response.send(await getTrendingItems(

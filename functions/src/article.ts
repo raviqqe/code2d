@@ -5,7 +5,7 @@ import unfluff = require("unfluff");
 import * as url from "url";
 
 import { getTrendingItems, IAnalyticsAttributes } from "./analytics";
-import { httpsFunction, urlToItemConverter } from "./utils";
+import { httpsFunction, urlToItemConverter, urlToItemFunction } from "./utils";
 
 export const analyticsAttributes: IAnalyticsAttributes = {
     action: "AddArticle",
@@ -46,13 +46,7 @@ export const convertUrlIntoItem = urlToItemConverter(async (url: string) => {
     };
 });
 
-export const article = httpsFunction(async ({ query: { url } }: Request, response: Response) => {
-    const article = await convertUrlIntoItem(url);
-
-    console.log("Article:", article);
-
-    response.send(article);
-});
+export const article = urlToItemFunction(convertUrlIntoItem);
 
 export const trendingArticles = httpsFunction(async (_, response: Response) => {
     response.send(await getTrendingItems(analyticsAttributes.dimension, convertUrlIntoItem));

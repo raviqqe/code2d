@@ -2,6 +2,7 @@ import axios from "axios";
 import { Request, Response } from "express";
 import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
+import * as geoip from "geoip-lite";
 
 const cacheSeconds = 24 * 60 * 60;
 const origins = functions.config().cors.origins.split(",");
@@ -38,6 +39,17 @@ export function httpsFunction(
                 response.sendStatus(500);
             }
         });
+}
+
+export function convertIpIntoCountry(ip: string): string {
+    return geoip.lookup(ip).country;
+}
+
+export function urlToItemFunction(
+    convertUrlIntoItem: (url: string, opitons?: { country?: string }) => Promise<object>) {
+    return httpsFunction(async ({ ip, query: { url } }: Request, response: Response) => {
+        response.send(await convertUrlIntoItem(url, { country: convertIpIntoCountry(ip) }));
+    });
 }
 
 export function urlToItemConverter<A extends { name: string }>(
