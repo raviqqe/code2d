@@ -33,7 +33,7 @@ export const convertUrlIntoItem = urlToItemConverter(async (url: string) => {
         publishedAt,
         url,
     };
-}, analyticsAttributes);
+});
 
 export const video = httpsFunction(async ({ query: { url } }: Request, response: Response) => {
     const video = await convertUrlIntoItem(url);

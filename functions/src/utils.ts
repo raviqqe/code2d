@@ -3,8 +3,6 @@ import { Request, Response } from "express";
 import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
 
-import { IAnalyticsAttributes, logItemAddition } from "./analytics";
-
 const cacheSeconds = 24 * 60 * 60;
 const origins = functions.config().cors.origins.split(",");
 
@@ -44,17 +42,13 @@ export function httpsFunction(
 
 export function urlToItemConverter<A extends { name: string }>(
     converter: (url: string, options?: object) => Promise<A>,
-    analyticsAttributes: IAnalyticsAttributes,
-    itemToId: (item) => string = ({ url }) => url,
 ): (url: string, options?: object) => Promise<A> {
-    return async (url: string, options: object = {}): Promise<any> => {
+    return async (url: string, options: object = {}): Promise<A> => {
         const item = await converter(url, options);
 
         if (!item.name) {
             throw new Error(`Invalid item is detected: ${item}`);
         }
-
-        await logItemAddition(itemToId(item), analyticsAttributes);
 
         return item;
     };

@@ -40,7 +40,7 @@ export const convertUrlIntoItem = urlToItemConverter(async (url: string) => {
         text,
         url,
     };
-}, analyticsAttributes);
+});
 
 export const article = httpsFunction(async ({ query: { url } }: Request, response: Response) => {
     const article = await convertUrlIntoItem(url);

@@ -59,7 +59,7 @@ export const convertUrlIntoItem = urlToItemConverter(
         const isbn = await convertUrlIntoIsbn(url);
 
         return await convertIsbnIntoBook(isbn, country);
-    }, analyticsAttributes, ({ isbn }) => isbn);
+    });
 
 export const book = httpsFunction(async ({ ip, query: { url } }: Request, response: Response) => {
     response.send(await convertUrlIntoItem(url, { country: convertIpIntoCountry(ip) }));
