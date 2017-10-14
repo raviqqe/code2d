@@ -5,9 +5,6 @@ import { extractArticle, IArticle } from "../lib/articles";
 import { actionCreators } from "../redux/articles";
 import ArticleDetails from "./ArticleDetails";
 import Item from "./Item";
-import LabeledDate from "./LabeledDate";
-import Link from "./Link";
-import "./style/Article.css";
 
 interface IProps extends IArticle {
     detailed: boolean;
