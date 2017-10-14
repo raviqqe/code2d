@@ -29,6 +29,9 @@
   },
   "jest": {
     "coverageDirectory": "coverage",
+    "setupFiles": [
+      "<rootDir>/src/set-up-tests.ts"
+    ],
     "transform": {
       "^.+\\.ts$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
