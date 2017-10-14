@@ -8,6 +8,10 @@ build:
           apt -y install inkscape pngquant rake
 
     - script:
+        name: secret
+        code: echo $FUNCTIONS_RUNTIMECONFIG_FILE | base64 -d > functions/.runtimeconfig.json
+
+    - script:
         name: build
         code: rake build
 
