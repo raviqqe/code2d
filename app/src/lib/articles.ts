@@ -21,3 +21,7 @@ export async function urlToArticle(url: string): Promise<IArticle> {
 export async function getTrendingArticles(): Promise<IArticle[]> {
     return await functions.call("trendingArticles");
 }
+
+export function extractArticle({ date, favicon, id, image, name, text, url }: IArticle): IArticle {
+    return { date, favicon, id, image, name, text, url };
+}

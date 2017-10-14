@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { IArticle } from "../lib/articles";
+import { extractArticle, IArticle } from "../lib/articles";
 import { actionCreators } from "../redux/articles";
 import ArticleDetails from "./ArticleDetails";
 import Item from "./Item";
@@ -20,21 +20,16 @@ interface IProps extends IArticle {
 
 class Article extends React.Component<IProps> {
     public render() {
-        const { name, url } = this.article;
+        const article = extractArticle(this.props);
 
         return (
             <Item
                 {...this.props}
-                details={<ArticleDetails detailed={true} {...this.article} />}
-                href={url}
-                item={this.article}
+                details={<ArticleDetails detailed={true} {...article} />}
+                href={article.url}
+                item={article}
             />
         );
-    }
-
-    private get article(): IArticle {
-        const { date, favicon, id, image, name, text, url } = this.props;
-        return { date, favicon, id, image, name, text, url };
     }
 }
 
