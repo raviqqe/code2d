@@ -1,4 +1,5 @@
 import axios from "axios";
+import cheerio = require("cheerio");
 import { Request, Response } from "express";
 import is = require("is_js");
 import unfluff = require("unfluff");
@@ -30,10 +31,11 @@ export function convertItemIntoId({ url }): string {
 }
 
 export const convertUrlIntoItem = urlToItemConverter(async (url: string) => {
-    const { date, favicon, image, softTitle, text, title }
-        = unfluff((await axios.get(url, { headers: { Accept: "text/html" } })).data);
+    const { data } = await axios.get(url, { headers: { Accept: "text/html" } });
+    const { date, favicon, image, softTitle, text } = unfluff(data);
+    const name = cheerio.load(data)("title").text() || softTitle;
 
-    if (!softTitle) {
+    if (!name) {
         throw new Error("Failed to extract title.");
     }
 
@@ -41,7 +43,7 @@ export const convertUrlIntoItem = urlToItemConverter(async (url: string) => {
         date,
         favicon: convertIntoUrl(favicon, url),
         image: convertIntoUrl(image, url),
-        name: softTitle,
+        name,
         text,
         url,
     };
