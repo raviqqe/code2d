@@ -4,11 +4,7 @@ import { connect } from "react-redux";
 import { extractBook, IBook } from "../lib/books";
 import { actionCreators } from "../redux/books";
 import BookDetails from "./BookDetails";
-import Image from "./Image";
 import Item from "./Item";
-import LabeledDate from "./LabeledDate";
-import Link from "./Link";
-import SubInformation from "./SubInformation";
 
 interface IProps extends IBook {
     detailed: boolean;
