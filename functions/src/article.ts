@@ -33,17 +33,12 @@ export function convertItemIntoId({ url }): string {
 export const convertUrlIntoItem = urlToItemConverter(async (url: string) => {
     const { data } = await axios.get(url, { headers: { Accept: "text/html" } });
     const { date, favicon, image, softTitle, text } = unfluff(data);
-    const name = cheerio.load(data)("title").text() || softTitle;
-
-    if (!name) {
-        throw new Error("Failed to extract title.");
-    }
 
     return {
         date,
         favicon: convertIntoUrl(favicon, url),
         image: convertIntoUrl(image, url),
-        name,
+        name: cheerio.load(data)("title").text() || softTitle,
         text,
         url,
     };
