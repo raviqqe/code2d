@@ -21,9 +21,9 @@ class SimpleArticle extends React.Component<IProps> {
         return (
             <ItemLike className="SimpleArticle-container">
                 <ItemName href={url} text={name} />
-                <ArticleDetails detailed={false} {...this.props} />
+                <ArticleDetails detailed={false} {...article} />
                 <Button onClick={() => addToTodoList(article)}>
-                    Add to to-do list
+                    Add to to-read list
                 </Button>
             </ItemLike>
         );

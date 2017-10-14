@@ -17,7 +17,7 @@ interface IProps extends IBook {
 
 class SimpleBook extends React.Component<IProps> {
     public render() {
-        const { addToTodoList, author, image, name, price, publisher, url } = this.props;
+        const { addToTodoList, name, url } = this.props;
         const book = extractBook(this.props);
 
         return (
@@ -25,7 +25,7 @@ class SimpleBook extends React.Component<IProps> {
                 <ItemName href={url} text={name} />
                 <BookDetails detailed={false} {...book} />
                 <Button onClick={() => addToTodoList(book)}>
-                    Add to to-do list
+                    Add to to-read list
                 </Button>
             </ItemLike>
         );
