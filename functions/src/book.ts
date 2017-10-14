@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import * as amazon from "./amazon";
 import { getTrendingItems, IAnalyticsAttributes } from "./analytics";
 import * as betterWorldBooks from "./better-world-books";
-import { httpsFunction, urlToItemFunction } from "./functions";
+import { httpsFunction, trendingItemsFunction, urlToItemFunction } from "./functions";
 import * as rakuten from "./rakuten";
 import { convertIpIntoCountry, urlToItemConverter } from "./utils";
 
@@ -65,7 +65,7 @@ export const book = urlToItemFunction(
     convertUrlIntoItem,
     { analyticsAttributes, itemToId: ({ isbn }) => isbn });
 
-export const trendingBooks = httpsFunction(async ({ ip }: Request, response: Response) => {
+export const trendingBooks = trendingItemsFunction(async ({ ip }: Request, response: Response) => {
     response.send(await getTrendingItems(
         analyticsAttributes.dimension,
         async (isbn: string) => await convertIsbnIntoBook(isbn, convertIpIntoCountry(ip)),

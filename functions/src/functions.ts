@@ -5,12 +5,13 @@ import * as functions from "firebase-functions";
 import { IAnalyticsAttributes, logItemAddition } from "./analytics";
 import { convertIpIntoCountry } from "./utils";
 
-const cacheSeconds = 24 * 60 * 60;
+const defaultCacheSeconds = 24 * 60 * 60;
 const origins = functions.config().cors.origins.split(",");
 
 export function httpsFunction(
     handler: (request: Request, response: Response, userId?: string) => void | Promise<void>,
-    options: { cacheSeconds?: number } = {}) {
+    options: { cacheSeconds?: number } = {},
+) {
     return functions.https.onRequest(
         async (request: Request, response: Response) => {
             const origin = request.get("Origin");
@@ -32,7 +33,7 @@ export function httpsFunction(
 
             const age = typeof options.cacheSeconds === "number"
                 ? options.cacheSeconds
-                : cacheSeconds;
+                : defaultCacheSeconds;
             response.set("Cache-Control", `private, max-age=${age}, s-maxage=${age}`);
 
             try {
@@ -46,7 +47,8 @@ export function httpsFunction(
 
 export function urlToItemFunction(
     convertUrlIntoItem: (url: string, opitons?: { country?: string }) => Promise<object>,
-    options: { itemToId?: (item) => string, analyticsAttributes: IAnalyticsAttributes }) {
+    options: { itemToId?: (item) => string, analyticsAttributes: IAnalyticsAttributes },
+) {
     return httpsFunction(async ({ ip, query: { url } }: Request, response: Response) => {
         const item = await convertUrlIntoItem(url, { country: convertIpIntoCountry(ip) });
 
@@ -56,4 +58,10 @@ export function urlToItemFunction(
 
         response.send(item);
     });
+}
+
+export function trendingItemsFunction(
+    handler: (request: Request, response: Response, userId?: string) => void | Promise<void>,
+) {
+    return httpsFunction(handler, { cacheSeconds: 7 * 24 * 60 * 60 });
 }
