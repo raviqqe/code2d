@@ -3,8 +3,9 @@ import { Request, Response } from "express";
 import * as amazon from "./amazon";
 import { getTrendingItems, IAnalyticsAttributes } from "./analytics";
 import * as betterWorldBooks from "./better-world-books";
+import { httpsFunction, urlToItemFunction } from "./functions";
 import * as rakuten from "./rakuten";
-import { convertIpIntoCountry, httpsFunction, urlToItemConverter, urlToItemFunction } from "./utils";
+import { convertIpIntoCountry, urlToItemConverter } from "./utils";
 
 export const analyticsAttributes: IAnalyticsAttributes = {
     action: "AddBook",
@@ -60,7 +61,9 @@ export const convertUrlIntoItem = urlToItemConverter(
         return await convertIsbnIntoBook(isbn, country);
     });
 
-export const book = urlToItemFunction(convertUrlIntoItem);
+export const book = urlToItemFunction(
+    convertUrlIntoItem,
+    { analyticsAttributes, itemToId: ({ isbn }) => isbn });
 
 export const trendingBooks = httpsFunction(async ({ ip }: Request, response: Response) => {
     response.send(await getTrendingItems(

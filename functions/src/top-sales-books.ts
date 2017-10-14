@@ -1,8 +1,8 @@
 import axios from "axios";
 import { Response } from "express";
 
+import { httpsFunction } from "./functions";
 import { callApi } from "./rakuten";
-import { httpsFunction } from "./utils";
 
 const filteredWords: string[] = ["LINE", "Twitter", "年賀状", "撮影"];
 

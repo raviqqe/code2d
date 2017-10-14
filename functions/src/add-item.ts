@@ -7,7 +7,7 @@ import nanoid = require("nanoid");
 import { IAnalyticsAttributes, logItemAddition } from "./analytics";
 import * as article from "./article";
 import * as book from "./book";
-import { httpsFunction } from "./utils";
+import { httpsFunction } from "./functions";
 import * as video from "./video";
 
 class File {
