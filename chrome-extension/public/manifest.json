@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "code2d",
-	"description": "This extension allows users to add web articles and YouTube videos to to-do lists of code2d.",
+	"description": "This extension helps users to add articles, YouTube videos, and books sold in Rakuten Books (https://books.rakuten.co.jp/) or Better World Books (https://www.betterworldbooks.com/) to to-do lists of code2d easily.",
 	"version": "0.3.3",
 
 	"browser_action": {
