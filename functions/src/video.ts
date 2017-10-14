@@ -8,7 +8,7 @@ import { httpsFunction, urlToItemConverter } from "./utils";
 
 YouTube.authenticate({ key: functions.config().youtube.key, type: "key" });
 
-const analyticsAttributes: IAnalyticsAttributes = {
+export const analyticsAttributes: IAnalyticsAttributes = {
     action: "AddVideo",
     dimension: 2,
 };
@@ -17,6 +17,10 @@ export const storageDirectory = "videos";
 
 export function isValidUrl(url: string): boolean {
     return parseUrl(url).hostname === "www.youtube.com";
+}
+
+export function convertItemIntoId({ url }): string {
+    return url;
 }
 
 export const convertUrlIntoItem = urlToItemConverter(async (url: string) => {

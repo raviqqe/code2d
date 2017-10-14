@@ -4,6 +4,7 @@ import * as geoip from "geoip-lite";
 import * as msgpack from "msgpack-lite";
 import nanoid = require("nanoid");
 
+import { IAnalyticsAttributes, logItemAddition } from "./analytics";
 import * as article from "./article";
 import * as book from "./book";
 import { httpsFunction } from "./utils";
@@ -25,7 +26,9 @@ class File {
 export default httpsFunction(
     async ({ ip, query: { url } }: Request, response: Response, userId: string) => {
         let itemModule: {
+            analyticsAttributes: IAnalyticsAttributes,
             convertUrlIntoItem: (url: string, options?: object) => Promise<any>,
+            convertItemIntoId: (item: object) => string,
             storageDirectory: string,
         } = article;
 
@@ -59,6 +62,8 @@ export default httpsFunction(
         }
 
         await file.write([{ id: nanoid(), ...item }, ...items]);
+
+        await logItemAddition(itemModule.convertItemIntoId(item), itemModule.analyticsAttributes);
 
         response.send(item);
     }, { noCache: true });

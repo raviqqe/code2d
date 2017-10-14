@@ -7,7 +7,7 @@ import * as betterWorldBooks from "./better-world-books";
 import * as rakuten from "./rakuten";
 import { httpsFunction, urlToItemConverter } from "./utils";
 
-const analyticsAttributes: IAnalyticsAttributes = {
+export const analyticsAttributes: IAnalyticsAttributes = {
     action: "AddBook",
     dimension: 3,
 };
@@ -22,6 +22,10 @@ export function isValidUrl(url: string): boolean {
     }
 
     return false;
+}
+
+export function convertItemIntoId({ isbn }): string {
+    return isbn;
 }
 
 async function convertUrlIntoIsbn(url: string): Promise<string> {

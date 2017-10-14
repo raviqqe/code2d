@@ -7,7 +7,7 @@ import * as url from "url";
 import { getTrendingItems, IAnalyticsAttributes } from "./analytics";
 import { httpsFunction, urlToItemConverter } from "./utils";
 
-const analyticsAttributes: IAnalyticsAttributes = {
+export const analyticsAttributes: IAnalyticsAttributes = {
     action: "AddArticle",
     dimension: 1,
 };
@@ -22,6 +22,10 @@ export function convertIntoUrl(urlOrPath: string, baseUrl: string): string {
     const { host, protocol } = url.parse(baseUrl);
 
     return url.format({ host, pathname: urlOrPath, protocol });
+}
+
+export function convertItemIntoId({ url }): string {
+    return url;
 }
 
 export const convertUrlIntoItem = urlToItemConverter(async (url: string) => {
