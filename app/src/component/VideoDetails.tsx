@@ -24,9 +24,9 @@ export default class extends React.Component<IProps> {
         );
 
         const details = [
+            <LabeledDate key="publishedOn" label="Published on" value={publishedAt} />,
             detailed && description &&
             <div key="description" className="VideoDetails-description">{description}</div>,
-            <LabeledDate key="publishedOn" label="Published on" value={publishedAt} />,
         ];
 
         if (detailed) {
