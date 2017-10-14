@@ -4,6 +4,7 @@ import { call, put } from "redux-saga/effects";
 import * as lib from "../lib/books";
 import { booksRepository, getTrendingBooks, IBook, urlToBook } from "../lib/books";
 import createItemsDuck, { IState as IItemsState, Reducer } from "./items";
+import * as message from "./message";
 import { takeEvery } from "./utils";
 
 interface IState extends IItemsState<IBook> {
@@ -36,9 +37,15 @@ export const sagas = [
     takeEvery(
         getTopSalesBooks.started,
         function* _(): SagaIterator {
-            yield put(getTopSalesBooks.done({
-                params: null,
-                result: yield call(lib.getTopSalesBooks),
-            }));
+            try {
+                yield put(getTopSalesBooks.done({
+                    params: null,
+                    result: yield call(lib.getTopSalesBooks),
+                }));
+            } catch (error) {
+                yield put(message.actionCreators.sendMessage(
+                    "Could not fetch top sales books. Please reload the page later.",
+                    { error: true }));
+            }
         }),
 ];
