@@ -10,7 +10,7 @@ const origins = functions.config().cors.origins.split(",");
 
 export function httpsFunction(
     handler: (request: Request, response: Response, userId?: string) => void | Promise<void>,
-    options: { noCache?: boolean } = {}) {
+    options: { cacheSeconds?: number } = {}) {
     return functions.https.onRequest(
         async (request: Request, response: Response) => {
             const origin = request.get("Origin");
@@ -30,7 +30,9 @@ export function httpsFunction(
             const { uid } = await admin.auth().verifyIdToken(
                 request.get("Authorization").split(" ")[1]);
 
-            const age = options.noCache ? 0 : cacheSeconds;
+            const age = typeof options.cacheSeconds === "number"
+                ? options.cacheSeconds
+                : cacheSeconds;
             response.set("Cache-Control", `private, max-age=${age}, s-maxage=${age}`);
 
             try {

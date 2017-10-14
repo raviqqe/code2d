@@ -66,4 +66,4 @@ export default httpsFunction(
         await logItemAddition(itemModule.convertItemIntoId(item), itemModule.analyticsAttributes);
 
         response.send(item);
-    }, { noCache: true });
+    }, { cacheSeconds: 0 });
