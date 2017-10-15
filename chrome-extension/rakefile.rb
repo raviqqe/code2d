@@ -19,6 +19,8 @@ task build: %i[clean deps dist/images] do
           ../images/icon.svg].join ' '
   end
 
+  sh 'convert -colorspace Gray dist/images/icon_128.png dist/images/icon_128_error.png'
+
   cd 'dist' do
     sh 'zip -r extension.zip *'
   end

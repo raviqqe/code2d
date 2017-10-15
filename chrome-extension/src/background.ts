@@ -9,10 +9,13 @@ firebase.initializeApp({
     authDomain: `${config.firebase.projectId}.firebaseapp.com`,
 });
 
-function sendNotification(message: string, contextMessage?: string) {
+function sendNotification(
+    message: string,
+    { contextMessage, error }: { contextMessage?: string, error?: boolean } = {},
+) {
     chrome.notifications.create(null, {
         contextMessage,
-        iconUrl: "images/icon_128.png",
+        iconUrl: error ? "images/icon_128_error.png" : "images/icon_128.png",
         message,
         title: "code2d",
         type: "basic",
@@ -44,10 +47,10 @@ async function addItem(url: string) {
                 params: { url, date: Date.now() },
             })).data;
 
-        sendNotification("An item is added.", name);
+        sendNotification("An item is added.", { contextMessage: name });
     } catch (error) {
         console.error(error);
-        sendNotification("Could not add an item.");
+        sendNotification("Could not add an item.", { error: true });
     }
 }
 
