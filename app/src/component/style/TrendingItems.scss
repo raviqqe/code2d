@@ -23,3 +23,9 @@
 		margin: 0.5em;
 	}
 }
+
+.TrendingItems-container-portrait {
+	@extend .TrendingItems-container;
+
+	flex-direction: column;
+}

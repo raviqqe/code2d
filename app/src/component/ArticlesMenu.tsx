@@ -24,7 +24,11 @@ class ArticlesMenu extends React.Component<IProps> {
                 doneButtonText="read"
                 todoButtonText="to read"
             >
-                <TrendingItems itemComponent={SimpleArticle} trendingItems={trendingItems} />
+                <TrendingItems
+                    itemComponent={SimpleArticle}
+                    portrait={true}
+                    trendingItems={trendingItems}
+                />
             </ItemsMenu>
         );
     }
