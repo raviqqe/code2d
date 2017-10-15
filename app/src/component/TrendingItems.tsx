@@ -14,7 +14,7 @@ export default class TrendingItems<A extends IItem> extends React.Component<IPro
         const { itemComponent, trendingItems } = this.props;
         const Item = itemComponent;
 
-        if (!trendingItems || trendingItems && trendingItems.length === 0) {
+        if (!trendingItems || trendingItems.length === 0) {
             return false;
         }
 
