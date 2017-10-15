@@ -78,6 +78,7 @@ export async function getTrendingItems(
     if (options.sequential) {
         for (const row of rows) {
             items.push(await rowToItem(row));
+            await new Promise((resolve) => setTimeout(resolve, 200)); // Supress request burst.
         }
     } else {
         items = await Promise.all(rows.map(rowToItem));
