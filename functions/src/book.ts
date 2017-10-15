@@ -68,5 +68,6 @@ export const book = urlToItemFunction(
 export const trendingBooks = trendingItemsFunction(async ({ ip }: Request, response: Response) => {
     response.send(await getTrendingItems(
         analyticsAttributes.dimension,
-        async (isbn: string) => await convertIsbnIntoBook(isbn, convertIpIntoCountry(ip))));
+        async (isbn: string) => await convertIsbnIntoBook(isbn, convertIpIntoCountry(ip)),
+        { sequential: true }));
 });
