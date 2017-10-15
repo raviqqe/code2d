@@ -21,6 +21,10 @@ class Books extends React.Component<IProps> {
         return <Items itemComponent={Book} menuComponent={BooksMenu} {...this.props} />;
     }
 
+    public componentDidMount() {
+        this.componentDidUpdate();
+    }
+
     public componentDidUpdate() {
         const script = document.createElement("script");
 
