@@ -7,13 +7,12 @@ export function initializeApp() {
 export function auth() {
     return {
         currentUser: { delete: () => undefined, getIdToken: () => "testJwt", uid: "testUid" },
-        getRedirectResult: () => {
+        onAuthStateChanged: () => undefined,
+        signInWithPopup: () => {
             if (signInFail) {
                 throw new Error("Failed to sign in.");
             }
         },
-        onAuthStateChanged: () => undefined,
-        signInWithRedirect: () => undefined,
         signOut: () => undefined,
     };
 }
