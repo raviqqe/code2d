@@ -1,6 +1,6 @@
 import is = require("is_js");
 
-import { convertIntoUrl, convertUrlIntoItem, trendingArticles } from "../article";
+import { convertIntoUrl, convertUrlIntoItem, extractTitle, trendingArticles } from "../article";
 
 jest.setTimeout(20000);
 
@@ -14,6 +14,21 @@ test("Convert URL-like strings into complete URLs", () => {
 test("Don't convert falsy values into URLs", () => {
     expect(convertIntoUrl(null, baseUrl)).toBe(null);
     expect(convertIntoUrl(undefined, baseUrl)).toBe(undefined);
+});
+
+test("Extract titles from HTML strings", () => {
+    for (const { html, title } of [
+        {
+            html: "<html><head><title>apple</title></head><body>bad apple</body></html>",
+            title: "apple",
+        },
+        {
+            html: "<html>\n<head><title>   foo bar baz\n  </title></head><body></body></html>",
+            title: "foo bar baz",
+        },
+    ]) {
+        expect(extractTitle(html)).toBe(title);
+    }
 });
 
 test("Convert a URL into an article object", async () => {
