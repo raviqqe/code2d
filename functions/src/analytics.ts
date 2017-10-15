@@ -40,7 +40,7 @@ export async function getTrendingItems(
     idToItem: (id: string) => Promise<object>,
     options: { sequential?: boolean } = {},
 ): Promise<object[]> {
-    let { reports: [{ data: { rows } }] } = await new Promise((resolve, reject) =>
+    const { reports: [{ data: { rows } }] } = await new Promise((resolve, reject) =>
         googleApis.analyticsreporting("v4").reports.batchGet(
             {
                 headers: { "Content-Type": "application/json" },
@@ -56,6 +56,7 @@ export async function getTrendingItems(
                             fieldName: "ga:hits",
                             sortOrder: "DESCENDING",
                         }],
+                        pageSize: 25,
                         viewId: config.viewid,
                     }],
                 },
@@ -72,7 +73,6 @@ export async function getTrendingItems(
         }
     };
 
-    rows = rows.slice(0, 25);
     let items = [];
 
     if (options.sequential) {
