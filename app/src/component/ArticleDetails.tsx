@@ -14,7 +14,7 @@ export default class extends React.Component<IProps> {
         const { date, detailed, image, text, url } = this.props;
 
         return [
-            image && <Image key="image" href={url} src={image} />,
+            detailed && image && <Image key="image" href={url} src={image} />,
             <LabeledDate key="date" label="Edited on" value={date} />,
             detailed && text && <div key="text" className="ArticleDetails-text">{text}</div>,
         ];
