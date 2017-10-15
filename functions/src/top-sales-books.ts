@@ -1,8 +1,9 @@
 import axios from "axios";
-import { Response } from "express";
+import { Request, Response } from "express";
 
 import { httpsFunction } from "./functions";
 import { callApi } from "./rakuten";
+import { convertIpIntoCountry } from "./utils";
 
 const filteredWords: string[] = ["LINE", "Twitter", "年賀状", "撮影"];
 
@@ -11,6 +12,6 @@ export async function getTopSalesBooks(): Promise<any[]> {
         .filter(({ name }) => !filteredWords.some((pattern) => name.includes(pattern)));
 }
 
-export default httpsFunction(async (_, response: Response) => {
-    response.send(await getTopSalesBooks());
+export default httpsFunction(async ({ ip }: Request, response: Response) => {
+    response.send(convertIpIntoCountry(ip) === "JP" ? await getTopSalesBooks() : []);
 });
