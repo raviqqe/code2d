@@ -6,6 +6,5 @@
 		"sourceMap": true,
 		"downlevelIteration": true,
 		"experimentalDecorators": true
-	},
-	"exclude": ["node_modules", "**/__tests__/*.ts", "**/__mocks__/*.ts"]
+	}
 }
