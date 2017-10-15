@@ -9,23 +9,16 @@ import Link from "../component/Link";
 import Screenshots from "../component/Screenshots";
 import TwitterButton from "../component/TwitterButton";
 import config from "../config";
-import { actionCreators as authenticationActionCreators } from "../redux/authentication";
-import { actionCreators as messageActionCreators } from "../redux/message";
+import { actionCreators } from "../redux/authentication";
 import "./style/SignIn.css";
 
 interface IProps {
-    sendMessage: (message: string) => void;
-    signingIn: boolean;
     signedIn: boolean;
     signIn: () => void;
 }
 
 class SignIn extends React.Component<IProps> {
     public render() {
-        if (this.props.signingIn) {
-            this.props.sendMessage("Signing in...");
-        }
-
         return (
             <div className="SignIn-container">
                 <div className="SignIn-main">
@@ -92,7 +85,4 @@ class SignIn extends React.Component<IProps> {
     }
 }
 
-export default connect(
-    ({ authentication }) => authentication,
-    { ...authenticationActionCreators, ...messageActionCreators },
-)(SignIn);
+export default connect(({ authentication }) => authentication, actionCreators)(SignIn);

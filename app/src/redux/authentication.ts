@@ -9,6 +9,7 @@ import { reducerWithInitialState } from "typescript-fsa-reducers";
 import * as firebase from "../lib/firebase";
 import * as articles from "./articles";
 import * as books from "./books";
+import * as message from "./message";
 import * as settings from "./settings";
 import * as tasks from "./tasks";
 import * as utils from "./utils";
@@ -33,18 +34,13 @@ export const signInActions = signIn;
 export interface IState {
     rehydrated: boolean;
     signedIn: boolean | null;
-    signingIn: boolean;
 }
 
 export const initialState: ImmutableObject<IState>
-    = Immutable({ rehydrated: false, signedIn: null, signingIn: false });
+    = Immutable({ rehydrated: false, signedIn: null });
 
 const subReducer = reducerWithInitialState(initialState)
-    .case(setSignInState, (state, signedIn) => state.merge({ signedIn }))
-    .case(signIn.started, (state) => state.merge({ signingIn: true }))
-    .case(signIn.done, (state) => state.merge({ signingIn: false }))
-    // Don't set signedIn property which is set by firebase callback.
-    .case(signIn.failed, (state) => state.merge({ signingIn: false }));
+    .case(setSignInState, (state, signedIn) => state.merge({ signedIn }));
 
 export function reducer(state: ImmutableObject<IState> = initialState, action) {
     if (action.type === REHYDRATE) {
@@ -85,10 +81,20 @@ export const sagas = [
         signIn.started,
         function* _(): SagaIterator {
             try {
+                yield put(message.actionCreators.sendMessage(
+                    "Signing in...",
+                    { temporary: false }));
+
                 yield call(firebase.signIn);
                 yield put(signIn.done({ params: null, result: null }));
+
+                yield put(message.actionCreators.clearMessage());
             } catch (error) {
                 yield put(signIn.failed({ params: null, error }));
+
+                yield put(message.actionCreators.sendMessage(
+                    "Could not sign in.",
+                    { error: true }));
             }
         }),
     utils.takeEvery(
