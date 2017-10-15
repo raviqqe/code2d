@@ -3,10 +3,17 @@
 .ItemName-container {
 	font-size: 1.1em;
 	margin-right: 0.5em;
+	display: flex;
+	align-items: center;
 }
 
 .ItemName-container-highlighted {
 	@extend .ItemName-container;
 
 	color: $red;
+}
+
+.ItemName-icon {
+	height: 1em;
+	margin-right: 0.5em;
 }

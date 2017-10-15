@@ -8,13 +8,14 @@ import "./style/ItemName.css";
 interface IProps {
     highlighted?: boolean;
     href?: string;
+    icon?: string;
     onEdit?: (text: string) => void;
     text: string;
 }
 
 export default class extends InputComponent<IProps> {
     public render() {
-        const { highlighted, href, onEdit, text } = this.props;
+        const { highlighted, href, icon, onEdit, text } = this.props;
 
         if (this.state.editing) {
             return (
@@ -38,6 +39,7 @@ export default class extends InputComponent<IProps> {
                 className={"ItemName-container" + (highlighted ? "-highlighted" : "")}
                 onClick={() => this.setState({ editing: this.props.onEdit !== undefined })}
             >
+                {icon && <img className="ItemName-icon" src={icon} />}
                 {href ? <Link href={href}>{text}</Link> : text}
             </div>
         );

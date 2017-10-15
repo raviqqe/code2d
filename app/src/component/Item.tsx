@@ -16,6 +16,7 @@ interface IProps<A extends IItem> {
     highlighted?: boolean;
     href?: string;
     item: A;
+    nameIcon?: string;
     onEditName?: (name: string) => void;
     removeItem: (item: A) => void;
     setCurrentItem: (item: A | null) => void;
@@ -30,7 +31,7 @@ export default class Item<A extends IItem> extends React.Component<IProps<A>, IS
     public state: IState = { showButtons: false };
 
     public render() {
-        const { detailed, details, highlighted, href, item, onEditName, setCurrentItem }
+        const { detailed, details, highlighted, href, item, nameIcon, onEditName, setCurrentItem }
             = this.props;
 
         return (
@@ -43,6 +44,7 @@ export default class Item<A extends IItem> extends React.Component<IProps<A>, IS
                     <ItemName
                         highlighted={highlighted}
                         href={href}
+                        icon={nameIcon}
                         onEdit={onEditName}
                         text={item.name}
                     />

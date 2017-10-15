@@ -25,6 +25,7 @@ class Article extends React.Component<IProps> {
                 details={<ArticleDetails detailed={true} {...article} />}
                 href={article.url}
                 item={article}
+                nameIcon={article.favicon}
             />
         );
     }

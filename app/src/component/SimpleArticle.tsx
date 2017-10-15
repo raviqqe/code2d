@@ -15,13 +15,13 @@ interface IProps extends IArticle {
 
 class SimpleArticle extends React.Component<IProps> {
     public render() {
-        const { addToTodoList, name, url } = this.props;
+        const { addToTodoList, favicon, name, url } = this.props;
         const article = extractArticle(this.props);
 
         return (
             <ItemLike className="SimpleArticle-container">
                 <div>
-                    <ItemName href={url} text={name} />
+                    <ItemName href={url} icon={favicon} text={name} />
                     <ArticleDetails detailed={false} {...article} />
                 </div>
                 <Button className="SimpleArticle-button" onClick={() => addToTodoList(article)}>
