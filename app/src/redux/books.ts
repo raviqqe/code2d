@@ -1,51 +1,16 @@
-import { SagaIterator } from "redux-saga";
-import { call, put } from "redux-saga/effects";
-
-import * as lib from "../lib/books";
-import { booksRepository, getTrendingBooks, IBook, urlToBook } from "../lib/books";
-import createItemsDuck, { IState as IItemsState, Reducer } from "./items";
-import * as message from "./message";
-import { takeEvery } from "./utils";
-
-interface IState extends IItemsState<IBook> {
-    topSalesBooks: IBook[];
-}
+import { booksRepository, getTrendingBooks, urlToBook } from "../lib/books";
+import createItemsDuck from "./items";
 
 const duck = createItemsDuck(
     "books",
     booksRepository,
     urlToBook,
-    {
-        getTrendingItems: getTrendingBooks,
-        partialInitialState: { topSalesBooks: [] },
-    });
+    { getTrendingItems: getTrendingBooks });
 
-const getTopSalesBooks = duck.actionCreatorFactory.async<void, IBook[]>("GET_TOP_SALES_BOOKS");
-
-export const actionCreators = {
-    ...duck.actionCreators,
-    getTopSalesBooks: () => getTopSalesBooks.started(null),
-};
+export const actionCreators = duck.actionCreators;
 
 export const initialState = duck.initialState;
 
-export const reducer = (duck.reducer as Reducer<IBook, IState>)
-    .case(getTopSalesBooks.done, (state, { result }) => state.merge({ topSalesBooks: result }));
+export const reducer = duck.reducer;
 
-export const sagas = [
-    ...duck.sagas,
-    takeEvery(
-        getTopSalesBooks.started,
-        function* _(): SagaIterator {
-            try {
-                yield put(getTopSalesBooks.done({
-                    params: null,
-                    result: yield call(lib.getTopSalesBooks),
-                }));
-            } catch (error) {
-                yield put(message.actionCreators.sendMessage(
-                    "Could not fetch top sales books. Please reload the page later.",
-                    { error: true }));
-            }
-        }),
-];
+export const sagas = duck.sagas;

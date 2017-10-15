@@ -59,7 +59,6 @@ function* initialize(): SagaIterator {
             put(articles.actionCreators.getTrendingItems()),
             put(books.actionCreators.getItems()),
             put(books.actionCreators.getTrendingItems()),
-            put(books.actionCreators.getTopSalesBooks()),
             put(tasks.actionCreators.getItems()),
             put(tasks.actionCreators.getTags()),
             put(videos.actionCreators.getItems()),

@@ -20,10 +20,6 @@ export async function urlToBook(url: string): Promise<IBook> {
     return await functions.call("book", { url });
 }
 
-export async function getTopSalesBooks(): Promise<IBook[]> {
-    return await functions.call("topSalesBooks");
-}
-
 export function extractBook<A extends IBook>({
         author, description, id, image, name, price, publisher, salesDate, url,
     }: A): IBook {

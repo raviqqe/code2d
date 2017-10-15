@@ -5,7 +5,6 @@ import { IBook } from "../lib/books";
 import CreateBook from "./CreateBook";
 import ItemsMenu from "./ItemsMenu";
 import SimpleBook from "./SimpleBook";
-import TopSalesBooks from "./TopSalesBooks";
 import TrendingItems from "./TrendingItems";
 
 interface IProps {
@@ -26,7 +25,6 @@ class BooksMenu extends React.Component<IProps> {
                 todoButtonText="to read"
             >
                 <TrendingItems itemComponent={SimpleBook} trendingItems={trendingItems} />
-                <TopSalesBooks />
             </ItemsMenu>
         );
     }

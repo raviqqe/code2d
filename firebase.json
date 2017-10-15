@@ -22,9 +22,6 @@
 			"source": "/functions/video",
 			"function": "video"
 		}, {
-			"source": "/functions/topSalesBooks",
-			"function": "topSalesBooks"
-		}, {
 			"source": "/functions/trendingArticles",
 			"function": "trendingArticles"
 		}, {
