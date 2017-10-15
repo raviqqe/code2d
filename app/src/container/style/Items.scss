@@ -18,7 +18,6 @@
 	width: 70em;
 	max-width: 100%;
 	display: flex;
-	padding: 0 0.5em;
 
 	> * {
 		flex: 1;
@@ -27,5 +26,5 @@
 
 .Items-current-item-container {
 	overflow-y: auto;
-	padding: 1em 0.5em;
+	padding: 1em;
 }
