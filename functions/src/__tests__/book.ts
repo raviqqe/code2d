@@ -1,6 +1,6 @@
 import is = require("is_js");
 
-import { convertUrlIntoItem } from "../book";
+import { convertUrlIntoItem, trendingBooks } from "../book";
 
 jest.setTimeout(20000);
 
@@ -36,4 +36,15 @@ test("Convert URLs of books into book objects in Japan", async () => {
     ]) {
         validateBook(await convertUrlIntoItem(bookUrl, { country: "JP" }));
     }
+});
+
+test("Fetch trending books", async () => {
+    expect.assertions(1);
+
+    await trendingBooks(
+        { get: () => "headerContent", ip: "219.114.161.59" } as any,
+        {
+            send: (books) => expect(books.length).toBeGreaterThan(5),
+            set: () => undefined,
+        } as any);
 });

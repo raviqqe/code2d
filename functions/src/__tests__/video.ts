@@ -1,6 +1,6 @@
 import is = require("is_js");
 
-import { convertUrlIntoItem } from "../video";
+import { convertUrlIntoItem, trendingVideos } from "../video";
 
 jest.setTimeout(20000);
 
@@ -20,4 +20,15 @@ test("Convert URLs into video objects", async () => {
         expect(typeof publishedAt).toBe("string");
         expect(is.url(url)).toBe(true);
     }
+});
+
+test("Fetch trending videos", async () => {
+    expect.assertions(1);
+
+    await trendingVideos(
+        { get: () => "headerContent" } as any,
+        {
+            send: (videos) => expect(videos.length).toBeGreaterThan(5),
+            set: () => undefined,
+        } as any);
 });
