@@ -2,6 +2,7 @@
 	"extends": ["tslint:recommended"],
 	"rules": {
 		"no-console": false,
+		"no-namespace": false,
 		"no-shadowed-variable": false,
 		"no-var-requires": false
 	}
