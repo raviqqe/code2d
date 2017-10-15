@@ -1,5 +1,4 @@
 import axios from "axios";
-import cheerio = require("cheerio");
 import { Request, Response } from "express";
 import is = require("is_js");
 import unfluff = require("unfluff");
@@ -30,8 +29,9 @@ export function convertItemIntoId({ url }): string {
     return url;
 }
 
-export function extractTitle(html: string): string {
-    return cheerio.load(html)("title").text().trim();
+export function extractTitle(html: string): string | null {
+    const match = html.match(/<title>((.|\n|\r)*)<\/title>/);
+    return match && match[1].trim();
 }
 
 export const convertUrlIntoItem = urlToItemConverter(async (url: string) => {
