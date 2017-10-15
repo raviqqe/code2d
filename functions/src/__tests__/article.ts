@@ -1,6 +1,6 @@
 import is = require("is_js");
 
-import { convertIntoUrl, convertUrlIntoItem } from "../article";
+import { convertIntoUrl, convertUrlIntoItem, trendingArticles } from "../article";
 
 jest.setTimeout(20000);
 
@@ -31,4 +31,15 @@ test("Convert a URL into an article object", async () => {
         expect(typeof text).toBe("string");
         expect(is.url(url)).toBe(true);
     }
+});
+
+test("Fetch trending articles", async () => {
+    expect.assertions(1);
+
+    await trendingArticles(
+        { get: () => "headerContent" } as any,
+        {
+            send: (articles) => expect(articles.length).toBeGreaterThan(5),
+            set: () => undefined,
+        } as any);
 });

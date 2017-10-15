@@ -10,23 +10,21 @@ export interface IAnalyticsAttributes {
     dimension: 1 | 2 | 3;
 }
 
-export function initialize(): void {
-    const jwtClient = new googleApis.auth.JWT(
-        config.serviceaccount.email,
-        null,
-        config.serviceaccount.key,
-        ["https://www.googleapis.com/auth/analytics.readonly"],
-        null,
-    );
+const jwtClient = new googleApis.auth.JWT(
+    config.serviceaccount.email,
+    null,
+    config.serviceaccount.key,
+    ["https://www.googleapis.com/auth/analytics.readonly"],
+    null,
+);
 
-    jwtClient.authorize((error) => {
-        if (error) {
-            throw error;
-        }
+jwtClient.authorize((error) => {
+    if (error) {
+        throw error;
+    }
 
-        googleApis.options({ auth: jwtClient });
-    });
-}
+    googleApis.options({ auth: jwtClient });
+});
 
 function getDate(date: Date): string {
     const format = (n: number) => _.padStart(n.toString(), 2, "0");
