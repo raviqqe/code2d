@@ -15,6 +15,10 @@ class TopSalesBooks extends React.Component<IProps> {
     public render() {
         const { topSalesBooks } = this.props;
 
+        if (!topSalesBooks || topSalesBooks.length === 0) {
+            return false;
+        }
+
         return (
             <Modal
                 button={
