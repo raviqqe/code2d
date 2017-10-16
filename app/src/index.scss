@@ -44,3 +44,12 @@ input, textarea {
 		@include font-without-size;
 	}
 }
+
+::-webkit-scrollbar {
+	width: 0.7rem;
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 1rem;
+	background: $grey;
+}
