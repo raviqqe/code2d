@@ -1,8 +1,9 @@
 @import "../../style/border.scss";
+@import "../../style/colors.scss";
 @import "./ItemLike.scss";
 
 .CreateItem-form-container {
-	background: rgba(0, 0, 0, 0.5);
+	background: $transparent-black;
 	z-index: 100;
 	position: fixed;
 	top: 0;

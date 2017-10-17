@@ -1,5 +1,6 @@
 @import "../../style/animation.scss";
 @import "../../style/border.scss";
+@import "../../style/colors.scss";
 @import "../../style/media.scss";
 
 .Modal-container {
@@ -21,7 +22,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background: rgba(0, 0, 0, 0.5);
+	background: $transparent-black;
 	transition: background $long-duration, visibility $long-duration;
 	padding: 1em;
 

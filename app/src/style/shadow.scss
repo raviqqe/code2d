@@ -1,3 +1,5 @@
+@import "./colors.scss";
+
 @mixin paper-shadow {
-	box-shadow: 0.2rem 0.2rem 1rem rgba(0, 0, 0, 0.5);
+	box-shadow: 0.2rem 0.2rem 1rem $transparent-black;
 }

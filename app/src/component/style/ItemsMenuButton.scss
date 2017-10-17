@@ -38,7 +38,7 @@
 .ItemsMenuButton-menu-background-shown {
 	@extend .ItemsMenuButton-menu-background;
 
-	background: rgba(0, 0, 0, 0.5);
+	background: $transparent-black;
 	visibility: visible;
 }
 
