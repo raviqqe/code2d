@@ -11,7 +11,7 @@
 	cursor: pointer;
 	padding: 0.5em;
 
-	&:hover {
+	&:hover, &:active {
 		color: $black;
 	}
 }
