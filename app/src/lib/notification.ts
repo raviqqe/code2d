@@ -23,6 +23,6 @@ export async function requestPermission(): Promise<boolean | null> {
 
 export function notify(message: string): void {
     if (isNotificationSupported() && permission()) {
-        const _ = new Notification(message);
+        const _ = new Notification(message, { icon: require("../images/notification.png") });
     }
 }

@@ -31,6 +31,11 @@ task :test do
 end
 
 task build: SCREENSHOTS do
+  sh %w[inkscape
+        --export-width 128 --export-height 128
+        --export-png images/notification.png
+        images/icon.svg].join ' '
+
   %w[app functions chrome-extension].each do |dir|
     cd dir do
       sh 'rake build'
