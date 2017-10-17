@@ -1,6 +1,7 @@
 @import "../../style/animation.scss";
 @import "../../style/border.scss";
 @import "../../style/colors.scss";
+@import "../../style/media.scss";
 
 .Item-header {
 	display: flex;
@@ -19,6 +20,11 @@
 
 	opacity: 0;
 	visibility: hidden;
+
+	@include smartphone {
+		opacity: 1;
+		visibility: visible;
+	}
 }
 
 .Item-button {
