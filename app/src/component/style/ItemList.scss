@@ -1,3 +1,5 @@
+@import "../../style/media.scss";
+
 .ItemList-container {
 	overflow-y: auto;
 	height: 100%;
@@ -5,6 +7,11 @@
 
 	> * {
 		margin: 0.5em;
+	}
+
+	@include smartphone {
+		// padding for a menu icon.
+		padding-bottom: 5em;
 	}
 }
 
