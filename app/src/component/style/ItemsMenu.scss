@@ -1,5 +1,6 @@
 @import "../../style/animation.scss";
 @import "../../style/colors.scss";
+@import "../../style/media.scss";
 
 .ItemsMenu-container {
 	width: 12em;
@@ -99,6 +100,11 @@
 	background: $red;
 	bottom: 0;
 	right: 0;
+
+	@include smartphone {
+		left: 0;
+		right: auto;
+	}
 }
 
 .ItemsMenu-lower-background {
@@ -107,4 +113,9 @@
 	background: white;
 	top: 0;
 	right: 0;
+
+	@include smartphone {
+		left: 0;
+		right: auto;
+	}
 }

@@ -2,7 +2,9 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import ItemList from "../component/ItemList";
+import ItemsMenuButton from "../component/ItemsMenuButton";
 import { IItem, include } from "../lib/items";
+import { isSmartphone } from "../lib/media";
 import "./style/Items.css";
 
 interface IProps<A extends IItem> {
@@ -31,10 +33,17 @@ class Items<A extends IItem> extends React.Component<IProps<A>, IState> {
         const Item = this.props.itemComponent;
         const ItemsMenu = this.props.menuComponent;
 
+        const itemsMenu = (
+            <ItemsMenu
+                done={done}
+                onItemsStateChange={(done) => this.setState({ done })}
+            />
+        );
+
         return (
             <div className="Items-container">
                 <div className="Items-content">
-                    <ItemsMenu done={done} onItemsStateChange={(done) => this.setState({ done })} />
+                    {!isSmartphone() && itemsMenu}
                     <div className="Items-main">
                         <ItemList
                             style={done ? { display: "none" } : {}}
@@ -50,9 +59,12 @@ class Items<A extends IItem> extends React.Component<IProps<A>, IState> {
                             items={doneItems}
                             {...this.props}
                         />
-                        <div className="Items-current-item-container">
-                            {currentItem && <Item detailed={true} done={done} {...currentItem} />}
-                        </div>
+                        {!isSmartphone() &&
+                            <div className="Items-current-item-container">
+                                {currentItem &&
+                                    <Item detailed={true} done={done} {...currentItem} />}
+                            </div>}
+                        {isSmartphone() && <ItemsMenuButton itemsMenu={itemsMenu} />}
                     </div>
                 </div>
             </div>

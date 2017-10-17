@@ -6,7 +6,7 @@ import PagesMenu from "./PagesMenu";
 import Settings from "./Settings";
 import "./style/ItemsMenu.css";
 
-interface IProps {
+export interface IProps {
     createItem: JSX.Element;
     done: boolean;
     doneButtonText?: string;

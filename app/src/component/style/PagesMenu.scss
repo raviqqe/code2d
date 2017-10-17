@@ -1,6 +1,7 @@
 @import "../../style/animation.scss";
 @import "../../style/border.scss";
 @import "../../style/colors.scss";
+@import "../../style/media.scss";
 @import "../../style/shadow.scss";
 
 .PagesMenu-container {
@@ -18,6 +19,11 @@
 	z-index: 200;
 	transform-origin: 0 0;
 	transition: transform $short-duration, opacity $instant-duration, visibility $instant-duration;
+
+	@include smartphone {
+		right: 0;
+		transform-origin: 100% 0;
+	}
 }
 
 .PagesMenu-box-hidden {
