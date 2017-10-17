@@ -95,10 +95,7 @@ export default class Item<A extends IItem> extends React.Component<IProps<A>, IS
         }
 
         return (
-            <div
-                className="Item-buttons"
-                style={this.state.showButtons ? {} : { opacity: 0, visibility: "hidden" }}
-            >
+            <div className={"Item-buttons" + (this.state.showButtons ? "" : "-hidden")}>
                 {buttons}
             </div>
         );

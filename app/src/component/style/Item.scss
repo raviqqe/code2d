@@ -14,6 +14,13 @@
 	transition: opacity $short-duration, visibility $short-duration;
 }
 
+.Item-buttons-hidden {
+	@extend .Item-buttons;
+
+	opacity: 0;
+	visibility: hidden;
+}
+
 .Item-button {
 	color: $black;
 	font-size: 1.5em;
