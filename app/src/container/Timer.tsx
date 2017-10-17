@@ -10,7 +10,8 @@ import { actionCreators as tasksActionCreators } from "../redux/tasks";
 import { actionCreators as timerActionCreators } from "../redux/timer";
 import "./style/Timer.css";
 
-const initialSeconds = 25 * 60;
+const workSeconds = 25 * 60;
+const restSeconds = 5 * 60;
 
 interface IProps {
     currentItem: ITask;
@@ -20,37 +21,45 @@ interface IProps {
 }
 
 interface IState {
+    rest: boolean;
     seconds: number;
 }
 
 class Timer extends React.Component<IProps, IState> {
-    public state: IState = { seconds: initialSeconds };
+    public state: IState = { rest: false, seconds: workSeconds };
 
     private timer;
 
     public componentDidMount() {
-        this.timer = window.setInterval(
+        this.timer = setInterval(
             () => this.setState({ seconds: Math.max(this.state.seconds - 1, 0) }),
             1000);
     }
 
     public componentWillUnmount() {
-        window.clearInterval(this.timer);
+        clearInterval(this.timer);
     }
 
     public componentDidUpdate(_, { seconds }: IState) {
         if (seconds !== 0 && this.state.seconds === 0) {
             this.props.playAlarm();
             notification.notify("Timer finished.");
+
+            if (!this.state.rest) {
+                this.saveSpentTime();
+                this.setState({ rest: true, seconds: restSeconds });
+            }
         }
     }
 
     public render() {
-        const { seconds } = this.state;
+        const { toggleTimer } = this.props;
+        const { rest, seconds } = this.state;
+        const postfix = rest ? "-rest" : "";
 
         return (
-            <div className="Timer-container">
-                <div className="Timer-time">
+            <div className={"Timer-container" + postfix}>
+                <div className={"Timer-time" + postfix}>
                     <div className="Timer-minutes">
                         {Math.floor(seconds / 60)}
                     </div>
@@ -61,8 +70,11 @@ class Timer extends React.Component<IProps, IState> {
                 <Button
                     className="Timer-button"
                     onClick={() => {
-                        this.saveSpentTime();
-                        this.props.toggleTimer();
+                        if (!rest) {
+                            this.saveSpentTime();
+                        }
+
+                        toggleTimer();
                     }}
                 >
                     <Square />
@@ -73,9 +85,11 @@ class Timer extends React.Component<IProps, IState> {
 
     private saveSpentTime = () => {
         const { currentItem, updateCurrentItem } = this.props;
-        const spentSeconds = currentItem.spentSeconds + (initialSeconds - this.state.seconds);
 
-        updateCurrentItem({ ...currentItem, spentSeconds });
+        updateCurrentItem({
+            ...currentItem,
+            spentSeconds: currentItem.spentSeconds + workSeconds - this.state.seconds,
+        });
     }
 }
 

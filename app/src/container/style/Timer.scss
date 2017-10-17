@@ -1,3 +1,5 @@
+@import "../../style/colors.scss";
+
 .Timer-container {
 	width: 100vw;
 	height: 100vh;
@@ -7,11 +9,23 @@
 	align-items: center;
 }
 
+.Timer-container-rest {
+	@extend .Timer-container;
+
+	background: white;
+}
+
 .Timer-time {
 	color: white;
 	font-size: 10em;
 	display: flex;
 	align-items: flex-end;
+}
+
+.Timer-time-rest {
+	@extend .Timer-time;
+
+	color: $black;
 }
 
 .Timer-minutes {
@@ -31,7 +45,7 @@
 		right: 2em;
 	};
 
-	& > svg {
+	> svg {
 		color: white;
 		font-size: 2.5em;
 	}
