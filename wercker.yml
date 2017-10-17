@@ -18,3 +18,7 @@ build:
     - script:
         name: test
         code: rake test
+
+    - script:
+        name: finalization
+        code: rm functions/.runtimeconfig.json
