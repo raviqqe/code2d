@@ -43,4 +43,8 @@
 		color: $red;
 		transform: scale(1.5, 1.5);
 	}
+
+	@include smartphone {
+		color: $grey;
+	}
 }
