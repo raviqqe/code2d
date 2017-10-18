@@ -44,7 +44,7 @@ export default class extends React.Component<IProps> {
 
     public componentDidUpdate() {
         if (this.button) {
-            waves.attach(this.button);
+            waves.attach(this.button, ["waves-light"]);
             waves.init();
         }
     }
