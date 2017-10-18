@@ -2,22 +2,36 @@
 @import "../../style/colors.scss";
 @import "../../style/media.scss";
 
-.ItemsMenu-container {
-	width: 12em;
-	max-width: 100%;
-	height: 100%;
+@mixin ItemsMenu-flex-column {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+
+	> * {
+		flex-shrink: 0;
+	}
+}
+
+.ItemsMenu-container {
+	@include ItemsMenu-flex-column;
+
+	width: 12em;
+	max-width: 100%;
+	height: 100%;
 }
 
 .ItemsMenu-upper-container {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+
+.ItemsMenu-upper-content {
 	color: white;
 	display: flex;
 	justify-content: center;
-	position: relative;
 
-	> *:nth-child(2) {
+	> * {
 		margin: 1em;
 	}
 }
@@ -25,18 +39,36 @@
 .ItemsMenu-lower-container {
 	flex: 1;
 	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
 	position: relative;
-	padding: 1.5em;
 }
 
-.ItemsMenu-lower-main {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
+.ItemsMenu-lower-content {
+	@include ItemsMenu-flex-column;
+
 	align-items: center;
+	width: 100%;
+	height: 100%;
+	overflow-y: auto;
+	padding: 1.5em;
+
+	> * {
+		margin: 1em 0;
+
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.ItemsMenu-lower-upper-container {
+	@include ItemsMenu-flex-column;
+
+	align-items: center;
+	width: 100%;
 
 	> * {
 		margin: 1em 0;
@@ -52,8 +84,7 @@
 }
 
 .ItemsMenu-states {
-	display: flex;
-	flex-direction: column;
+	@include ItemsMenu-flex-column;
 }
 
 .ItemsMenu-state {

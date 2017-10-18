@@ -23,29 +23,33 @@ export default class extends React.Component<IProps> {
             <div className="ItemsMenu-container">
                 <div className="ItemsMenu-upper-container">
                     <div className="ItemsMenu-upper-background" />
-                    <PagesMenu />
+                    <div className="ItemsMenu-upper-content">
+                        <PagesMenu />
+                    </div>
                 </div>
                 <div className="ItemsMenu-lower-container">
                     <div className="ItemsMenu-lower-background" />
-                    <div className="ItemsMenu-lower-main">
-                        <div className="ItemsMenu-states">
-                            <div
-                                className={"ItemsMenu-state" + (done ? "" : "-highlighted")}
-                                onClick={() => onItemsStateChange(false)}
-                            >
-                                <Todo /> {todoButtonText || "to do"}
+                    <div className="ItemsMenu-lower-content">
+                        <div className="ItemsMenu-lower-upper-container">
+                            <div className="ItemsMenu-states">
+                                <div
+                                    className={"ItemsMenu-state" + (done ? "" : "-highlighted")}
+                                    onClick={() => onItemsStateChange(false)}
+                                >
+                                    <Todo /> {todoButtonText || "to do"}
+                                </div>
+                                <div
+                                    className={"ItemsMenu-state" + (done ? "-highlighted" : "")}
+                                    onClick={() => onItemsStateChange(true)}
+                                >
+                                    <Done /> {doneButtonText || "done"}
+                                </div>
                             </div>
-                            <div
-                                className={"ItemsMenu-state" + (done ? "-highlighted" : "")}
-                                onClick={() => onItemsStateChange(true)}
-                            >
-                                <Done /> {doneButtonText || "done"}
-                            </div>
+                            {!done && createItem}
+                            {children}
                         </div>
-                        {!done && createItem}
-                        {children}
+                        <Settings />
                     </div>
-                    <Settings />
                 </div>
             </div>
         );
