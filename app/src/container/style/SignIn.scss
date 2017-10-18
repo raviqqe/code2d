@@ -78,7 +78,7 @@
 		right: 2em;
 	};
 
-	& > svg {
+	> svg {
 		font-size: 2em;
 		margin-right: 0.4em;
 	}
@@ -121,7 +121,7 @@
 	align-items: flex-start;
 	flex-wrap: wrap;
 
-	& > * {
+	> * {
 		width: 22%;
 		min-width: 15em;
 		margin: 5vh 2vh;
@@ -138,7 +138,7 @@
 	flex-wrap: wrap;
 	padding: 0 1em;
 
-	& > * {
+	> * {
 		margin: 1.5em 1em;
 	}
 }
@@ -147,7 +147,7 @@
 	display: flex;
 	flex-wrap: wrap;
 
-	& > * {
+	> * {
 		margin: 0 0.7em;
 	}
 }
