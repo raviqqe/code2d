@@ -1,4 +1,5 @@
 @import "../../style/colors.scss";
+@import "../../style/media.scss";
 
 @mixin SignIn-children-margins {
 	> * {
@@ -136,10 +137,14 @@
 	justify-content: flex-end;
 	align-items: center;
 	flex-wrap: wrap;
-	padding: 0 1em;
+	padding: 0.75em 1em;
 
 	> * {
-		margin: 1.5em 1em;
+		margin: 0.75em 1em;
+	}
+
+	@include smartphone {
+		justify-content: flex-start;
 	}
 }
 
@@ -149,5 +154,13 @@
 
 	> * {
 		margin: 0 0.7em;
+
+		&:first-child {
+			margin-left: 0;
+		}
+
+		&:last-child {
+			margin-right: 0;
+		}
 	}
 }
