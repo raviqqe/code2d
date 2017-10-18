@@ -1,5 +1,6 @@
 @import "../../style/border.scss";
 @import "../../style/colors.scss";
+@import "../../style/media.scss";
 @import "./ItemLike.scss";
 
 .CreateItem-form-container {
@@ -13,6 +14,11 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
+	@include smartphone {
+		left: auto;
+		right: 0;
+	}
 }
 
 .CreateItem-form {
