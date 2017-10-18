@@ -5,6 +5,7 @@ import { actionCreators } from "../redux/message";
 import "./style/Message.css";
 
 interface IProps {
+    clearMessage: () => void;
     error: boolean;
     message: string;
 }
@@ -20,7 +21,7 @@ class Message extends React.Component<IProps, IState> {
     public render() {
         return (
             <div className="Message-container">
-                <div className={this.boxClassName}>
+                <div className={this.boxClassName} onClick={() => this.props.clearMessage()}>
                     {this.state.message}
                 </div>
             </div>
