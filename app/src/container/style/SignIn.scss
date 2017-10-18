@@ -58,7 +58,12 @@
 
 .SignIn-short-description {
 	font-size: 1.3em;
-	margin-top: 0.8em;
+	text-align: center;
+	margin: {
+		top: 0.8em;
+		left: 1em;
+		right: 1em;
+	};
 }
 
 .SignIn-button {

@@ -26,7 +26,7 @@ class SignIn extends React.Component<IProps> {
                         <img className="SignIn-icon" src={require("../images/icon.svg")} />
                         <div className="SignIn-title">{config.name}</div>
                         <div className="SignIn-short-description">
-                            Productivity tools for software engineers.
+                            Productivity tools for software engineers
                         </div>
                     </div>
                     <Button className="SignIn-button" onClick={this.props.signIn}>
