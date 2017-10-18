@@ -25,6 +25,10 @@ body {
 	background: $light-blue;
 	margin: 0;
 	padding: 0;
+
+	&::-webkit-scrollbar {
+		background: $white;
+	}
 }
 
 input, textarea {
