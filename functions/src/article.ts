@@ -30,7 +30,7 @@ export function convertItemIntoId({ url }): string {
 }
 
 export function extractTitle(html: string): string | null {
-    const match = html.match(/<title>((.|\n|\r)*)<\/title>/);
+    const match = html.match(/<title>((.|\n|\r)*?)<\/title>/);
     return match && match[1].trim();
 }
 

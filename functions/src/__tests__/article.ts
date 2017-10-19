@@ -1,3 +1,4 @@
+import axios from "axios";
 import is = require("is_js");
 
 import { convertIntoUrl, convertUrlIntoItem, extractTitle, trendingArticles } from "../article";
@@ -16,7 +17,9 @@ test("Don't convert falsy values into URLs", () => {
     expect(convertIntoUrl(undefined, baseUrl)).toBe(undefined);
 });
 
-test("Extract titles from HTML strings", () => {
+test("Extract titles from HTML strings", async () => {
+    expect.assertions(3);
+
     for (const { html, title } of [
         {
             html: "<html><head><title>apple</title></head><body>bad apple</body></html>",
@@ -25,6 +28,10 @@ test("Extract titles from HTML strings", () => {
         {
             html: "<html>\n<head><title>   foo bar baz\n  </title></head><body></body></html>",
             title: "foo bar baz",
+        },
+        {
+            html: (await axios.get("https://deepmind.com/blog/alphago-zero-learning-scratch/")).data,
+            title: "AlphaGo Zero: Learning from scratch | DeepMind",
         },
     ]) {
         expect(extractTitle(html)).toBe(title);
