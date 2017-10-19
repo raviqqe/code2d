@@ -6,6 +6,7 @@ import "./style/Modal.css";
 
 interface IProps {
     button: (props: { shown: boolean, showWindow: () => void }) => JSX.Element;
+    onOpen?: () => void;
     showCloseButton?: boolean;
 }
 
@@ -47,5 +48,13 @@ export default class extends React.Component<IProps, IState> {
                 </div>
             </div>
         );
+    }
+
+    public componentDidUpdate(_, { shown }: IState) {
+        const { onOpen } = this.props;
+
+        if (onOpen && !shown && this.state.shown) {
+            setTimeout(onOpen); // Run after animation.
+        }
     }
 }

@@ -17,20 +17,23 @@ interface IState {
 }
 
 class CreateTask extends React.Component<IProps, IState> {
+    public input: HTMLElement;
     public state: IState = { description: "", name: "" };
 
     public render() {
+        const { createItem } = this.props;
         const { description, name } = this.state;
 
         return (
             <CreateItem
                 createItem={() => {
-                    this.props.createItem({ description, name, tags: [] });
+                    createItem({ description, name, tags: [] });
                     this.setState({ description: "", name: "" });
                 }}
+                focus={() => this.input && this.input.focus()}
             >
                 <input
-                    autoFocus={true}
+                    ref={this.ref}
                     placeholder="Name"
                     value={name}
                     onChange={({ target: { value } }) => this.setState({ name: value })}
@@ -48,6 +51,8 @@ class CreateTask extends React.Component<IProps, IState> {
             </CreateItem>
         );
     }
+
+    private ref = (input) => this.input = input;
 }
 
 export default connect(null, actionCreators)(CreateTask);

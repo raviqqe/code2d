@@ -7,11 +7,12 @@ import "./style/CreateItem.css";
 
 interface IProps {
     createItem: () => void;
+    focus?: () => void;
 }
 
 export default class extends React.Component<IProps> {
     public render() {
-        const { children, createItem } = this.props;
+        const { children, createItem, focus } = this.props;
 
         return (
             <Modal
@@ -22,6 +23,7 @@ export default class extends React.Component<IProps> {
                     >
                         <Plus /><div>new</div>
                     </Button>}
+                onOpen={focus}
             >
                 {(closeWindow) =>
                     <form
