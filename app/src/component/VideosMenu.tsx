@@ -2,12 +2,14 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import { IVideo } from "../lib/videos";
-import CreateVideo from "./CreateVideo";
+import { actionCreators } from "../redux/videos";
+import CreateMediaItem from "./CreateMediaItem";
 import ItemsMenu from "./ItemsMenu";
 import SimpleVideo from "./SimpleVideo";
 import TrendingItems from "./TrendingItems";
 
 interface IProps {
+    createItem: (url: string) => void;
     done: boolean;
     onItemsStateChange: (done: boolean) => void;
     trendingItems: IVideo[];
@@ -15,12 +17,16 @@ interface IProps {
 
 class VideosMenu extends React.Component<IProps> {
     public render() {
-        const { trendingItems } = this.props;
+        const { createItem, trendingItems } = this.props;
 
         return (
             <ItemsMenu
                 {...this.props}
-                createItem={<CreateVideo />}
+                createItem={
+                    <CreateMediaItem
+                        createItem={createItem}
+                        placeholder="YouTube video URL"
+                    />}
                 doneButtonText="watched"
                 todoButtonText="to watch"
             >
@@ -30,4 +36,4 @@ class VideosMenu extends React.Component<IProps> {
     }
 }
 
-export default connect(({ videos }) => videos)(VideosMenu);
+export default connect(({ videos }) => videos, actionCreators)(VideosMenu);

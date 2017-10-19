@@ -1,33 +1,35 @@
 import * as React from "react";
-import { connect } from "react-redux";
 
-import { actionCreators } from "../redux/videos";
 import CreateItem from "./CreateItem";
 
 interface IProps {
     createItem: (url: string) => void;
+    placeholder: string;
 }
 
 interface IState {
     url: string;
 }
 
-class CreateVideo extends React.Component<IProps, IState> {
+export default class extends React.Component<IProps, IState> {
     public state: IState = { url: "" };
+    private input: HTMLElement;
 
     public render() {
+        const { createItem, placeholder } = this.props;
         const { url } = this.state;
 
         return (
             <CreateItem
                 createItem={() => {
-                    this.props.createItem(url);
+                    createItem(url);
                     this.setState({ url: "" });
                 }}
+                focus={() => this.input && this.input.focus()}
             >
                 <input
-                    autoFocus={true}
-                    placeholder="YouTube URL"
+                    ref={(input) => this.input = input}
+                    placeholder={placeholder}
                     value={url}
                     onChange={({ target: { value } }) => this.setState({ url: value })}
                 />
@@ -35,5 +37,3 @@ class CreateVideo extends React.Component<IProps, IState> {
         );
     }
 }
-
-export default connect(null, actionCreators)(CreateVideo);

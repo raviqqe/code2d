@@ -2,12 +2,14 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import { IBook } from "../lib/books";
-import CreateBook from "./CreateBook";
+import { actionCreators } from "../redux/books";
+import CreateMediaItem from "./CreateMediaItem";
 import ItemsMenu from "./ItemsMenu";
 import SimpleBook from "./SimpleBook";
 import TrendingItems from "./TrendingItems";
 
 interface IProps {
+    createItem: (url: string) => void;
     done: boolean;
     onItemsStateChange: (done: boolean) => void;
     trendingItems: IBook[];
@@ -15,12 +17,16 @@ interface IProps {
 
 class BooksMenu extends React.Component<IProps> {
     public render() {
-        const { trendingItems } = this.props;
+        const { createItem, trendingItems } = this.props;
 
         return (
             <ItemsMenu
                 {...this.props}
-                createItem={<CreateBook />}
+                createItem={
+                    <CreateMediaItem
+                        createItem={createItem}
+                        placeholder="Book URL of Rakuten Books or Better World Books"
+                    />}
                 doneButtonText="read"
                 todoButtonText="to read"
             >
@@ -30,4 +36,4 @@ class BooksMenu extends React.Component<IProps> {
     }
 }
 
-export default connect(({ books }) => books)(BooksMenu);
+export default connect(({ books }) => books, actionCreators)(BooksMenu);

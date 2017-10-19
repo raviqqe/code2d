@@ -2,12 +2,14 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import { IArticle } from "../lib/articles";
-import CreateArticle from "./CreateArticle";
+import { actionCreators } from "../redux/articles";
+import CreateMediaItem from "./CreateMediaItem";
 import ItemsMenu from "./ItemsMenu";
 import SimpleArticle from "./SimpleArticle";
 import TrendingItems from "./TrendingItems";
 
 interface IProps {
+    createItem: (url: string) => void;
     done: boolean;
     onItemsStateChange: (done: boolean) => void;
     trendingItems: IArticle[];
@@ -15,12 +17,12 @@ interface IProps {
 
 class ArticlesMenu extends React.Component<IProps> {
     public render() {
-        const { trendingItems } = this.props;
+        const { createItem, trendingItems } = this.props;
 
         return (
             <ItemsMenu
                 {...this.props}
-                createItem={<CreateArticle />}
+                createItem={<CreateMediaItem createItem={createItem} placeholder="Article URL" />}
                 doneButtonText="read"
                 todoButtonText="to read"
             >
@@ -34,4 +36,4 @@ class ArticlesMenu extends React.Component<IProps> {
     }
 }
 
-export default connect(({ articles }) => articles)(ArticlesMenu);
+export default connect(({ articles }) => articles, actionCreators)(ArticlesMenu);
