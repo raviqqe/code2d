@@ -1,32 +1,10 @@
-@import "../../style/border.scss";
-@import "../../style/colors.scss";
-@import "../../style/media.scss";
 @import "./ItemLike.scss";
-
-.CreateItem-form-container {
-	background: $transparent-black;
-	z-index: 100;
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
-	@include smartphone {
-		left: auto;
-		right: 0;
-	}
-}
 
 .CreateItem-form {
 	@extend .ItemLike-container;
 
 	width: 40em;
-	max-width: 90%;
-	margin: 1em;
+	padding: 1em;
 	display: flex;
 	flex-direction: column;
 }

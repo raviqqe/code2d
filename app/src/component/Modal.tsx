@@ -20,19 +20,20 @@ export default class extends React.Component<IProps, IState> {
         const { button, children, showCloseButton } = this.props;
         const ShowButton = button;
         const { shown } = this.state;
+        const closeWindow = () => this.setState({ shown: false });
 
         return (
             <div>
                 <ShowButton shown={shown} showWindow={() => this.setState({ shown: true })} />
                 <div
                     className={"Modal-container" + (shown ? "" : "-hidden")}
-                    onClick={() => this.setState({ shown: false })}
+                    onClick={closeWindow}
                 >
                     {showCloseButton &&
                         <div className="Modal-close-button-container">
                             <Button
                                 className="Modal-close-button"
-                                onClick={() => this.setState({ shown: false })}
+                                onClick={closeWindow}
                             >
                                 <Close />
                             </Button>
@@ -41,7 +42,7 @@ export default class extends React.Component<IProps, IState> {
                         className="Modal-window"
                         onClick={(event) => event.stopPropagation()}
                     >
-                        {children}
+                        {typeof children === "function" ? children(closeWindow) : children}
                     </div>
                 </div>
             </div>
