@@ -54,7 +54,7 @@ export default class extends React.Component<IProps, IState> {
         const { onOpen } = this.props;
 
         if (onOpen && !shown && this.state.shown) {
-            setTimeout(onOpen); // Run after animation.
+            setTimeout(onOpen, 200); // Run after animation.
         }
     }
 }
