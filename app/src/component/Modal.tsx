@@ -5,29 +5,29 @@ import Button from "./Button";
 import "./style/Modal.css";
 
 interface IProps {
-    button: (props: { shown: boolean, showWindow: () => void }) => JSX.Element;
+    button: (props: { opened: boolean, openWindow: () => void }) => JSX.Element;
     onOpen?: () => void;
     showCloseButton?: boolean;
 }
 
 interface IState {
-    shown: boolean;
+    opened: boolean;
 }
 
 export default class extends React.Component<IProps, IState> {
-    public state: IState = { shown: false };
+    public state: IState = { opened: false };
 
     public render() {
         const { button, children, showCloseButton } = this.props;
         const ShowButton = button;
-        const { shown } = this.state;
-        const closeWindow = () => this.setState({ shown: false });
+        const { opened } = this.state;
+        const closeWindow = () => this.setState({ opened: false });
 
         return (
             <div>
-                <ShowButton shown={shown} showWindow={() => this.setState({ shown: true })} />
+                <ShowButton opened={opened} openWindow={() => this.setState({ opened: true })} />
                 <div
-                    className={"Modal-container" + (shown ? "" : "-hidden")}
+                    className={"Modal-container" + (opened ? "" : "-hidden")}
                     onClick={closeWindow}
                 >
                     {showCloseButton &&
@@ -50,10 +50,10 @@ export default class extends React.Component<IProps, IState> {
         );
     }
 
-    public componentDidUpdate(_, { shown }: IState) {
+    public componentDidUpdate(_, { opened }: IState) {
         const { onOpen } = this.props;
 
-        if (onOpen && !shown && this.state.shown) {
+        if (onOpen && !opened && this.state.opened) {
             setTimeout(onOpen, 200); // Run after animation.
         }
     }

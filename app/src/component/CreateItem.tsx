@@ -16,10 +16,10 @@ export default class extends React.Component<IProps> {
 
         return (
             <Modal
-                button={({ showWindow }) =>
+                button={({ openWindow }) =>
                     <Button
                         className="CreateItem-button"
-                        onClick={showWindow}
+                        onClick={openWindow}
                     >
                         <Plus /><div>new</div>
                     </Button>}

@@ -22,8 +22,8 @@ export default class TrendingItems<A extends IItem> extends React.Component<IPro
         return (
             <Modal
                 button={
-                    ({ shown, showWindow }) =>
-                        <div className="TrendingItems-button" onClick={showWindow}>
+                    ({ opened, openWindow }) =>
+                        <div className="TrendingItems-button" onClick={openWindow}>
                             Trending
                         </div>}
                 showCloseButton={true}
