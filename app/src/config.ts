@@ -1,1 +1,1 @@
-export default require("./config.json");
+export default { ...require("./config.json"), rootId: "root" };
