@@ -18,15 +18,17 @@
 	z-index: 100;
 	width: 100vw;
 	height: 100vh;
+	padding: 1em;
 	overflow-y: auto;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	background: $transparent-black;
+	visibility: visible;
 	transition: background $long-duration, visibility $long-duration;
-	padding: 1em;
 
 	> * {
+		transform: translateY(0);
 		transition: transform $long-duration;
 	}
 }
@@ -40,6 +42,14 @@
 	> * {
 		transform: translateY(calc(-100vh - 100%));
 	}
+}
+
+.Modal-container-appear.Modal-container-appear-active, .Modal-container-exit {
+	@extend .Modal-container;
+}
+
+.Modal-container-appear, .Modal-container-exit.Modal-container-exit-active {
+	@extend .Modal-container-hidden;
 }
 
 .Modal-window {
