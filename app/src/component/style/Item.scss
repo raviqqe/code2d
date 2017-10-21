@@ -12,7 +12,7 @@
 .Item-buttons {
 	display: flex;
 	align-items: center;
-	transition: opacity $short-duration, visibility $short-duration;
+	transition: opacity $instant-duration, visibility $instant-duration;
 }
 
 .Item-buttons-hidden {
