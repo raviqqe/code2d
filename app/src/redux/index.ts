@@ -8,9 +8,11 @@ import { ImmutableObject } from "seamless-immutable";
 
 import * as analytics from "../lib/analytics";
 import * as firebase from "../lib/firebase";
+import { onWindowSizeChange } from "../lib/media";
 import * as articles from "./articles";
 import * as authentication from "./authentication";
 import * as books from "./books";
+import * as environment from "./environment";
 import * as message from "./message";
 import * as pages from "./pages";
 import * as settings from "./settings";
@@ -33,6 +35,7 @@ export default function() {
             articles: articles.reducer,
             authentication: authentication.reducer,
             books: books.reducer,
+            environment: environment.reducer,
             message: message.reducer,
             pages: pages.reducer,
             settings: settings.reducer,
@@ -70,6 +73,9 @@ export default function() {
             store.dispatch(authentication.actionCreators.setSignInState(true));
         }
     });
+
+    onWindowSizeChange((isSmallWindow) =>
+        store.dispatch(environment.actionCreators.setIsSmallDevice(isSmallWindow)));
 
     return store;
 }

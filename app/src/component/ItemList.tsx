@@ -2,7 +2,6 @@ import * as React from "react";
 import sortable = require("sortablejs");
 
 import { equal, IItem } from "../lib/items";
-import { isSmartphone } from "../lib/media";
 import Modal from "./Modal";
 import "./style/ItemList.css";
 
@@ -11,6 +10,7 @@ interface IProps<A extends IItem> {
     currentItem: A | null;
     done: boolean;
     fixed?: boolean;
+    isSmallWindow: boolean;
     items: A[];
     setItems: (items: A[], done: boolean) => void;
     style?: { [key: string]: any };
@@ -21,7 +21,8 @@ export default class ItemList<A extends IItem> extends React.Component<IProps<A>
     private container: HTMLElement;
 
     public render() {
-        const { itemComponent, currentItem, done, fixed, items, setItems, style } = this.props;
+        const { itemComponent, currentItem, done, fixed, isSmallWindow, items, setItems, style }
+            = this.props;
         const Item = itemComponent;
 
         if (items.length === 0) {
@@ -35,7 +36,7 @@ export default class ItemList<A extends IItem> extends React.Component<IProps<A>
                 style={style}
             >
                 {items.map((item) =>
-                    isSmartphone() ?
+                    isSmallWindow ?
                         <Modal
                             key={item.id}
                             button={({ openWindow }) =>

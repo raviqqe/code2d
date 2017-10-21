@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import ItemList from "../component/ItemList";
 import ItemsMenuButton from "../component/ItemsMenuButton";
 import { IItem, include } from "../lib/items";
-import { isSmartphone } from "../lib/media";
 import "./style/Items.css";
 
 interface IProps<A extends IItem> {
@@ -12,6 +11,7 @@ interface IProps<A extends IItem> {
     currentItem: A | null;
     doneItems: A[];
     fixed?: boolean;
+    isSmallWindow: boolean;
     menuComponent: (props) => JSX.Element;
     setCurrentItem: (item: A) => void;
     setItems: (items: A[], done: boolean) => void;
@@ -27,7 +27,7 @@ class Items<A extends IItem> extends React.Component<IProps<A>, IState> {
     public state: IState = { done: false };
 
     public render() {
-        const { currentItem, doneItems, todoItems, signedIn } = this.props;
+        const { currentItem, doneItems, isSmallWindow, todoItems, signedIn } = this.props;
         const { done } = this.state;
 
         const Item = this.props.itemComponent;
@@ -43,7 +43,7 @@ class Items<A extends IItem> extends React.Component<IProps<A>, IState> {
         return (
             <div className="Items-container">
                 <div className="Items-content">
-                    {!isSmartphone() && itemsMenu}
+                    {!isSmallWindow && itemsMenu}
                     <div className="Items-main">
                         <ItemList
                             style={done ? { display: "none" } : {}}
@@ -59,12 +59,12 @@ class Items<A extends IItem> extends React.Component<IProps<A>, IState> {
                             items={doneItems}
                             {...this.props}
                         />
-                        {!isSmartphone() &&
+                        {!isSmallWindow &&
                             <div className="Items-current-item-container">
                                 {currentItem &&
                                     <Item detailed={true} done={done} {...currentItem} />}
                             </div>}
-                        {isSmartphone() && <ItemsMenuButton itemsMenu={itemsMenu} />}
+                        {isSmallWindow && <ItemsMenuButton itemsMenu={itemsMenu} />}
                     </div>
                 </div>
             </div>
@@ -86,4 +86,4 @@ class Items<A extends IItem> extends React.Component<IProps<A>, IState> {
     }
 }
 
-export default connect(({ authentication }) => authentication)(Items);
+export default connect(({ authentication, environment }) => ({ ...authentication, ...environment }))(Items);
