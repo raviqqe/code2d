@@ -1,19 +1,24 @@
 @import "../../style/animation.scss";
 @import "../../style/colors.scss";
 
-.PageButton-container {
-	@include color-transition;
-
+@mixin PageButton-container($color, $active-color, $active-background-color) {
 	display: flex;
 	align-items: center;
 	font-size: 1.2em;
-	color: $light-grey;
+	color: $color;
 	cursor: pointer;
 	padding: 0.5em;
+	border-radius: 0.2em;
+	transition: background $instant-duration, color $instant-duration;
 
 	&:hover, &:active {
-		color: $black;
+		background: $active-background-color;
+		color: $active-color;
 	}
+}
+
+.PageButton-container {
+	@include PageButton-container($grey, $black, transparentize($black, 0.95));
 }
 
 .PageButton-icon {

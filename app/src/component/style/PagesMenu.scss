@@ -3,6 +3,7 @@
 @import "../../style/colors.scss";
 @import "../../style/media.scss";
 @import "../../style/shadow.scss";
+@import "./PageButton.scss";
 
 .PagesMenu-container {
 	position: relative;
@@ -48,17 +49,9 @@
 }
 
 .PagesMenu-current-button {
-	color: inherit;
-
-	&:hover {
-		color: inherit;
-	}
+	@include PageButton-container(white, white, transparent);
 }
 
 .PagesMenu-disabled-button {
-	color: $red;
-
-	&:hover {
-		color: $red;
-	}
+	@include PageButton-container($red, $red, transparent);
 }
