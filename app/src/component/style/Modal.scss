@@ -63,22 +63,12 @@
 
 .Modal-close-button-container {
 	position: fixed;
-	top: 1.5em;
-	right: 1.5em;
+	top: 1em;
+	right: 1em;
 	z-index: 200;
 
 	@include small-window {
 		top: auto;
-		bottom: 1.5em;
+		bottom: 1em;
 	}
-}
-
-.Modal-close-button {
-	$Modal-close-button-size: 2em;
-
-	font-size: 1.5em;
-	width: $Modal-close-button-size;
-	height: $Modal-close-button-size;
-	border-radius: $Modal-close-button-size;
-	padding: 0;
 }

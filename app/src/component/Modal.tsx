@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { CSSTransition } from "react-transition-group";
 
 import config from "../config";
-import Button from "./Button";
+import CircleButton from "./CircleButton";
 import "./style/Modal.css";
 
 interface IProps {
@@ -66,9 +66,9 @@ class Modal extends React.Component<IProps, IState> {
                 <div className="Modal-container" onClick={closeWindow}>
                     {(isSmallWindow || showCloseButton) &&
                         <div className="Modal-close-button-container">
-                            <Button className="Modal-close-button" onClick={closeWindow}>
+                            <CircleButton onClick={closeWindow}>
                                 <Close />
-                            </Button>
+                            </CircleButton>
                         </div>}
                     <div className="Modal-window" onClick={(event) => event.stopPropagation()}>
                         {typeof children === "function" ? children(closeWindow) : children}
