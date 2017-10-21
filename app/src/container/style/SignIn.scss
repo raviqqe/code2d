@@ -1,5 +1,6 @@
 @import "../../style/colors.scss";
 @import "../../style/media.scss";
+@import "../../component/style/Button.scss";
 
 @mixin SignIn-children-margins {
 	> * {
@@ -68,10 +69,9 @@
 }
 
 .SignIn-button {
+	@include Button-container;
+
 	font-size: 1.2em;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	padding: {
 		top: 1em;
 		bottom: 1em;

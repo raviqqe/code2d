@@ -1,12 +1,13 @@
 @import "../../style/animation.scss";
 @import "../../style/colors.scss";
+@import "../../style/media.scss";
 
-.Button-container {
+@mixin Button-container($background-color: $red) {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-shrink: 0;
-	background: $red;
+	background: $background-color;
 	color: white;
 	cursor: pointer;
 	font-size: 1em;
@@ -20,18 +21,40 @@
 		radius: 0.5rem;
 		width: 0;
 	};
-	transform: translate(0, 0);
-	transition: transform $instant-duration;
 
-	&:hover {
-		$Button-shadow-size: 0.15rem;
+	@include untouchable {
+		transition: box-shadow $instant-duration, transform $instant-duration;
 
-		transform: translateY(-$Button-shadow-size);
-		box-shadow: 0 $Button-shadow-size $Button-shadow-size $transparent-black;
+		&:hover {
+			$Button-shadow-size: 0.15rem;
+
+			transform: translateY(-$Button-shadow-size);
+			box-shadow: 0 $Button-shadow-size $Button-shadow-size $transparent-black;
+		}
+
+		&:active {
+			transform: translateY(0);
+			box-shadow: none;
+		}
 	}
 
-	&:active {
-		transform: translate(0, 0);
-		box-shadow: none;
+
+	@include touchable {
+		$Button-dark-background: darken($background-color, 15%);
+		$Button-thickness: 0.3rem;
+
+		margin-bottom: $Button-thickness;
+		box-sizing: content-box;
+		transition: box-shadow $short-duration, transform $short-duration;
+		box-shadow: 0 $Button-thickness $Button-dark-background;
+
+		&:active {
+			transform: translateY($Button-thickness);
+			box-shadow: 0 0 $Button-dark-background;
+		}
 	}
+}
+
+.Button-container {
+	@include Button-container;
 }

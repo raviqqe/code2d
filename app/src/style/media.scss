@@ -11,3 +11,15 @@ $small-width: 768px;
 		@content;
 	}
 }
+
+@mixin touchable {
+	@media (pointer: coarse) {
+		@content;
+	}
+}
+
+@mixin untouchable {
+	@media (pointer: fine), (pointer: none) {
+		@content;
+	}
+}

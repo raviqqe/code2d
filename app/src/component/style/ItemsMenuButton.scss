@@ -1,5 +1,6 @@
 @import "../../style/animation.scss";
 @import "../../style/colors.scss";
+@import "./CircleButton.scss";
 
 .ItemsMenuButton-container {
 	position: fixed;
@@ -7,8 +8,8 @@
 	right: 1em;
 }
 
-.ItemsMenuButton-icon {
-	background: $dark-grey;
+.ItemsMenuButton-button {
+	@include CircleButton-container($dark-grey);
 }
 
 .ItemsMenuButton-menu-background {

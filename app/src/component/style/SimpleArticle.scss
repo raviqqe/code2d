@@ -1,4 +1,5 @@
 @import "../../style/media.scss";
+@import "./Button.scss";
 
 .SimpleArticle-container {
 	max-width: 50em;
@@ -22,5 +23,7 @@
 }
 
 .SimpleArticle-button {
+	@include Button-container;
+
 	white-space: nowrap;
 }

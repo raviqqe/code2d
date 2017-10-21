@@ -23,7 +23,7 @@ export default class extends React.Component<IProps, IState> {
         return (
             <div className="ItemsMenuButton-container">
                 <CircleButton
-                    className="ItemsMenuButton-icon"
+                    className="ItemsMenuButton-button"
                     onClick={() => this.setState({ shown: !shown })}
                 >
                     <Menu />

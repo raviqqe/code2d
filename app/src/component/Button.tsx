@@ -23,7 +23,7 @@ export default class extends React.Component<IProps> {
         return (
             <button
                 ref={(button) => this.button = button}
-                className={"Button-container " + className}
+                className={className || "Button-container"}
                 onClick={onClick && ((event) => {
                     onClick();
                     event.stopPropagation();

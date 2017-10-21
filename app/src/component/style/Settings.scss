@@ -1,6 +1,7 @@
 @import "../../style/animation.scss";
 @import "../../style/colors.scss";
 @import "../../style/media.scss";
+@import "./Button.scss";
 
 .Settings-icon {
 	font-size: 2em;
@@ -64,7 +65,7 @@
 }
 
 .Settings-negative-button {
-	background: $grey;
+	@include Button-container($grey);
 }
 
 .Settings-footer {

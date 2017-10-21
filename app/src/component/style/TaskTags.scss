@@ -13,7 +13,7 @@
 }
 
 .TaskTags-button {
-	@include TaskTag-tag-like;
+	@include TaskTag-container($red);
 
 	padding: 0;
 	width: $TaskTag-size;

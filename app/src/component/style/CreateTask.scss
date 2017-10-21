@@ -1,4 +1,5 @@
 @import "../../style/colors.scss";
+@import "./Button.scss";
 @import "./TaskDescription.scss";
 
 .CreateTask-description {
@@ -11,7 +12,9 @@
 	display: flex;
 }
 
-.CreateTask-button {
+@mixin CreateTask-button($background-color) {
+	@include Button-container($background-color);
+
 	flex: 1;
 	margin-right: 0.5em;
 
@@ -20,8 +23,10 @@
 	}
 }
 
-.CreateTask-cancel-button {
-	@extend .CreateTask-button;
+.CreateTask-button {
+	@include CreateTask-button($red);
+}
 
-	background: $grey;
+.CreateTask-cancel-button {
+	@include CreateTask-button($grey);
 }

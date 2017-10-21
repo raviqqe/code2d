@@ -14,13 +14,9 @@
 }
 
 .TasksMenu-no-tag-button {
-	@include TaskTag-tag-like;
-
-	background: $light-grey;
+	@extend .TaskTag-container-unhighlighted;
 }
 
 .TasksMenu-no-tag-button-highlighted {
-	@extend .TasksMenu-no-tag-button;
-
-	background: $red;
+	@extend .TaskTag-container-highlighted;
 }
