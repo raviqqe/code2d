@@ -2,6 +2,7 @@
 
 @import "./style/colors.scss";
 @import "./style/border.scss";
+@import "./style/media.scss";
 @import "./style/shadow.scss";
 
 @mixin font-without-size {
@@ -17,6 +18,17 @@
 
 * {
 	box-sizing: border-box;
+
+	@include desktop {
+		&::-webkit-scrollbar {
+			width: 0.7rem;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			border-radius: 1rem;
+			background: $grey;
+		}
+	}
 }
 
 body {
@@ -26,8 +38,10 @@ body {
 	margin: 0;
 	padding: 0;
 
-	&::-webkit-scrollbar {
-		background: $white;
+	@include desktop {
+		&::-webkit-scrollbar {
+			background: $white;
+		}
 	}
 }
 
@@ -47,13 +61,4 @@ input, textarea {
 	&:focus {
 		@include font-without-size;
 	}
-}
-
-::-webkit-scrollbar {
-	width: 0.7rem;
-}
-
-::-webkit-scrollbar-thumb {
-	border-radius: 1rem;
-	background: $grey;
 }

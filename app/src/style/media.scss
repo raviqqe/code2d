@@ -1,5 +1,13 @@
+$smartphone-width: 768px;
+
 @mixin smartphone {
-	@media (max-width: 768px) {
+	@media (max-width: $smartphone-width) {
+		@content;
+	}
+}
+
+@mixin desktop {
+	@media (min-width: $smartphone-width) {
 		@content;
 	}
 }
