@@ -26,7 +26,7 @@ export default class PageButton extends React.Component<IProps> {
 
         return (
             <div
-                className={"PageButton-container" + (className ? " " + className : "")}
+                className={className || "PageButton-container"}
                 onClick={onClick}
             >
                 <div className="PageButton-icon">{icons[page]}</div> {page}
