@@ -9,7 +9,7 @@
 	left: 0;
 
 	// This may be necessary because of Chrome's bug of nested position fixed.
-	@include smartphone {
+	@include small-window {
 		left: auto;
 		right: 0;
 	}
@@ -67,7 +67,7 @@
 	right: 1.5em;
 	z-index: 200;
 
-	@include smartphone {
+	@include small-window {
 		top: auto;
 		bottom: 1.5em;
 	}

@@ -84,7 +84,7 @@
 		margin: 0 0.6em;
 	}
 
-	@include smartphone {
+	@include small-window {
 		justify-content: flex-start;
 	}
 }

@@ -9,7 +9,7 @@
 		margin: 0.5em;
 	}
 
-	@include smartphone {
+	@include small-window {
 		// padding for a menu icon.
 		padding-bottom: 5em;
 	}

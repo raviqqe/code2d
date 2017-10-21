@@ -20,7 +20,7 @@
 	transform-origin: 0 0;
 	transition: transform $short-duration, opacity $instant-duration, visibility $instant-duration;
 
-	@include smartphone {
+	@include small-window {
 		right: 0;
 		transform-origin: 100% 0;
 	}

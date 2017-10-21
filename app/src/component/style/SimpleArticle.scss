@@ -11,7 +11,7 @@
 		margin: 0 0.5em;
 	}
 
-	@include smartphone {
+	@include small-window {
 		flex-direction: column;
 		align-items: flex-start;
 

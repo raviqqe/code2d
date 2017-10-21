@@ -21,7 +21,7 @@
 	opacity: 0;
 	visibility: hidden;
 
-	@include smartphone {
+	@include small-window {
 		opacity: 1;
 		visibility: visible;
 	}
@@ -44,7 +44,7 @@
 		transform: scale(1.5, 1.5);
 	}
 
-	@include smartphone {
+	@include small-window {
 		color: $grey;
 	}
 }
