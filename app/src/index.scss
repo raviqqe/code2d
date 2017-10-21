@@ -19,7 +19,7 @@
 * {
 	box-sizing: border-box;
 
-	@include desktop {
+	@include large-window {
 		&::-webkit-scrollbar {
 			width: 0.7rem;
 		}
@@ -38,7 +38,7 @@ body {
 	margin: 0;
 	padding: 0;
 
-	@include desktop {
+	@include large-window {
 		&::-webkit-scrollbar {
 			background: $white;
 		}

@@ -6,7 +6,7 @@ $small-width: 768px;
 	}
 }
 
-@mixin desktop {
+@mixin large-window {
 	@media (min-width: $small-width) {
 		@content;
 	}
