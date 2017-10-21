@@ -1,4 +1,5 @@
 import localForage = require("localforage");
+import * as _ from "lodash";
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import { autoRehydrate, createTransform, persistStore } from "redux-persist";
 import createSagaMiddleware from "redux-saga";
@@ -20,6 +21,19 @@ import * as tasks from "./tasks";
 import * as timer from "./timer";
 import * as videos from "./videos";
 
+const ducks = {
+    articles,
+    authentication,
+    books,
+    environment,
+    message,
+    pages,
+    settings,
+    tasks,
+    timer,
+    videos,
+};
+
 export function convertImmutableToMutable<A>(immutable: ImmutableObject<A>): A {
     return immutable.asMutable();
 }
@@ -31,32 +45,12 @@ export function convertMutableToImmutable<A>(mutable: A): ImmutableObject<A> {
 export default function() {
     const sagaMiddleware = createSagaMiddleware();
     const store = createStore(
-        combineReducers({
-            articles: articles.reducer,
-            authentication: authentication.reducer,
-            books: books.reducer,
-            environment: environment.reducer,
-            message: message.reducer,
-            pages: pages.reducer,
-            settings: settings.reducer,
-            tasks: tasks.reducer,
-            timer: timer.reducer,
-            videos: videos.reducer,
-        }),
+        combineReducers(_.mapValues(ducks, ({ reducer }) => reducer)),
         compose(applyMiddleware(sagaMiddleware), autoRehydrate()));
 
     sagaMiddleware.run(function* _() {
-        yield all([
-            ...articles.sagas,
-            ...authentication.sagas,
-            ...books.sagas,
-            ...message.sagas,
-            ...pages.sagas,
-            ...settings.sagas,
-            ...tasks.sagas,
-            ...timer.sagas,
-            ...videos.sagas,
-        ]);
+        yield all([].concat(
+            ...Object.values(ducks).map(({ sagas }: any) => sagas).filter((sagas) => !!sagas)));
     });
 
     persistStore(store, {
