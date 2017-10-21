@@ -1,3 +1,4 @@
+import { StoreCreator } from "redux";
 import { REHYDRATE } from "redux-persist/constants";
 import { SagaIterator } from "redux-saga";
 import { all, call, put, select, takeEvery } from "redux-saga/effects";
@@ -6,6 +7,7 @@ import { ImmutableObject } from "seamless-immutable";
 import actionCreatorFactory from "typescript-fsa";
 import { reducerWithInitialState } from "typescript-fsa-reducers";
 
+import * as analytics from "../lib/analytics";
 import * as firebase from "../lib/firebase";
 import * as articles from "./articles";
 import * as books from "./books";
@@ -102,3 +104,20 @@ export const sagas = [
             yield call(firebase.signOut);
         }),
 ];
+
+export function enhancer(createStore: StoreCreator): StoreCreator {
+    return (reducer, state?, enhancer?) => {
+        const store = createStore(reducer, state, enhancer);
+
+        firebase.onAuthStateChanged(async (user) => {
+            if (user === null) {
+                store.dispatch(setSignInState(false));
+            } else {
+                analytics.setUserId(user.uid);
+                store.dispatch(setSignInState(true));
+            }
+        });
+
+        return store;
+    };
+}

@@ -7,9 +7,6 @@ import { all } from "redux-saga/effects";
 import Immutable = require("seamless-immutable");
 import { ImmutableObject } from "seamless-immutable";
 
-import * as analytics from "../lib/analytics";
-import * as firebase from "../lib/firebase";
-import { onWindowSizeChange } from "../lib/media";
 import * as articles from "./articles";
 import * as authentication from "./authentication";
 import * as books from "./books";
@@ -46,7 +43,12 @@ export default function() {
     const sagaMiddleware = createSagaMiddleware();
     const store = createStore(
         combineReducers(_.mapValues(ducks, ({ reducer }) => reducer)),
-        compose(applyMiddleware(sagaMiddleware), autoRehydrate()));
+        compose(
+            applyMiddleware(sagaMiddleware),
+            autoRehydrate(),
+            ...Object.values(ducks)
+                .map(({ enhancer }: any) => enhancer)
+                .filter((enhancer) => !!enhancer)));
 
     sagaMiddleware.run(function* _() {
         yield all([].concat(
@@ -58,18 +60,6 @@ export default function() {
         transforms: [createTransform(convertImmutableToMutable, convertMutableToImmutable)],
         whitelist: ["articles", "books", "pages", "settings", "tasks", "videos"],
     });
-
-    firebase.onAuthStateChanged(async (user) => {
-        if (user === null) {
-            store.dispatch(authentication.actionCreators.setSignInState(false));
-        } else {
-            analytics.setUserId(user.uid);
-            store.dispatch(authentication.actionCreators.setSignInState(true));
-        }
-    });
-
-    onWindowSizeChange((isSmallWindow) =>
-        store.dispatch(environment.actionCreators.setIsSmallDevice(isSmallWindow)));
 
     return store;
 }
