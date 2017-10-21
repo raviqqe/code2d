@@ -29,3 +29,5 @@ export const sagas = [
             yield call(logPageView, page);
         }),
 ];
+
+export const persistent = true;

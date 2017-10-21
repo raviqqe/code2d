@@ -85,3 +85,5 @@ export const sagas = [
             yield put(getTags.started(null));
         }),
 ];
+
+export const persistent = true;

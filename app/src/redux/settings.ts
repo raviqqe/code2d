@@ -46,3 +46,5 @@ export const sagas = [
             yield put(setNotificationState(yield call(notification.requestPermission)));
         }),
 ];
+
+export const persistent = true;

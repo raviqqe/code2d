@@ -58,7 +58,7 @@ export default function() {
     persistStore(store, {
         storage: localForage,
         transforms: [createTransform(convertImmutableToMutable, convertMutableToImmutable)],
-        whitelist: ["articles", "books", "pages", "settings", "tasks", "videos"],
+        whitelist: Object.keys(ducks).filter((name: string) => ducks[name].persistent),
     });
 
     return store;
