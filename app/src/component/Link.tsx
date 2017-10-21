@@ -10,6 +10,15 @@ export default class extends React.Component<IProps> {
     public render() {
         const { children, href } = this.props;
 
-        return <a className="Link-container" href={href} target="_blank">{children}</a>;
+        return (
+            <a
+                className="Link-container"
+                href={href}
+                onClick={(event) => event.stopPropagation()}
+                target="_blank"
+            >
+                {children}
+            </a>
+        );
     }
 }

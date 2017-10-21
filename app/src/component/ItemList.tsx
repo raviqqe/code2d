@@ -2,6 +2,8 @@ import * as React from "react";
 import sortable = require("sortablejs");
 
 import { equal, IItem } from "../lib/items";
+import { isSmartphone } from "../lib/media";
+import Modal from "./Modal";
 import "./style/ItemList.css";
 
 interface IProps<A extends IItem> {
@@ -33,12 +35,22 @@ export default class ItemList<A extends IItem> extends React.Component<IProps<A>
                 style={style}
             >
                 {items.map((item) =>
-                    <Item
-                        key={item.id}
-                        done={done}
-                        highlighted={currentItem && equal(item, currentItem)}
-                        {...item}
-                    />)}
+                    isSmartphone() ?
+                        <Modal
+                            key={item.id}
+                            button={({ openWindow }) =>
+                                <div onClick={openWindow}>
+                                    <Item done={done} {...item} />
+                                </div>}
+                        >
+                            <Item detailed={true} done={done} {...item} />
+                        </Modal> :
+                        <Item
+                            key={item.id}
+                            done={done}
+                            highlighted={currentItem && equal(item, currentItem)}
+                            {...item}
+                        />)}
             </div>
         );
     }
