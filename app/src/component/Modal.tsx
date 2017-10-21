@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import Close = require("react-icons/lib/md/close");
+import { connect } from "react-redux";
 import { CSSTransition } from "react-transition-group";
 
 import config from "../config";
@@ -9,6 +10,7 @@ import "./style/Modal.css";
 
 interface IProps {
     button: (props: { opened: boolean, openWindow: () => void }) => JSX.Element;
+    isSmallWindow: boolean;
     onOpen?: () => void;
     showCloseButton?: boolean;
 }
@@ -17,7 +19,7 @@ interface IState {
     opened: boolean;
 }
 
-export default class extends React.Component<IProps, IState> {
+class Modal extends React.Component<IProps, IState> {
     public state: IState = { opened: false };
     private element: HTMLElement | null;
 
@@ -48,7 +50,7 @@ export default class extends React.Component<IProps, IState> {
     }
 
     private renderModalWindow = (): JSX.Element => {
-        const { children, onOpen, showCloseButton } = this.props;
+        const { children, isSmallWindow, onOpen, showCloseButton } = this.props;
         const { opened } = this.state;
         const closeWindow = () => this.setState({ opened: false });
 
@@ -62,7 +64,7 @@ export default class extends React.Component<IProps, IState> {
                 onExited={this.removeElement}
             >
                 <div className="Modal-container" onClick={closeWindow}>
-                    {showCloseButton &&
+                    {(isSmallWindow || showCloseButton) &&
                         <div className="Modal-close-button-container">
                             <Button className="Modal-close-button" onClick={closeWindow}>
                                 <Close />
@@ -90,3 +92,5 @@ export default class extends React.Component<IProps, IState> {
         }
     }
 }
+
+export default connect(({ environment }) => environment)(Modal);
