@@ -2,6 +2,7 @@ import "raf/polyfill";
 
 import * as enzyme from "enzyme";
 import Adapter = require("enzyme-adapter-react-16");
+import matchMediaMock = require("match-media-mock");
 
 enzyme.configure({ adapter: new Adapter() });
 
@@ -37,4 +38,6 @@ class LocalStorageMock {
     }
 };
 
-(window as any).matchMedia = () => ({ matches: true });
+const matchMedia = matchMediaMock.create();
+matchMedia.setConfig({ type: "screen", width: 1200 });
+window.matchMedia = matchMedia;
