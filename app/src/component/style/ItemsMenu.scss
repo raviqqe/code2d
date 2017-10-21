@@ -88,14 +88,13 @@
 }
 
 .ItemsMenu-state {
-	@include color-transition;
-
 	padding: 0.5em 1em;
 	color: $light-grey;
 	cursor: pointer;
 	display: flex;
 	align-items: center;
 	white-space: nowrap;
+	transition: color $instant-duration;
 
 	&:hover {
 		color: $black;
