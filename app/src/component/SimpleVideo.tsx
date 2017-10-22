@@ -22,7 +22,7 @@ class SimpleVideo extends React.Component<IProps> {
             <ItemLike className="SimpleVideo-container">
                 <ItemName href={url} text={name} />
                 <VideoDetails detailed={false} {...video} />
-                <Button className="SimpleVideo-button" onClick={() => addToTodoList(video)}>
+                <Button onClick={() => addToTodoList(video)}>
                     Add to to-watch list
                 </Button>
             </ItemLike>

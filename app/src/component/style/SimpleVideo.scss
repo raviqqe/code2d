@@ -1,8 +1,8 @@
 .SimpleVideo-container {
 	width: 20em;
 	max-width: 100%;
-}
 
-.SimpleVideo-button {
-	margin-top: 0.8em;
+	> *:last-child {
+		margin-top: 0.5em;
+	}
 }

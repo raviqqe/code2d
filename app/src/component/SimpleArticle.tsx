@@ -24,7 +24,7 @@ class SimpleArticle extends React.Component<IProps> {
                     <ItemName href={url} icon={favicon} text={name} />
                     <ArticleDetails detailed={false} {...article} />
                 </div>
-                <Button className="SimpleArticle-button" onClick={() => addToTodoList(article)}>
+                <Button onClick={() => addToTodoList(article)}>
                     Add to to-read list
                 </Button>
             </ItemLike>
