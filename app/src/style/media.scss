@@ -7,19 +7,19 @@ $small-width: 768px;
 }
 
 @mixin large-window {
-	@media (min-width: $small-width) {
+	@media not all and (max-width: $small-width) {
 		@content;
 	}
 }
 
 @mixin touchable {
-	@media (pointer: coarse) {
+	@media not all and (any-pointer: fine), (-moz-touch-enabled: 1) {
 		@content;
 	}
 }
 
 @mixin untouchable {
-	@media (pointer: fine), (pointer: none) {
+	@media (any-pointer: fine), (-moz-touch-enabled: 0) {
 		@content;
 	}
 }
