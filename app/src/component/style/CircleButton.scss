@@ -1,7 +1,7 @@
 @import "./Button.scss";
 
 @mixin CircleButton-container($background-color: $red) {
-	@include Button-container($background-color);
+	@include Button-container($background-color, true);
 
 	font-size: 2em;
 	width: 1.8em;
