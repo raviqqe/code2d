@@ -19,7 +19,7 @@
 	top: 100%;
 	z-index: 200;
 	transform-origin: 0 0;
-	transition: transform $short-duration, opacity $instant-duration, visibility $instant-duration;
+	transition: transform $short-duration, opacity $short-duration, visibility $short-duration;
 
 	@include small-window {
 		right: 0;
