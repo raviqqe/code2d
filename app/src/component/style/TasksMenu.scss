@@ -5,6 +5,10 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
+
+	> * {
+		margin: 0.2em;
+	}
 }
 
 .TasksMenu-tags-title {

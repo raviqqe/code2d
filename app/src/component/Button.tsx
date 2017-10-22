@@ -21,20 +21,22 @@ export default class extends React.Component<IProps> {
             = this.props;
 
         return (
-            <button
-                ref={(button) => this.button = button}
-                className={className || "Button-container"}
-                onClick={onClick && ((event) => {
-                    onClick();
-                    event.stopPropagation();
-                })}
-                onMouseOver={onMouseOver}
-                onMouseOut={onMouseOut}
-                style={style}
-                type={type}
-            >
-                {children}
-            </button>
+            <div className="Button-wrapper">
+                <button
+                    ref={(button) => this.button = button}
+                    className={className || "Button-container"}
+                    onClick={onClick && ((event) => {
+                        onClick();
+                        event.stopPropagation();
+                    })}
+                    onMouseOver={onMouseOver}
+                    onMouseOut={onMouseOut}
+                    style={style}
+                    type={type}
+                >
+                    {children}
+                </button>
+            </div>
         );
     }
 

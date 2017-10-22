@@ -39,7 +39,7 @@
 		width: 0;
 	};
 
-	@include untouchable {
+	@include large-window {
 		@include Button-shadow-transition;
 
 		&:hover {
@@ -52,7 +52,7 @@
 	}
 
 
-	@include touchable {
+	@include small-window {
 		@if $shadow-only {
 			@include Button-shadow-transition;
 			@include Button-shadow-on;
@@ -62,17 +62,22 @@
 			}
 		}
 		@else {
-			$Button-dark-background: darken($background-color, 15%);
-			$Button-thickness: 0.3rem;
+			$dark-background: darken($background-color, 15%);
+			$thickness: 0.3rem;
 
-			margin-bottom: $Button-thickness;
-			box-sizing: content-box;
-			transition: box-shadow $short-duration, transform $short-duration;
-			box-shadow: 0 $Button-thickness $Button-dark-background;
+			margin: {
+				top: 0;
+				bottom: $thickness;
+			};
+			box-shadow: 0 $thickness $dark-background;
+			transition: box-shadow $short-duration, margin $short-duration;
 
 			&:active {
-				transform: translateY($Button-thickness);
-				box-shadow: 0 0 $Button-dark-background;
+				margin: {
+					top: $thickness;
+					bottom: 0;
+				};
+				box-shadow: 0 0 $dark-background;
 			}
 		}
 	}
@@ -80,4 +85,12 @@
 
 .Button-container {
 	@include Button-container;
+}
+
+.Button-wrapper {
+	display: flex;
+
+	> * {
+		flex: 1;
+	}
 }

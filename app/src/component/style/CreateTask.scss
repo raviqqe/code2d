@@ -10,23 +10,21 @@
 
 .CreateTask-buttons {
 	display: flex;
-}
 
-@mixin CreateTask-button($background-color) {
-	@include Button-container($background-color);
+	> * {
+		flex: 1;
+		margin-right: 0.5em;
 
-	flex: 1;
-	margin-right: 0.5em;
-
-	&:last-child {
-		margin-right: 0;
+		&:last-child {
+			margin-right: 0;
+		}
 	}
 }
 
 .CreateTask-button {
-	@include CreateTask-button($red);
+	@include Button-container($red);
 }
 
 .CreateTask-cancel-button {
-	@include CreateTask-button($grey);
+	@include Button-container($grey);
 }
