@@ -13,7 +13,7 @@ $TaskTag-size: 1.8em;
 }
 
 .TaskTag-container {
-	@include TaskTag-container($light-blue);
+	@include TaskTag-container($light-green);
 }
 
 .TaskTag-container-highlighted {
