@@ -1,4 +1,4 @@
-import { StoreCreator } from "redux";
+import { Store } from "redux";
 import { REHYDRATE } from "redux-persist/constants";
 import { SagaIterator } from "redux-saga";
 import { all, call, put, select, takeEvery } from "redux-saga/effects";
@@ -105,19 +105,13 @@ export const sagas = [
         }),
 ];
 
-export function enhancer(createStore: StoreCreator): StoreCreator {
-    return (reducer, state?, enhancer?) => {
-        const store = createStore(reducer, state, enhancer);
-
-        firebase.onAuthStateChanged(async (user) => {
-            if (user === null) {
-                store.dispatch(setSignInState(false));
-            } else {
-                analytics.setUserId(user.uid);
-                store.dispatch(setSignInState(true));
-            }
-        });
-
-        return store;
-    };
+export function storeInitializer<A>(store: Store<A>): void {
+    firebase.onAuthStateChanged(async (user) => {
+        if (user === null) {
+            store.dispatch(setSignInState(false));
+        } else {
+            analytics.setUserId(user.uid);
+            store.dispatch(setSignInState(true));
+        }
+    });
 }

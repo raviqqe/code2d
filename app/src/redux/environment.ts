@@ -1,4 +1,4 @@
-import { StoreCreator } from "redux";
+import { Store } from "redux";
 import Immutable = require("seamless-immutable");
 import { ImmutableObject } from "seamless-immutable";
 import actionCreatorFactory from "typescript-fsa";
@@ -21,13 +21,6 @@ export const initialState: ImmutableObject<IState> = Immutable({ isSmallWindow }
 export const reducer = reducerWithInitialState(initialState)
     .case(setIsSmallWindow, (state, isSmallWindow) => state.merge({ isSmallWindow }));
 
-export function enhancer(createStore: StoreCreator): StoreCreator {
-    return (reducer, state?, enhancer?) => {
-        const store = createStore(reducer, state, enhancer);
-
-        onWindowSizeChange((isSmallWindow) =>
-            store.dispatch(setIsSmallWindow(isSmallWindow)));
-
-        return store;
-    };
+export function storeInitializer<A>(store: Store<A>): void {
+    onWindowSizeChange((isSmallWindow) => store.dispatch(setIsSmallWindow(isSmallWindow)));
 }

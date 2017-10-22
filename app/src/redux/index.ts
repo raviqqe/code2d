@@ -43,12 +43,7 @@ export default function() {
     const sagaMiddleware = createSagaMiddleware();
     const store = createStore(
         combineReducers(_.mapValues(ducks, ({ reducer }) => reducer)),
-        compose(
-            applyMiddleware(sagaMiddleware),
-            autoRehydrate(),
-            ...Object.values(ducks)
-                .map(({ enhancer }: any) => enhancer)
-                .filter((enhancer) => !!enhancer)));
+        compose(applyMiddleware(sagaMiddleware), autoRehydrate()));
 
     sagaMiddleware.run(function* _() {
         yield all([].concat(
@@ -60,6 +55,14 @@ export default function() {
         transforms: [createTransform(convertImmutableToMutable, convertMutableToImmutable)],
         whitelist: Object.keys(ducks).filter((name: string) => ducks[name].persistent),
     });
+
+    for (const duck of Object.values(ducks)) {
+        const { storeInitializer }: any = duck;
+
+        if (storeInitializer) {
+            storeInitializer(store);
+        }
+    }
 
     return store;
 }
