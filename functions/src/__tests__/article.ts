@@ -61,7 +61,7 @@ test("Fetch trending articles", async () => {
     await trendingArticles(
         { get: () => "headerContent" } as any,
         {
-            send: (articles) => expect(articles.length).toBeGreaterThan(5),
+            send: (articles) => expect(articles.length).toBeGreaterThan(1),
             set: () => undefined,
         } as any);
 });

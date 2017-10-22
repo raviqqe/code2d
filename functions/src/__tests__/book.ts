@@ -44,7 +44,7 @@ test("Fetch trending books", async () => {
     await trendingBooks(
         { get: () => "headerContent", ip: "219.114.161.59" } as any,
         {
-            send: (books) => expect(books.length).toBeGreaterThan(5),
+            send: (books) => expect(books.length).toBeGreaterThan(1),
             set: () => undefined,
         } as any);
 });

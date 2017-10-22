@@ -28,7 +28,7 @@ test("Fetch trending videos", async () => {
     await trendingVideos(
         { get: () => "headerContent" } as any,
         {
-            send: (videos) => expect(videos.length).toBeGreaterThan(5),
+            send: (videos) => expect(videos.length).toBeGreaterThan(1),
             set: () => undefined,
         } as any);
 });

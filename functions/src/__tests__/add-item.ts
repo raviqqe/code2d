@@ -5,11 +5,13 @@ import { default as addItem } from "../add-item";
 jest.setTimeout(20000);
 
 test("Add items", async () => {
-    expect.assertions(5);
+    expect.assertions(7);
 
     for (const url of [
         "https://martinfowler.com/bliki/MonolithFirst.html",
         "https://charlieharvey.org.uk/page/javascript_the_weird_parts",
+        "https://www.youtube.com/watch?v=2V1FtfBDsLU&t=2s",
+        "https://www.youtube.com/watch?v=vS5hct55p40",
         "https://books.rakuten.co.jp/rb/14920954/",
         "https://books.rakuten.co.jp/rb/15078428/",
         "https://www.betterworldbooks.com/Soft-Skills" +
