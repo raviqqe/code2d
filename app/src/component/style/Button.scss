@@ -39,7 +39,7 @@
 		width: 0;
 	};
 
-	@include large-window {
+	@include untouchable {
 		@include Button-shadow-transition;
 
 		&:hover {
@@ -52,7 +52,7 @@
 	}
 
 
-	@include small-window {
+	@include touchable {
 		@if $shadow-only {
 			@include Button-shadow-transition;
 			@include Button-shadow-on;
