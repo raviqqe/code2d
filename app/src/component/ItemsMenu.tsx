@@ -1,7 +1,9 @@
 import * as React from "react";
 import Done = require("react-icons/lib/md/check-box");
 import Todo = require("react-icons/lib/md/check-box-outline-blank");
+import { connect } from "react-redux";
 
+import Button from "./Button";
 import PagesMenu from "./PagesMenu";
 import Settings from "./Settings";
 import "./style/ItemsMenu.css";
@@ -10,14 +12,18 @@ export interface IProps {
     createItem: JSX.Element;
     done: boolean;
     doneButtonText?: string;
+    touchable: boolean;
+    makeItemListSortable: () => void;
     todoButtonText?: string;
     onItemsStateChange: (done: boolean) => void;
 }
 
-export default class extends React.Component<IProps> {
+class ItemsMenu extends React.Component<IProps> {
     public render() {
-        const { createItem, children, done, doneButtonText, todoButtonText, onItemsStateChange }
-            = this.props;
+        const {
+            createItem, children, done, doneButtonText, touchable,
+            makeItemListSortable, todoButtonText, onItemsStateChange,
+        } = this.props;
 
         return (
             <div className="ItemsMenu-container">
@@ -46,6 +52,8 @@ export default class extends React.Component<IProps> {
                                 </div>
                             </div>
                             {!done && createItem}
+                            {touchable &&
+                                <Button onClick={makeItemListSortable}>sort</Button>}
                             {children}
                         </div>
                         <Settings />
@@ -55,3 +63,5 @@ export default class extends React.Component<IProps> {
         );
     }
 }
+
+export default connect(({ environment }) => environment)(ItemsMenu);

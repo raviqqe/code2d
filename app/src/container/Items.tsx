@@ -1,6 +1,8 @@
 import * as React from "react";
+import Close = require("react-icons/lib/md/close");
 import { connect } from "react-redux";
 
+import CircleButton from "../component/CircleButton";
 import ItemList from "../component/ItemList";
 import ItemsMenuButton from "../component/ItemsMenuButton";
 import { IItem, include } from "../lib/items";
@@ -21,10 +23,11 @@ interface IProps<A extends IItem> {
 
 interface IState {
     done: boolean;
+    fixed: boolean;
 }
 
 class Items<A extends IItem> extends React.Component<IProps<A>, IState> {
-    public state: IState = { done: false };
+    public state: IState = { done: false, fixed: false };
 
     public render() {
         const { currentItem, doneItems, isSmallWindow, todoItems, signedIn } = this.props;
@@ -37,6 +40,7 @@ class Items<A extends IItem> extends React.Component<IProps<A>, IState> {
             <ItemsMenu
                 done={done}
                 onItemsStateChange={(done) => this.setState({ done })}
+                makeItemListSortable={() => this.setState({ fixed: false })}
             />
         );
 
@@ -51,6 +55,7 @@ class Items<A extends IItem> extends React.Component<IProps<A>, IState> {
                             done={false}
                             items={todoItems}
                             {...this.props}
+                            fixed={this.props.fixed || this.state.fixed}
                         />
                         <ItemList
                             style={done ? {} : { display: "none" }}
@@ -64,7 +69,13 @@ class Items<A extends IItem> extends React.Component<IProps<A>, IState> {
                                 {currentItem &&
                                     <Item detailed={true} done={done} {...currentItem} />}
                             </div>}
-                        {isSmallWindow && <ItemsMenuButton itemsMenu={itemsMenu} />}
+                        {isSmallWindow && !this.state.fixed &&
+                            <div className="Items-fix-list-button-container">
+                                <CircleButton onClick={() => this.setState({ fixed: true })}>
+                                    <Close />
+                                </CircleButton>
+                            </div>}
+                        {isSmallWindow && this.state.fixed && <ItemsMenuButton itemsMenu={itemsMenu} />}
                     </div>
                 </div>
             </div>
@@ -72,6 +83,10 @@ class Items<A extends IItem> extends React.Component<IProps<A>, IState> {
     }
 
     public componentDidMount() {
+        if (this.props.isSmallWindow) {
+            this.setState({ fixed: true });
+        }
+
         this.componentDidUpdate();
     }
 
