@@ -9,7 +9,7 @@ import CircleButton from "./CircleButton";
 import "./style/Modal.css";
 
 interface IProps {
-    button: (props: { opened: boolean, openWindow: () => void }) => JSX.Element;
+    buttonComponent: (props: { opened: boolean, openWindow: () => void }) => JSX.Element;
     buttonProps?: object;
     isSmallWindow: boolean;
     onOpen?: () => void;
@@ -25,8 +25,8 @@ class Modal extends React.Component<IProps, IState> {
     private element: HTMLElement | null;
 
     public render() {
-        const { button, buttonProps } = this.props;
-        const Button = button;
+        const { buttonComponent, buttonProps } = this.props;
+        const Button = buttonComponent;
         const { opened } = this.state;
 
         return [

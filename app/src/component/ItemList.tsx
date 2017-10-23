@@ -40,7 +40,7 @@ export default class ItemList<A extends IItem> extends React.Component<IProps<A>
                     isSmallWindow ?
                         <Modal
                             key={item.id}
-                            button={this.ClickableItem}
+                            buttonComponent={this.ClickableItem}
                             buttonProps={{ done, item }}
                         >
                             <Item detailed={true} done={done} {...item} />

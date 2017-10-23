@@ -30,7 +30,7 @@ class Settings extends React.Component<IProps> {
 
         return (
             <Modal
-                button={
+                buttonComponent={
                     ({ opened, openWindow }) =>
                         <div
                             className={"Settings-icon" + (opened ? "-active" : "")}

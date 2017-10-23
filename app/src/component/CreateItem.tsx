@@ -16,7 +16,7 @@ export default class extends React.Component<IProps> {
 
         return (
             <Modal
-                button={({ openWindow }) =>
+                buttonComponent={({ openWindow }) =>
                     <Button
                         className="CreateItem-button"
                         onClick={openWindow}
