@@ -1,5 +1,5 @@
 import * as React from "react";
-import Close = require("react-icons/lib/md/close");
+import Save = require("react-icons/lib/md/save");
 import { connect } from "react-redux";
 
 import CircleButton from "../component/CircleButton";
@@ -72,7 +72,7 @@ class Items<A extends IItem> extends React.Component<IProps<A>, IState> {
                         {isSmallWindow && !this.state.fixed &&
                             <div className="Items-fix-list-button-container">
                                 <CircleButton onClick={() => this.setState({ fixed: true })}>
-                                    <Close />
+                                    <Save />
                                 </CircleButton>
                             </div>}
                         {isSmallWindow && this.state.fixed && <ItemsMenuButton itemsMenu={itemsMenu} />}
