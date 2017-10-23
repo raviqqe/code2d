@@ -15,7 +15,7 @@ export default class extends React.Component<IProps> {
 
         return (
             <div
-                className={"ItemLike-container" + (className ? ` ${className}` : "")}
+                className={className || "ItemLike-container"}
                 onClick={onClick}
                 onMouseOut={onMouseOut}
                 onMouseOver={onMouseOver}

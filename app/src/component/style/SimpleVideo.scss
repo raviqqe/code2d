@@ -1,4 +1,8 @@
+@import "./ItemLike.scss";
+
 .SimpleVideo-container {
+	@extend .ItemLike-container;
+
 	width: 20em;
 	max-width: 100%;
 
