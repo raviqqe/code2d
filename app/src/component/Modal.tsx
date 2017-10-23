@@ -10,6 +10,7 @@ import "./style/Modal.css";
 
 interface IProps {
     button: (props: { opened: boolean, openWindow: () => void }) => JSX.Element;
+    buttonProps?: object;
     isSmallWindow: boolean;
     onOpen?: () => void;
     showCloseButton?: boolean;
@@ -24,7 +25,8 @@ class Modal extends React.Component<IProps, IState> {
     private element: HTMLElement | null;
 
     public render() {
-        const Button = this.props.button;
+        const { button, buttonProps } = this.props;
+        const Button = button;
         const { opened } = this.state;
 
         return [
@@ -33,6 +35,7 @@ class Modal extends React.Component<IProps, IState> {
                     key="button"
                     opened={opened}
                     openWindow={() => this.setState({ opened: true })}
+                    {...{ ...(buttonProps || {}) }}
                 />
             ),
             !!this.element && this.renderModalWindow(),

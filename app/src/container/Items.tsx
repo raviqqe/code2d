@@ -19,6 +19,7 @@ interface IProps<A extends IItem> {
     setItems: (items: A[], done: boolean) => void;
     signedIn: boolean;
     todoItems: A[];
+    touchable: boolean;
 }
 
 interface IState {
@@ -30,7 +31,7 @@ class Items<A extends IItem> extends React.Component<IProps<A>, IState> {
     public state: IState = { done: false, fixed: false };
 
     public render() {
-        const { currentItem, doneItems, isSmallWindow, todoItems, signedIn } = this.props;
+        const { currentItem, doneItems, isSmallWindow, todoItems, touchable, signedIn } = this.props;
         const { done } = this.state;
 
         const Item = this.props.itemComponent;
@@ -56,6 +57,7 @@ class Items<A extends IItem> extends React.Component<IProps<A>, IState> {
                             items={todoItems}
                             {...this.props}
                             fixed={this.props.fixed || this.state.fixed}
+                            sorting={touchable && !this.state.fixed}
                         />
                         <ItemList
                             style={done ? {} : { display: "none" }}

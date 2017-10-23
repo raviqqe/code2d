@@ -1,3 +1,5 @@
+@import "../../style/animation.scss";
+@import "../../style/colors.scss";
 @import "../../style/media.scss";
 
 .ItemList-container {
@@ -6,12 +8,22 @@
 	padding: 0.5em;
 
 	> * {
+		transition: box-shadow $instant-duration, transform $instant-duration;
 		margin: 0.5em;
 	}
 
 	@include small-window {
 		// padding for a menu icon.
 		padding-bottom: 5em;
+	}
+}
+
+.ItemList-container-shadowed {
+	@extend .ItemList-container;
+
+	> * {
+		box-shadow: 0 0.2em 0.2em $transparent-black;
+		transform: translateY(-0.2em);
 	}
 }
 

@@ -13,6 +13,7 @@ interface IProps<A extends IItem> {
     isSmallWindow: boolean;
     items: A[];
     setItems: (items: A[], done: boolean) => void;
+    sorting?: boolean;
     style?: { [key: string]: any };
 }
 
@@ -21,7 +22,7 @@ export default class ItemList<A extends IItem> extends React.Component<IProps<A>
     private container: HTMLElement;
 
     public render() {
-        const { itemComponent, currentItem, done, fixed, isSmallWindow, items, setItems, style }
+        const { itemComponent, currentItem, done, fixed, isSmallWindow, items, setItems, sorting, style }
             = this.props;
         const Item = itemComponent;
 
@@ -32,17 +33,15 @@ export default class ItemList<A extends IItem> extends React.Component<IProps<A>
         return (
             <div
                 ref={(container) => this.container = container}
-                className="ItemList-container"
+                className={"ItemList-container" + (sorting ? "-shadowed" : "")}
                 style={style}
             >
                 {items.map((item) =>
                     isSmallWindow ?
                         <Modal
                             key={item.id}
-                            button={({ openWindow }) =>
-                                <div onClick={openWindow}>
-                                    <Item done={done} {...item} />
-                                </div>}
+                            button={this.ClickableItem}
+                            buttonProps={{ done, item }}
                         >
                             <Item detailed={true} done={done} {...item} />
                         </Modal> :
@@ -83,5 +82,15 @@ export default class ItemList<A extends IItem> extends React.Component<IProps<A>
         }
 
         this.sortable.option("disabled", fixed);
+    }
+
+    private ClickableItem = ({ done, openWindow, item }) => {
+        const Item = this.props.itemComponent;
+
+        return (
+            <div onClick={openWindow}>
+                <Item done={done} {...item} />
+            </div>
+        );
     }
 }
