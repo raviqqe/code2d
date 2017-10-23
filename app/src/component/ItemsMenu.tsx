@@ -1,9 +1,10 @@
 import * as React from "react";
 import Done = require("react-icons/lib/md/check-box");
 import Todo = require("react-icons/lib/md/check-box-outline-blank");
+import Sort = require("react-icons/lib/md/sort");
 import { connect } from "react-redux";
 
-import Button from "./Button";
+import IconedButton from "./IconedButton";
 import PagesMenu from "./PagesMenu";
 import Settings from "./Settings";
 import "./style/ItemsMenu.css";
@@ -53,7 +54,13 @@ class ItemsMenu extends React.Component<IProps> {
                             </div>
                             {!done && createItem}
                             {touchable &&
-                                <Button onClick={makeItemListSortable}>sort</Button>}
+                                <IconedButton
+                                    className="ItemsMenu-sort-button"
+                                    icon={<Sort />}
+                                    onClick={makeItemListSortable}
+                                >
+                                    sort
+                                </IconedButton>}
                             {children}
                         </div>
                         <Settings />

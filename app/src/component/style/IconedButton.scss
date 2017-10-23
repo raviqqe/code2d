@@ -1,10 +1,15 @@
+@import "../../style/colors.scss";
 @import "./Button.scss";
 
-.IconedButton-container {
-	@include Button-container;
+@mixin IconedButton-container($background-color: $red) {
+	@include Button-container($background-color);
 
 	> *:first-child {
 		font-size: 1.5em;
 		margin-right: 0.1em;
 	}
+}
+
+.IconedButton-container {
+	@include IconedButton-container;
 }

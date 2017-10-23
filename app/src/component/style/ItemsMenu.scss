@@ -1,6 +1,7 @@
 @import "../../style/animation.scss";
 @import "../../style/colors.scss";
 @import "../../style/media.scss";
+@import "./IconedButton.scss";
 
 @mixin ItemsMenu-flex-column {
 	display: flex;
@@ -148,4 +149,8 @@
 		left: 0;
 		right: auto;
 	}
+}
+
+.ItemsMenu-sort-button {
+	@include IconedButton-container($grey);
 }

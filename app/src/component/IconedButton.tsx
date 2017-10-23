@@ -4,17 +4,18 @@ import Button from "./Button";
 import "./style/IconedButton.css";
 
 interface IProps {
+    className?: string;
     icon: JSX.Element;
     onClick: () => void;
 }
 
 export default class extends React.Component<IProps> {
     public render() {
-        const { children, icon, onClick } = this.props;
+        const { children, className, icon, onClick } = this.props;
 
         return (
             <Button
-                className="IconedButton-container"
+                className={className || "IconedButton-container"}
                 onClick={onClick}
             >
                 {icon}
