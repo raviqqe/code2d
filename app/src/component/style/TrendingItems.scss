@@ -2,8 +2,15 @@
 @import "../../style/colors.scss";
 
 .TrendingItems-button {
+	display: flex;
+	align-items: center;
 	color: $grey;
 	cursor: pointer;
+
+	> svg {
+		font-size: 1.5em;
+		margin-right: 0.2em;
+	}
 
 	&:hover {
 		color: $black;

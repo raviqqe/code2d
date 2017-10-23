@@ -1,4 +1,5 @@
 import * as React from "react";
+import Flame = require("react-icons/lib/go/flame");
 
 import { IItem } from "../lib/items";
 import Modal from "./Modal";
@@ -24,7 +25,7 @@ export default class TrendingItems<A extends IItem> extends React.Component<IPro
                 buttonComponent={
                     ({ opened, openWindow }) =>
                         <div className="TrendingItems-button" onClick={openWindow}>
-                            Trending
+                            <Flame /> Trending
                         </div>}
                 showCloseButton={true}
             >
