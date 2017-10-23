@@ -19,6 +19,7 @@
 }
 
 @mixin Button-container($background-color: $red, $shadow-only: false) {
+	width: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -88,9 +89,5 @@
 }
 
 .Button-wrapper {
-	display: flex;
-
-	> * {
-		flex: 1;
-	}
+	display: inline-block;
 }
