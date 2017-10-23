@@ -1,3 +1,4 @@
+@import "../../component/style/Button.scss";
 @import "../../style/colors.scss";
 
 .Timer-container {
@@ -38,15 +39,11 @@
 }
 
 .Timer-button {
-	padding: {
-		top: 0.5em;
-		bottom: 0.5em;
-		left: 2em;
-		right: 2em;
-	};
+	@include Button-container;
+
+	padding: 0.5em 2em;
 
 	> svg {
-		color: white;
 		font-size: 2.5em;
 	}
 }
