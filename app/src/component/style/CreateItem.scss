@@ -10,16 +10,6 @@
 	flex-direction: column;
 }
 
-.CreateItem-button {
-	@include Button-container;
-
-	& > svg {
-		font-size: 1.5em;
-		margin-right: 0.1em;
-	}
-
-	& > div {
-		padding-bottom: 0.1em;
-		margin-right: 0.3em;
-	}
+.CreateItem-button-text {
+	margin-right: 0.3em;
 }

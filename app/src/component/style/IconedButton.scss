@@ -1,0 +1,10 @@
+@import "./Button.scss";
+
+.IconedButton-container {
+	@include Button-container;
+
+	> *:first-child {
+		font-size: 1.5em;
+		margin-right: 0.1em;
+	}
+}

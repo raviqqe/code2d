@@ -1,7 +1,7 @@
 import * as React from "react";
 import Plus = require("react-icons/lib/md/add");
 
-import Button from "./Button";
+import IconedButton from "./IconedButton";
 import Modal from "./Modal";
 import "./style/CreateItem.css";
 
@@ -17,12 +17,9 @@ export default class extends React.Component<IProps> {
         return (
             <Modal
                 buttonComponent={({ openWindow }) =>
-                    <Button
-                        className="CreateItem-button"
-                        onClick={openWindow}
-                    >
-                        <Plus /><div>new</div>
-                    </Button>}
+                    <IconedButton icon={<Plus />} onClick={openWindow}>
+                        <div className="CreateItem-button-text">new</div>
+                    </IconedButton>}
                 onOpen={focus}
             >
                 {(closeWindow) =>
