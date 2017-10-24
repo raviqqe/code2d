@@ -7,7 +7,7 @@ import "./style/TaskTag.css";
 
 interface IProps {
     showRemoveButton?: boolean;
-    highlight?: boolean;
+    highlighted?: boolean;
     onClick?: () => void;
     tag: string;
 }
@@ -20,7 +20,7 @@ export default class extends React.Component<IProps, IState> {
     public state: IState = { mouseOver: false };
 
     public render() {
-        const { highlight, onClick, tag } = this.props;
+        const { highlighted, onClick, tag } = this.props;
         const showRemoveButton = this.props.showRemoveButton && this.state.mouseOver;
 
         return (
@@ -46,10 +46,10 @@ export default class extends React.Component<IProps, IState> {
     }
 
     private get containerClassName(): string {
-        const { highlight } = this.props;
+        const { highlighted } = this.props;
 
-        if (_.isBoolean(highlight)) {
-            return highlight ? "TaskTag-container-highlighted" : "TaskTag-container-unhighlighted";
+        if (_.isBoolean(highlighted)) {
+            return "TaskTag-container-" + (highlighted ? "highlighted" : "unhighlighted");
         }
 
         return "TaskTag-container";
