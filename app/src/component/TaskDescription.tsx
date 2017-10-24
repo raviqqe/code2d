@@ -4,12 +4,7 @@ import Markdown = require("react-markdown");
 import InputComponent from "./InputComponent";
 import "./style/TaskDescription.css";
 
-interface IProps {
-    onEdit: (text: string) => void;
-    text: string;
-}
-
-export default class extends InputComponent<IProps> {
+export default class extends InputComponent {
     public render() {
         if (this.state.editing) {
             return (
@@ -19,20 +14,20 @@ export default class extends InputComponent<IProps> {
                         if (event.keyCode === 83 && event.ctrlKey ||
                             event.keyCode === 13 && event.shiftKey) {
                             this.setState({ editing: false });
-                            this.props.onEdit(this.state.text);
                             event.preventDefault();
                         }
                     }}
-                    value={this.state.text}
-                    {...this.formProps}
+                    {...{ ...this.getFormProps() }}
                 />
             );
         }
 
+        const { text } = this.props;
+
         return (
             <div onClick={() => this.setState({ editing: true })}>
-                {this.props.text.trim()
-                    ? <Markdown className="TaskDescription-markdown" source={this.props.text} />
+                {text.trim()
+                    ? <Markdown className="TaskDescription-markdown" source={text} />
                     : <div className="TaskDescription-message">No description</div>}
             </div>
         );
