@@ -1,6 +1,7 @@
 import * as _ from "lodash";
 import * as React from "react";
 import Remove = require("react-icons/lib/md/close");
+import { connect } from "react-redux";
 
 import Button from "./Button";
 import "./style/TaskTag.css";
@@ -10,18 +11,19 @@ interface IProps {
     highlighted?: boolean;
     onClick?: () => void;
     tag: string;
+    touchable: boolean;
 }
 
 interface IState {
     mouseOver: boolean;
 }
 
-export default class extends React.Component<IProps, IState> {
+class TaskTag extends React.Component<IProps, IState> {
     public state: IState = { mouseOver: false };
 
     public render() {
-        const { highlighted, onClick, tag } = this.props;
-        const showRemoveButton = this.props.showRemoveButton && this.state.mouseOver;
+        const { highlighted, onClick, showRemoveButton, tag, touchable } = this.props;
+        const { mouseOver } = this.state;
 
         return (
             <Button
@@ -34,10 +36,16 @@ export default class extends React.Component<IProps, IState> {
                 onMouseOver={() => this.setState({ mouseOver: true })}
                 onMouseOut={() => this.setState({ mouseOver: false })}
             >
-                <div style={showRemoveButton ? { visibility: "hidden" } : {}}>{tag}</div>
+                <div
+                    style={(!touchable && showRemoveButton && mouseOver)
+                        ? { visibility: "hidden" } : {}}
+                >
+                    {tag}
+                </div>
                 <div
                     className="TaskTag-remove-button"
-                    style={showRemoveButton ? {} : { display: "none" }}
+                    style={(showRemoveButton && (touchable || mouseOver))
+                        ? {} : { display: "none" }}
                 >
                     <Remove />
                 </div>
@@ -55,3 +63,5 @@ export default class extends React.Component<IProps, IState> {
         return "TaskTag-container";
     }
 }
+
+export default connect(({ environment }) => environment)(TaskTag);

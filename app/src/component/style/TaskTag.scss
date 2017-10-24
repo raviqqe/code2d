@@ -1,4 +1,5 @@
 @import "../../style/colors.scss";
+@import "../../style/media.scss";
 @import "./Button.scss";
 
 $TaskTag-size: 1.8em;
@@ -25,13 +26,24 @@ $TaskTag-size: 1.8em;
 }
 
 .TaskTag-remove-button {
-	position: absolute;
-	top: 0;
-	left: 0;
 	width: 100%;
 	height: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font-size: 1.6em;
+
+	@include untouchable {
+		font-size: 1.6em;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+
+	@include touchable {
+		font-size : 1.2em;
+		margin: {
+			left: 0.2em;
+			right: -0.2em;
+		};
+	}
 }
