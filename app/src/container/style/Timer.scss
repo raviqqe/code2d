@@ -1,5 +1,6 @@
 @import "../../component/style/Button.scss";
 @import "../../style/colors.scss";
+@import "../../style/media.scss";
 
 .Timer-container {
 	width: 100vw;
@@ -21,6 +22,10 @@
 	font-size: 10em;
 	display: flex;
 	align-items: flex-end;
+
+	@include small-window {
+		font-size: 6em;
+	}
 }
 
 .Timer-time-rest {
