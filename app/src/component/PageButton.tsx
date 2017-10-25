@@ -5,6 +5,7 @@ import Video = require("react-icons/lib/md/ondemand-video");
 import Task = require("react-icons/lib/md/playlist-add-check");
 
 import { Page } from "../redux/pages";
+import NoBoxButton from "./NoBoxButton";
 import "./style/PageButton.css";
 
 const icons = {
@@ -25,12 +26,13 @@ export default class PageButton extends React.Component<IProps> {
         const { className, onClick, page } = this.props;
 
         return (
-            <div
+            <NoBoxButton
                 className={className || "PageButton-container"}
+                icon={icons[page]}
                 onClick={onClick}
             >
-                <div className="PageButton-icon">{icons[page]}</div> {page}
-            </div>
+                {page}
+            </NoBoxButton>
         );
     }
 }

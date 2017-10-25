@@ -1,28 +1,9 @@
-@import "../../style/animation.scss";
-@import "../../style/colors.scss";
+@import "./NoBoxButton.scss";
 
 @mixin PageButton-container($color, $active-color, $active-background-color) {
-	display: flex;
-	align-items: center;
-	font-size: 1.2em;
-	color: $color;
-	cursor: pointer;
-	padding: 0.5em;
-	border-radius: 0.2em;
-	transition: background $instant-duration, color $instant-duration;
-
-	&:hover, &:active {
-		background: $active-background-color;
-		color: $active-color;
-	}
+	@include NoBoxButton-container($color, $active-color, $active-background-color);
 }
 
 .PageButton-container {
-	@include PageButton-container($grey, $black, transparentize($black, 0.95));
-}
-
-.PageButton-icon {
-	display: flex;
-	font-size: 1.8em;
-	margin-right: 0.3em;
+	@include NoBoxButton-container;
 }
