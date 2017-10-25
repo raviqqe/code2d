@@ -3,6 +3,7 @@ import Flame = require("react-icons/lib/go/flame");
 
 import { IItem } from "../lib/items";
 import Modal from "./Modal";
+import NoBoxButton from "./NoBoxButton";
 import "./style/TrendingItems.css";
 
 interface IProps<A extends IItem> {
@@ -24,9 +25,7 @@ export default class TrendingItems<A extends IItem> extends React.Component<IPro
             <Modal
                 buttonComponent={
                     ({ opened, openWindow }) =>
-                        <div className="TrendingItems-button" onClick={openWindow}>
-                            <Flame /> Trending
-                        </div>}
+                        <NoBoxButton icon={<Flame />} onClick={openWindow}>Trending</NoBoxButton>}
                 showCloseButton={true}
             >
                 <div className={"TrendingItems-container" + (portrait ? "-portrait" : "")}>
