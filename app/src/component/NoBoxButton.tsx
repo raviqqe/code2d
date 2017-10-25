@@ -13,13 +13,10 @@ export default class PageButton extends React.Component<IProps> {
         const { children, className, icon, onClick } = this.props;
 
         return (
-            <div
-                className={className || "NoBoxButton-container"}
-                onClick={onClick}
-            >
+            <button className={className || "NoBoxButton-container"} onClick={onClick}>
                 {icon}
                 {children}
-            </div>
+            </button>
         );
     }
 }

@@ -2,13 +2,16 @@
 @import "../../style/colors.scss";
 
 @mixin NoBoxButton-container($color: $grey, $active-color: $black, $active-background-color: $transparent-grey) {
+	font: inherit;
 	display: flex;
 	align-items: center;
 	color: $color;
 	cursor: pointer;
 	padding: 0.5em;
+	border: none;
 	border-radius: 0.2em;
 	white-space: nowrap;
+	background: transparent;
 	transition: background $instant-duration, color $instant-duration;
 
 	&:hover, &:active {
