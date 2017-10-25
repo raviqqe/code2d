@@ -73,6 +73,7 @@ export default function createItemsDuck<A extends IItem, B>(
             setItems: (items: A[], done: boolean) => setItems({ done, items }),
             toggleItemState,
         },
+        getItemsActionCreators: getItems,
         initialState,
         reducer: reducerWithInitialState(initialState)
             .case(getItems.done, (state, { result }) => state.merge(result))

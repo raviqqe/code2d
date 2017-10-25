@@ -56,6 +56,11 @@ export const reducer =
 export const sagas = [
     ...duck.sagas,
     takeEvery(
+        duck.getItemsActionCreators.done,
+        function* _(): SagaIterator {
+            yield put(actionCreators.getTags());
+        }),
+    takeEvery(
         getTags.started,
         function* _(): SagaIterator {
             const { doneItems, todoItems }: IState = yield duck.selectState();
@@ -82,7 +87,7 @@ export const sagas = [
 
             yield put(actionCreators.setItems(items, done));
             yield put(actionCreators.setCurrentItem(item));
-            yield put(getTags.started(null));
+            yield put(actionCreators.getTags());
         }),
 ];
 
