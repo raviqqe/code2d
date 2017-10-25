@@ -7,32 +7,33 @@ import "./style/PagesMenu.css";
 
 interface IProps {
     currentPage: Page;
+    closed?: boolean;
     setCurrentPage: (page: Page) => void;
 }
 
 interface IState {
-    showMenu: boolean;
+    opened: boolean;
 }
 
 class PagesMenu extends React.Component<IProps, IState> {
-    public state: IState = { showMenu: false };
+    public state: IState = { opened: false };
 
     public render() {
-        const { currentPage, setCurrentPage } = this.props;
-        const { showMenu } = this.state;
+        const { currentPage, closed, setCurrentPage } = this.props;
+        const opened = !closed && this.state.opened;
 
         return (
             <div className="PagesMenu-container">
                 <PageButton
                     className="PagesMenu-current-button"
                     page={currentPage}
-                    onClick={() => this.setState({ showMenu: !showMenu })}
+                    onClick={() => this.setState({ opened: !this.state.opened })}
                 />
                 <div
-                    className={"PagesMenu-background" + (showMenu ? "" : "-hidden")}
-                    onClick={() => this.setState({ showMenu: false })}
+                    className={"PagesMenu-background" + (opened ? "" : "-hidden")}
+                    onClick={() => this.setState({ opened: false })}
                 />
-                <div className={"PagesMenu-box" + (showMenu ? "" : "-hidden")}>
+                <div className={"PagesMenu-box" + (opened ? "" : "-hidden")}>
                     {pages.map((page) =>
                         <PageButton
                             key={page}
@@ -40,7 +41,7 @@ class PagesMenu extends React.Component<IProps, IState> {
                             page={page}
                             onClick={() => {
                                 setCurrentPage(page);
-                                this.setState({ showMenu: false });
+                                this.setState({ opened: false });
                             }}
                         />)}
                 </div>
