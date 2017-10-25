@@ -5,6 +5,7 @@ import Sort = require("react-icons/lib/md/sort");
 import { connect } from "react-redux";
 
 import IconedButton from "./IconedButton";
+import NoBoxButton from "./NoBoxButton";
 import PagesMenu from "./PagesMenu";
 import Settings from "./Settings";
 import "./style/ItemsMenu.css";
@@ -39,18 +40,20 @@ class ItemsMenu extends React.Component<IProps> {
                     <div className="ItemsMenu-lower-content">
                         <div className="ItemsMenu-lower-upper-container">
                             <div className="ItemsMenu-states">
-                                <div
-                                    className={"ItemsMenu-state" + (done ? "" : "-highlighted")}
+                                <NoBoxButton
+                                    className={!done && "ItemsMenu-state-highlighted"}
+                                    icon={<Todo />}
                                     onClick={() => onItemsStateChange(false)}
                                 >
-                                    <Todo /> {todoButtonText || "to do"}
-                                </div>
-                                <div
-                                    className={"ItemsMenu-state" + (done ? "-highlighted" : "")}
+                                    {todoButtonText || "to do"}
+                                </NoBoxButton>
+                                <NoBoxButton
+                                    className={done && "ItemsMenu-state-highlighted"}
+                                    icon={<Done />}
                                     onClick={() => onItemsStateChange(true)}
                                 >
-                                    <Done /> {doneButtonText || "done"}
-                                </div>
+                                    {doneButtonText || "done"}
+                                </NoBoxButton>
                             </div>
                             {!done && createItem}
                             {touchable &&

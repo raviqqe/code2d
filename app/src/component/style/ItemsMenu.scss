@@ -2,6 +2,7 @@
 @import "../../style/colors.scss";
 @import "../../style/media.scss";
 @import "./IconedButton.scss";
+@import "./NoBoxButton.scss";
 
 @mixin ItemsMenu-flex-column {
 	display: flex;
@@ -88,34 +89,10 @@
 	@include ItemsMenu-flex-column;
 }
 
-.ItemsMenu-state {
-	padding: 0.5em 1em;
-	color: $light-grey;
-	cursor: pointer;
-	display: flex;
-	align-items: center;
-	white-space: nowrap;
-	transition: color $instant-duration;
-
-	&:hover {
-		color: $black;
-	}
-
-	& > svg {
-		font-size: 1.6em;
-		margin-right: 0.2em;
-	}
-}
-
 .ItemsMenu-state-highlighted {
-	@extend .ItemsMenu-state;
+	@include NoBoxButton-container($red, $red, transparent);
 
-	color: $red;
 	cursor: auto;
-
-	&:hover {
-		color: $red;
-	}
 }
 
 @mixin ItemsMenu-background {

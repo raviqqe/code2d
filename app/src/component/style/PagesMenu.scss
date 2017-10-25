@@ -54,4 +54,6 @@
 
 .PagesMenu-disabled-button {
 	@include PageButton-container($red, $red, transparent);
+
+	cursor: auto;
 }

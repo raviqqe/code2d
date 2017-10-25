@@ -1,9 +1,12 @@
+@import "../../style/colors.scss";
 @import "./NoBoxButton.scss";
 
 @mixin PageButton-container($color, $active-color, $active-background-color) {
 	@include NoBoxButton-container($color, $active-color, $active-background-color);
+
+	font-size: 1.2em;
 }
 
 .PageButton-container {
-	@include NoBoxButton-container;
+	@include PageButton-container($grey, $black, $transparent-grey);
 }
