@@ -23,7 +23,7 @@
 	z-index: 100;
 }
 
-.ItemsMenuButton-menu-background-shown {
+.ItemsMenuButton-menu-background-opened {
 	@extend .ItemsMenuButton-menu-background;
 
 	background: $transparent-black;
@@ -40,7 +40,7 @@
 	z-index: 200;
 }
 
-.ItemsMenuButton-menu-container-shown {
+.ItemsMenuButton-menu-container-opened {
 	@extend .ItemsMenuButton-menu-container;
 
 	transform: translateX(0);

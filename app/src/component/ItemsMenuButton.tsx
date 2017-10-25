@@ -9,32 +9,33 @@ interface IProps {
 }
 
 interface IState {
-    shown: boolean;
+    opened: boolean;
 }
 
 export default class extends React.Component<IProps, IState> {
-    public state: IState = { shown: false };
+    public state: IState = { opened: false };
 
     public render() {
         const { itemsMenu } = this.props;
-        const { shown } = this.state;
-        const postfix = shown ? "-shown" : "";
+        const { opened } = this.state;
+        const postfix = opened ? "-opened" : "";
 
         return (
             <div className="ItemsMenuButton-container">
                 <CircleButton
                     className="ItemsMenuButton-button"
-                    onClick={() => this.setState({ shown: !shown })}
+                    onClick={() => this.setState({ opened: !opened })}
                 >
                     <Menu />
                 </CircleButton>
                 <div
                     className={"ItemsMenuButton-menu-background" + postfix}
-                    onClick={() => this.setState({ shown: false })}
+                    onClick={() => this.setState({ opened: false })}
                 />
                 <div className={"ItemsMenuButton-menu-container" + postfix}>
                     {itemsMenu}
                 </div>
-            </div>);
+            </div>
+        );
     }
 }
