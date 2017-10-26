@@ -45,6 +45,12 @@ class Items<A extends IItem> extends React.Component<IProps<A>, IState> {
             />
         );
 
+        const itemListProps = {
+            ...this.props,
+            fixed: this.props.fixed || this.state.fixed,
+            sorting: touchable && !this.state.fixed,
+        };
+
         return (
             <div className="Items-container">
                 <div className="Items-content">
@@ -52,19 +58,15 @@ class Items<A extends IItem> extends React.Component<IProps<A>, IState> {
                     <div className="Items-main">
                         <ItemList
                             style={done ? { display: "none" } : {}}
-                            itemComponent={Item}
                             done={false}
                             items={todoItems}
-                            {...this.props}
-                            fixed={this.props.fixed || this.state.fixed}
-                            sorting={touchable && !this.state.fixed}
+                            {...itemListProps}
                         />
                         <ItemList
                             style={done ? {} : { display: "none" }}
-                            itemComponent={Item}
                             done={true}
                             items={doneItems}
-                            {...this.props}
+                            {...itemListProps}
                         />
                         {!isSmallWindow &&
                             <div className="Items-current-item-container">
