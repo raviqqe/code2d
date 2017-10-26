@@ -8,6 +8,7 @@
 @mixin font-without-size {
 	color: $black;
 	font-family: "Noto Sans", sans-serif;
+	line-height: 1.6;
 }
 
 @mixin font {
