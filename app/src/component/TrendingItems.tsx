@@ -2,7 +2,7 @@ import * as React from "react";
 import Flame = require("react-icons/lib/go/flame");
 
 import { IItem } from "../lib/items";
-import Modal from "./Modal";
+import ModalWindowButton from "./ModalWindowButton";
 import NoBoxButton from "./NoBoxButton";
 import "./style/TrendingItems.css";
 
@@ -22,7 +22,7 @@ export default class TrendingItems<A extends IItem> extends React.Component<IPro
         }
 
         return (
-            <Modal
+            <ModalWindowButton
                 buttonComponent={
                     ({ opened, openWindow }) =>
                         <NoBoxButton icon={<Flame />} onClick={openWindow}>Trending</NoBoxButton>}
@@ -32,7 +32,7 @@ export default class TrendingItems<A extends IItem> extends React.Component<IPro
                     {trendingItems.map((item: A, index) =>
                         <Item key={index} {...item} />)}
                 </div>
-            </Modal>
+            </ModalWindowButton>
         );
     }
 }

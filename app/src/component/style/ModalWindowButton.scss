@@ -3,7 +3,7 @@
 @import "../../style/colors.scss";
 @import "../../style/media.scss";
 
-.Modal-container {
+.ModalWindowButton-container {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -33,8 +33,8 @@
 	}
 }
 
-.Modal-container-hidden {
-	@extend .Modal-container;
+.ModalWindowButton-container-hidden {
+	@extend .ModalWindowButton-container;
 
 	visibility: hidden;
 	background: transparent;
@@ -44,15 +44,15 @@
 	}
 }
 
-.Modal-container-appear.Modal-container-appear-active, .Modal-container-exit {
-	@extend .Modal-container;
+.ModalWindowButton-container-appear.ModalWindowButton-container-appear-active, .ModalWindowButton-container-exit {
+	@extend .ModalWindowButton-container;
 }
 
-.Modal-container-appear, .Modal-container-exit.Modal-container-exit-active {
-	@extend .Modal-container-hidden;
+.ModalWindowButton-container-appear, .ModalWindowButton-container-exit.ModalWindowButton-container-exit-active {
+	@extend .ModalWindowButton-container-hidden;
 }
 
-.Modal-window {
+.ModalWindowButton-window {
 	@include paper-border;
 
 	background: white;
@@ -61,7 +61,7 @@
 	margin: auto;
 }
 
-.Modal-close-button-container {
+.ModalWindowButton-close-button-container {
 	position: fixed;
 	top: 1em;
 	right: 1em;

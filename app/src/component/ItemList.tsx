@@ -2,7 +2,7 @@ import * as React from "react";
 import sortable = require("sortablejs");
 
 import { equal, IItem } from "../lib/items";
-import Modal from "./Modal";
+import ModalWindowButton from "./ModalWindowButton";
 import "./style/ItemList.css";
 
 interface IProps<A extends IItem> {
@@ -38,13 +38,13 @@ export default class ItemList<A extends IItem> extends React.Component<IProps<A>
             >
                 {items.map((item) =>
                     isSmallWindow ?
-                        <Modal
+                        <ModalWindowButton
                             key={item.id}
                             buttonComponent={this.ClickableItem}
                             buttonProps={{ done, item }}
                         >
                             <Item detailed={true} done={done} {...item} />
-                        </Modal> :
+                        </ModalWindowButton> :
                         <Item
                             key={item.id}
                             done={done}

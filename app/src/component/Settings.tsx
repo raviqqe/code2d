@@ -9,7 +9,7 @@ import { actionCreators as authenticationActionCreators } from "../redux/authent
 import { actionCreators as settingsActionCreators } from "../redux/settings";
 import Button from "./Button";
 import Link from "./Link";
-import Modal from "./Modal";
+import ModalWindowButton from "./ModalWindowButton";
 import SettingsItem from "./SettingsItem";
 import "./style/Settings.css";
 
@@ -29,7 +29,7 @@ class Settings extends React.Component<IProps> {
         const { alarmVolume, deleteAccount, notificationOn, setAlarmVolume, signOut } = this.props;
 
         return (
-            <Modal
+            <ModalWindowButton
                 buttonComponent={
                     ({ opened, openWindow }) =>
                         <div
@@ -85,7 +85,7 @@ class Settings extends React.Component<IProps> {
                         <Link href="/privacy_policy.pdf">Privacy Policy</Link>
                     </div>
                 </div>
-            </Modal>
+            </ModalWindowButton>
         );
     }
 }

@@ -2,7 +2,7 @@ import * as React from "react";
 import Plus = require("react-icons/lib/md/add");
 
 import IconedButton from "./IconedButton";
-import Modal from "./Modal";
+import ModalWindowButton from "./ModalWindowButton";
 import "./style/CreateItem.css";
 
 interface IProps {
@@ -15,7 +15,7 @@ export default class extends React.Component<IProps> {
         const { children, createItem, focus } = this.props;
 
         return (
-            <Modal
+            <ModalWindowButton
                 buttonComponent={({ openWindow }) =>
                     <IconedButton icon={<Plus />} onClick={openWindow}>
                         <div className="CreateItem-button-text">new</div>
@@ -37,7 +37,7 @@ export default class extends React.Component<IProps> {
                     >
                         {children}
                     </form>}
-            </Modal>
+            </ModalWindowButton>
         );
     }
 }

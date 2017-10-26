@@ -6,7 +6,7 @@ import { CSSTransition } from "react-transition-group";
 
 import config from "../config";
 import CircleButton from "./CircleButton";
-import "./style/Modal.css";
+import "./style/ModalWindowButton.css";
 
 interface IProps {
     buttonComponent: (props: { opened: boolean, openWindow: () => void }) => JSX.Element;
@@ -20,7 +20,7 @@ interface IState {
     opened: boolean;
 }
 
-class Modal extends React.Component<IProps, IState> {
+class ModalWindowButton extends React.Component<IProps, IState> {
     public state: IState = { opened: false };
     private element: HTMLElement | null;
 
@@ -38,7 +38,7 @@ class Modal extends React.Component<IProps, IState> {
                     {...{ ...(buttonProps || {}) }}
                 />
             ),
-            !!this.element && this.renderModalWindow(),
+            !!this.element && this.renderModalWindowButtonWindow(),
         ];
     }
 
@@ -52,7 +52,7 @@ class Modal extends React.Component<IProps, IState> {
         this.removeElement();
     }
 
-    private renderModalWindow = (): JSX.Element => {
+    private renderModalWindowButtonWindow = (): JSX.Element => {
         const { children, isSmallWindow, onOpen, showCloseButton } = this.props;
         const { opened } = this.state;
         const closeWindow = () => this.setState({ opened: false });
@@ -60,20 +60,20 @@ class Modal extends React.Component<IProps, IState> {
         return (ReactDOM as any).createPortal(
             <CSSTransition
                 appear={true}
-                classNames="Modal-container"
+                classNames="ModalWindowButton-container"
                 in={opened}
                 timeout={config.maxAnimationDelayMs}
                 onEntered={onOpen}
                 onExited={this.removeElement}
             >
-                <div className="Modal-container" onClick={closeWindow}>
+                <div className="ModalWindowButton-container" onClick={closeWindow}>
                     {(isSmallWindow || showCloseButton) &&
-                        <div className="Modal-close-button-container">
+                        <div className="ModalWindowButton-close-button-container">
                             <CircleButton onClick={closeWindow}>
                                 <Close />
                             </CircleButton>
                         </div>}
-                    <div className="Modal-window" onClick={(event) => event.stopPropagation()}>
+                    <div className="ModalWindowButton-window" onClick={(event) => event.stopPropagation()}>
                         {typeof children === "function" ? children(closeWindow) : children}
                     </div>
                 </div>
@@ -96,4 +96,4 @@ class Modal extends React.Component<IProps, IState> {
     }
 }
 
-export default connect(({ environment }) => environment)(Modal);
+export default connect(({ environment }) => environment)(ModalWindowButton);
