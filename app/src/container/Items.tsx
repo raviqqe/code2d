@@ -87,7 +87,7 @@ class Items<A extends IItem> extends React.Component<IProps<A>, IState> {
     }
 
     public componentDidMount() {
-        if (this.props.isSmallWindow) {
+        if (this.props.touchable) {
             this.setState({ fixed: true });
         }
 
