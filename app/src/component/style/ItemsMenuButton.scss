@@ -19,7 +19,7 @@
 	width: 100vw;
 	height: 100vh;
 	background: $transparent-black;
-	transition: background $long-duration, visibility $long-duration;
+	transition: background $short-duration, visibility $short-duration;
 	z-index: 100;
 
 	> * {
