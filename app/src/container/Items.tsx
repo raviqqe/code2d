@@ -45,10 +45,12 @@ class Items<A extends IItem> extends React.Component<IProps<A>, IState> {
             />
         );
 
+        const sorting = touchable && !this.state.fixed;
+
         const itemListProps = {
             ...this.props,
             fixed: this.props.fixed || this.state.fixed,
-            sorting: touchable && !this.state.fixed,
+            sorting,
         };
 
         return (
@@ -73,13 +75,13 @@ class Items<A extends IItem> extends React.Component<IProps<A>, IState> {
                                 {currentItem &&
                                     <Item detailed={true} done={done} {...currentItem} />}
                             </div>}
-                        {isSmallWindow && !this.state.fixed &&
+                        {sorting &&
                             <div className="Items-fix-list-button-container">
                                 <CircleButton onClick={() => this.setState({ fixed: true })}>
                                     <Save />
                                 </CircleButton>
                             </div>}
-                        {isSmallWindow && this.state.fixed && <ItemsMenuButton itemsMenu={itemsMenu} />}
+                        {isSmallWindow && !sorting && <ItemsMenuButton itemsMenu={itemsMenu} />}
                     </div>
                 </div>
             </div>
