@@ -2,40 +2,40 @@ import * as React from "react";
 import Menu = require("react-icons/lib/md/menu");
 
 import CircleButton from "./CircleButton";
+import ModalButton, { IButtonProps, IContentProps } from "./ModalButton";
 import "./style/ItemsMenuButton.css";
 
 interface IProps {
     itemsMenu: JSX.Element;
 }
 
-interface IState {
-    opened: boolean;
-}
-
-export default class extends React.Component<IProps, IState> {
-    public state: IState = { opened: false };
-
+export default class extends React.Component<IProps> {
     public render() {
         const { itemsMenu } = this.props;
-        const { opened } = this.state;
-        const postfix = opened ? "-opened" : "";
 
         return (
-            <div className="ItemsMenuButton-container">
-                <CircleButton
-                    className="ItemsMenuButton-button"
-                    onClick={() => this.setState({ opened: !opened })}
-                >
-                    <Menu />
-                </CircleButton>
-                <div
-                    className={"ItemsMenuButton-menu-background" + postfix}
-                    onClick={() => this.setState({ opened: false })}
-                />
-                <div className={"ItemsMenuButton-menu-container" + postfix}>
-                    {itemsMenu}
-                </div>
-            </div>
+            <ModalButton
+                buttonComponent={this.buttonComponent}
+                contentComponent={this.contentComponent}
+                transitionClassNames="ItemsMenuButton-menu-container"
+            />
         );
     }
+
+    private buttonComponent = ({ openWindow }: IButtonProps): JSX.Element => (
+        <div className="ItemsMenuButton-button-container">
+            <CircleButton
+                className="ItemsMenuButton-button"
+                onClick={openWindow}
+            >
+                <Menu />
+            </CircleButton>
+        </div>
+    )
+
+    private contentComponent = ({ closeWindow }: IContentProps): JSX.Element => (
+        <div className="ItemsMenuButton-menu-container" onClick={closeWindow} >
+            {this.props.itemsMenu}
+        </div>
+    )
 }

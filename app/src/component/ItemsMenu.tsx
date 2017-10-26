@@ -29,7 +29,7 @@ class ItemsMenu extends React.Component<IProps> {
         } = this.props;
 
         return (
-            <div className="ItemsMenu-container">
+            <div className="ItemsMenu-container" onClick={(event) => event.stopPropagation()}>
                 <div className="ItemsMenu-upper-container">
                     <div className="ItemsMenu-upper-background" />
                     <div className="ItemsMenu-upper-content">
