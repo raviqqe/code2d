@@ -11,7 +11,6 @@ import Settings from "./Settings";
 import "./style/ItemsMenu.css";
 
 export interface IProps {
-    closed?: boolean;
     createItem: JSX.Element;
     done: boolean;
     doneButtonText?: string;
@@ -24,7 +23,7 @@ export interface IProps {
 class ItemsMenu extends React.Component<IProps> {
     public render() {
         const {
-            closed, createItem, children, done, doneButtonText, touchable,
+             createItem, children, done, doneButtonText, touchable,
             makeItemListSortable, todoButtonText, onItemsStateChange,
         } = this.props;
 
@@ -33,7 +32,7 @@ class ItemsMenu extends React.Component<IProps> {
                 <div className="ItemsMenu-upper-container">
                     <div className="ItemsMenu-upper-background" />
                     <div className="ItemsMenu-upper-content">
-                        <PagesMenu closed={closed} />
+                        <PagesMenu />
                     </div>
                 </div>
                 <div className="ItemsMenu-lower-container">
