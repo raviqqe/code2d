@@ -6,8 +6,15 @@
 	position: fixed;
 	bottom: 1em;
 	right: 1em;
+	transition: opacity $short-duration, visibility $short-duration;
 }
 
+.ItemsMenuButton-button-container-hidden {
+	@extend .ItemsMenuButton-button-container;
+
+	opacity: 0;
+	visibility: hidden;
+}
 .ItemsMenuButton-button {
 	@include CircleButton-container($dark-grey);
 }

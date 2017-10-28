@@ -7,6 +7,7 @@ import "./style/ItemsMenuButton.css";
 
 interface IProps {
     closed?: boolean;
+    hidden?: boolean;
     itemsMenu: JSX.Element;
 }
 
@@ -25,7 +26,7 @@ export default class extends React.Component<IProps> {
     }
 
     private buttonComponent = ({ openWindow }: IButtonProps): JSX.Element => (
-        <div className="ItemsMenuButton-button-container">
+        <div className={"ItemsMenuButton-button-container" + (this.props.hidden ? "-hidden" : "")}>
             <CircleButton
                 className="ItemsMenuButton-button"
                 onClick={openWindow}
