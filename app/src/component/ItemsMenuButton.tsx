@@ -6,16 +6,18 @@ import ModalButton, { IButtonProps, IContentProps } from "./ModalButton";
 import "./style/ItemsMenuButton.css";
 
 interface IProps {
+    closed?: boolean;
     itemsMenu: JSX.Element;
 }
 
 export default class extends React.Component<IProps> {
     public render() {
-        const { itemsMenu } = this.props;
+        const { closed, itemsMenu } = this.props;
 
         return (
             <ModalButton
                 buttonComponent={this.buttonComponent}
+                closed={closed}
                 contentComponent={this.contentComponent}
                 transitionClassNames="ItemsMenuButton-menu-container"
             />

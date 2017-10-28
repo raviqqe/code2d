@@ -75,13 +75,13 @@ class Items<A extends IItem> extends React.Component<IProps<A>, IState> {
                                 {currentItem &&
                                     <Item detailed={true} done={done} {...currentItem} />}
                             </div>}
+                        {isSmallWindow && <ItemsMenuButton closed={sorting} itemsMenu={itemsMenu} />}
                         {sorting &&
                             <div className="Items-fix-list-button-container">
                                 <CircleButton onClick={() => this.setState({ fixed: true })}>
                                     <Save />
                                 </CircleButton>
                             </div>}
-                        {isSmallWindow && !sorting && <ItemsMenuButton itemsMenu={itemsMenu} />}
                     </div>
                 </div>
             </div>

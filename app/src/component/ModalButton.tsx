@@ -17,6 +17,7 @@ export interface IContentProps {
 interface IProps {
     buttonComponent: (props: IButtonProps) => JSX.Element;
     buttonProps?: object;
+    closed?: boolean;
     contentComponent: (props: IContentProps) => JSX.Element;
     contentProps?: object;
     onOpen?: () => void;
@@ -33,12 +34,12 @@ export default class extends React.Component<IProps, IState> {
 
     public render() {
         const {
-            buttonComponent, buttonProps, contentComponent, contentProps,
+            buttonComponent, buttonProps, closed, contentComponent, contentProps,
             onOpen, transitionClassNames,
         } = this.props;
         const Button = buttonComponent;
         const Content = contentComponent;
-        const { opened } = this.state;
+        const opened = !closed && this.state.opened;
 
         return [
             (
@@ -71,6 +72,12 @@ export default class extends React.Component<IProps, IState> {
     public componentWillUpdate(_, { opened }: IState) {
         if (!this.state.opened && opened) {
             this.createElement();
+        }
+    }
+
+    public componentDidUpdate({ closed }: IProps) {
+        if (!closed && this.props.closed) {
+            this.setState({ opened: false });
         }
     }
 
