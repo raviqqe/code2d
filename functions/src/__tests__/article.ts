@@ -55,8 +55,10 @@ test("Convert a URL into an article object", async () => {
     }
 });
 
-test("Convert a Japanese article URL into an article object", async () => {
+test("Don't warn about no stopwards file for Japanese", async () => {
     expect.assertions(3);
+
+    console.error = () => { throw new Error("Don't call console.error!"); };
 
     const { favicon, name, url } = await convertUrlIntoItem("https://note.mu/ruiu/n/n3378b4169ad8");
 
