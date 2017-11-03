@@ -37,10 +37,10 @@ export function extractTitle(html: string): string | null {
 export const convertUrlIntoItem = urlToItemConverter(async (url: string) => {
     const { data } = await axios.get(url, { headers: { Accept: "text/html" } });
 
-    const warn = console.warn;
-    console.warn = () => undefined;
+    const error = console.error;
+    console.error = () => undefined;
     const { date, favicon, image, softTitle, text } = unfluff(data);
-    console.warn = warn;
+    console.error = error;
 
     return {
         date,
