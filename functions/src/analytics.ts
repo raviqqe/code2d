@@ -64,6 +64,10 @@ export async function getTrendingItems(
             (error, result) => error ? reject(error) : resolve(result),
         )) as any;
 
+    if (!rows) {
+        return [];
+    }
+
     const rowToItem = async ({ dimensions: [id] }): Promise<object | null> => {
         try {
             return await idToItem(id);
