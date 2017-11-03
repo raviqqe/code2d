@@ -55,6 +55,16 @@ test("Convert a URL into an article object", async () => {
     }
 });
 
+test("Convert a Japanese article URL into an article object", async () => {
+    expect.assertions(3);
+
+    const { favicon, name, url } = await convertUrlIntoItem("https://note.mu/ruiu/n/n3378b4169ad8");
+
+    expect(is.url(favicon)).toBe(true);
+    expect(typeof name).toBe("string");
+    expect(is.url(url)).toBe(true);
+});
+
 test("Fetch trending articles", async () => {
     expect.assertions(1);
 
