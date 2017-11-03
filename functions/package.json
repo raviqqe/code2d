@@ -38,11 +38,15 @@
     "transformIgnorePatterns": [],
     "testEnvironment": "node",
     "testRegex": "/__tests__/.+\\.ts$",
+    "mapCoverage": true,
     "moduleFileExtensions": [
       "ts",
       "js",
       "json"
     ],
-    "modulePathIgnorePatterns": ["coverage", "dist"]
+    "modulePathIgnorePatterns": [
+      "coverage",
+      "dist"
+    ]
   }
 }
