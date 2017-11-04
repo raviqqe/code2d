@@ -1,7 +1,8 @@
 const path = require('path')
 
 module.exports = {
-  entry: './src/index.ts',
+  context: path.resolve(__dirname, 'src'),
+  entry: './index.ts',
   module: {
     rules: [
       {
