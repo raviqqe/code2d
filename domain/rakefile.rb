@@ -3,7 +3,7 @@ task :deps do
 end
 
 task build: :deps do
-  sh 'npx webpack'
+  sh 'npx tsc'
 end
 
 task test: :deps do
