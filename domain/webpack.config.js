@@ -2,7 +2,10 @@ const path = require('path')
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
-  entry: './index.ts',
+  entry: {
+    index: './index.ts',
+    book: './book/index.ts'
+  },
   module: {
     rules: [
       {
@@ -16,7 +19,7 @@ module.exports = {
     extensions: [ '.ts', '.js' ]
   },
   output: {
-    filename: 'index.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'dist')
   }
 }
