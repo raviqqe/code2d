@@ -1,5 +1,6 @@
 import { convertCountryIntoBookStoreUrl } from "domain-layer/book";
 import * as React from "react";
+import Search = require("react-icons/lib/md/search");
 import { connect } from "react-redux";
 
 import { IBook } from "../lib/books";
@@ -7,6 +8,7 @@ import { actionCreators } from "../redux/books";
 import CreateMediaItem from "./CreateMediaItem";
 import ItemsMenu from "./ItemsMenu";
 import Link from "./Link";
+import NoBoxButton from "./NoBoxButton";
 import SimpleBook from "./SimpleBook";
 import TrendingItems from "./TrendingItems";
 
@@ -35,10 +37,13 @@ class BooksMenu extends React.Component<IProps> {
             >
                 <TrendingItems itemComponent={SimpleBook} trendingItems={trendingItems} />
                 {country &&
-                    <Link
-                        href={convertCountryIntoBookStoreUrl(country)}
-                    >
-                        Search online
+                    <Link href={convertCountryIntoBookStoreUrl(country)}>
+                        <NoBoxButton
+                            icon={<Search />}
+                            onClick={() => undefined}
+                        >
+                            Search
+                        </NoBoxButton>
                     </Link>}
             </ItemsMenu>
         );
