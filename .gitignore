@@ -7,3 +7,4 @@
 .terraform
 coverage
 node_modules
+local_modules

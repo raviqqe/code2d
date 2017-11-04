@@ -1,5 +1,5 @@
 task :deps do
-  sh 'npm install'
+  sh 'npm install --ignore-scripts'
 end
 
 task build: :deps do

@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.16.2",
+    "domain-layer": "file:local_modules/domain",
     "firebase": "^4.6.0",
     "localforage": "^1.5.2",
     "lodash": "^4.17.4",

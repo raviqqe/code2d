@@ -1,6 +1,9 @@
 {
   "name": "domain-layer",
   "version": "0.1.0",
+  "scripts": {
+    "postinstall": "mv dist/* ."
+  },
   "private": true,
   "devDependencies": {
     "@types/jest": "^21.1.5",
