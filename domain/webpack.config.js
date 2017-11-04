@@ -21,5 +21,6 @@ module.exports = {
   output: {
     filename: '[name]/index.js',
     path: path.resolve(__dirname, 'dist')
-  }
+  },
+  target: 'node'
 }
