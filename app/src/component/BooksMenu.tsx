@@ -1,4 +1,4 @@
-import { convertLocaleIntoBookStoreUrl } from "domain-layer/book";
+import { convertCountryIntoBookStoreUrl } from "domain-layer/book";
 import * as React from "react";
 import { connect } from "react-redux";
 
@@ -36,9 +36,7 @@ class BooksMenu extends React.Component<IProps> {
                 <TrendingItems itemComponent={SimpleBook} trendingItems={trendingItems} />
                 {country &&
                     <Link
-                        href={convertLocaleIntoBookStoreUrl(
-                            country,
-                            navigator.languages || [navigator.language])}
+                        href={convertCountryIntoBookStoreUrl(country)}
                     >
                         Search online
                     </Link>}
