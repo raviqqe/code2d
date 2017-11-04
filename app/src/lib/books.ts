@@ -17,7 +17,7 @@ const repository = new StatefulItemsRepository<IBook>("books");
 export const booksRepository = repository.state;
 
 export async function urlToBook(url: string): Promise<IBook> {
-    return await functions.call("book", { url });
+    return await functions.call("book", { params: { url } });
 }
 
 export function extractBook<A extends IBook>({

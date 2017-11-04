@@ -42,7 +42,7 @@ export const sagas = [
         function* _() {
             yield put(getCountry.done({
                 params: null,
-                result: yield call(functions.call, "country"),
+                result: yield call(functions.call, "country", { cache: false }),
             }));
         }),
 ];
