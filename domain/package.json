@@ -1,5 +1,5 @@
 {
-  "name": "domain-and-application",
+  "name": "domain-layer",
   "version": "0.1.0",
   "devDependencies": {
     "@types/jest": "^21.1.5",
