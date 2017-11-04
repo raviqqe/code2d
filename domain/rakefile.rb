@@ -2,11 +2,11 @@ task :deps do
   sh 'npm install'
 end
 
-task :build do
+task build: :deps do
   sh 'npx webpack'
 end
 
-task :test do
+task test: :deps do
   sh 'npx jest --coverage'
 end
 
