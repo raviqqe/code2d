@@ -7,7 +7,7 @@ import config from "../config";
 const { firebase: { projectId } } = config;
 
 export async function call<R = any>(
-    pathname: string,
+    name: string,
     { cache, params }: {
         cache?: boolean,
         params?: { [key: string]: string },
@@ -17,12 +17,12 @@ export async function call<R = any>(
         cache ?
             url.format({
                 hostname: config.domain,
-                pathname: "/functions/" + pathname,
+                pathname: "/functions/" + name,
                 protocol: "https",
             }) :
             url.format({
                 hostname: `us-central1-${projectId}.cloudfunctions.net`,
-                pathname: "/" + pathname,
+                pathname: "/" + name,
                 protocol: "https",
             }),
         {
