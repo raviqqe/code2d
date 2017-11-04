@@ -11,6 +11,7 @@ import * as analytics from "../lib/analytics";
 import * as firebase from "../lib/firebase";
 import * as articles from "./articles";
 import * as books from "./books";
+import * as environment from "./environment";
 import * as message from "./message";
 import * as settings from "./settings";
 import * as tasks from "./tasks";
@@ -61,6 +62,7 @@ function* initialize(): SagaIterator {
             put(articles.actionCreators.getTrendingItems()),
             put(books.actionCreators.getItems()),
             put(books.actionCreators.getTrendingItems()),
+            put(environment.actionCreators.getCountry()),
             put(tasks.actionCreators.getItems()),
             put(tasks.actionCreators.getTags()),
             put(videos.actionCreators.getItems()),
