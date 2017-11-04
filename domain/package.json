@@ -1,6 +1,7 @@
 {
   "name": "domain-layer",
   "version": "0.1.0",
+  "private": true,
   "devDependencies": {
     "@types/jest": "^21.1.5",
     "jest": "^21.2.1",
