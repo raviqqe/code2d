@@ -4,8 +4,26 @@
   "devDependencies": {
     "@types/jest": "^21.1.5",
     "jest": "^21.2.1",
+    "ts-jest": "^21.1.4",
     "ts-loader": "^3.1.1",
     "typescript": "^2.6.1",
     "webpack": "^3.8.1"
+  },
+  "jest": {
+    "coverageDirectory": "coverage",
+    "transform": {
+      "^.+\\.ts$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testEnvironment": "node",
+    "testRegex": "/__tests__/.+\\.ts$",
+    "mapCoverage": true,
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "modulePathIgnorePatterns": [
+      "coverage",
+      "dist"
+    ]
   }
 }
