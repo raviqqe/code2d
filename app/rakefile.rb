@@ -1,4 +1,5 @@
 task :deps do
+  rm_rf 'local_modules'
   mkdir_p 'local_modules'
   cp_r '../domain', 'local_modules/domain'
   sh 'npm install'
