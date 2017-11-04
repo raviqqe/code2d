@@ -23,7 +23,7 @@ rule %r{images/screenshots/[^/]+\.png} => method(:original_png_path) do |t|
 end
 
 task :test do
-  %w[app functions].each do |dir|
+  %w[app domain functions].each do |dir|
     cd dir do
       sh 'rake test'
     end
@@ -36,7 +36,7 @@ task build: SCREENSHOTS do
         --export-png images/notification.png
         images/icon.svg].join ' '
 
-  %w[app functions chrome-extension].each do |dir|
+  %w[app domain functions chrome-extension].each do |dir|
     cd dir do
       sh 'rake build'
     end
