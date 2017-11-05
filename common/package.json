@@ -2,7 +2,7 @@
   "name": "common",
   "version": "0.1.0",
   "scripts": {
-    "postinstall": "mv dist/* ."
+    "postinstall": "cp -r dist/* ."
   },
   "private": true,
   "devDependencies": {
