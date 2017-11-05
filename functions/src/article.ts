@@ -1,4 +1,5 @@
 import axios from "axios";
+import { IArticle } from "common/domain/article";
 import { Request, Response } from "express";
 import is = require("is_js");
 import unfluff = require("unfluff");
@@ -34,7 +35,7 @@ export function extractTitle(html: string): string | null {
     return match && match[1].trim();
 }
 
-export const convertUrlIntoItem = urlToItemConverter(async (url: string) => {
+export const convertUrlIntoItem = urlToItemConverter(async (url: string): Promise<IArticle> => {
     const { data } = await axios.get(url, { headers: { Accept: "text/html" } });
 
     const error = console.error;
@@ -45,6 +46,7 @@ export const convertUrlIntoItem = urlToItemConverter(async (url: string) => {
     return {
         date,
         favicon: convertIntoUrl(favicon, url),
+        id: url,
         image: convertIntoUrl(image, url),
         name: extractTitle(data) || softTitle,
         text,

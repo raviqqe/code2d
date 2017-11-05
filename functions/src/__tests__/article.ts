@@ -1,4 +1,5 @@
 import axios from "axios";
+import { IArticle } from "common/domain/article";
 import is = require("is_js");
 
 import { convertIntoUrl, convertUrlIntoItem, extractTitle, trendingArticles } from "../article";
@@ -6,6 +7,13 @@ import { convertIntoUrl, convertUrlIntoItem, extractTitle, trendingArticles } fr
 jest.setTimeout(20000);
 
 const baseUrl = "https://foo.com";
+
+function validateArticle({ id, name, url }: IArticle): void {
+    expect(typeof id).toBe("string");
+    expect(id.length).toBeGreaterThan(0);
+    expect(typeof name).toBe("string");
+    expect(is.url(url)).toBe(true);
+}
 
 test("Convert URL-like strings into complete URLs", () => {
     expect(convertIntoUrl("/foo", baseUrl)).toBe("https://foo.com/foo");
@@ -39,32 +47,29 @@ test("Extract titles from HTML strings", async () => {
 });
 
 test("Convert a URL into an article object", async () => {
-    expect.assertions(8);
+    expect.assertions(12);
 
     for (const articleUrl of [
         "https://martinfowler.com/bliki/MonolithFirst.html",
         "https://charlieharvey.org.uk/page/javascript_the_weird_parts",
     ]) {
-        const { date, favicon, image, name, text, url }
-            = await convertUrlIntoItem(articleUrl);
+        const article = await convertUrlIntoItem(articleUrl);
 
-        expect(is.url(image)).toBe(true);
-        expect(typeof name).toBe("string");
-        expect(typeof text).toBe("string");
-        expect(is.url(url)).toBe(true);
+        validateArticle(article);
+        expect(is.url(article.image)).toBe(true);
+        expect(typeof article.text).toBe("string");
     }
 });
 
 test("Don't warn about no stopwards file for Japanese", async () => {
-    expect.assertions(3);
+    expect.assertions(5);
 
     console.error = () => { throw new Error("Don't call console.error!"); };
 
-    const { favicon, name, url } = await convertUrlIntoItem("https://note.mu/ruiu/n/n3378b4169ad8");
+    const article = await convertUrlIntoItem("https://note.mu/ruiu/n/n3378b4169ad8");
 
-    expect(is.url(favicon)).toBe(true);
-    expect(typeof name).toBe("string");
-    expect(is.url(url)).toBe(true);
+    validateArticle(article);
+    expect(is.url(article.favicon)).toBe(true);
 });
 
 test("Fetch trending articles", async () => {

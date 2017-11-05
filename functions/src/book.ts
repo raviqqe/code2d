@@ -1,3 +1,4 @@
+import { IBook } from "common/domain/book";
 import { Request, Response } from "express";
 
 import * as amazon from "./amazon";
@@ -45,15 +46,12 @@ async function convertUrlIntoIsbn(url: string): Promise<string> {
     return await convert(url);
 }
 
-export async function convertIsbnIntoBook(isbn: string, country: string): Promise<any> {
-    return {
-        ...(await (country === "JP" ? rakuten : betterWorldBooks).convertIsbnIntoBook(isbn)),
-        isbn,
-    };
+export async function convertIsbnIntoBook(isbn: string, country: string): Promise<IBook> {
+    return await (country === "JP" ? rakuten : betterWorldBooks).convertIsbnIntoBook(isbn);
 }
 
 export const convertUrlIntoItem = urlToItemConverter(
-    async (url: string, { country }: { country: string }): Promise<any> => {
+    async (url: string, { country }: { country: string }): Promise<IBook> => {
         console.log("Country:", country);
 
         const isbn = await convertUrlIntoIsbn(url);

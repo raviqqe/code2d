@@ -1,20 +1,24 @@
+import { IBook } from "common/domain/book";
 import is = require("is_js");
 
 import { convertUrlIntoItem, trendingBooks } from "../book";
+import { isIsbn } from "../utils";
 
 jest.setTimeout(20000);
 
-function validateBook({ author, image, name, publisher, title, url }): void {
+function validateBook({ author, id, image, isbn, name, publisher, url }: IBook): void {
+    expect(typeof id).toBe("string");
+    expect(id.length).toBeGreaterThan(0);
     expect(typeof name).toBe("string");
-    expect(title).toBeUndefined();
     expect(typeof author).toBe("string");
     expect(typeof publisher).toBe("string");
     expect(is.url(image)).toBe(true);
+    expect(isIsbn(isbn)).toBe(true);
     expect(is.url(url)).toBe(true);
 }
 
 test("Convert URLs of books into book objects in US", async () => {
-    expect.assertions(2 * 6);
+    expect.assertions(2 * 8);
 
     for (const bookUrl of [
         "https://www.betterworldbooks.com/it-id-1501142976.aspx",
@@ -25,7 +29,7 @@ test("Convert URLs of books into book objects in US", async () => {
 });
 
 test("Convert URLs of books into book objects in Japan", async () => {
-    expect.assertions(4 * 6);
+    expect.assertions(4 * 8);
 
     for (const bookUrl of [
         "https://books.rakuten.co.jp/rb/14920954/",

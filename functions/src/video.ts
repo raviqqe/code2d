@@ -1,3 +1,4 @@
+import { IVideo } from "common/domain/video";
 import { Request, Response } from "express";
 import * as functions from "firebase-functions";
 import { parse as parseUrl } from "url";
@@ -24,7 +25,7 @@ export function convertItemIntoId({ url }): string {
     return url;
 }
 
-export const convertUrlIntoItem = urlToItemConverter(async (url: string) => {
+export const convertUrlIntoItem = urlToItemConverter(async (url: string): Promise<IVideo> => {
     const id = parseUrl(url, true).query.v;
     const { description, publishedAt, title } = await new Promise((resolve, reject) =>
         YouTube.videos.list(
@@ -34,6 +35,7 @@ export const convertUrlIntoItem = urlToItemConverter(async (url: string) => {
     return {
         description,
         embedUrl: `https://www.youtube.com/embed/${id}`,
+        id,
         name: title,
         publishedAt,
         url,

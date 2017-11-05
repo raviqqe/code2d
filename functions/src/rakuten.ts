@@ -1,5 +1,6 @@
 import axios from "axios";
 import cheerio = require("cheerio");
+import { IBook } from "common/domain/book";
 import * as functions from "firebase-functions";
 import { ISBN } from "isbn";
 import moji = require("moji");
@@ -10,13 +11,15 @@ function normalizeString(text: string): string {
 }
 
 function convertItemIntoBook({
-    affiliateUrl, author, itemCaption, itemPrice, largeImageUrl,
+    affiliateUrl, author, isbn, itemCaption, itemPrice, itemUrl, largeImageUrl,
     publisherName, salesDate, title,
-    }) {
+    }): IBook {
     return {
         author,
         description: normalizeString(itemCaption),
+        id: itemUrl,
         image: largeImageUrl,
+        isbn,
         name: normalizeString(title),
         price: `¥${itemPrice}`,
         publisher: publisherName,
@@ -25,7 +28,7 @@ function convertItemIntoBook({
     };
 }
 
-export async function callApi(kind: "Total" | "Book", query: object): Promise<any[]> {
+export async function callApi(kind: "Total" | "Book", query: object): Promise<IBook[]> {
     const { data: { Items } } = await axios.get(
         `https://app.rakuten.co.jp/services/api/Books${kind}/Search/20170404`,
         {
@@ -45,7 +48,7 @@ export async function convertUrlIntoIsbn(url: string): Promise<string> {
         .attr("content");
 }
 
-export async function convertIsbnIntoBook(isbn: string): Promise<any> {
+export async function convertIsbnIntoBook(isbn: string): Promise<IBook> {
     return (await callApi("Total", { isbnjan: ISBN.parse(isbn).asIsbn13() }))[0];
 }
 

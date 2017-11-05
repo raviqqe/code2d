@@ -4,6 +4,7 @@ export interface IBook extends IItem {
     author?: string;
     description?: string;
     image?: string;
+    isbn: string;
     price?: string;
     publisher?: string;
     salesDate?: string;
@@ -11,9 +12,9 @@ export interface IBook extends IItem {
 }
 
 export function extractBook<A extends IBook>({
-        author, description, id, image, name, price, publisher, salesDate, url,
+        author, description, id, image, isbn, name, price, publisher, salesDate, url,
     }: A): IBook {
-    return { author, description, id, image, name, price, publisher, salesDate, url };
+    return { author, description, id, image, isbn, name, price, publisher, salesDate, url };
 }
 
 export function convertCountryIntoBookStoreUrl(country: string): string {

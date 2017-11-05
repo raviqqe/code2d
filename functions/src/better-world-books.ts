@@ -1,5 +1,6 @@
 import axios from "axios";
 import cheerio = require("cheerio");
+import { IBook } from "common/domain/book";
 import { parse as parseUrl } from "url";
 import { parseString } from "xml2js";
 
@@ -8,7 +9,7 @@ export async function parseXml(xml: string): Promise<any> {
         parseString(xml, (error, result) => error ? reject(error) : resolve(result)));
 }
 
-export async function convertIsbnIntoBook(isbn: string) {
+export async function convertIsbnIntoBook(isbn: string): Promise<IBook> {
     const { DetailURLPage: [detailUrl] } = (
         await parseXml((await axios.get(
             "http://products.betterworldbooks.com/service.aspx",
@@ -25,7 +26,9 @@ export async function convertIsbnIntoBook(isbn: string) {
     return {
         author,
         description,
+        id: url,
         image,
+        isbn,
         name,
         price: priceMatch && priceMatch[1],
         publisher,
