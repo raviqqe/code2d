@@ -28,5 +28,9 @@
       "coverage",
       "dist"
     ]
+  },
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "nanoid": "^1.0.1"
   }
 }
