@@ -27,7 +27,22 @@ export default class extends InputComponent {
         return (
             <div onClick={() => this.setState({ editing: true })}>
                 {text.trim()
-                    ? <Markdown className="TaskDescription-markdown" source={text} />
+                    ? (
+                        <Markdown
+                            className="TaskDescription-markdown"
+                            source={text}
+                            renderers={{
+                                Link: ({ href, title, children }) =>
+                                    <a
+                                        href={href}
+                                        target="_blank"
+                                        onClick={(event) => event.stopPropagation()}
+                                    >
+                                        {children}
+                                    </a>,
+                            }}
+                        />
+                    )
                     : <div className="TaskDescription-message">No description</div>}
             </div>
         );
