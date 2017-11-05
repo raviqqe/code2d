@@ -1,9 +1,9 @@
+import { equal, IItem } from "common/domain/item";
 import * as React from "react";
 import Check = require("react-icons/lib/md/check");
 import Trash = require("react-icons/lib/md/delete");
 import Repeat = require("react-icons/lib/md/replay");
 
-import { equal, IItem } from "../lib/items";
 import ItemLike from "./ItemLike";
 import ItemName from "./ItemName";
 import "./style/Item.css";

@@ -1,7 +1,7 @@
+import { extractVideo, IVideo } from "common/domain/video";
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { extractVideo, IVideo } from "../lib/videos";
 import { actionCreators } from "../redux/videos";
 import Button from "./Button";
 import ItemLike from "./ItemLike";

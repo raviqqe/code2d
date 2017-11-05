@@ -1,7 +1,7 @@
+import { extractArticle, IArticle } from "common/domain/article";
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { extractArticle, IArticle } from "../lib/articles";
 import { actionCreators } from "../redux/articles";
 import ArticleDetails from "./ArticleDetails";
 import Item from "./Item";

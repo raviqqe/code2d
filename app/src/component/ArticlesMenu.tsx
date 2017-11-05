@@ -1,7 +1,7 @@
+import { IArticle } from "common/domain/article";
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { IArticle } from "../lib/articles";
 import { actionCreators } from "../redux/articles";
 import CreateMediaItem from "./CreateMediaItem";
 import ItemsMenu from "./ItemsMenu";

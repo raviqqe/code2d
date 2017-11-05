@@ -1,9 +1,8 @@
-import { convertCountryIntoBookStoreUrl } from "common/domain/book";
+import { convertCountryIntoBookStoreUrl, IBook } from "common/domain/book";
 import * as React from "react";
 import Search = require("react-icons/lib/md/search");
 import { connect } from "react-redux";
 
-import { IBook } from "../lib/books";
 import { actionCreators } from "../redux/books";
 import CreateMediaItem from "./CreateMediaItem";
 import ItemsMenu from "./ItemsMenu";

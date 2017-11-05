@@ -1,7 +1,7 @@
+import { extractBook, IBook } from "common/domain/book";
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { extractBook, IBook } from "../lib/books";
 import { actionCreators } from "../redux/books";
 import BookDetails from "./BookDetails";
 import Item from "./Item";

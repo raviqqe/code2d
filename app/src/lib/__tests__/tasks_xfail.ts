@@ -1,4 +1,6 @@
-import { ITask, tasksRepository } from "../tasks";
+import { ITask } from "common/domain/task";
+
+import { tasksRepository } from "../tasks";
 
 jest.mock("axios", () => ({
     default: {

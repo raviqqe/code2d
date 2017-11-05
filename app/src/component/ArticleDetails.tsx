@@ -1,6 +1,6 @@
+import { IArticle } from "common/domain/article";
 import * as React from "react";
 
-import { IArticle } from "../lib/articles";
 import Image from "./Image";
 import LabeledDate from "./LabeledDate";
 import "./style/ArticleDetails.css";

@@ -1,4 +1,5 @@
-import { IItem } from "./items";
+import { IItem } from "common/domain/item";
+
 import ItemsRepository from "./items-repository";
 
 export default class StatefulItemsRepository<A extends IItem> {

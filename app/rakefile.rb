@@ -21,6 +21,10 @@ task build: :deps do
   sh 'npx workbox generate:sw'
 end
 
+task :build_only do
+  sh 'npx react-scripts-ts build'
+end
+
 task test: :deps do
   sh 'CI=true npx react-scripts-ts test --coverage --env=jsdom'
 end

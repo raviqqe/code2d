@@ -1,3 +1,4 @@
+import { IItem, include } from "common/domain/item";
 import * as React from "react";
 import Save = require("react-icons/lib/md/save");
 import { connect } from "react-redux";
@@ -5,7 +6,6 @@ import { connect } from "react-redux";
 import CircleButton from "../component/CircleButton";
 import ItemList from "../component/ItemList";
 import ItemsMenuButton from "../component/ItemsMenuButton";
-import { IItem, include } from "../lib/items";
 import "./style/Items.css";
 
 interface IProps<A extends IItem> {

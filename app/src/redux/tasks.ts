@@ -1,9 +1,10 @@
+import { include } from "common/domain/item";
+import { createTask, extractTagsFromTasks, INewTask, ITask } from "common/domain/task";
 import { findIndex } from "lodash";
 import { SagaIterator } from "redux-saga";
 import { call, put, select } from "redux-saga/effects";
 
-import { include } from "../lib/items";
-import { extractTagsFromTasks, INewTask, ITask, tasksRepository } from "../lib/tasks";
+import { tasksRepository } from "../lib/tasks";
 import createItemsDuck, { IState as IItemsState, Reducer } from "./items";
 import { takeEvery } from "./utils";
 
@@ -17,12 +18,7 @@ export interface IState extends IItemsState<ITask> {
 const duck = createItemsDuck(
     "tasks",
     tasksRepository,
-    (task: INewTask) => ({
-        ...task,
-        createdAt: Date.now(),
-        spentSeconds: 0,
-        updatedAt: Date.now(),
-    }),
+    createTask,
     {
         onToggleTaskState: (task: ITask): ITask => ({ ...task, updatedAt: Date.now() }),
         partialInitialState: {

@@ -1,8 +1,8 @@
+import { IItem } from "common/domain/item";
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import createSagaMiddleware from "redux-saga";
 import { all } from "redux-saga/effects";
 
-import { IItem } from "../../lib/items";
 import StatefulItemsRepository from "../../lib/stateful-items-repository";
 import { dispatch } from "../../lib/utils";
 import createItemsDuck, { IState } from "../items";
@@ -74,7 +74,7 @@ it("creates a new item", async () => {
 
     const { actionCreators, store } = initialize();
 
-    await dispatch(store, actionCreators.createItem({ name: "foo", data: "bar" }));
+    await dispatch(store, actionCreators.createItem({ id: "id", name: "foo", data: "bar" }));
 
     expect(getState(store).todoItems).toEqual([{ name: "foo", data: "bar", id: "dummyId" }]);
 });

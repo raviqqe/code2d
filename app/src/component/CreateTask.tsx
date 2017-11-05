@@ -1,7 +1,7 @@
+import { INewTask } from "common/domain/task";
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { INewTask } from "../lib/tasks";
 import { actionCreators } from "../redux/tasks";
 import Button from "./Button";
 import CreateItem from "./CreateItem";

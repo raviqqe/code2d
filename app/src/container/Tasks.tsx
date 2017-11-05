@@ -1,10 +1,10 @@
+import { ITask } from "common/domain/task";
 import * as _ from "lodash";
 import * as React from "react";
 import { connect } from "react-redux";
 
 import Task from "../component/Task";
 import TasksMenu from "../component/TasksMenu";
-import { ITask } from "../lib/tasks";
 import { actionCreators as settingsActionCreators } from "../redux/settings";
 import { actionCreators as tasksActionCreators } from "../redux/tasks";
 import Items from "./Items";

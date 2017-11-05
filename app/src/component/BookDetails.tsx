@@ -1,6 +1,6 @@
+import { IBook } from "common/domain/book";
 import * as React from "react";
 
-import { IBook } from "../lib/books";
 import Image from "./Image";
 import LabeledDate from "./LabeledDate";
 import SubInformation from "./SubInformation";

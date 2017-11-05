@@ -1,9 +1,9 @@
+import { IVideo } from "common/domain/video";
 import * as React from "react";
 import { connect } from "react-redux";
 
 import Video from "../component/Video";
 import VideosMenu from "../component/VideosMenu";
-import { IVideo } from "../lib/videos";
 import { actionCreators } from "../redux/videos";
 import Items from "./Items";
 

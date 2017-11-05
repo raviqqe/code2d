@@ -1,10 +1,10 @@
+import { IBook } from "common/domain/book";
 import * as React from "react";
 import { connect } from "react-redux";
 
 import Book from "../component/Book";
 import BooksMenu from "../component/BooksMenu";
 import config from "../config";
-import { IBook } from "../lib/books";
 import { actionCreators } from "../redux/books";
 import Items from "./Items";
 

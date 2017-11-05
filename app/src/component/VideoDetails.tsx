@@ -1,6 +1,6 @@
+import { IVideo } from "common/domain/video";
 import * as React from "react";
 
-import { IVideo } from "../lib/videos";
 import LabeledDate from "./LabeledDate";
 import "./style/VideoDetails.css";
 

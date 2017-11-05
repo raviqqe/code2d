@@ -1,14 +1,15 @@
+import { ITask } from "common/domain/task";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 
-import { ITask } from "../../lib/tasks";
 import createStore from "../../redux";
 import Task from "../Task";
 
 const task: ITask = {
     createdAt: 42,
     description: "bar",
+    id: "id",
     name: "foo",
     spentSeconds: 42,
     tags: [],

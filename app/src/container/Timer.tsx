@@ -1,3 +1,4 @@
+import { ITask } from "common/domain/task";
 import numeral = require("numeral");
 import * as React from "react";
 import Square = require("react-icons/lib/md/stop");
@@ -5,7 +6,6 @@ import { connect } from "react-redux";
 
 import Button from "../component/Button";
 import * as notification from "../lib/notification";
-import { ITask } from "../lib/tasks";
 import { actionCreators as tasksActionCreators } from "../redux/tasks";
 import { actionCreators as timerActionCreators } from "../redux/timer";
 import "./style/Timer.css";

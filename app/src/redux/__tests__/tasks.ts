@@ -1,14 +1,15 @@
+import { ITask } from "common/domain/task";
 import * as _ from "lodash";
 
 import createStore from "..";
-import { ITask, tasksRepository } from "../../lib/tasks";
+import { tasksRepository } from "../../lib/tasks";
 import { dispatch } from "../../lib/utils";
 import { actionCreators, IState } from "../tasks";
 
 jest.mock("axios", () => ({
     default: {
         get: (): Promise<{ data: ArrayBuffer }> => Promise.resolve({ data: new ArrayBuffer(0) }),
-    }
+    },
 }));
 
 jest.mock("../../lib/json", () => ({

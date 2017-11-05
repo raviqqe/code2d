@@ -1,8 +1,7 @@
 import axios from "axios";
+import { IItem } from "common/domain/item";
 import * as firebase from "firebase";
-import * as _ from "lodash";
 
-import { IItem } from "./items";
 import * as json from "./json";
 
 export default class ItemsRepository<A extends IItem> {

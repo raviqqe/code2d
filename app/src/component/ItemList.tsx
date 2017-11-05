@@ -1,7 +1,7 @@
+import { equal, IItem } from "common/domain/item";
 import * as React from "react";
 import sortable = require("sortablejs");
 
-import { equal, IItem } from "../lib/items";
 import ModalWindowButton from "./ModalWindowButton";
 import "./style/ItemList.css";
 

@@ -1,3 +1,4 @@
+import { IItem, include } from "common/domain/item";
 import { remove } from "lodash";
 import { SagaIterator } from "redux-saga";
 import { all, call, put, select } from "redux-saga/effects";
@@ -6,7 +7,6 @@ import Immutable = require("seamless-immutable");
 import actionCreatorFactory from "typescript-fsa";
 import { ReducerBuilder, reducerWithInitialState } from "typescript-fsa-reducers";
 
-import { createId, IItem, include } from "../lib/items";
 import ItemsRepository from "../lib/items-repository";
 import * as message from "./message";
 import { takeEvery } from "./utils";
@@ -86,8 +86,6 @@ export default function createItemsDuck<A extends IItem, B>(
             takeEvery(
                 addToTodoList,
                 function* _(item: A): SagaIterator {
-                    item = createId(item);
-
                     yield put(setItems({
                         done: false,
                         items: [item, ...(yield selectState()).todoItems],

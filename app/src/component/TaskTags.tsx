@@ -1,10 +1,10 @@
+import { ITask } from "common/domain/task";
 import * as _ from "lodash";
 import * as React from "react";
 import AutoComplete = require("react-autocomplete");
 import Plus = require("react-icons/lib/md/add");
 import { connect } from "react-redux";
 
-import { ITask } from "../lib/tasks";
 import { actionCreators } from "../redux/tasks";
 import Button from "./Button";
 import "./style/TaskTags.css";

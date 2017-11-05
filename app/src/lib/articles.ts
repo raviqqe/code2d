@@ -1,14 +1,7 @@
-import * as functions from "./functions";
-import { IItem } from "./items";
-import StatefulItemsRepository from "./stateful-items-repository";
+import { IArticle } from "common/domain/article";
 
-export interface IArticle extends IItem {
-    date?: string;
-    favicon?: string;
-    image?: string;
-    text?: string;
-    url: string;
-}
+import * as functions from "./functions";
+import StatefulItemsRepository from "./stateful-items-repository";
 
 const repository = new StatefulItemsRepository<IArticle>("articles");
 
@@ -20,8 +13,4 @@ export async function urlToArticle(url: string): Promise<IArticle> {
 
 export async function getTrendingArticles(): Promise<IArticle[]> {
     return await functions.call("trendingArticles");
-}
-
-export function extractArticle({ date, favicon, id, image, name, text, url }: IArticle): IArticle {
-    return { date, favicon, id, image, name, text, url };
 }

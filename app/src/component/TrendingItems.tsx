@@ -1,7 +1,7 @@
+import { IItem } from "common/domain/item";
 import * as React from "react";
 import Flame = require("react-icons/lib/go/flame");
 
-import { IItem } from "../lib/items";
 import ModalWindowButton from "./ModalWindowButton";
 import NoBoxButton from "./NoBoxButton";
 import "./style/TrendingItems.css";

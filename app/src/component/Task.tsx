@@ -1,9 +1,9 @@
+import { ITask } from "common/domain/task";
 import numeral = require("numeral");
 import * as React from "react";
 import Clock = require("react-icons/lib/md/access-time");
 import { connect } from "react-redux";
 
-import { ITask } from "../lib/tasks";
 import { actionCreators as tasksActionCreators } from "../redux/tasks";
 import { actionCreators as timerActionCreators } from "../redux/timer";
 import Item from "./Item";

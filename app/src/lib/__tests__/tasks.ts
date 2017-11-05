@@ -1,4 +1,5 @@
-import { extractTagsFromTasks, ITask, tasksRepository } from "../tasks";
+import { ITask } from "common/domain/task";
+import { tasksRepository } from "../tasks";
 
 jest.mock("axios", () => ({
     default: {
@@ -11,15 +12,6 @@ jest.mock("../json", () => ({
     encode: () => undefined,
 }));
 
-const dummyTask: ITask = {
-    createdAt: 42,
-    description: "bar",
-    name: "foo",
-    spentSeconds: 42,
-    tags: [],
-    updatedAt: 42,
-};
-
 it("gets todo tasks", async () => {
     expect.assertions(1);
     expect((await tasksRepository(false).get()).length).toBe(3);
@@ -31,15 +23,13 @@ it("gets done tasks", async () => {
 });
 
 it("sets tasks", async () => {
-    await tasksRepository(false).set([dummyTask]);
-});
-
-it("extracts tags from tasks", () => {
-    expect(extractTagsFromTasks([])).toEqual([]);
-    expect(extractTagsFromTasks([dummyTask])).toEqual([]);
-    expect(extractTagsFromTasks([
-        dummyTask,
-        { ...dummyTask, tags: ["foo", "bar"] },
-        { ...dummyTask, tags: ["foo"] },
-    ])).toEqual(["bar", "foo"]);
+    await tasksRepository(false).set([{
+        createdAt: 42,
+        description: "bar",
+        id: "id",
+        name: "foo",
+        spentSeconds: 42,
+        tags: [],
+        updatedAt: 42,
+    }]);
 });
