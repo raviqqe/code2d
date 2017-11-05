@@ -1,4 +1,4 @@
-import { convertCountryIntoBookStoreUrl } from "domain-layer/book";
+import { convertCountryIntoBookStoreUrl } from "common/domain/book";
 import * as React from "react";
 import Search = require("react-icons/lib/md/search");
 import { connect } from "react-redux";

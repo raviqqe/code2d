@@ -2,6 +2,7 @@
 	"compilerOptions": {
 		"declaration": true,
 		"lib": ["es5", "es6", "es7", "esnext"],
+		"rootDir": "src",
 		"outDir": "dist",
 		"target": "es5",
 		"sourceMap": true,
