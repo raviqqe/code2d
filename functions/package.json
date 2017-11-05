@@ -47,7 +47,8 @@
     ],
     "modulePathIgnorePatterns": [
       "coverage",
-      "dist"
+      "dist",
+      "local_modules"
     ]
   }
 }
