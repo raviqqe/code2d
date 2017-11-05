@@ -35,16 +35,18 @@ class BooksMenu extends React.Component<IProps> {
                 doneButtonText="read"
                 todoButtonText="to read"
             >
-                <TrendingItems itemComponent={SimpleBook} trendingItems={trendingItems} />
-                {country &&
-                    <Link href={convertCountryIntoBookStoreUrl(country)}>
-                        <NoBoxButton
-                            icon={<Search />}
-                            onClick={() => undefined}
-                        >
-                            Search
-                        </NoBoxButton>
-                    </Link>}
+                <div>
+                    <TrendingItems itemComponent={SimpleBook} trendingItems={trendingItems} />
+                    {country &&
+                        <Link href={convertCountryIntoBookStoreUrl(country)}>
+                            <NoBoxButton
+                                icon={<Search />}
+                                onClick={() => undefined}
+                            >
+                                Search
+                            </NoBoxButton>
+                        </Link>}
+                </div>
             </ItemsMenu>
         );
     }
