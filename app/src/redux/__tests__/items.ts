@@ -14,8 +14,6 @@ jest.mock("axios", () => ({
     },
 }));
 
-jest.mock("nanoid", () => (() => "dummyId"));
-
 jest.mock("../../lib/json", () => ({
     decode: () => [{ name: "foo", data: "bar", id: "dummyId" }],
     encode: () => undefined,
@@ -76,7 +74,7 @@ it("creates a new item", async () => {
 
     await dispatch(store, actionCreators.createItem({ id: "id", name: "foo", data: "bar" }));
 
-    expect(getState(store).todoItems).toEqual([{ name: "foo", data: "bar", id: "dummyId" }]);
+    expect(getState(store).todoItems).toEqual([{ id: "id", name: "foo", data: "bar" }]);
 });
 
 it("fails to create a new item", async () => {
