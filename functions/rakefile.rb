@@ -1,4 +1,7 @@
+require_relative '../local_modules'
+
 task :deps do
+  install_local_module 'common'
   sh 'npm install'
 end
 

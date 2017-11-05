@@ -1,8 +1,7 @@
+require_relative '../local_modules'
+
 task :deps do
-  rm_rf 'local_modules'
-  mkdir_p 'local_modules'
-  cp_r '../common', 'local_modules/common'
-  sh 'npm install ./local_modules/common'
+  install_local_module 'common'
   sh 'npm install'
 end
 

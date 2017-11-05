@@ -6,5 +6,6 @@
 		"sourceMap": true,
 		"downlevelIteration": true,
 		"experimentalDecorators": true
-	}
+	},
+	"exclude": ["node_modules", "local_modules"]
 }

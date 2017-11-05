@@ -6,6 +6,7 @@
   "dependencies": {
     "axios": "^0.16.2",
     "cheerio": "^1.0.0-rc.2",
+    "common": "file:local_modules/common",
     "firebase-admin": "^5.4.3",
     "firebase-functions": "^0.6.3",
     "geoip-lite": "^1.2.1",
