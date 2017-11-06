@@ -1,6 +1,7 @@
 import axios from "axios";
 import { IArticle } from "common/domain/article";
 import { Request, Response } from "express";
+import he = require("he");
 import is = require("is_js");
 import unfluff = require("unfluff");
 import * as url from "url";
@@ -48,7 +49,7 @@ export const convertUrlIntoItem = urlToItemConverter(async (url: string): Promis
         favicon: convertIntoUrl(favicon, url),
         id: url,
         image: convertIntoUrl(image, url),
-        name: extractTitle(data) || softTitle,
+        name: he.decode(extractTitle(data)) || softTitle,
         text,
         url,
     };

@@ -82,3 +82,10 @@ test("Fetch trending articles", async () => {
             set: () => undefined,
         } as any);
 });
+
+test("Unescape special characters in article titles", async () => {
+    const { name } = await convertUrlIntoItem(
+        "https://medium.com/@kswanie21/css-modules-sass-in-create-react-app-37c3152de9");
+
+    expect(name).toBe("CSS Modules & Sass in Create React App – Kirsten Swanson – Medium");
+});
