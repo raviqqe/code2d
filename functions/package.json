@@ -16,7 +16,6 @@
     "isbn": "^0.4.0",
     "lodash": "^4.17.4",
     "moji": "git+https://github.com/niwaringo/moji.git",
-    "msgpack-lite": "^0.1.26",
     "nanoid": "^0.2.2",
     "unfluff": "^1.1.0",
     "xml2js": "^0.4.19",

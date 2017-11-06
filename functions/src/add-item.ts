@@ -1,7 +1,7 @@
+import * as json from "common/infra/json";
 import { Request, Response } from "express";
 import * as admin from "firebase-admin";
 import * as geoip from "geoip-lite";
-import * as msgpack from "msgpack-lite";
 import nanoid = require("nanoid");
 
 import { IAnalyticsAttributes, logItemAddition } from "./analytics";
@@ -17,9 +17,9 @@ class File {
         this.file = admin.storage().bucket().file(path);
     }
 
-    public read = async () => await msgpack.decode((await this.file.download())[0]);
+    public read = async () => await json.decode((await this.file.download())[0]);
 
-    public write = async (content: any) => await this.file.save(msgpack.encode(content));
+    public write = async (content: any) => await this.file.save(json.encode(content));
 }
 
 // This function is used exclusively by browser extensions.

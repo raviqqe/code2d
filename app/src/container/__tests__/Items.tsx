@@ -8,7 +8,7 @@ import { dispatch } from "../../redux/utils";
 import Items from "../Items";
 
 jest.mock("axios", () => ({ default: { get: () => ({ data: new ArrayBuffer(0) }) } }));
-jest.mock("../../infra/json", () => ({ decode: () => [] }));
+jest.mock("common/infra/json", () => ({ decode: () => [] }));
 
 function getAuthenticationState(store): typeof initialState {
     return store.getState().authentication;

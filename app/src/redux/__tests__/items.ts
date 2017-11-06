@@ -4,9 +4,9 @@ import createSagaMiddleware from "redux-saga";
 import { all } from "redux-saga/effects";
 
 import StatefulItemsRepository from "../../infra/stateful-items-repository";
-import { dispatch } from "../utils";
 import createItemsDuck, { IState } from "../items";
 import * as message from "../message";
+import { dispatch } from "../utils";
 
 jest.mock("axios", () => ({
     default: {
@@ -14,7 +14,7 @@ jest.mock("axios", () => ({
     },
 }));
 
-jest.mock("../../infra/json", () => ({
+jest.mock("common/infra/json", () => ({
     decode: () => [{ name: "foo", data: "bar", id: "dummyId" }],
     encode: () => undefined,
 }));

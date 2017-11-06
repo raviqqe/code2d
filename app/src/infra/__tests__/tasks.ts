@@ -7,7 +7,7 @@ jest.mock("axios", () => ({
     },
 }));
 
-jest.mock("../json", () => ({
+jest.mock("common/infra/json", () => ({
     decode: () => Promise.resolve([{}, {}, {}]),
     encode: () => undefined,
 }));

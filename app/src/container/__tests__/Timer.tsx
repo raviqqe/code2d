@@ -8,7 +8,7 @@ import { dispatch } from "../../redux/utils";
 import Timer from "../Timer";
 
 jest.mock("axios", () => ({ default: { get: () => ({ data: new ArrayBuffer(0) }) } }));
-jest.mock("../../infra/json", () => ({ decode: () => [], encode: () => "" }));
+jest.mock("common/infra/json", () => ({ decode: () => [], encode: () => "" }));
 
 it("renders a full-screen timer", async () => {
     expect.assertions(1);

@@ -3,8 +3,8 @@ import * as _ from "lodash";
 
 import createStore from "..";
 import { tasksRepository } from "../../infra/tasks";
-import { dispatch } from "../utils";
 import { actionCreators, IState } from "../tasks";
+import { dispatch } from "../utils";
 
 jest.mock("axios", () => ({
     default: {
@@ -12,7 +12,7 @@ jest.mock("axios", () => ({
     },
 }));
 
-jest.mock("../../infra/json", () => ({
+jest.mock("common/infra/json", () => ({
     decode: () => [{
         createdAt: 42,
         description: "testDescription",
