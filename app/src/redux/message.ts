@@ -1,10 +1,10 @@
+import { sleep } from "common/utils";
 import { SagaIterator } from "redux-saga";
 import { call, put } from "redux-saga/effects";
 import Immutable = require("seamless-immutable");
 import actionCreatorFactory from "typescript-fsa";
 import { reducerWithInitialState } from "typescript-fsa-reducers";
 
-import { sleep } from "../lib/utils";
 import { takeEvery } from "./utils";
 
 const factory = actionCreatorFactory("MESSAGE");

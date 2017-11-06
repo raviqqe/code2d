@@ -1,5 +1,5 @@
 import createStore from "..";
-import { dispatch } from "../../lib/utils";
+import { dispatch } from "../utils";
 import { actionCreators, initialState, reducer } from "../message";
 
 jest.useFakeTimers();

@@ -2,9 +2,9 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 
-import { dispatch } from "../../lib/utils";
 import createStore from "../../redux";
 import { actionCreators, initialState } from "../../redux/authentication";
+import { dispatch } from "../../redux/utils";
 import Items from "../Items";
 
 jest.mock("axios", () => ({ default: { get: () => ({ data: new ArrayBuffer(0) }) } }));

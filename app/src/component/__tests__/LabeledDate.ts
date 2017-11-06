@@ -1,4 +1,4 @@
-import { formatDate } from "../utils";
+import { formatDate } from "../LabeledDate";
 
 it("checks dates", () => {
     expect(typeof formatDate("2017-11-08")).toBe("string");

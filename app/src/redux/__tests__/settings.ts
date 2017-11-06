@@ -1,6 +1,6 @@
 import createStore from "..";
 import * as notification from "../../lib/notification";
-import { dispatch } from "../../lib/utils";
+import { dispatch } from "../utils";
 import { actionCreators, initialState, reducer } from "../settings";
 
 function getState(store): typeof initialState {

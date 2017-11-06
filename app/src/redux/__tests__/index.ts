@@ -1,8 +1,8 @@
+import { sleep } from "common/utils";
 import Immutable = require("seamless-immutable");
 
 import createStore, { convertImmutableToMutable, convertMutableToImmutable } from "..";
 import * as firebase from "../../lib/firebase";
-import { sleep } from "../../lib/utils";
 import { initialState } from "../authentication";
 
 jest.mock("../../lib/firebase", () => ({

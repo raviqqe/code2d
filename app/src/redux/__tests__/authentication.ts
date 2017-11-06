@@ -3,7 +3,7 @@ import { REHYDRATE } from "redux-persist/constants";
 
 import createStore from "..";
 import * as firebase from "../../lib/firebase";
-import { dispatch } from "../../lib/utils";
+import { dispatch } from "../utils";
 import { actionCreators, initialState, reducer, signInActions } from "../authentication";
 
 jest.mock("../../lib/items-repository", () => ({

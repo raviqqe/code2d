@@ -1,6 +1,6 @@
 import createStore from "..";
 import * as audio from "../../lib/audio";
-import { dispatch } from "../../lib/utils";
+import { dispatch } from "../utils";
 import { actionCreators, initialState, reducer } from "../timer";
 
 it("toggles a timer", () => {

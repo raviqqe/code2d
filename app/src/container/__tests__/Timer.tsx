@@ -2,9 +2,9 @@ import { mount } from "enzyme";
 import * as React from "react";
 import { Provider } from "react-redux";
 
-import { dispatch } from "../../lib/utils";
 import createStore from "../../redux";
 import { actionCreators } from "../../redux/tasks";
+import { dispatch } from "../../redux/utils";
 import Timer from "../Timer";
 
 jest.mock("axios", () => ({ default: { get: () => ({ data: new ArrayBuffer(0) }) } }));

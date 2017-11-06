@@ -3,7 +3,7 @@ import * as _ from "lodash";
 
 import createStore from "..";
 import { tasksRepository } from "../../lib/tasks";
-import { dispatch } from "../../lib/utils";
+import { dispatch } from "../utils";
 import { actionCreators, IState } from "../tasks";
 
 jest.mock("axios", () => ({
