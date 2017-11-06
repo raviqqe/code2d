@@ -7,6 +7,7 @@ import { reducerWithInitialState } from "typescript-fsa-reducers";
 
 import * as functions from "../lib/functions";
 import { isSmallWindow, onTouchabilityChange, onWindowSizeChange, touchable } from "../lib/media";
+import * as message from "./message";
 import { takeEvery } from "./utils";
 
 const actionCreator = actionCreatorFactory("ENVIRONMENT");
@@ -40,10 +41,16 @@ export const sagas = [
     takeEvery(
         getCountry.started,
         function* _() {
-            yield put(getCountry.done({
-                params: null,
-                result: yield call(functions.call, "country", { cache: false }),
-            }));
+            try {
+                yield put(getCountry.done({
+                    params: null,
+                    result: yield call(functions.call, "country", { cache: false }),
+                }));
+            } catch (error) {
+                yield put(message.actionCreators.sendMessage(
+                    "Couldn't connect to the Internet.",
+                    { error: true }));
+            }
         }),
 ];
 
