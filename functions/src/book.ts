@@ -1,4 +1,5 @@
 import { IBook } from "common/domain/book";
+import { sleep } from "common/utils";
 import { Request, Response } from "express";
 
 import * as amazon from "./amazon";
@@ -67,7 +68,7 @@ export const trendingBooks = trendingItemsFunction(async ({ ip }: Request, respo
     response.send(await getTrendingItems(
         analyticsAttributes.dimension,
         async (isbn: string) => {
-            await new Promise((resolve) => setTimeout(resolve, 400)); // Supress request burst.
+            await sleep(400); // Supress request burst.
             return await convertIsbnIntoBook(isbn, convertIpIntoCountry(ip));
         },
         { sequential: true }));
