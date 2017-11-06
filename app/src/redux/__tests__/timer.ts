@@ -1,5 +1,5 @@
 import createStore from "..";
-import * as audio from "../../lib/audio";
+import * as audio from "../../infra/audio";
 import { dispatch } from "../utils";
 import { actionCreators, initialState, reducer } from "../timer";
 

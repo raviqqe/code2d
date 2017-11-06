@@ -7,7 +7,7 @@ import Immutable = require("seamless-immutable");
 import actionCreatorFactory from "typescript-fsa";
 import { ReducerBuilder, reducerWithInitialState } from "typescript-fsa-reducers";
 
-import ItemsRepository from "../lib/items-repository";
+import ItemsRepository from "../infra/items-repository";
 import * as message from "./message";
 import { takeEvery } from "./utils";
 

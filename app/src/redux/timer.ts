@@ -4,7 +4,7 @@ import Immutable = require("seamless-immutable");
 import actionCreatorFactory from "typescript-fsa";
 import { reducerWithInitialState } from "typescript-fsa-reducers";
 
-import * as audio from "../lib/audio";
+import * as audio from "../infra/audio";
 import { takeEvery } from "./utils";
 
 const actionCreator = actionCreatorFactory();

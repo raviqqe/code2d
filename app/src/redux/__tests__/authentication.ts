@@ -2,17 +2,17 @@ import * as firebaseModule from "firebase";
 import { REHYDRATE } from "redux-persist/constants";
 
 import createStore from "..";
-import * as firebase from "../../lib/firebase";
+import * as firebase from "../../infra/firebase";
 import { dispatch } from "../utils";
 import { actionCreators, initialState, reducer, signInActions } from "../authentication";
 
-jest.mock("../../lib/items-repository", () => ({
+jest.mock("../../infra/items-repository", () => ({
     default: class {
         public get = () => [];
     },
 }));
 
-jest.mock("../../lib/notification", () => ({
+jest.mock("../../infra/notification", () => ({
     permission: () => true,
     requestPermission: () => true,
 }));

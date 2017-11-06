@@ -5,8 +5,8 @@ import { ImmutableObject } from "seamless-immutable";
 import actionCreatorFactory from "typescript-fsa";
 import { reducerWithInitialState } from "typescript-fsa-reducers";
 
-import * as functions from "../lib/functions";
-import { isSmallWindow, onTouchabilityChange, onWindowSizeChange, touchable } from "../lib/media";
+import * as functions from "../infra/functions";
+import { isSmallWindow, onTouchabilityChange, onWindowSizeChange, touchable } from "../infra/media";
 import * as message from "./message";
 import { takeEvery } from "./utils";
 

@@ -1,4 +1,4 @@
-import { booksRepository, getTrendingBooks, urlToBook } from "../lib/books";
+import { booksRepository, getTrendingBooks, urlToBook } from "../infra/books";
 import createItemsDuck from "./items";
 
 const duck = createItemsDuck(

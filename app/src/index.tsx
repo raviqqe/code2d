@@ -6,8 +6,8 @@ import { Provider } from "react-redux";
 import config from "./config";
 import App from "./container/App";
 import "./index.css";
-import * as analytics from "./lib/analytics";
-import * as firebase from "./lib/firebase";
+import * as analytics from "./infra/analytics";
+import * as firebase from "./infra/firebase";
 import createStore from "./redux";
 import registerServiceWorker from "./register-service-worker";
 

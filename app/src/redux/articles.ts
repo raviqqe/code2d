@@ -1,4 +1,4 @@
-import { articlesRepository, getTrendingArticles, urlToArticle } from "../lib/articles";
+import { articlesRepository, getTrendingArticles, urlToArticle } from "../infra/articles";
 import createItemsDuck from "./items";
 
 const duck = createItemsDuck(

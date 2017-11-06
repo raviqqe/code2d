@@ -1,4 +1,4 @@
-import { getTrendingVideos, urlToVideo, videosRepository } from "../lib/videos";
+import { getTrendingVideos, urlToVideo, videosRepository } from "../infra/videos";
 import createItemsDuck from "./items";
 
 const duck = createItemsDuck(

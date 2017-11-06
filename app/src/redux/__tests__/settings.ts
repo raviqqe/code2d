@@ -1,5 +1,5 @@
 import createStore from "..";
-import * as notification from "../../lib/notification";
+import * as notification from "../../infra/notification";
 import { dispatch } from "../utils";
 import { actionCreators, initialState, reducer } from "../settings";
 
@@ -7,7 +7,7 @@ function getState(store): typeof initialState {
     return store.getState().settings;
 }
 
-jest.mock("../../lib/notification", () => ({
+jest.mock("../../infra/notification", () => ({
     permission: () => true,
     requestPermission: () => true,
 }));

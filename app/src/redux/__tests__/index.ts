@@ -2,22 +2,22 @@ import { sleep } from "common/utils";
 import Immutable = require("seamless-immutable");
 
 import createStore, { convertImmutableToMutable, convertMutableToImmutable } from "..";
-import * as firebase from "../../lib/firebase";
+import * as firebase from "../../infra/firebase";
 import { initialState } from "../authentication";
 
-jest.mock("../../lib/firebase", () => ({
+jest.mock("../../infra/firebase", () => ({
     onAuthStateChanged(callback) {
         this.callback = callback;
     },
 }));
 
-jest.mock("../../lib/items-repository", () => ({
+jest.mock("../../infra/items-repository", () => ({
     default: class {
         public get = () => [];
     },
 }));
 
-jest.mock("../../lib/notification", () => ({
+jest.mock("../../infra/notification", () => ({
     permission: () => true,
     requestPermission: () => true,
 }));

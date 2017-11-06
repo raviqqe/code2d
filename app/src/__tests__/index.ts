@@ -1,6 +1,6 @@
 document.body.innerHTML += '<div id="root"/>';
 
-jest.mock("../lib/firebase", () => ({
+jest.mock("../infra/firebase", () => ({
     initialize: () => undefined,
     onAuthStateChanged: () => undefined,
 }));

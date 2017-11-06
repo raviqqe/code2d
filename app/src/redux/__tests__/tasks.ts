@@ -2,7 +2,7 @@ import { ITask } from "common/domain/task";
 import * as _ from "lodash";
 
 import createStore from "..";
-import { tasksRepository } from "../../lib/tasks";
+import { tasksRepository } from "../../infra/tasks";
 import { dispatch } from "../utils";
 import { actionCreators, IState } from "../tasks";
 
@@ -12,7 +12,7 @@ jest.mock("axios", () => ({
     },
 }));
 
-jest.mock("../../lib/json", () => ({
+jest.mock("../../infra/json", () => ({
     decode: () => [{
         createdAt: 42,
         description: "testDescription",

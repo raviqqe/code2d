@@ -4,7 +4,7 @@ import Immutable = require("seamless-immutable");
 import actionCreatorFactory from "typescript-fsa";
 import { reducerWithInitialState } from "typescript-fsa-reducers";
 
-import { logPageView } from "../lib/analytics";
+import { logPageView } from "../infra/analytics";
 import { takeEvery } from "./utils";
 
 export type Page = "tasks" | "articles" | "videos" | "books";

@@ -3,7 +3,7 @@ import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import createSagaMiddleware from "redux-saga";
 import { all } from "redux-saga/effects";
 
-import StatefulItemsRepository from "../../lib/stateful-items-repository";
+import StatefulItemsRepository from "../../infra/stateful-items-repository";
 import { dispatch } from "../utils";
 import createItemsDuck, { IState } from "../items";
 import * as message from "../message";
@@ -14,7 +14,7 @@ jest.mock("axios", () => ({
     },
 }));
 
-jest.mock("../../lib/json", () => ({
+jest.mock("../../infra/json", () => ({
     decode: () => [{ name: "foo", data: "bar", id: "dummyId" }],
     encode: () => undefined,
 }));

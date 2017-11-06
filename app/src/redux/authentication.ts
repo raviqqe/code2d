@@ -7,8 +7,8 @@ import { ImmutableObject } from "seamless-immutable";
 import actionCreatorFactory from "typescript-fsa";
 import { reducerWithInitialState } from "typescript-fsa-reducers";
 
-import * as analytics from "../lib/analytics";
-import * as firebase from "../lib/firebase";
+import * as analytics from "../infra/analytics";
+import * as firebase from "../infra/firebase";
 import * as articles from "./articles";
 import * as books from "./books";
 import * as environment from "./environment";

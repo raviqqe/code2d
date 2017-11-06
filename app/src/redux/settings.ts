@@ -5,7 +5,7 @@ import { ImmutableObject } from "seamless-immutable";
 import actionCreatorFactory from "typescript-fsa";
 import { reducerWithInitialState } from "typescript-fsa-reducers";
 
-import * as notification from "../lib/notification";
+import * as notification from "../infra/notification";
 import { takeEvery } from "./utils";
 
 const actionCreator = actionCreatorFactory("SETTINGS");

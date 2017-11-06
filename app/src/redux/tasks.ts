@@ -4,7 +4,7 @@ import { findIndex } from "lodash";
 import { SagaIterator } from "redux-saga";
 import { call, put, select } from "redux-saga/effects";
 
-import { tasksRepository } from "../lib/tasks";
+import { tasksRepository } from "../infra/tasks";
 import createItemsDuck, { IState as IItemsState, Reducer } from "./items";
 import { takeEvery } from "./utils";
 

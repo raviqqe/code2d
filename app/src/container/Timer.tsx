@@ -5,7 +5,7 @@ import Square = require("react-icons/lib/md/stop");
 import { connect } from "react-redux";
 
 import Button from "../component/Button";
-import * as notification from "../lib/notification";
+import * as notification from "../infra/notification";
 import { actionCreators as tasksActionCreators } from "../redux/tasks";
 import { actionCreators as timerActionCreators } from "../redux/timer";
 import "./style/Timer.css";
