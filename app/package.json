@@ -8,7 +8,6 @@
     "firebase": "^4.6.0",
     "localforage": "^1.5.2",
     "lodash": "^4.17.4",
-    "nanoid": "^0.2.2",
     "node-waves": "^0.7.5",
     "normalize.css": "^7.0.0",
     "numeral": "^2.0.6",
