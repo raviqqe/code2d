@@ -1,5 +1,4 @@
-import { IItem, include } from "common/domain/item";
-import { remove } from "lodash";
+import { addItemToItems, IItem, include, removeItemFromItems } from "common/domain/item";
 import { SagaIterator } from "redux-saga";
 import { all, call, put, select } from "redux-saga/effects";
 import { ImmutableObject } from "seamless-immutable";
@@ -88,7 +87,7 @@ export default function createItemsDuck<A extends IItem, B>(
                 function* _(item: A): SagaIterator {
                     yield put(setItems({
                         done: false,
-                        items: [item, ...(yield selectState()).todoItems],
+                        items: addItemToItems((yield selectState()).todoItems, item),
                     }));
                     yield put(setCurrentItem(item));
                 }),
@@ -157,10 +156,9 @@ export default function createItemsDuck<A extends IItem, B>(
 
                     yield put(setItems({
                         done,
-                        items: [
-                            options.onToggleTaskState(item),
-                            ...(done ? doneItems : todoItems),
-                        ],
+                        items: addItemToItems(
+                            done ? doneItems : todoItems,
+                            options.onToggleTaskState(item)),
                     }));
                 }),
             takeEvery(
@@ -168,11 +166,11 @@ export default function createItemsDuck<A extends IItem, B>(
                 function* _(item): SagaIterator {
                     const { doneItems, todoItems } = yield selectState();
                     const done = include(doneItems, item);
-                    const items = [...(done ? doneItems : todoItems)];
 
-                    remove(items, { id: item.id });
-
-                    yield put(setItems({ done, items }));
+                    yield put(setItems({
+                        done,
+                        items: removeItemFromItems(done ? doneItems : todoItems, item.id),
+                    }));
                 }),
             takeEvery(
                 setItems,

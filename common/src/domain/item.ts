@@ -12,3 +12,13 @@ export function equal<A extends IItem>(x: A, y: A): boolean {
 export function include<A extends IItem>(items: A[], { id }: A): boolean {
     return !!_.find(items, { id });
 }
+
+export function addItemToItems<A extends IItem>(items: A[], item: A): A[] {
+    return [item, ...(removeItemFromItems(items, item.id))];
+}
+
+export function removeItemFromItems<A extends IItem>(items: A[], id: string): A[] {
+    items = [...items];
+    _.remove(items, { id });
+    return items;
+}

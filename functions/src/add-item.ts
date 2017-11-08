@@ -1,9 +1,9 @@
+import { addItemToItems } from "common/domain/item";
 import * as json from "common/infra/json";
 import * as storage from "common/infra/storage";
 import { Request, Response } from "express";
 import * as admin from "firebase-admin";
 import * as geoip from "geoip-lite";
-import nanoid = require("nanoid");
 
 import { IAnalyticsAttributes, logItemAddition } from "./analytics";
 import * as article from "./article";
@@ -62,7 +62,7 @@ export default httpsFunction(
             }
         }
 
-        await file.write([{ id: nanoid(), ...item }, ...items]);
+        await file.write(addItemToItems(items, item));
 
         await logItemAddition(itemModule.convertItemIntoId(item), itemModule.analyticsAttributes);
 
