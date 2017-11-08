@@ -28,7 +28,8 @@ interface ITestItem extends IItem {
 }
 
 function createTestItemsDuck() {
-    const repository = new StatefulItemsRepository<ITestItem>("items");
+    const repository = new StatefulItemsRepository<ITestItem>("tasks");
+
     return createItemsDuck("items", repository.state, (item: ITestItem) => {
         if (typeof item !== "object") {
             throw new Error("Failed to create an item.");

@@ -15,7 +15,7 @@ export const analyticsAttributes: IAnalyticsAttributes = {
     dimension: 1,
 };
 
-export const storageDirectory = "articles";
+export const itemsName = "articles";
 
 export function convertIntoUrl(urlOrPath: string, baseUrl: string): string {
     if (!urlOrPath || is.url(urlOrPath)) {

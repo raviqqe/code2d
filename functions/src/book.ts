@@ -14,7 +14,7 @@ export const analyticsAttributes: IAnalyticsAttributes = {
     dimension: 3,
 };
 
-export const storageDirectory = "books";
+export const itemsName = "books";
 
 export function isValidUrl(url: string): boolean {
     for (const provider of [amazon, betterWorldBooks, rakuten]) {

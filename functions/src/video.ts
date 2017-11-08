@@ -15,7 +15,7 @@ export const analyticsAttributes: IAnalyticsAttributes = {
     dimension: 2,
 };
 
-export const storageDirectory = "videos";
+export const itemsName = "videos";
 
 export function isValidUrl(url: string): boolean {
     return parseUrl(url).hostname === "www.youtube.com";

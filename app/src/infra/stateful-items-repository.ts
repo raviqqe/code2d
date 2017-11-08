@@ -1,4 +1,5 @@
 import { IItem } from "common/domain/item";
+import { ItemsName } from "common/infra/storage";
 
 import ItemsRepository from "./items-repository";
 
@@ -6,7 +7,7 @@ export default class StatefulItemsRepository<A extends IItem> {
     private todoItems: ItemsRepository<A>;
     private doneItems: ItemsRepository<A>;
 
-    constructor(name: string) {
+    constructor(name: ItemsName) {
         this.todoItems = new ItemsRepository(name, false);
         this.doneItems = new ItemsRepository(name, true);
     }

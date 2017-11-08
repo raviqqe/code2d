@@ -1,10 +1,11 @@
 import axios from "axios";
 import { IItem } from "common/domain/item";
 import * as json from "common/infra/json";
+import * as storage from "common/infra/storage";
 import * as firebase from "firebase";
 
 export default class ItemsRepository<A extends IItem> {
-    constructor(private name: string, private done: boolean) { }
+    constructor(private name: storage.ItemsName, private done: boolean) { }
 
     public get = async (): Promise<A[]> => {
         try {
@@ -29,6 +30,6 @@ export default class ItemsRepository<A extends IItem> {
     }
 
     private get path(): string {
-        return `users/${firebase.auth().currentUser.uid}/${this.name}/${this.done ? "done" : "todo"}`;
+        return storage.itemsPath(this.name, this.done, firebase.auth().currentUser.uid);
     }
 }

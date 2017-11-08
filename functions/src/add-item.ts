@@ -1,4 +1,5 @@
 import * as json from "common/infra/json";
+import * as storage from "common/infra/storage";
 import { Request, Response } from "express";
 import * as admin from "firebase-admin";
 import * as geoip from "geoip-lite";
@@ -29,7 +30,7 @@ export default httpsFunction(
             analyticsAttributes: IAnalyticsAttributes,
             convertUrlIntoItem: (url: string, options?: object) => Promise<any>,
             convertItemIntoId: (item: object) => string,
-            storageDirectory: string,
+            itemsName: storage.ItemsName,
         } = article;
 
         if (video.isValidUrl(url)) {
@@ -48,7 +49,7 @@ export default httpsFunction(
 
         console.log("Item:", item);
 
-        const file = new File(`/users/${userId}/${itemModule.storageDirectory}/todo`);
+        const file = new File(storage.itemsPath(itemModule.itemsName, false, userId));
         let items = [];
 
         try {
