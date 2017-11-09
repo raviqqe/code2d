@@ -14,16 +14,16 @@ jest.mock("common/infra/json", () => ({
 
 it("gets todo tasks", async () => {
     expect.assertions(1);
-    expect((await tasksRepository(false).get()).length).toBe(3);
+    expect((await tasksRepository.state(false).get()).length).toBe(3);
 });
 
 it("gets done tasks", async () => {
     expect.assertions(1);
-    expect((await tasksRepository(true).get()).length).toBe(3);
+    expect((await tasksRepository.state(true).get()).length).toBe(3);
 });
 
 it("sets tasks", async () => {
-    await tasksRepository(false).set([{
+    await tasksRepository.state(false).set([{
         createdAt: 42,
         description: "bar",
         id: "id",

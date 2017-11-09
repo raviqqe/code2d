@@ -1,4 +1,5 @@
 import { addItemToItems, IItem, include, removeItemFromItems } from "common/domain/item";
+import { Store } from "redux";
 import { SagaIterator } from "redux-saga";
 import { all, call, put, select } from "redux-saga/effects";
 import { ImmutableObject } from "seamless-immutable";
@@ -6,7 +7,7 @@ import Immutable = require("seamless-immutable");
 import actionCreatorFactory from "typescript-fsa";
 import { ReducerBuilder, reducerWithInitialState } from "typescript-fsa-reducers";
 
-import ItemsRepository from "../infra/items-repository";
+import StatefulItemsRepository from "../infra/stateful-items-repository";
 import * as message from "./message";
 import { takeEvery } from "./utils";
 
@@ -28,7 +29,7 @@ interface IOptions<A> {
 
 export default function createItemsDuck<A extends IItem, B>(
     reducerName: string,
-    repository: (done: boolean) => ItemsRepository<A>,
+    repository: StatefulItemsRepository<A>,
     initialize: (itemSource: B) => A | Promise<A>,
     options: IOptions<A> = {}) {
     options = Object.assign(
@@ -121,8 +122,8 @@ export default function createItemsDuck<A extends IItem, B>(
                         yield put(getItems.done({
                             params: null,
                             result: yield all({
-                                doneItems: call(repository(true).get),
-                                todoItems: call(repository(false).get),
+                                doneItems: call(repository.state(true).get),
+                                todoItems: call(repository.state(false).get),
                             }),
                         }));
                     } catch (error) {
@@ -175,9 +176,12 @@ export default function createItemsDuck<A extends IItem, B>(
             takeEvery(
                 setItems,
                 function* _({ done, items }): SagaIterator {
-                    yield call(repository(done).set, items);
+                    yield call(repository.state(done).set, items);
                 }),
         ],
         selectState,
+        storeInitializer: <A>(store: Store<A>): void => {
+            repository.onUpdate(() => store.dispatch(getItems.started(null)));
+        },
     };
 }

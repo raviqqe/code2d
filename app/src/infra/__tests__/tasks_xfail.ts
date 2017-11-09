@@ -10,5 +10,5 @@ jest.mock("axios", () => ({
 
 it("gets no task on error", async () => {
     expect.assertions(1);
-    expect((await tasksRepository(false).get()).length).toBe(0);
+    expect((await tasksRepository.state(false).get()).length).toBe(0);
 });

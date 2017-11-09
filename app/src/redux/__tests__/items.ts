@@ -3,7 +3,7 @@ import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import createSagaMiddleware from "redux-saga";
 import { all } from "redux-saga/effects";
 
-import StatefulItemsRepository from "../../infra/stateful-items-repository";
+import storage from "../../infra/storage";
 import createItemsDuck, { IState } from "../items";
 import * as message from "../message";
 import { dispatch } from "../utils";
@@ -28,9 +28,9 @@ interface ITestItem extends IItem {
 }
 
 function createTestItemsDuck() {
-    const repository = new StatefulItemsRepository<ITestItem>("tasks");
+    const repository = storage.statefulItemsRepository<ITestItem>("tasks");
 
-    return createItemsDuck("items", repository.state, (item: ITestItem) => {
+    return createItemsDuck("items", repository, (item: ITestItem) => {
         if (typeof item !== "object") {
             throw new Error("Failed to create an item.");
         }

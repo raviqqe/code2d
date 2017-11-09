@@ -16,3 +16,5 @@ export const reducer = duck.reducer;
 export const sagas = duck.sagas;
 
 export const persistent = true;
+
+export const storeInitializer = duck.storeInitializer;

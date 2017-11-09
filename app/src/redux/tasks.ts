@@ -88,3 +88,5 @@ export const sagas = [
 ];
 
 export const persistent = true;
+
+export const storeInitializer = duck.storeInitializer;

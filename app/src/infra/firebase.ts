@@ -1,6 +1,7 @@
 import * as firebase from "firebase";
 
 import config from "../config";
+import storage from "./storage";
 
 const { apiKey, projectId } = config.firebase;
 
@@ -11,6 +12,8 @@ export function initialize(): void {
         databaseURL: `https://${projectId}.firebaseio.com`,
         storageBucket: `${projectId}.appspot.com`,
     });
+
+    storage.initialize();
 }
 
 export async function signIn(): Promise<void> {

@@ -1,8 +1,6 @@
 import { ITask } from "common/domain/task";
 import * as _ from "lodash";
 
-import StatefulItemsRepository from "./stateful-items-repository";
+import storage from "./storage";
 
-const repository = new StatefulItemsRepository<ITask>("tasks");
-
-export const tasksRepository = repository.state;
+export const tasksRepository = storage.statefulItemsRepository<ITask>("tasks");

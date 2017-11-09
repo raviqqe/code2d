@@ -1,11 +1,9 @@
 import { IVideo } from "common/domain/video";
 
 import * as functions from "./functions";
-import StatefulItemsRepository from "./stateful-items-repository";
+import storage from "./storage";
 
-const repository = new StatefulItemsRepository<IVideo>("videos");
-
-export const videosRepository = repository.state;
+export const videosRepository = storage.statefulItemsRepository<IVideo>("videos");
 
 export async function urlToVideo(url: string): Promise<IVideo> {
     return await functions.call("video", { params: { url } });

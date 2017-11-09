@@ -1,11 +1,9 @@
 import { IArticle } from "common/domain/article";
 
 import * as functions from "./functions";
-import StatefulItemsRepository from "./stateful-items-repository";
+import storage from "./storage";
 
-const repository = new StatefulItemsRepository<IArticle>("articles");
-
-export const articlesRepository = repository.state;
+export const articlesRepository = storage.statefulItemsRepository<IArticle>("articles");
 
 export async function urlToArticle(url: string): Promise<IArticle> {
     return await functions.call("article", { params: { url } });

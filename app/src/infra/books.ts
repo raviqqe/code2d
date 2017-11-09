@@ -1,11 +1,9 @@
 import { IBook } from "common/domain/book";
 
 import * as functions from "./functions";
-import StatefulItemsRepository from "./stateful-items-repository";
+import storage from "./storage";
 
-const repository = new StatefulItemsRepository<IBook>("books");
-
-export const booksRepository = repository.state;
+export const booksRepository = storage.statefulItemsRepository<IBook>("books");
 
 export async function urlToBook(url: string): Promise<IBook> {
     return await functions.call("book", { params: { url } });
