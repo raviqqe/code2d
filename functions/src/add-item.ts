@@ -1,4 +1,5 @@
 import { addItemToItems } from "common/domain/item";
+import * as database from "common/infra/database";
 import * as json from "common/infra/json";
 import * as storage from "common/infra/storage";
 import { Request, Response } from "express";
@@ -63,6 +64,8 @@ export default httpsFunction(
         }
 
         await file.write(addItemToItems(items, item));
+        await admin.database().ref(database.storagePath(userId)).set(
+            { updatedItems: itemModule.itemsName, timestamp: Date.now() });
 
         await logItemAddition(itemModule.convertItemIntoId(item), itemModule.analyticsAttributes);
 

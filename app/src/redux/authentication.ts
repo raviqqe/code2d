@@ -1,3 +1,4 @@
+import { ItemsName } from "common/infra/storage";
 import { Store } from "redux";
 import { REHYDRATE } from "redux-persist/constants";
 import { SagaIterator } from "redux-saga";
@@ -9,6 +10,7 @@ import { reducerWithInitialState } from "typescript-fsa-reducers";
 
 import * as analytics from "../infra/analytics";
 import * as firebase from "../infra/firebase";
+import * as itemsUpdate from "../infra/items-update";
 import * as articles from "./articles";
 import * as books from "./books";
 import * as environment from "./environment";
@@ -111,9 +113,14 @@ export function storeInitializer<A>(store: Store<A>): void {
     firebase.onAuthStateChanged(async (user) => {
         if (user === null) {
             store.dispatch(setSignInState(false));
+
+            itemsUpdate.removeCallback();
         } else {
             analytics.setUserId(user.uid);
             store.dispatch(setSignInState(true));
+
+            itemsUpdate.onItemsUpdate((itemsName: ItemsName) => store.dispatch(
+                { articles, books, videos }[itemsName].actionCreators.getItems()));
         }
     });
 }

@@ -1,5 +1,25 @@
 {
 	"rules": {
+		"users": {
+			"$uid": {
+				".read": "$uid == auth.uid",
+				".write": "$uid == auth.uid",
+				"storage": {
+					"timestamp": {
+						".validate": "newData.isNumber()"
+					},
+					"updatedItems": {
+						".validate": "newData.isString() && newData.val().length < 256"
+					},
+					"$other": {
+						".validate": false
+					}
+				},
+				"$other": {
+					".validate": false
+				}
+			}
+		},
 		"$other": {
 			".validate": false
 		}

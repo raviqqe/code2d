@@ -14,3 +14,11 @@ export function storage() {
         }),
     };
 }
+
+export function database() {
+    return {
+        ref: () => ({
+            set: () => undefined,
+        }),
+    };
+}
