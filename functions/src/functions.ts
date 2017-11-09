@@ -35,6 +35,7 @@ export function httpsFunction(
                 ? options.cacheSeconds
                 : defaultCacheSeconds;
             response.set("Cache-Control", `private, max-age=${age}, s-maxage=${age}`);
+            response.set("Vary", "Origin");
 
             try {
                 await handler(request, response, uid);
