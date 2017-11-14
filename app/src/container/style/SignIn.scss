@@ -123,7 +123,8 @@
 	flex-wrap: wrap;
 
 	> * {
-		width: 22%;
+		// Must be 25 ~ 33.3%.
+		width: 28%;
 		min-width: 15em;
 		margin: 5vh 2vh;
 	}
