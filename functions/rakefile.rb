@@ -15,5 +15,5 @@ task test: :deps do
 end
 
 task :clean do
-  sh 'git clean -dfx'
+  sh 'git clean -dfx --exclude .runtimeconfig.json'
 end
