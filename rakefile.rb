@@ -70,11 +70,11 @@ task :withdraw do
 end
 
 task :clean do
-  cd 'app' do
-    sh 'rake clean'
+  %w[app common functions].each do |dir|
+    cd dir do
+      sh 'rake clean'
+    end
   end
 
-  cd 'functions' do
-    sh 'rake clean'
-  end
+  sh 'git clean -dfx --exclude .terraform --exclude terraform.tfstate'
 end
