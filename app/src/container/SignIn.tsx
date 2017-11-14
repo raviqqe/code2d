@@ -56,12 +56,12 @@ class SignIn extends React.Component<IProps> {
                         </Feature>
                         <Feature
                             title={
-                                <Link href={config.chrome.extensionUrl}>
+                                <Link colored={true} href={config.chrome.extensionUrl}>
                                     Chrome browser support
                                 </Link>}
                             image={require("../images/chrome.svg")}
                         >
-                            Install <Link href={config.chrome.extensionUrl}>the Chrome extension</Link>.
+                            Install <Link colored={true} href={config.chrome.extensionUrl}>the Chrome extension</Link>.
                             It allows you to add artciles, videos, and books
                             shown in current tabs to todo lists by one click.
                         </Feature>
