@@ -36,7 +36,7 @@ class SignIn extends React.Component<IProps> {
                 <div className="SignIn-description">
                     <div className="SignIn-overview">
                         <div className="SignIn-overview-title">
-                            Code Harder and Better
+                            Make your todos done
                         </div>
                         <div className="SignIn-overview-text">
                             code2d is a set of productivity tools which keep
