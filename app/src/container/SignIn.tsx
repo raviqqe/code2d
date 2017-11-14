@@ -39,8 +39,8 @@ class SignIn extends React.Component<IProps> {
                             Make your todos done
                         </div>
                         <div className="SignIn-overview-text">
-                            code2d is a set of productivity tools which keep
-                            you productive and learning new things everyday.
+                            code2d is a set of todo management tools.
+                            Keep you productive and learning new things everyday!
                         </div>
                     </div>
                     <div className="SignIn-features">
@@ -55,11 +55,29 @@ class SignIn extends React.Component<IProps> {
                             in one place.
                         </Feature>
                         <Feature
+                            title={
+                                <Link href={config.chrome.extensionUrl}>
+                                    Chrome browser support
+                                </Link>}
+                            image={require("../images/chrome.svg")}
+                        >
+                            Install <Link href={config.chrome.extensionUrl}>the Chrome extension</Link>.
+                            It allows you to add artciles, videos, and books
+                            shown in current tabs to todo lists by one click.
+                        </Feature>
+                        <Feature
                             title="Built-in pomodoro timer"
                             image={require("../images/timer.svg")}
                         >
                             Use pomodoro technique to be productive
                             and make your work done faster.
+                        </Feature>
+                        <Feature
+                            title="Pursue trends"
+                            image={require("../images/flame.svg")}
+                        >
+                            Don't miss any trending article, video, or book.
+                            Update yourself with the latest information.
                         </Feature>
                         <Feature
                             title="Focus on engineering"

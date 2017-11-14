@@ -2,6 +2,9 @@
 	"aws": {
 		"region": "us-east-1"
 	},
+	"chrome": {
+		"extensionUrl": "https://chrome.google.com/webstore/detail/code2d/fmbpjfldodgfbmhnbpahimhabjmipojd?hl=en"
+	},
 	"commissionJunction": {
 		"scriptSrc": "//www.anrdoezrs.net/am/8455674/include/allCj/am.js"
 	},

@@ -4,7 +4,7 @@ import "./style/Feature.css";
 
 interface IProps {
     image: string;
-    title: string;
+    title: string | JSX.Element;
 }
 
 export default class extends React.Component<IProps> {
