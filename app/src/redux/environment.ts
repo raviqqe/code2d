@@ -6,13 +6,16 @@ import actionCreatorFactory from "typescript-fsa";
 import { reducerWithInitialState } from "typescript-fsa-reducers";
 
 import * as functions from "../infra/functions";
-import { isSmallWindow, onTouchabilityChange, onWindowSizeChange, touchable } from "../infra/media";
+import {
+    isSmallWindow, onPointerChange, onTouchabilityChange, onWindowSizeChange, pointerAvailable, touchable,
+} from "../infra/media";
 import * as message from "./message";
 import { takeEvery } from "./utils";
 
 const actionCreator = actionCreatorFactory("ENVIRONMENT");
 
 const setIsSmallWindow = actionCreator<boolean>("SET_IS_SMALL_WINDOW");
+const setPointerAvailable = actionCreator<boolean>("SET_POINTER_AVAILABLE");
 const setTouchable = actionCreator<boolean>("SET_TOUCHABLE");
 const getCountry = actionCreator.async<void, string>("GET_COUNTRY");
 
@@ -23,18 +26,21 @@ export const actionCreators = {
 export interface IState {
     country: string | null;
     isSmallWindow: boolean;
+    pointerAvailable: boolean;
     touchable: boolean;
 }
 
 export const initialState: ImmutableObject<IState> = Immutable({
     country: null,
     isSmallWindow,
+    pointerAvailable,
     touchable,
 });
 
 export const reducer = reducerWithInitialState(initialState)
     .case(getCountry.done, (state, { result }) => state.merge({ country: result }))
     .case(setIsSmallWindow, (state, isSmallWindow) => state.merge({ isSmallWindow }))
+    .case(setPointerAvailable, (state, pointerAvailable) => state.merge({ pointerAvailable }))
     .case(setTouchable, (state, touchable) => state.merge({ touchable }));
 
 export const sagas = [
@@ -57,4 +63,6 @@ export const sagas = [
 export function storeInitializer<A>(store: Store<A>): void {
     onWindowSizeChange((isSmallWindow) => store.dispatch(setIsSmallWindow(isSmallWindow)));
     onTouchabilityChange((touchable: boolean) => store.dispatch(setTouchable(touchable)));
+    onPointerChange((pointerAvailable: boolean) =>
+        store.dispatch(setPointerAvailable(pointerAvailable)));
 }
