@@ -9,6 +9,7 @@ const images: string[] = [
     require("../images/screenshots/tasks.png"),
     require("../images/screenshots/articles.png"),
     require("../images/screenshots/videos.png"),
+    require("../images/screenshots/books.png"),
 ];
 
 export default class extends React.Component {
