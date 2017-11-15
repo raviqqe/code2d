@@ -56,9 +56,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.24748737"
-     inkscape:cx="335.56701"
-     inkscape:cy="481.82455"
+     inkscape:zoom="0.49497474"
+     inkscape:cx="406.88457"
+     inkscape:cy="307.8593"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -76,8 +76,8 @@
     <inkscape:grid
        type="xygrid"
        id="grid815"
-       originx="405.2228"
-       originy="-76.729151" />
+       originx="405.22277"
+       originy="-76.729145" />
   </sodipodi:namedview>
   <metadata
      id="metadata5">
@@ -87,7 +87,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -97,7 +97,8 @@
      id="layer1"
      transform="translate(405.22284,44.3125)">
     <g
-       id="g1544">
+       id="g1544"
+       transform="translate(0,-1.5875)">
       <g
          transform="translate(-328.08333,-21.166666)"
          id="g4740">
@@ -148,19 +149,19 @@
       </g>
     </g>
     <g
-       id="g1590"
-       transform="translate(13.229169)">
+       id="g1365"
+       transform="translate(5.2916712,-1.8521193)">
       <path
          sodipodi:nodetypes="cc"
          inkscape:connector-curvature="0"
          id="path885"
-         d="m -328.22671,16.541658 c 26.45834,-37.041663 74.08333,-37.041663 100.54166,-5.291663"
+         d="m -314.99754,-1.9791799 c 26.45834,-37.0416701 74.08333,-37.0416701 100.54166,-5.29166"
          style="fill:none;stroke:#b56a55;stroke-width:20;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#TriangleOutS)" />
       <path
          sodipodi:nodetypes="cc"
          inkscape:connector-curvature="0"
          id="path885-8"
-         d="m -217.63563,164.70833 c -26.45834,37.04166 -74.08334,37.04166 -100.54167,5.29166"
+         d="m -204.40647,181.64177 c -26.45834,37.04166 -74.08334,37.04166 -100.54167,5.29166"
          style="fill:none;stroke:#b56a55;stroke-width:20;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#TriangleOutS-3)" />
     </g>
     <rect
