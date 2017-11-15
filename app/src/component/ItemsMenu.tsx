@@ -14,7 +14,7 @@ export interface IProps {
     createItem: JSX.Element;
     done: boolean;
     doneButtonText?: string;
-    touchable: boolean;
+    pointerAvailable: boolean;
     makeItemListSortable: () => void;
     todoButtonText?: string;
     onItemsStateChange: (done: boolean) => void;
@@ -23,7 +23,7 @@ export interface IProps {
 class ItemsMenu extends React.Component<IProps> {
     public render() {
         const {
-             createItem, children, done, doneButtonText, touchable,
+             createItem, children, done, doneButtonText, pointerAvailable,
             makeItemListSortable, todoButtonText, onItemsStateChange,
         } = this.props;
 
@@ -56,7 +56,7 @@ class ItemsMenu extends React.Component<IProps> {
                                 </NoBoxButton>
                             </div>
                             {!done && createItem}
-                            {touchable &&
+                            {!pointerAvailable &&
                                 <IconedButton
                                     className="ItemsMenu-sort-button"
                                     icon={<Sort />}
