@@ -57,7 +57,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.24748737"
-     inkscape:cx="1040.6535"
+     inkscape:cx="335.56701"
      inkscape:cy="481.82455"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -87,7 +87,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -97,10 +97,9 @@
      id="layer1"
      transform="translate(405.22284,44.3125)">
     <g
-       id="g6504"
-       transform="translate(-364.59586,-27.516671)">
+       id="g1544">
       <g
-         transform="translate(36.51253,6.3500052)"
+         transform="translate(-328.08333,-21.166666)"
          id="g4740">
         <rect
            style="fill:#7f969c;fill-opacity:1;stroke:#7f969c;stroke-width:10;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -123,7 +122,7 @@
            inkscape:connector-curvature="0" />
       </g>
       <g
-         transform="translate(-30.162497,8.4666459)"
+         transform="translate(-394.75836,-19.050025)"
          id="g4745">
         <rect
            style="fill:#7f969c;fill-opacity:1;stroke:#7f969c;stroke-width:10;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -147,21 +146,22 @@
            rx="5.3345718"
            ry="5.334579" />
       </g>
-      <g
-         id="g6491">
-        <path
-           style="fill:none;stroke:#b56a55;stroke-width:20;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#TriangleOutS)"
-           d="M 52.916673,95.916663 C 79.375006,58.875 127,58.875 153.45833,90.625"
-           id="path885"
-           inkscape:connector-curvature="0"
-           sodipodi:nodetypes="cc" />
-        <path
-           style="fill:none;stroke:#b56a55;stroke-width:20;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#TriangleOutS-3)"
-           d="M 164.04167,132.95834 C 137.58333,170 89.95833,170 63.5,138.25"
-           id="path885-8"
-           inkscape:connector-curvature="0"
-           sodipodi:nodetypes="cc" />
-      </g>
+    </g>
+    <g
+       id="g1590"
+       transform="translate(13.229169)">
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path885"
+         d="m -328.22671,16.541658 c 26.45834,-37.041663 74.08333,-37.041663 100.54166,-5.291663"
+         style="fill:none;stroke:#b56a55;stroke-width:20;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#TriangleOutS)" />
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path885-8"
+         d="m -217.63563,164.70833 c -26.45834,37.04166 -74.08334,37.04166 -100.54167,5.29166"
+         style="fill:none;stroke:#b56a55;stroke-width:20;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#TriangleOutS-3)" />
     </g>
     <rect
        style="fill:#ffffff;fill-opacity:0;stroke:none;stroke-width:18.51851845;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
