@@ -12,6 +12,13 @@
 			"**/.*",
 			"**/node_modules/**"
 		],
+		"headers": [{
+			"source": "**/*.@(css|eot|html|js|json|pdf|png|svg|ttf|woff)",
+			"headers": [{
+				"key": "Cache-Control",
+				"value": "max-age=86400"
+			}]
+		}],
 		"rewrites": [{
 			"source": "/functions/article",
 			"function": "article"
