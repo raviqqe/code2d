@@ -80,6 +80,13 @@ class SignIn extends React.Component<IProps> {
                             Update yourself with the latest information.
                         </Feature>
                         <Feature
+                            title="Sync data over devices"
+                            image={require("../images/sync.svg")}
+                        >
+                            Sync your tasks and stocked articles, videos, and
+                            books over your desktops, laptops and smartphones.
+                        </Feature>
+                        <Feature
                             title="Focus on engineering"
                             image={require("../images/focus.svg")}
                         >
