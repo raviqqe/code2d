@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name": "code2d",
 	"description": "The extension helps users to stock articles, YouTube videos, and books sold in Rakuten Books or Better World Books to code2d easily.",
-	"version": "0.3.6",
+	"version": "1.0.0",
 
 	"browser_action": {
 		"default_icon": "images/icon_19.png",
