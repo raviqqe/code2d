@@ -1,4 +1,5 @@
 import * as React from "react";
+import { connect } from "react-redux";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
@@ -12,13 +13,26 @@ const images: string[] = [
     require("../images/screenshots/books.png"),
 ];
 
-export default class extends React.Component {
+const mobileImages: string[] = [
+    require("../images/screenshots/mobile_tasks.png"),
+    require("../images/screenshots/mobile_menu.png"),
+    require("../images/screenshots/mobile_articles.png"),
+    require("../images/screenshots/mobile_trending.png"),
+];
+
+interface IProps {
+    isSmallWindow: boolean;
+}
+
+class Screenshots extends React.Component<IProps> {
     public render() {
+        const { isSmallWindow } = this.props;
+
         return (
             <div className="Screenshots-container">
                 <div className="Screenshots-title">Screenshots</div>
                 <Slider dots={true} adaptiveHeight={true} arrows={false} autoplay={true}>
-                    {images.map((path) =>
+                    {(isSmallWindow ? mobileImages : images).map((path) =>
                         // Image component is not available here somehow.
                         <a key={path} href={path} target="_blank">
                             <img className="Screenshots-image" src={path} />
@@ -28,3 +42,5 @@ export default class extends React.Component {
         );
     }
 }
+
+export default connect(({ environment }) => environment)(Screenshots);
