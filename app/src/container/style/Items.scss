@@ -15,9 +15,8 @@
 }
 
 .Items-main {
-	width: 70em;
-	max-width: 100%;
 	display: flex;
+	flex: 1;
 
 	> * {
 		flex: 1;
