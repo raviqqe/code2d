@@ -1,4 +1,5 @@
 @import "../../style/colors.scss";
+@import "../../style/media.scss";
 
 .Screenshots-container {
 	background: white;
@@ -23,6 +24,10 @@
 			};
 			width: 70em;
 			max-width: 85%;
+
+			@include small-window {
+				width: 375px;
+			}
 		}
 	}
 }
