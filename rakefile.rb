@@ -10,8 +10,8 @@ TERRAFORM_VARS = %W[
   -var addresses='#{HOSTING['addresses']}'
 ].join ' '
 
-SCREENSHOTS = %w[tasks articles videos].map do |name|
-  "images/screenshots/#{name}.png"
+SCREENSHOTS = Dir.glob('images/screenshots/original/*.png').map do |path|
+  path.sub '/original', ''
 end
 
 def original_png_path(path)
