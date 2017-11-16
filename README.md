@@ -36,6 +36,7 @@ Todo management tools for software engineers.
   - [Rake](https://github.com/ruby/rake)
 
 - Others
+  - [Chrome extension](https://chrome.google.com/webstore/detail/code2d/fmbpjfldodgfbmhnbpahimhabjmipojd?hl=en)
   - YouTube Data API
   - Google Analytics Reporting API
 
