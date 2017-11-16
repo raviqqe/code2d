@@ -8,6 +8,7 @@ Todo management tools for software engineers.
 ## Stack
 
 - Frontend
+  - [TypeScript](https://www.typescriptlang.org/)
   - [React](https://reactjs.org/)
   - [Redux](https://github.com/reactjs/redux)
 
