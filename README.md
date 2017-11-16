@@ -39,6 +39,22 @@ Todo management tools for software engineers.
   - YouTube Data API
   - Google Analytics Reporting API
 
+## Screenshots
+
+### Desktop
+
+![tasks page](images/screenshots/original/tasks.png)
+![articles page](images/screenshots/original/articles.png)
+![videos page](images/screenshots/original/videos.png)
+![books page](images/screenshots/original/books.png)
+
+### Mobile
+
+![tasks page on mobile](images/screenshots/original/mobile_tasks.png)
+![menu on mobile](images/screenshots/original/mobile_menu.png)
+![articles page on mobile](images/screenshots/original/mobile_articles.png)
+![trending page on mobile](images/screenshots/original/mobile_trending.png)
+
 ## License
 
 [MIT](LICENSE)
