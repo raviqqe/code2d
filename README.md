@@ -43,16 +43,38 @@ Todo management tools for software engineers.
 
 ### Desktop
 
+#### Tasks
+
 ![tasks page](images/screenshots/original/tasks.png)
+
+#### Articles
+
 ![articles page](images/screenshots/original/articles.png)
+
+#### Videos
+
 ![videos page](images/screenshots/original/videos.png)
+
+#### Books
+
 ![books page](images/screenshots/original/books.png)
 
 ### Mobile
 
+#### Tasks
+
 ![tasks page on mobile](images/screenshots/original/mobile_tasks.png)
+
+#### Menu
+
 ![menu on mobile](images/screenshots/original/mobile_menu.png)
+
+#### Articles
+
 ![articles page on mobile](images/screenshots/original/mobile_articles.png)
+
+#### Trending articles
+
 ![trending page on mobile](images/screenshots/original/mobile_trending.png)
 
 ## License
