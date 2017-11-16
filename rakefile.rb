@@ -69,6 +69,14 @@ task :withdraw do
   sh "terraform destroy #{TERRAFORM_VARS}"
 end
 
+task :small_screenshots do
+  mkdir_p 'images/screenshots/small'
+
+  Dir.glob('images/screenshots/original/mobile_*.png').each do |file|
+    sh "convert #{file} -resize 50% #{file.sub 'original', 'small'}"
+  end
+end
+
 task :clean do
   %w[app common functions].each do |dir|
     cd dir do

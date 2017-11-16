@@ -63,19 +63,19 @@ Todo management tools for software engineers.
 
 #### Tasks
 
-![tasks page on mobile](images/screenshots/original/mobile_tasks.png)
+![tasks page on mobile](images/screenshots/small/mobile_tasks.png)
 
 #### Menu
 
-![menu on mobile](images/screenshots/original/mobile_menu.png)
+![menu on mobile](images/screenshots/small/mobile_menu.png)
 
 #### Articles
 
-![articles page on mobile](images/screenshots/original/mobile_articles.png)
+![articles page on mobile](images/screenshots/small/mobile_articles.png)
 
 #### Trending articles
 
-![trending page on mobile](images/screenshots/original/mobile_trending.png)
+![trending page on mobile](images/screenshots/small/mobile_trending.png)
 
 ## License
 
