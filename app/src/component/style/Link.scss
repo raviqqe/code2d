@@ -18,4 +18,8 @@
 	@extend .Link-container;
 
 	color: $blue;
+
+	&:visited {
+		color: $blue;
+	}
 }
