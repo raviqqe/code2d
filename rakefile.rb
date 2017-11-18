@@ -78,11 +78,11 @@ task :small_screenshots do
 end
 
 task :clean do
-  %w[app common functions].each do |dir|
+  %w[app common functions chrome-extension].each do |dir|
     cd dir do
       sh 'rake clean'
     end
   end
 
-  sh 'git clean -dfx --exclude .terraform --exclude terraform.tfstate'
+  sh 'git clean -dfx images'
 end
