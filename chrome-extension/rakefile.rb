@@ -27,5 +27,5 @@ task build: %i[clean deps dist/images] do
 end
 
 task :clean do
-  rm_rf 'dist'
+  sh 'git clean -dfx'
 end
