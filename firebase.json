@@ -16,7 +16,7 @@
 			"source": "**/*.@(css|eot|html|js|json|pdf|png|svg|ttf|woff)",
 			"headers": [{
 				"key": "Cache-Control",
-				"value": "max-age=86400"
+				"value": "max-age=604800"
 			}]
 		}],
 		"rewrites": [{
