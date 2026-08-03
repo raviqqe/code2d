@@ -3,14 +3,14 @@
 	"version": "0.1.0",
 	"description": "code2d's chrome extension to add articles and videos to todo lists by one click on Chrome",
 	"dependencies": {
-		"axios": "^0.17.0",
-		"firebase": "^4.4.0"
+		"axios": "^0.33.0",
+		"firebase": "^10.9.0"
 	},
 	"devDependencies": {
 		"@types/chrome": "0.0.49",
 		"@types/node": "^8.0.31",
 		"ts-loader": "^2.3.7",
 		"typescript": "^2.5.3",
-		"webpack": "^3.6.0"
+		"webpack": "^5.109.2"
 	}
 }
